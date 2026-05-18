@@ -894,37 +894,31 @@
     thumbnailIdx = idx;
     renderImageList();
   }
-  function handleImages(input) {
+  async function handleImages(input) {
     const files = Array.from(input.files);
     if (!files.length) return;
-    let loaded = 0;
-    const results = new Array(files.length);
-    files.forEach((file, i) => {
-      const reader = new FileReader();
-      reader.onload = e => {
-        const dataUrl = e.target.result;
-        results[i] = { filename: file.name, base64: dataUrl.split(',')[1], url: null, _dataUrl: dataUrl };
-        loaded++;
-        if (loaded === files.length) {
-          results.forEach(r => pendingImages.push(r));
-          renderImageList();
-          // 내용 에디터에도 동기화 (보도자료)
-          const el = document.getElementById('f-content');
-          if (el && currentSection === 'press') {
-            el.focus();
-            const range = document.createRange();
-            range.selectNodeContents(el);
-            range.collapse(false);
-            const sel = window.getSelection();
-            sel.removeAllRanges();
-            sel.addRange(range);
-            results.forEach(r => document.execCommand('insertHTML', false, rteImgHtml(r._dataUrl)));
-          }
-        }
-      };
-      reader.readAsDataURL(file);
-    });
     input.value = '';
+    showToast('이미지 업로드 중...');
+    try {
+      const urls = await Promise.all(files.map(f => uploadImageNow(f, 'press')));
+      const el = document.getElementById('f-content');
+      // 이미지 목록에 추가
+      urls.forEach((url, i) => pendingImages.push({ filename: files[i].name, url, base64: null }));
+      renderImageList();
+      // 내용 에디터 끝에 삽입 (보도자료)
+      if (el && currentSection === 'press') {
+        el.focus();
+        const range = document.createRange();
+        range.selectNodeContents(el);
+        range.collapse(false);
+        const sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+        urls.forEach(url => document.execCommand('insertHTML', false, rteImgHtml(url)));
+      }
+    } catch (err) {
+      showToast('이미지 업로드 실패: ' + err.message, true);
+    }
   }
   function removeImage(idx) {
     pendingImages.splice(idx, 1);
@@ -1120,28 +1114,61 @@
     return `<div class="rte-img-block" style="display:block;text-align:center;margin:15px 0;"><img src="${src}" class="rte-img" style="width:60%;max-width:100%;display:inline-block;"><p class="rte-img-caption" data-placeholder="▲ 캡션을 입력하세요 (선택)">▲ </p></div><p><br></p>`;
   }
 
+  /* ── GitHub에 이미지 즉시 업로드 → URL 반환 ── */
+  async function uploadImageNow(file, folder) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = async e => {
+        const base64 = e.target.result.split(',')[1];
+        try {
+          const res = await fetch('/api/admin-upload', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', Authorization: 'Basic ' + authHeader },
+            body: JSON.stringify({ filename: file.name, content: base64, folder: folder || currentSection })
+          });
+          const d = await res.json();
+          if (!d.ok) throw new Error(d.message || '업로드 실패');
+          resolve(d.url);
+        } catch (err) { reject(err); }
+      };
+      reader.onerror = () => reject(new Error('파일 읽기 실패'));
+      reader.readAsDataURL(file);
+    });
+  }
+
   /* ── RTE 이미지 삽입 ── */
   function rteInsertImage() {
     const input = document.createElement('input');
     input.type = 'file';
     input.accept = 'image/*';
-    input.onchange = function() {
+    input.onchange = async function() {
       const file = input.files[0];
       if (!file) return;
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        const dataUrl = e.target.result;
-        const el = document.getElementById('f-content');
-        if (!el) return;
-        el.focus();
-        document.execCommand('insertHTML', false, rteImgHtml(dataUrl));
-        // 이미지 목록에도 동기화 (보도자료)
+      const el = document.getElementById('f-content');
+      if (!el) return;
+      // 로딩 플레이스홀더 삽입
+      const pid = 'rte-loading-' + Date.now();
+      el.focus();
+      document.execCommand('insertHTML', false,
+        `<span id="${pid}" style="display:inline-block;padding:2px 10px;background:#eef6fb;color:#1E8DCD;border-radius:4px;font-size:12px;">⏳ 업로드 중...</span>`);
+      try {
+        const url = await uploadImageNow(file);
+        const placeholder = document.getElementById(pid);
+        if (placeholder) {
+          const tmp = document.createElement('div');
+          tmp.innerHTML = rteImgHtml(url);
+          placeholder.replaceWith(tmp.firstChild);
+        }
+        // 보도자료: 이미지 목록에도 동기화
         if (currentSection === 'press') {
-          pendingImages.push({ filename: file.name, base64: dataUrl.split(',')[1], url: null });
+          pendingImages.push({ filename: file.name, url, base64: null });
           renderImageList();
         }
-      };
-      reader.readAsDataURL(file);
+      } catch (err) {
+        const placeholder = document.getElementById(pid);
+        if (placeholder) placeholder.remove();
+        showToast('이미지 업로드 실패: ' + err.message, true);
+      }
     };
     input.click();
   }
