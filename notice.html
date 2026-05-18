@@ -1384,6 +1384,33 @@
   </footer>
 
   <script>
+    // ─── 첨부파일 팝업 (전역) ───
+    let _noticesMap = {};
+    function showAttachPopup(e, id) {
+      e.stopPropagation();
+      const existing = document.getElementById('attach-popup');
+      if (existing) { existing.remove(); return; }
+      const atts = _noticesMap[id] || [];
+      if (!atts.length) return;
+      const _CLIP_SMALL = `<svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M12 3L17 8L8 17C6.3 18.7 3.5 18.7 1.8 17C0.1 15.3 0.1 12.5 1.8 10.8L10.5 2.1C11.7 0.9 13.6 0.9 14.8 2.1C16 3.3 16 5.2 14.8 6.4L7.1 14.1C6.4 14.8 5.3 14.8 4.6 14.1C3.9 13.4 3.9 12.3 4.6 11.6L12 4.2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+      const popup = document.createElement('div');
+      popup.id = 'attach-popup';
+      popup.className = 'attach-popup';
+      popup.innerHTML = atts.map(a =>
+        `<a class="attach-popup-item" href="${a.url}" download="${a.name}">${_CLIP_SMALL}${a.name}</a>`
+      ).join('');
+      document.body.appendChild(popup);
+      const rect = e.currentTarget.getBoundingClientRect();
+      popup.style.top = (rect.bottom + window.scrollY + 4) + 'px';
+      popup.style.left = Math.min(rect.left + window.scrollX, window.innerWidth - 340) + 'px';
+      setTimeout(() => {
+        document.addEventListener('click', function close() {
+          popup.remove();
+          document.removeEventListener('click', close);
+        });
+      }, 0);
+    }
+
     // ─── 헤더 스크롤 (그림자 + 숨김) ───
     let _lastScrollY = window.scrollY;
     window.addEventListener('scroll', () => {
@@ -1622,33 +1649,8 @@
     const _PIN_SVG = `<svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M16.7906 6.72187L11.7 5.93438L9.39371 1.09688C9.22495 0.759375 8.77495 0.759375 8.6062 1.09688L6.29995 5.9625L1.23746 6.72187C0.87183 6.77812 0.731205 7.25625 1.01246 7.50938L4.69683 11.3063L3.82495 16.6219C3.7687 16.9875 4.13433 17.2969 4.47183 17.0719L9.0562 14.5687L13.6125 17.0719C13.9218 17.2406 14.3156 16.9594 14.2312 16.6219L13.3593 11.3063L17.0437 7.50938C17.2687 7.25625 17.1562 6.77812 16.7906 6.72187Z" fill="#1E8DCD"/></svg>`;
     const _ATTACH_SVG = `<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M12 3L17 8L8 17C6.3 18.7 3.5 18.7 1.8 17C0.1 15.3 0.1 12.5 1.8 10.8L10.5 2.1C11.7 0.9 13.6 0.9 14.8 2.1C16 3.3 16 5.2 14.8 6.4L7.1 14.1C6.4 14.8 5.3 14.8 4.6 14.1C3.9 13.4 3.9 12.3 4.6 11.6L12 4.2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
     const _CLIP_SMALL = `<svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M12 3L17 8L8 17C6.3 18.7 3.5 18.7 1.8 17C0.1 15.3 0.1 12.5 1.8 10.8L10.5 2.1C11.7 0.9 13.6 0.9 14.8 2.1C16 3.3 16 5.2 14.8 6.4L7.1 14.1C6.4 14.8 5.3 14.8 4.6 14.1C3.9 13.4 3.9 12.3 4.6 11.6L12 4.2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-    let _noticesMap = {};
     const _noticeTbody = document.querySelector('.notice-table tbody');
     _noticeTbody.innerHTML = '';
-
-    function showAttachPopup(e, id) {
-      e.stopPropagation();
-      const existing = document.getElementById('attach-popup');
-      if (existing) { existing.remove(); return; }
-      const atts = _noticesMap[id] || [];
-      if (!atts.length) return;
-      const popup = document.createElement('div');
-      popup.id = 'attach-popup';
-      popup.className = 'attach-popup';
-      popup.innerHTML = atts.map(a =>
-        `<a class="attach-popup-item" href="${a.url}" download="${a.name}">${_CLIP_SMALL}${a.name}</a>`
-      ).join('');
-      document.body.appendChild(popup);
-      const rect = e.currentTarget.getBoundingClientRect();
-      popup.style.top = (rect.bottom + window.scrollY + 4) + 'px';
-      popup.style.left = Math.min(rect.left + window.scrollX, window.innerWidth - 340) + 'px';
-      setTimeout(() => {
-        document.addEventListener('click', function close() {
-          popup.remove();
-          document.removeEventListener('click', close);
-        });
-      }, 0);
-    }
 
     (async function initNotices() {
       try {

@@ -34,15 +34,25 @@
     /* ── 사이드바 ── */
     .sidebar { width: 220px; background: #1a1f36; color: #fff; display: flex; flex-direction: column; flex-shrink: 0; position: fixed; top: 0; left: 0; height: 100vh; z-index: 100; }
     .sidebar-logo { padding: 24px 20px 20px; border-bottom: 1px solid rgba(255,255,255,0.08); }
-    .sidebar-logo img { height: 28px; width: auto; display: block; filter: brightness(0) invert(1); }
+    .sidebar-logo img { height: 28px; width: auto; display: block; filter: brightness(0) invert(1); margin-left: 7px; }
     .sidebar-nav { flex: 1; padding: 16px 0; }
     .nav-btn { display: flex; align-items: center; gap: 10px; width: 100%; padding: 11px 20px; background: none; border: none; color: rgba(255,255,255,0.6); font-size: 14px; cursor: pointer; transition: all 0.15s; text-align: left; border-left: 3px solid transparent; }
     .nav-btn:hover { color: #fff; background: rgba(255,255,255,0.06); }
     .nav-btn.active { color: #fff; background: rgba(30,141,205,0.18); border-left-color: #1E8DCD; }
     .nav-btn .nav-icon { font-size: 16px; width: 20px; text-align: center; }
     .sidebar-footer { padding: 16px 20px; border-top: 1px solid rgba(255,255,255,0.08); }
+    .preview-site-btn { width: 100%; padding: 9px; background: rgba(30,141,205,0.18); border: 1px solid rgba(30,141,205,0.4); border-radius: 6px; color: #6ec6f5; font-size: 13px; cursor: pointer; transition: all 0.15s; margin-bottom: 8px; }
+    .preview-site-btn:hover { background: rgba(30,141,205,0.3); color: #fff; }
     .logout-btn { width: 100%; padding: 9px; background: rgba(255,255,255,0.07); border: none; border-radius: 6px; color: rgba(255,255,255,0.6); font-size: 13px; cursor: pointer; transition: all 0.15s; }
     .logout-btn:hover { background: rgba(255,255,255,0.12); color: #fff; }
+    /* ── 웹사이트 미리보기 오버레이 ── */
+    .site-preview-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.82); z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding: 28px 24px 24px; }
+    .site-preview-notice { font-size: 12px; color: rgba(255,255,255,0.55); margin-bottom: 12px; text-align: center; letter-spacing: 0.2px; }
+    .site-preview-bar { display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 1300px; margin-bottom: 10px; }
+    .site-preview-bar span { font-size: 13px; color: rgba(255,255,255,0.7); font-weight: 600; }
+    .site-preview-close { background: rgba(255,255,255,0.1); border: none; border-radius: 6px; color: #fff; font-size: 13px; padding: 6px 14px; cursor: pointer; transition: background 0.15s; }
+    .site-preview-close:hover { background: rgba(255,255,255,0.2); }
+    .site-preview-frame { width: 100%; max-width: 1300px; flex: 1; border: none; border-radius: 10px; background: #fff; min-height: 0; }
 
     /* ── 메인 ── */
     .main-content { margin-left: 220px; flex: 1; padding: 32px; }
@@ -246,6 +256,7 @@
       </button>
     </nav>
     <div class="sidebar-footer">
+      <button class="preview-site-btn" onclick="showSitePreview()">🌐 웹사이트 미리보기</button>
       <button class="logout-btn" onclick="doLogout()">로그아웃</button>
     </div>
   </aside>
@@ -742,7 +753,6 @@
       </div>
       <div class="form-actions">
         <button class="btn-cancel" onclick="hideForm()">취소</button>
-        ${(currentSection === 'notices' || currentSection === 'press') ? '<button class="btn-preview" type="button" onclick="showPreview()">미리보기</button>' : ''}
         <button class="btn-save" id="save-btn" onclick="saveItem()">저장</button>
       </div>`;
   }
@@ -1277,6 +1287,21 @@
       </div>`;
     modal.addEventListener('click', function(e) { if (e.target === modal) modal.remove(); });
     document.body.appendChild(modal);
+  }
+
+  /* ── 웹사이트 미리보기 ── */
+  function showSitePreview() {
+    const overlay = document.createElement('div');
+    overlay.className = 'site-preview-overlay';
+    overlay.innerHTML = `
+      <p class="site-preview-notice">⚠ 게시 후 실제 반영까지 몇 분이 소요될 수 있습니다.</p>
+      <div class="site-preview-bar">
+        <span>🌐 웹사이트 미리보기</span>
+        <button class="site-preview-close" onclick="this.closest('.site-preview-overlay').remove()">✕ 닫기</button>
+      </div>
+      <iframe class="site-preview-frame" src="https://ecobellwebsite.vercel.app" allowfullscreen></iframe>`;
+    overlay.addEventListener('click', e => { if (e.target === overlay) overlay.remove(); });
+    document.body.appendChild(overlay);
   }
 
   /* ── 유틸 ── */
