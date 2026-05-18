@@ -171,9 +171,11 @@
     .rte-content.notice-rte p:last-child { margin-bottom: 0; }
 
     /* ── RTE 이미지 블록 ── */
-    .rte-img-block { display: block; margin: 12px 0; line-height: 0; }
+    .rte-img-block { display: block; margin: 15px 0; text-align: center; }
     .rte-img { cursor: pointer; display: inline-block; max-width: 100%; outline: none; }
     .rte-img.selected { outline: 2px solid #1E8DCD; }
+    .rte-img-caption { font-size: 10px; color: rgba(0,0,0,0.5); line-height: 1.5; margin: 4px 0 0; text-align: center; }
+    .rte-img-caption:empty::before { content: attr(data-placeholder); color: #ccc; pointer-events: none; }
     .rte-img-toolbar { display: flex; align-items: center; gap: 4px; padding: 5px 8px; background: #1a1f36; border-radius: 6px; margin-bottom: 6px; flex-wrap: wrap; }
     .rte-img-toolbar button { padding: 2px 8px; border: 1px solid rgba(255,255,255,0.3); border-radius: 3px; background: transparent; color: #fff; cursor: pointer; font-size: 12px; }
     .rte-img-toolbar button:hover { background: rgba(255,255,255,0.15); }
@@ -894,14 +896,31 @@
   }
   function handleImages(input) {
     const files = Array.from(input.files);
+    if (!files.length) return;
     let loaded = 0;
-    files.forEach(file => {
+    const results = new Array(files.length);
+    files.forEach((file, i) => {
       const reader = new FileReader();
       reader.onload = e => {
-        const base64 = e.target.result.split(',')[1];
-        pendingImages.push({ filename: file.name, base64, url: null });
+        const dataUrl = e.target.result;
+        results[i] = { filename: file.name, base64: dataUrl.split(',')[1], url: null, _dataUrl: dataUrl };
         loaded++;
-        if (loaded === files.length) renderImageList();
+        if (loaded === files.length) {
+          results.forEach(r => pendingImages.push(r));
+          renderImageList();
+          // 내용 에디터에도 동기화 (보도자료)
+          const el = document.getElementById('f-content');
+          if (el && currentSection === 'press') {
+            el.focus();
+            const range = document.createRange();
+            range.selectNodeContents(el);
+            range.collapse(false);
+            const sel = window.getSelection();
+            sel.removeAllRanges();
+            sel.addRange(range);
+            results.forEach(r => document.execCommand('insertHTML', false, rteImgHtml(r._dataUrl)));
+          }
+        }
       };
       reader.readAsDataURL(file);
     });
@@ -1096,6 +1115,11 @@
     return base;
   }
 
+  /* ── RTE 이미지 블록 HTML 생성 ── */
+  function rteImgHtml(src) {
+    return `<div class="rte-img-block" style="display:block;text-align:center;margin:15px 0;"><img src="${src}" class="rte-img" style="width:60%;max-width:100%;display:inline-block;"><p class="rte-img-caption" data-placeholder="▲ 캡션을 입력하세요 (선택)">▲ </p></div><p><br></p>`;
+  }
+
   /* ── RTE 이미지 삽입 ── */
   function rteInsertImage() {
     const input = document.createElement('input');
@@ -1106,11 +1130,16 @@
       if (!file) return;
       const reader = new FileReader();
       reader.onload = function(e) {
+        const dataUrl = e.target.result;
         const el = document.getElementById('f-content');
         if (!el) return;
         el.focus();
-        const html = `<div class="rte-img-block" style="display:block;text-align:center;margin:12px 0;line-height:0;"><img src="${e.target.result}" class="rte-img" style="width:60%;max-width:100%;display:inline-block;"></div><p><br></p>`;
-        document.execCommand('insertHTML', false, html);
+        document.execCommand('insertHTML', false, rteImgHtml(dataUrl));
+        // 이미지 목록에도 동기화 (보도자료)
+        if (currentSection === 'press') {
+          pendingImages.push({ filename: file.name, base64: dataUrl.split(',')[1], url: null });
+          renderImageList();
+        }
       };
       reader.readAsDataURL(file);
     };
@@ -1129,12 +1158,7 @@
       <button type="button" onmousedown="event.preventDefault();setRteImgWidth(25)">25%</button>
       <button type="button" onmousedown="event.preventDefault();setRteImgWidth(50)">50%</button>
       <button type="button" onmousedown="event.preventDefault();setRteImgWidth(75)">75%</button>
-      <button type="button" onmousedown="event.preventDefault();setRteImgWidth(100)">100%</button>
-      <span style="width:1px;height:14px;background:rgba(255,255,255,0.2);margin:0 4px;display:inline-block;"></span>
-      <span class="lbl">정렬:</span>
-      <button type="button" onmousedown="event.preventDefault();setRteImgAlign('left')">좌</button>
-      <button type="button" onmousedown="event.preventDefault();setRteImgAlign('center')">중앙</button>
-      <button type="button" onmousedown="event.preventDefault();setRteImgAlign('right')">우</button>`;
+      <button type="button" onmousedown="event.preventDefault();setRteImgWidth(100)">100%</button>`;
     const block = img.closest('.rte-img-block') || img.parentNode;
     block.insertBefore(toolbar, img);
   }
@@ -1147,12 +1171,6 @@
 
   function setRteImgWidth(pct) {
     if (_activeRteImg) _activeRteImg.style.width = pct + '%';
-  }
-
-  function setRteImgAlign(align) {
-    if (!_activeRteImg) return;
-    const block = _activeRteImg.closest('.rte-img-block');
-    if (block) block.style.textAlign = align;
   }
 
   /* ── 미리보기 ── */
