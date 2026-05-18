@@ -795,11 +795,11 @@
       <div class="article-content">
 
         <!-- 기사 제목 -->
-        <h1 class="article-title">에코벨, AI·MRV 탄소자산기술로 BIXPO 2025 8대 혁신기업 선정</h1>
+        <h1 class="article-title" id="article-title">에코벨, AI·MRV 탄소자산기술로 BIXPO 2025 8대 혁신기업 선정</h1>
 
         <!-- 날짜 + 공유 -->
         <div class="article-meta">
-          <p class="article-date">2025-10-30</p>
+          <p class="article-date" id="article-date">2025-10-30</p>
           <button class="article-share" aria-label="공유">
             <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M11.5234 16.6406C11.9922 16.6406 12.4219 16.25 12.4219 15.7422V9.88278C12.4219 7.77341 14.1406 6.05466 16.25 6.05466H20.8984L18.6328 8.2031C18.2812 8.55466 18.2812 9.10153 18.5937 9.4531C18.75 9.64841 18.9844 9.72653 19.2188 9.72653C19.4531 9.72653 19.6484 9.64841 19.8047 9.49216L23.3984 6.09372C23.6328 5.85935 23.7891 5.50778 23.7891 5.15622C23.7891 4.80466 23.6328 4.49216 23.3984 4.25778L19.8047 0.937471C19.4531 0.624971 18.9062 0.624971 18.5547 0.976534C18.2422 1.3281 18.2422 1.87497 18.5937 2.22653L20.8594 4.33591H16.1719C13.0859 4.33591 10.5859 6.83591 10.5859 9.92185V15.7812C10.6641 16.25 11.0547 16.6406 11.5234 16.6406Z" fill="#1E8DCD"/>
@@ -809,29 +809,12 @@
         </div>
 
         <!-- 이미지 -->
-        <div class="article-image-wrap">
-          <div class="article-image"></div>
+        <div class="article-image-wrap" id="article-image-wrap">
+          <div class="article-image" id="article-image"></div>
         </div>
 
         <!-- 본문 텍스트 -->
-        <p class="article-text">에너지·AI 융합기술기업 ㈜에코벨(대표이사 김소연)이 한국전력공사가 주최하는 'BIXPO 2025 Future TIPS League'에서 전국 8개 혁신기업중 하나로 선정됐다. 이번 프로그램은 한전 에너지생태계조성처 주관으로, 산업통상자원부와 광주광역시가 후원하며 국내 주요 TIPS 운영사(엔슬파트너스, 블루포인트, 소풍벤처스)가 참여해 기술력·사업성·정책연계성을 종합 평가하는 방식으로 진행됐다.
-<br><br>
-에코벨은 AI 기반 스마트 제조기술과 디지털 데이터 관리 역량을 융합한 탄소감축 통합 솔루션 기업이다. 자체 개발한 탄소 감축 측정장치 '에코노드(EcoNode)'와 탄소 자산관리 플랫폼 'ecoAsset시스템'을 통해 에너지 데이터를 실시간 측정·검증(MRV)하고, 국제표준(ISO 14064, GHG Protocol)에 따라 탄소 데이터를 자산화(Assetization) 한다.
-<br><br>
-특히 에너지분야에서 MRV 시스템을 실증·운영중인 국내 유일 기업으로, AI·데이터·탄소 금융을 결합한 'One-Stop 탄소자산화 모델'을 상용화한 점이 높이 평가됐다.
-<br><br>
-㈜에코벨 김소연 대표는 "이번 선정은 에코벨의 기술력뿐 아니라 정부와 한전이 추진하는 AI·탄소·에너지융합 정책 방향과의 정합성, 그리고 향후 글로벌 확장 가능성까지 인정받은 결과"라며 "ecoAsset을 기반으로 한 실증사업과 RE100, VPP, 탄소금융 연계 모델을 지속 확산하겠다"고 밝혔다.
-<br><br>
-에코벨은 이번 BIXPO 선정을 계기로 한국전력의 AI·탄소연계 실증 프로젝트 및 TIPS 투자트랙 연계 협력을 추진하며, 'ecoAsset 기반 에너지고속도로(Energy Highway)' 실증사업을 전북·시화·새만금산업단지 중심으로 확대할 예정이다.</p>
-
-        <!-- 태그 -->
-        <div class="article-tags">
-          <span class="article-tag">#에코벨</span>
-          <span class="article-tag">#BIXPO</span>
-          <span class="article-tag">#탄소감축</span>
-          <span class="article-tag">#자산화</span>
-          <span class="article-tag">#에코에셋</span>
-        </div>
+        <div class="article-text" id="article-body"><p>에너지·AI 융합기술기업 ㈜에코벨(대표이사 김소연)이 한국전력공사가 주최하는 'BIXPO 2025 Future TIPS League'에서 전국 8개 혁신기업중 하나로 선정됐다.</p></div>
 
         <!-- 하단 구분선 (파란색) -->
         <div class="article-divider article-divider-bottom"></div>
@@ -1090,6 +1073,36 @@
           showToast();
         });
       });
+    })();
+  </script>
+  <script>
+    // ─── 보도자료 데이터 동적 로드 ───
+    (function () {
+      const id = new URLSearchParams(window.location.search).get('id');
+      if (!id) return;
+      fetch('data/press.json')
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          const item = (data.items || []).find(function(i) { return i.id === id; });
+          if (!item) return;
+          const titleEl   = document.getElementById('article-title');
+          const dateEl    = document.getElementById('article-date');
+          const imageEl   = document.getElementById('article-image');
+          const imageWrap = document.getElementById('article-image-wrap');
+          const bodyEl    = document.getElementById('article-body');
+          if (titleEl) titleEl.textContent = item.title || '';
+          if (dateEl)  dateEl.textContent  = (item.date || '').replace(/-/g, '.');
+          if (imageEl && item.images && item.images.length) {
+            imageEl.style.backgroundImage = "url('" + item.images[0] + "')";
+            imageEl.style.backgroundSize  = 'cover';
+            imageEl.style.backgroundPosition = 'center';
+          } else if (imageWrap && (!item.images || !item.images.length)) {
+            imageWrap.style.display = 'none';
+          }
+          if (bodyEl && item.content) bodyEl.innerHTML = item.content;
+          document.title = (item.title || '보도자료') + ' - Ecobell';
+        })
+        .catch(function() {});
     })();
   </script>
   <script src="assets/admin-trigger.js"></script>

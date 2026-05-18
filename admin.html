@@ -166,7 +166,7 @@
     .attach-item .attach-del:hover { color: #e63946; }
 
     /* ── 공지사항 본문 타이포 미리보기 ── */
-    .notice-rte { letter-spacing: -1px; line-height: 40px; font-size: 19px; }
+    .notice-rte { letter-spacing: 1px; line-height: 40px; font-size: 20px; }
     .notice-rte p { margin-bottom: 70px; }
     .notice-rte p:last-child { margin-bottom: 0; }
 
@@ -440,7 +440,7 @@
     const isPinned = !!item.pinned;
     let meta = '';
     if (currentSection === 'faq') meta = '<span class="item-tag">' + (item.category || '기타') + '</span>';
-    else if (currentSection === 'press') meta = (item.date || '') + (item.keywords?.length ? ' · #' + item.keywords.slice(0,3).join(' #') : '');
+    else if (currentSection === 'press') meta = item.date || '';
     else if (currentSection === 'archive') meta = '<span class="item-tag">' + (item.type || '') + '</span>' + (item.date ? ' ' + item.date : '');
     else meta = (item.author ? `<span class="item-tag">${item.author}</span>` : '') + (item.date || '');
 
@@ -568,12 +568,8 @@
       const pinnedChk = document.getElementById('f-pinned');
       if (pinnedChk) pinnedChk.addEventListener('change', updateArchiveFields);
     }
-    // 키워드 초기화
+    // press 이미지 초기화
     if (currentSection === 'press') {
-      const kws = item?.keywords || [];
-      document.getElementById('f-keywords').value = JSON.stringify(kws);
-      renderKeywords(kws);
-      initKeywordInput();
       pendingImages = (item?.images || []).map(url => ({ url, filename: '', base64: null }));
       renderImageList();
     }
@@ -663,13 +659,6 @@
         <div class="form-group full">
           <label class="form-label">내용 *</label>
           <div class="rte-wrap">${RTE_TOOLBAR}<div class="rte-content" id="f-content" contenteditable="true" data-placeholder="내용을 입력하세요"></div></div>
-        </div>
-        <div class="form-group full">
-          <label class="form-label">키워드 <span style="font-weight:400;color:#aaa;font-size:12px;">Enter 또는 쉼표로 구분</span></label>
-          <div class="tag-wrap" id="f-keywords-wrap" onclick="document.getElementById('f-kw-input').focus()">
-            <input type="text" class="tag-field" id="f-kw-input" placeholder="키워드 입력 후 Enter">
-          </div>
-          <input type="hidden" id="f-keywords" value="[]">
         </div>
         <div class="form-group full">
           <label class="form-label">이미지 <span style="font-weight:400;color:#aaa;font-size:12px;">★ 클릭으로 썸네일 지정</span></label>
@@ -1070,14 +1059,13 @@
       return { ...base, title: get('f-title'), content: rte('f-content'), date: get('f-date'), author: get('f-author'), attachments: uploadedAttachments };
     }
     if (currentSection === 'press') {
-      const kws = JSON.parse(get('f-keywords') || '[]');
       // 선택된 썸네일을 첫 번째로 이동
       const reordered = [...uploadedImages];
       if (thumbnailIdx > 0 && thumbnailIdx < reordered.length) {
         const [thumb] = reordered.splice(thumbnailIdx, 1);
         reordered.unshift(thumb);
       }
-      return { ...base, title: get('f-title'), content: rte('f-content'), date: get('f-date'), keywords: kws, images: reordered };
+      return { ...base, title: get('f-title'), content: rte('f-content'), date: get('f-date'), images: reordered };
     }
     if (currentSection === 'archive') {
       const existing = editingId ? (currentItems.find(i => i.id === editingId) || {}) : {};
