@@ -1036,7 +1036,7 @@
           const dateEl  = document.getElementById('article-date');
           const bodyEl  = document.getElementById('article-body');
           if (titleEl) titleEl.textContent = item.title || '';
-          if (deptEl)  deptEl.textContent  = item.department || '';
+          if (deptEl)  deptEl.textContent  = item.author || item.department || '';
           if (dateEl)  dateEl.textContent  = (item.date || '').replace(/-/g, '.');
           if (bodyEl && item.content) bodyEl.innerHTML = item.content;
           document.title = (item.title || '공지사항') + ' - Ecobell';
