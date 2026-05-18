@@ -166,8 +166,8 @@
     .attach-item .attach-del:hover { color: #e63946; }
 
     /* ── 공지사항 본문 타이포 미리보기 ── */
-    .rte-content.notice-rte { letter-spacing: 1px; line-height: 40px; font-size: 20px; }
-    .rte-content.notice-rte p { margin-bottom: 70px; }
+    .rte-content.notice-rte { letter-spacing: 0; line-height: 30px; font-size: 18px; }
+    .rte-content.notice-rte p { margin-bottom: 0; }
     .rte-content.notice-rte p:last-child { margin-bottom: 0; }
 
     /* ── RTE 이미지 블록 ── */
@@ -195,8 +195,8 @@
     .preview-article-header { padding: 0 0 28px; border-bottom: 0.3px solid #1e8ccc; }
     .preview-article-title { font-family: 'Noto Sans KR', sans-serif; font-weight: 800; font-size: 23px; color: #000; line-height: 1.45; letter-spacing: 0.28px; margin-bottom: 14px; }
     .preview-article-meta { font-family: 'Noto Sans KR', sans-serif; font-weight: 700; font-size: 14px; color: rgba(0,0,0,0.5); display: flex; align-items: center; gap: 8px; }
-    .preview-article-body { padding: 50px 0; font-family: 'Noto Sans KR', sans-serif; font-weight: 400; font-size: 20px; color: #000; line-height: 40px; letter-spacing: 1px; }
-    .preview-article-body p { margin-bottom: 70px; }
+    .preview-article-body { padding: 50px 0; font-family: 'Noto Sans KR', sans-serif; font-weight: 400; font-size: 18px; color: #000; line-height: 30px; letter-spacing: 0; }
+    .preview-article-body p { margin-bottom: 0; }
     .preview-article-body p:last-child { margin-bottom: 0; }
 
     /* ── 개요 카운터 ── */
@@ -639,7 +639,7 @@
         </div>
         <div class="form-group"><label class="form-label">날짜</label><input class="form-input" type="date" id="f-date" value="${escAttr(v('date',''))}"></div>
         <div class="form-group full">
-          <label class="form-label">내용 * <span style="font-weight:400;color:#aaa;font-size:12px;">크기 20px · 자간 1px · 행간 40px · 문단 간격 70px 적용됨</span></label>
+          <label class="form-label">내용 * <span style="font-weight:400;color:#aaa;font-size:12px;">크기 18px · 자간 0 · 행간 30px · 문단 간격 0 적용됨</span></label>
           <div class="rte-wrap">${RTE_TOOLBAR_NOTICES}<div class="rte-content notice-rte" id="f-content" contenteditable="true" data-placeholder="내용을 입력하세요"></div></div>
         </div>
         <div class="form-group full">
@@ -701,13 +701,14 @@
         </div>`;
 
     } else if (currentSection === 'faq') {
+      const _faqCats = ['ecoASSET','E-ASSET','ecoNODE','신재생에너지','기타'];
+      const _selCats = String(v('category','')).split(',').map(s => s.trim()).filter(Boolean);
       fields = `
-        <div class="form-group"><label class="form-label">카테고리 *</label>
-          <select class="form-select" id="f-category">
-            ${['ecoASSET','E-ASSET','ecoNODE','신재생에너지','기타'].map(c => `<option value="${c}" ${v('category','')===c?'selected':''}>${c}</option>`).join('')}
-          </select>
+        <div class="form-group full"><label class="form-label">카테고리 * <span style="font-weight:400;color:#aaa;font-size:12px;">복수 선택 가능</span></label>
+          <div class="form-check-row" style="flex-wrap:wrap;gap:8px 20px;margin-top:4px;">
+            ${_faqCats.map(c => `<label class="form-check"><input type="checkbox" class="f-cat-check" value="${c}" ${_selCats.includes(c)?'checked':''}> ${c}</label>`).join('')}
+          </div>
         </div>
-        <div class="form-group full" style="margin-top:0;"><div></div></div>
         <div class="form-group full"><label class="form-label">질문 *</label><input class="form-input" id="f-question" value="${escAttr(v('question',''))}" placeholder="자주 묻는 질문"></div>
         <div class="form-group full"><label class="form-label">답변 *</label><textarea class="form-textarea" id="f-answer" rows="6" placeholder="답변 내용">${escHtml(v('answer',''))}</textarea></div>`;
     }
@@ -719,7 +720,7 @@
         <div class="form-group">
           <label class="form-label">옵션</label>
           <div class="form-check-row">
-            <label class="form-check"><input type="checkbox" id="f-pinned" ${v('pinned',false)?'checked':''}> 상단 고정</label>
+            ${currentSection !== 'faq' ? `<label class="form-check"><input type="checkbox" id="f-pinned" ${v('pinned',false)?'checked':''}> 상단 고정</label>` : ''}
             <label class="form-check"><input type="checkbox" id="f-published" ${v('published',true)!==false?'checked':''}> 게시</label>
           </div>
         </div>
@@ -1083,7 +1084,11 @@
         summary: (isPinned && (archType === 'catalog' || archType === 'intro')) ? get('f-summary') : ''
       };
     }
-    if (currentSection === 'faq') return { ...base, category: get('f-category'), question: get('f-question'), answer: get('f-answer') };
+    if (currentSection === 'faq') {
+      const catChecks = document.querySelectorAll('.f-cat-check:checked');
+      const category = Array.from(catChecks).map(c => c.value).join(',');
+      return { ...base, category, question: get('f-question'), answer: get('f-answer') };
+    }
     return base;
   }
 
