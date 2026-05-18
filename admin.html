@@ -631,13 +631,17 @@
     let fields = '';
 
     if (currentSection === 'notices') {
+      const _today = new Date().toISOString().slice(0, 10);
+      const _depts = ['사업부', '기술운영부', '경영지원부'];
       fields = `
         <div class="form-group full"><label class="form-label">제목 *</label><input class="form-input" id="f-title" value="${escAttr(v('title',''))}" placeholder="공지사항 제목"></div>
         <div class="form-group">
           <label class="form-label">작성자</label>
-          <input class="form-input" id="f-author" value="${escAttr(v('author',''))}" placeholder="부서 또는 작성자명">
+          <select class="form-select" id="f-author">
+            ${_depts.map(d => `<option value="${d}" ${v('author','')===d?'selected':''}>${d}</option>`).join('')}
+          </select>
         </div>
-        <div class="form-group"><label class="form-label">날짜</label><input class="form-input" type="date" id="f-date" value="${escAttr(v('date',''))}"></div>
+        <div class="form-group"><label class="form-label">날짜</label><input class="form-input" type="date" id="f-date" value="${escAttr(v('date', _today))}"></div>
         <div class="form-group full">
           <label class="form-label">내용 * <span style="font-weight:400;color:#aaa;font-size:12px;">크기 18px · 자간 0 · 행간 30px · 문단 간격 0 적용됨</span></label>
           <div class="rte-wrap">${RTE_TOOLBAR_NOTICES}<div class="rte-content notice-rte" id="f-content" contenteditable="true" data-placeholder="내용을 입력하세요"></div></div>
