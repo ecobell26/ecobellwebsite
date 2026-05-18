@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Ecobell Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;600;700&family=Nanum+Square:wght@400;700;800&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Noto Sans KR', -apple-system, sans-serif; background: #f0f2f5; color: #333; min-height: 100vh; }
@@ -166,7 +169,7 @@
     .attach-item .attach-del:hover { color: #e63946; }
 
     /* ── 공지사항 본문 타이포 미리보기 ── */
-    .rte-content.notice-rte { letter-spacing: 0; line-height: 30px; font-size: 18px; }
+    .rte-content.notice-rte { font-family: 'Nanum Square', 'NanumSquare', sans-serif; font-weight: 400; font-size: 16px; color: #000; line-height: 40px; letter-spacing: 0; text-align: left; word-break: keep-all; overflow-wrap: break-word; }
     .rte-content.notice-rte p { margin-bottom: 0; }
     .rte-content.notice-rte p:last-child { margin-bottom: 0; }
 
@@ -197,7 +200,7 @@
     .preview-article-header { padding: 0 0 28px; border-bottom: 0.3px solid #1e8ccc; }
     .preview-article-title { font-family: 'Noto Sans KR', sans-serif; font-weight: 800; font-size: 23px; color: #000; line-height: 1.45; letter-spacing: 0.28px; margin-bottom: 14px; }
     .preview-article-meta { font-family: 'Noto Sans KR', sans-serif; font-weight: 700; font-size: 14px; color: rgba(0,0,0,0.5); display: flex; align-items: center; gap: 8px; }
-    .preview-article-body { padding: 50px 0; font-family: 'Noto Sans KR', sans-serif; font-weight: 400; font-size: 18px; color: #000; line-height: 30px; letter-spacing: 0; }
+    .preview-article-body { padding: 50px 0; font-family: 'Nanum Square', 'NanumSquare', sans-serif; font-weight: 400; font-size: 16px; color: #000; line-height: 40px; letter-spacing: 0; text-align: left; word-break: keep-all; overflow-wrap: break-word; }
     .preview-article-body p { margin-bottom: 0; }
     .preview-article-body p:last-child { margin-bottom: 0; }
 
@@ -579,6 +582,17 @@
     if (currentSection === 'notices') {
       pendingAttachments = (item?.attachments || []).map(a => ({ name: a.name, url: a.url, base64: null }));
       renderAttachList();
+      // 글자크기·행간·자간·문단간 인라인 스타일 실시간 차단
+      const LOCKED = ['font-size','line-height','letter-spacing','font','text-align'];
+      function stripLockedStyles() {
+        if (!rteEl) return;
+        rteEl.querySelectorAll('*').forEach(el => {
+          if (el.classList.contains('rte-img') || el.classList.contains('rte-img-block')) return;
+          LOCKED.forEach(p => el.style.removeProperty(p));
+        });
+      }
+      rteEl.addEventListener('input', stripLockedStyles);
+      rteEl.addEventListener('paste', () => setTimeout(stripLockedStyles, 0));
     }
   }
 
@@ -645,7 +659,7 @@
         </div>
         <div class="form-group"><label class="form-label">날짜</label><input class="form-input" type="date" id="f-date" value="${escAttr(v('date', _today))}"></div>
         <div class="form-group full">
-          <label class="form-label">내용 * <span style="font-weight:400;color:#aaa;font-size:12px;">크기 18px · 자간 0 · 행간 30px · 문단 간격 0 적용됨</span></label>
+          <label class="form-label">내용 * <span style="font-weight:400;color:#aaa;font-size:12px;">크기 16px · 자간 0 · 행간 40px · 문단 간격 0 적용됨</span></label>
           <div class="rte-wrap">${RTE_TOOLBAR_NOTICES}<div class="rte-content notice-rte" id="f-content" contenteditable="true" data-placeholder="내용을 입력하세요"></div></div>
         </div>
         <div class="form-group full">
@@ -1067,6 +1081,22 @@
     btn.disabled = false; btn.textContent = '저장';
   }
 
+  /* 공지사항 본문에서 인라인 폰트 스타일 제거 */
+  function sanitizeNoticeContent(html) {
+    const div = document.createElement('div');
+    div.innerHTML = html;
+    div.querySelectorAll('*').forEach(el => {
+      if (el.classList.contains('rte-img') || el.classList.contains('rte-img-block')) return;
+      el.style.removeProperty('font-size');
+      el.style.removeProperty('line-height');
+      el.style.removeProperty('letter-spacing');
+      el.style.removeProperty('font-family');
+      el.style.removeProperty('font-weight');
+      el.style.removeProperty('text-align');
+    });
+    return div.innerHTML;
+  }
+
   function collectFormData(uploadedUrls, uploadedImages, uploadedAttachments) {
     const get = id => { const el = document.getElementById(id); return el ? el.value.trim() : ''; };
     const chk = id => { const el = document.getElementById(id); return el ? el.checked : false; };
@@ -1074,7 +1104,7 @@
     const base = { pinned: chk('f-pinned'), published: chk('f-published') };
 
     if (currentSection === 'notices') {
-      return { ...base, title: get('f-title'), content: rte('f-content'), date: get('f-date'), author: get('f-author'), attachments: uploadedAttachments };
+      return { ...base, title: get('f-title'), content: sanitizeNoticeContent(rte('f-content')), date: get('f-date'), author: get('f-author'), attachments: uploadedAttachments };
     }
     if (currentSection === 'press') {
       // 선택된 썸네일을 첫 번째로 이동

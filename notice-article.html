@@ -524,8 +524,15 @@
     .article-body {
       padding: 50px 0 72px;
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 400; font-size: 18px; color: #000;
-      line-height: 30px; letter-spacing: 0;
+      font-weight: 400; font-size: 16px; color: #000;
+      line-height: 40px; letter-spacing: 0;
+      text-align: left; word-break: keep-all; overflow-wrap: break-word;
+    }
+    .article-body *:not(.rte-img):not(.rte-img-block):not(.rte-img-caption) {
+      font-size: 16px !important;
+      line-height: 40px !important;
+      letter-spacing: 0 !important;
+      text-align: left !important;
     }
     .article-body p { margin-bottom: 0; }
     .article-body p:last-child { margin-bottom: 0; }
