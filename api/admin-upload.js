@@ -17,6 +17,14 @@ function verifyAuth(req) {
   return user === process.env.ADMIN_USER && pass === process.env.ADMIN_PASS;
 }
 
+module.exports.config = {
+  api: {
+    bodyParser: {
+      sizeLimit: '25mb'
+    }
+  }
+};
+
 module.exports = async function(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');

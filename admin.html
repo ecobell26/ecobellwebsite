@@ -609,13 +609,8 @@
   const RTE_TOOLBAR = `
     <div class="rte-toolbar">
       <button type="button" onmousedown="event.preventDefault();rteCmd('bold')"><b>B</b></button>
-      <button type="button" onmousedown="event.preventDefault();rteCmd('italic')"><i>I</i></button>
-      <button type="button" onmousedown="event.preventDefault();rteCmd('underline')"><u>U</u></button>
-      <button type="button" onmousedown="event.preventDefault();rteCmd('insertUnorderedList')">• 목록</button>
-      <button type="button" onmousedown="event.preventDefault();rteCmd('insertOrderedList')">① 목록</button>
       <div class="rte-sep"></div>
       <button type="button" onmousedown="event.preventDefault();rteInsertImage()" title="이미지 삽입">🖼 이미지</button>
-      <button type="button" onmousedown="event.preventDefault();rteCmd('removeFormat')">서식제거</button>
     </div>`;
 
   const RTE_COLORS = ['#000000','#444444','#888888','#e63946','#f4722b','#f9c74f','#2d6a4f','#1E8DCD','#234B63','#6a0dad'];
@@ -1038,6 +1033,32 @@
         const d = await res.json();
         if (!d.ok) throw new Error('첨부파일 업로드 실패: ' + d.message);
         uploadedAttachments.push({ name: att.name, url: d.url });
+      }
+
+      // RTE 내 잔여 base64 이미지 → GitHub URL 교체 (notices/press 공통)
+      if (currentSection === 'notices' || currentSection === 'press') {
+        const rteEl = document.getElementById('f-content');
+        if (rteEl) {
+          const imgs = rteEl.querySelectorAll('img[src^="data:"]');
+          if (imgs.length) {
+            btn.textContent = '이미지 업로드 중...';
+            await Promise.all(Array.from(imgs).map(async img => {
+              try {
+                const dataUrl = img.src;
+                const base64 = dataUrl.split(',')[1];
+                const mime = (dataUrl.match(/:(.*?);/) || [])[1] || 'image/jpeg';
+                const ext = mime.split('/')[1] || 'jpg';
+                const res = await fetch('/api/admin-upload', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json', Authorization: 'Basic ' + authHeader },
+                  body: JSON.stringify({ filename: 'image-' + Date.now() + '.' + ext, content: base64, folder: currentSection })
+                });
+                const d = await res.json();
+                if (d.ok) img.src = d.url;
+              } catch (_) {}
+            }));
+          }
+        }
       }
 
       btn.textContent = '저장 중...';
