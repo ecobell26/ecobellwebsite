@@ -525,8 +525,10 @@
       padding: 50px 0 72px;
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
       font-weight: 400; font-size: 15px; color: #000;
-      line-height: 1.9; letter-spacing: 0.15px;
+      line-height: 30px; letter-spacing: -1px;
     }
+    .article-body p { margin-bottom: 50px; }
+    .article-body p:last-child { margin-bottom: 0; }
     .article-body h3 {
       font-weight: 800; font-size: 14px;
       margin-top: 36px; margin-bottom: 8px;
@@ -767,16 +769,16 @@
 
       <!-- 게시글 헤더 -->
       <div class="article-header">
-        <h1 class="article-title">(예시) 에코벨 서비스 이용약관 변경 안내</h1>
+        <h1 class="article-title" id="article-title">(예시) 에코벨 서비스 이용약관 변경 안내</h1>
         <div class="article-meta">
-          <span>사업부</span>
+          <span id="article-department">사업부</span>
           <span>|</span>
-          <span>2024.11.13</span>
+          <span id="article-date">2024.11.13</span>
         </div>
       </div>
 
       <!-- 본문 -->
-      <div class="article-body">
+      <div class="article-body" id="article-body">
         <p>안녕하세요. 에코벨 사업부입니다.</p>
         <p>2024년 10월 31일부로 에코벨 비즈니스 서비스 이용약관이 변경됨을 공지드립니다. 주요 변경사항은 아래와 같으며, 변경 약관의 전문은 아래의 링크에서 확인할 수 있습니다.</p>
 
@@ -1013,6 +1015,30 @@
       contactItem.querySelector('.nav-link').style.color = '#1e8dcd';
     }
 
+  </script>
+
+  <script>
+    // ─── 공지사항 데이터 동적 로드 ───
+    (function () {
+      const id = new URLSearchParams(window.location.search).get('id');
+      if (!id) return;
+      fetch('data/notices.json')
+        .then(r => r.json())
+        .then(function (data) {
+          const item = (data.items || []).find(function (i) { return i.id === id; });
+          if (!item) return;
+          const titleEl = document.getElementById('article-title');
+          const deptEl  = document.getElementById('article-department');
+          const dateEl  = document.getElementById('article-date');
+          const bodyEl  = document.getElementById('article-body');
+          if (titleEl) titleEl.textContent = item.title || '';
+          if (deptEl)  deptEl.textContent  = item.department || '';
+          if (dateEl)  dateEl.textContent  = (item.date || '').replace(/-/g, '.');
+          if (bodyEl && item.content) bodyEl.innerHTML = item.content;
+          document.title = (item.title || '공지사항') + ' - Ecobell';
+        })
+        .catch(function () {});
+    })();
   </script>
   <script src="assets/admin-trigger.js"></script>
 </body>

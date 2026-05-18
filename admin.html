@@ -164,6 +164,11 @@
     .attach-item .attach-name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #444; }
     .attach-item .attach-del { background: none; border: none; cursor: pointer; color: #ccc; font-size: 16px; line-height: 1; flex-shrink: 0; padding: 0; }
     .attach-item .attach-del:hover { color: #e63946; }
+
+    /* ── 공지사항 본문 타이포 미리보기 ── */
+    .notice-rte { letter-spacing: -1px; line-height: 30px; }
+    .notice-rte p { margin-bottom: 50px; }
+    .notice-rte p:last-child { margin-bottom: 0; }
   </style>
 </head>
 <body>
@@ -388,7 +393,7 @@
     if (currentSection === 'faq') meta = '<span class="item-tag">' + (item.category || '기타') + '</span>';
     else if (currentSection === 'press') meta = (item.date || '') + (item.keywords?.length ? ' · #' + item.keywords.slice(0,3).join(' #') : '');
     else if (currentSection === 'archive') meta = '<span class="item-tag">' + (item.type || '') + '</span>' + (item.date ? ' ' + item.date : '');
-    else meta = item.date || '';
+    else meta = (item.department ? `<span class="item-tag">${item.department}</span>` : '') + (item.date || '');
 
     const title = currentSection === 'faq' ? (item.question || '') : (item.title || '');
 
@@ -572,11 +577,17 @@
     if (currentSection === 'notices') {
       fields = `
         <div class="form-group full"><label class="form-label">제목 *</label><input class="form-input" id="f-title" value="${escAttr(v('title',''))}" placeholder="공지사항 제목"></div>
-        <div class="form-group full">
-          <label class="form-label">내용 *</label>
-          <div class="rte-wrap">${RTE_TOOLBAR_NOTICES}<div class="rte-content" id="f-content" contenteditable="true" data-placeholder="내용을 입력하세요"></div></div>
+        <div class="form-group">
+          <label class="form-label">부서 *</label>
+          <select class="form-select" id="f-department">
+            ${['사업부','기술운영부','경영지원부'].map(d => `<option value="${d}" ${v('department','사업부')===d?'selected':''}>${d}</option>`).join('')}
+          </select>
         </div>
         <div class="form-group"><label class="form-label">날짜</label><input class="form-input" type="date" id="f-date" value="${escAttr(v('date',''))}"></div>
+        <div class="form-group full">
+          <label class="form-label">내용 * <span style="font-weight:400;color:#aaa;font-size:12px;">자간 -1 · 행간 30px · 문단간 50px 적용됨</span></label>
+          <div class="rte-wrap">${RTE_TOOLBAR_NOTICES}<div class="rte-content notice-rte" id="f-content" contenteditable="true" data-placeholder="내용을 입력하세요"></div></div>
+        </div>
         <div class="form-group full">
           <label class="form-label">첨부파일</label>
           <div class="upload-area" onclick="document.getElementById('f-attach-input').click()">
@@ -980,7 +991,7 @@
     const base = { pinned: chk('f-pinned'), published: chk('f-published') };
 
     if (currentSection === 'notices') {
-      return { ...base, title: get('f-title'), content: rte('f-content'), date: get('f-date'), attachments: uploadedAttachments };
+      return { ...base, title: get('f-title'), content: rte('f-content'), date: get('f-date'), department: get('f-department'), attachments: uploadedAttachments };
     }
     if (currentSection === 'press') {
       const kws = JSON.parse(get('f-keywords') || '[]');
