@@ -1,1 +1,13 @@
-{"items":[]}
+{
+  "items": [
+    {
+      "pinned": false,
+      "published": true,
+      "category": "ecoNODE",
+      "question": "ecoNODE란 무엇인가요?",
+      "answer": "1",
+      "id": "mpahzp5v94uks",
+      "createdAt": "2026-05-18T01:00:49.315Z"
+    }
+  ]
+}
