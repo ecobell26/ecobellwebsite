@@ -4,6 +4,15 @@
       "pinned": false,
       "published": true,
       "category": "ecoASSET",
+      "question": "ecoASSET(에코에셋)은 어떤 플랫폼인가요?",
+      "answer": "d",
+      "id": "mpai04okej3ny",
+      "createdAt": "2026-05-18T01:01:09.428Z"
+    },
+    {
+      "pinned": false,
+      "published": true,
+      "category": "ecoASSET",
       "question": "E-ASSET(에너지에셋)은 어떤 플랫폼인가요?",
       "answer": "w",
       "id": "mpahzvno5baf2",
