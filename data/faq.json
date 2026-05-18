@@ -1,1 +1,49 @@
-{"items":[]}
+{
+  "items": [
+    {
+      "pinned": false,
+      "published": true,
+      "category": "ecoASSET",
+      "question": "탄소자산화가 무엇인가요?",
+      "answer": "d",
+      "id": "mpai0qb7ovr2d",
+      "createdAt": "2026-05-18T01:01:37.459Z"
+    },
+    {
+      "pinned": false,
+      "published": true,
+      "category": "신재생에너지",
+      "question": "태양광 솔루션 견적 신청은 어떻게 해야 하나요?",
+      "answer": "d",
+      "id": "mpai0ihd4hol9",
+      "createdAt": "2026-05-18T01:01:27.313Z"
+    },
+    {
+      "pinned": false,
+      "published": true,
+      "category": "ecoASSET",
+      "question": "ecoASSET(에코에셋)은 어떤 플랫폼인가요?",
+      "answer": "d",
+      "id": "mpai04okej3ny",
+      "createdAt": "2026-05-18T01:01:09.428Z"
+    },
+    {
+      "pinned": false,
+      "published": true,
+      "category": "E-ASSET",
+      "question": "E-ASSET(에너지에셋)은 어떤 플랫폼인가요?",
+      "answer": "w",
+      "id": "mpahzvno5baf2",
+      "createdAt": "2026-05-18T01:00:57.732Z"
+    },
+    {
+      "pinned": false,
+      "published": true,
+      "category": "ecoNODE",
+      "question": "ecoNODE란 무엇인가요?",
+      "answer": "1",
+      "id": "mpahzp5v94uks",
+      "createdAt": "2026-05-18T01:00:49.315Z"
+    }
+  ]
+}
