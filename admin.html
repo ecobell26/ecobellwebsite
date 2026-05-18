@@ -583,7 +583,7 @@
       pendingAttachments = (item?.attachments || []).map(a => ({ name: a.name, url: a.url, base64: null }));
       renderAttachList();
       // 글자크기·행간·자간·문단간 인라인 스타일 실시간 차단
-      const LOCKED = ['font-size','line-height','letter-spacing','font','text-align'];
+      const LOCKED = ['font-size','line-height','letter-spacing','font-family','text-align'];
       function stripLockedStyles() {
         if (!rteEl) return;
         rteEl.querySelectorAll('*').forEach(el => {
@@ -1081,7 +1081,7 @@
     btn.disabled = false; btn.textContent = '저장';
   }
 
-  /* 공지사항 본문에서 인라인 폰트 스타일 제거 */
+  /* 공지사항 본문: 크기·자간·행간·정렬만 제거, 굵기·색상 등은 유지 */
   function sanitizeNoticeContent(html) {
     const div = document.createElement('div');
     div.innerHTML = html;
@@ -1091,8 +1091,8 @@
       el.style.removeProperty('line-height');
       el.style.removeProperty('letter-spacing');
       el.style.removeProperty('font-family');
-      el.style.removeProperty('font-weight');
       el.style.removeProperty('text-align');
+      // font-weight, color, text-decoration, font-style은 유지 (굵기·색상·밑줄·기울기 반영)
     });
     return div.innerHTML;
   }
