@@ -1,0 +1,1673 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>기업소개 - Ecobell</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&family=Nanum+Square:wght@400;700;800&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=chillax@400,500,600,700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; overscroll-behavior: none; }
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      min-width: 1100px;
+      background: #fff;
+      color: #000;
+    }
+
+    /* ─── HEADER ─── */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0; min-width: 1100px;
+      height: 69px;
+      background: #fff;
+      z-index: 999;
+      transition: box-shadow 0.3s ease, transform 0.35s cubic-bezier(0.4,0,0.2,1), background 0.5s ease;
+    }
+    header.scrolled { box-shadow: 0 2px 16px rgba(0,0,0,0.07); background: #fff; }
+    header.gnb-hidden { transform: translateY(-100%); }
+
+    .header-inner {
+      position: relative;
+      width: 100%;
+      max-width: 1440px;
+      height: 100%;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+    }
+
+    /* LOGO */
+    .logo {
+      position: absolute;
+      left: 44px;
+      top: 50%; transform: translateY(-50%);
+      width: 110px; height: 26px;
+      transition: opacity 0.2s;
+    }
+    .logo img { width: 100%; height: 100%; object-fit: contain; }
+    .logo:hover { opacity: 0.75; }
+
+    /* ─── GNB NAV ─── */
+    nav {
+      position: absolute;
+      left: 198px;
+      right: 324px;
+      top: 0;
+      display: flex;
+      align-items: stretch;
+      height: 69px;
+    }
+
+    .nav-item {
+      position: relative;
+      display: flex;
+      align-items: center;
+      transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    nav.lnb-open .nav-item:nth-child(1) { transform: translateX(0px); }
+    nav.lnb-open .nav-item:nth-child(2) { transform: translateX(25px); }
+    nav.lnb-open .nav-item:nth-child(3) { transform: translateX(53px); }
+    nav.lnb-open .nav-item:nth-child(4) { transform: translateX(87px); }
+    nav.lnb-open .nav-item:nth-child(5) { transform: translateX(111px); }
+
+    .nav-link {
+      font-family: 'Chillax', sans-serif;
+      font-weight: 500;
+      font-size: 15.5px;
+      color: #000;
+      text-decoration: none;
+      letter-spacing: 0.46px;
+      line-height: 1.6;
+      padding: 0 17px;
+      white-space: nowrap;
+      position: relative;
+      display: flex;
+      align-items: center;
+      height: 100%;
+      transition: color 0.2s;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      left: 17px; right: 17px;
+      bottom: 0;
+      height: 2px;
+      background: #000;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.25s ease;
+    }
+    .nav-item:not(.lnb-active) .nav-link:hover::after { transform: scaleX(1); }
+
+    .nav-item.lnb-active .nav-link { color: #1e8dcd; }
+
+    /* ─── LNB DROPDOWN ─── */
+    .lnb {
+      position: fixed;
+      top: 69px;
+      left: 0; right: 0; min-width: 1100px;
+      height: 202px;
+      background: #fff;
+      border-top: 0.3px solid #d9d9d9; border-bottom: 0.3px solid #d9d9d9;
+      opacity: 0;
+      transform: translateY(-6px);
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 102;
+    }
+    .lnb-inner {
+      position: relative;
+      width: 100%;
+      max-width: 1440px;
+      margin: 0 auto;
+      height: 100%;
+    }
+    .lnb.open { opacity: 1; transform: translateY(0); pointer-events: auto; }
+
+    .lnb-col {
+      position: absolute;
+      top: 0;
+      width: 132px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 29px;
+      gap: 0;
+      transition: background 0.2s ease;
+    }
+    .lnb-col[data-col="company"]  { left: 187px; }
+    .lnb-col[data-col="solution"] { left: 319px; }
+    .lnb-col[data-col="platform"] { left: 451px; }
+    .lnb-col[data-col="insight"]  { left: 584px; }
+    .lnb-col[data-col="contact"]  { left: 716px; }
+
+    .lnb-col.active {
+      background: #fafcfd;
+      border-top: 2px solid #1e8dcd;
+      padding-top: 27px;
+    }
+
+    .lnb-col a {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      color: #000;
+      text-decoration: none;
+      letter-spacing: 0.14px;
+      line-height: 21px;
+      text-align: center;
+      display: block;
+      width: 100%;
+      padding: 7px 0;
+      transition: color 0.15s;
+    }
+    .lnb-col a.en { font-family: 'Chillax', sans-serif; font-weight: 450; }
+    .lnb-col a:hover { color: #1e8dcd; }
+    .lnb-col a.active-page { color: #1e8dcd; }
+    .lnb-col a.ext::after { content: ' ↗'; font-size: 11px; }
+
+    .lnb-sep {
+      width: 70px; height: 0.5px;
+      background: #d9d9d9;
+      margin: 14px auto 24px;
+      flex-shrink: 0;
+    }
+
+    /* ─── SEARCH OVERLAY ─── */
+    header.search-open {
+      background: #fafcfd;
+      border-bottom-color: transparent;
+      box-shadow: none;
+    }
+    .search-overlay {
+      position: fixed;
+      top: 69px;
+      left: 0; right: 0; min-width: 1100px;
+      height: 202px;
+      background: #fafcfd;
+      border-bottom: 0.2px solid rgba(0,0,0,0.3);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.28s cubic-bezier(0.4,0,0.2,1);
+      transform: translateY(-8px);
+      z-index: 100;
+    }
+    .search-overlay.open { opacity: 1; pointer-events: auto; transform: translateY(0); }
+    .search-content {
+      position: relative;
+      width: 100%; max-width: 1440px;
+      margin: 0 auto; height: 100%;
+    }
+    .search-input-row {
+      position: absolute;
+      top: 57px;
+      left: 23.9583%; right: 24.0278%;
+      display: flex; align-items: center; gap: 0;
+    }
+    .search-input {
+      flex: 1;
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 400; font-size: 20px; color: #000;
+      letter-spacing: 0.2px; line-height: 1.5;
+      background: transparent; border: none; outline: none;
+      height: 36px; padding: 0;
+    }
+    .search-input::placeholder { color: rgba(0,0,0,0.3); }
+    .search-submit {
+      background: none; border: none; cursor: pointer;
+      width: 17px; height: 17px; padding: 0;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; opacity: 0.6; transition: opacity 0.2s;
+    }
+    .search-submit:hover { opacity: 1; }
+    .search-divider {
+      position: absolute; top: 102px;
+      left: 23.9583%; right: 24.0278%;
+      height: 0.3px; background: rgba(0,0,0,0.2);
+    }
+    .search-tags {
+      position: absolute; top: 117px; left: 23.9583%;
+      display: flex; gap: 9px;
+    }
+    .search-tag {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 700; font-size: 11.6px; color: rgba(0,0,0,0.55);
+      border: 0.3px solid rgba(0,0,0,0.15); border-radius: 100px;
+      padding: 0 10px; height: 22px;
+      background: transparent; cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .search-tag:hover { border-color: rgba(0,0,0,0.4); color: rgba(0,0,0,0.85); }
+    .search-icon-wrap {
+      position: relative; width: 22px; height: 22px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .search-tooltip {
+      position: absolute; top: calc(100% + 10px); left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.78); color: #fff;
+      font-family: 'Noto Sans KR', sans-serif; font-size: 11px;
+      font-weight: 400; letter-spacing: 0.4px;
+      padding: 5px 10px; border-radius: 4px;
+      white-space: nowrap; pointer-events: none;
+      opacity: 0; transition: opacity 0.18s ease; z-index: 1001;
+    }
+    .search-tooltip::before {
+      content: ''; position: absolute; bottom: 100%; left: 50%;
+      transform: translateX(-50%);
+      border: 5px solid transparent; border-bottom-color: rgba(0,0,0,0.78);
+    }
+    .search-icon-wrap:hover .search-tooltip { opacity: 1; }
+    header.search-open .search-tooltip { opacity: 0 !important; pointer-events: none; }
+    .close-btn {
+      display: flex; background: none; border: none; cursor: pointer;
+      width: 20px; height: 20px; padding: 0;
+      align-items: center; justify-content: center;
+      font-size: 18px; color: #000;
+      opacity: 0; pointer-events: none; position: absolute;
+      transform: rotate(-180deg) scale(0.5);
+      transition: opacity 0.25s ease, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .close-btn:hover { opacity: 1; }
+    header.search-open .search-btn { opacity: 0; pointer-events: none; transform: rotate(90deg) scale(0.7); }
+    header.search-open .close-btn { opacity: 0.6; pointer-events: auto; transform: rotate(0deg) scale(1); }
+
+    /* ─── HEADER RIGHT ─── */
+    .header-right {
+      position: absolute; right: 45px;
+      top: 50%; transform: translateY(-50%);
+      display: flex; align-items: center; gap: 25px;
+    }
+    .gnb-sep { color: rgba(0,0,0,0.2); font-size: 16px; line-height: 1; user-select: none; }
+
+    .search-btn {
+      background: none; border: none; cursor: pointer;
+      width: 20px; height: 21px; padding: 0;
+      display: flex; align-items: center; justify-content: center;
+      position: absolute;
+      transition: transform 0.2s ease, opacity 0.2s;
+    }
+    .search-btn:hover { transform: scale(1.15); opacity: 0.7; }
+
+    .demo-btn {
+      display: flex; align-items: center; gap: 5px;
+      border: 0.3px solid rgba(0,0,0,0.5);
+      border-radius: 100px; padding: 0 18px; height: 34px;
+      cursor: pointer; text-decoration: none; background: transparent;
+      overflow: hidden; position: relative;
+      transition: border-color 0.25s ease;
+    }
+    .demo-btn::before {
+      content: ''; position: absolute; left: 0; top: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      width: 34px; height: 34px; background: #000;
+      border-radius: 50%; transition: transform 0.45s ease;
+    }
+    .demo-btn:hover::before { transform: translate(-50%, -50%) scale(10); }
+    .demo-btn:hover { border-color: #000; }
+    .demo-btn:hover .demo-text { color: #fff; }
+    .demo-text {
+      font-family: 'Chillax', sans-serif; font-weight: 500;
+      font-size: 13px; color: #000;
+      letter-spacing: 0.16px; line-height: 0.8; white-space: nowrap;
+      transition: color 0.25s ease; position: relative; top: 1.5px;
+    }
+
+    @media (min-width: 1441px) {
+      .header-inner { max-width: none; }
+      .lnb-inner { max-width: none; }
+    }
+
+    /* ─── 플로팅 버튼 ─── */
+    .floating-ecoasset { position: fixed; right: 44px; bottom: 44px; width: 65px; height: 48px; cursor: pointer; z-index: 500; transition: transform 0.2s ease, opacity 0.2s; text-decoration: none; }
+    .floating-ecoasset:hover { transform: scale(1.08); opacity: 0.9; }
+    .floating-ecoasset img { width: 100%; height: 100%; object-fit: contain; }
+
+    /* ─── BREADCRUMB ─── */
+    .breadcrumb {
+      display: flex; align-items: center; gap: 6px;
+      position: absolute; top: 18px; right: 48px;
+      margin-bottom: 0; z-index: 10;
+    }
+    @media (min-width: 1441px) { .breadcrumb { right: calc((100% - 1440px) / 2 + 48px); } }
+    .breadcrumb-home { width: 11px; height: 12px; display: flex; align-items: center; }
+    .breadcrumb-sep { width: 5px; height: 10px; display: flex; align-items: center; }
+    .breadcrumb a, .breadcrumb span {
+      font-family: 'Chillax', sans-serif; font-weight: 400; font-size: 13px;
+      color: #1e8dcd; text-decoration: none; letter-spacing: 0.13px;
+    }
+    .breadcrumb a[href]:not(.breadcrumb-home):hover { opacity: 0.7; }
+
+    /* ─── PAGE ─── */
+    main { padding-top: 69px; }
+
+    /* ═══ 1. HERO ═══ */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: calc(100vh - 69px);
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: url('assets/company-hero-bg.png') top/cover no-repeat;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.15) 100%);
+    }
+    .hero-content {
+      position: absolute;
+      left: 0; right: 0; top: 180px;
+      text-align: center;
+    }
+    .hero-title {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 750;
+      font-size: 45px;
+      color: #234B63;
+      line-height: 1.4;
+      letter-spacing: 1px;
+      text-align: center;
+    }
+
+    /* ═══ 2. MISSION ═══ */
+    .mission-wrapper {
+      position: relative;
+      z-index: 10;
+    }
+    .mission-section {
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .mission-bg {
+      position: absolute; inset: 0;
+      background: url('assets/company-section2-bg.png') center/cover no-repeat;
+      transform-origin: center center;
+      will-change: transform;
+    }
+    .mission-overlay {
+      position: absolute; inset: 0;
+      background: rgba(15, 30, 40, 0.35);
+    }
+    .mission-text {
+      position: absolute;
+      left: 0; right: 0;
+      top: 50%; transform: translateY(-50%);
+      z-index: 1;
+      text-align: center;
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 750;
+      font-size: 33px;
+      color: #fff;
+      line-height: 1.70;
+      letter-spacing: -0.3px;
+    }
+
+    /* ═══ 3. NAVY OVERLAY ═══ */
+    .mission-navy {
+      position: absolute; inset: 0;
+      background: #1c2134;
+      opacity: 0;
+      will-change: opacity;
+    }
+    .overlay-text-block {
+      position: absolute;
+      left: 0; right: 0;
+      top: 50%; transform: translateY(-50%);
+      text-align: center;
+      z-index: 2;
+    }
+    .overlay-text-wrap {
+      overflow: hidden;
+      padding-bottom: 4px;
+    }
+    .overlay-text {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 750;
+      font-size: 33px;
+      color: #fff;
+      line-height: 1.70;
+      letter-spacing: -0.3px;
+      text-align: center;
+      transform: translateY(100%);
+      will-change: transform;
+    }
+
+    .mission-fadeout {
+      position: absolute; inset: 0;
+      background: #fff;
+      opacity: 0;
+      z-index: 20;
+      pointer-events: none;
+    }
+
+    /* ═══ 3+4. IDENTITY + CARDS 공유 그라데이션 ═══ */
+    .identity-cards-wrap {
+      background: linear-gradient(to bottom, #ffffff 0%, #F3F8FB 100%);
+    }
+    /* ═══ 4. COMPANY IDENTITY ═══ */
+    .identity-section {
+      position: relative;
+      background: transparent;
+      padding: 120px 0 100px;
+      text-align: center;
+    }
+    /* GSAP 텍스트 초기 상태 */
+    .gsap-text {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    .identity-subtitle {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 700;
+      font-size: 21px;
+      color: #234B63;
+      line-height: 1.75;
+      letter-spacing: -0.3px;
+      margin-bottom: 41px;
+      margin-top: -30px;
+    }
+    .identity-logo {
+      display: block;
+      width: 360px;
+      margin: 0 auto 63px;
+      object-fit: contain;
+      opacity: 0;
+    }
+    .identity-tagline {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 800;
+      font-size: 24px;
+      color: #234B63;
+      line-height: 1.4;
+      margin-bottom: 55px;
+      margin-top: -10px;
+    }
+    .identity-desc {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 400;
+      font-size: 19px;
+      color: #000;
+      line-height: 1.78;
+      letter-spacing: -0.44px;
+      text-align: center;
+      max-width: 780px;
+      margin: 0 auto;
+      margin-bottom: 100px;
+    }
+
+    /* ═══ 4. 3R CARDS ═══ */
+    .cards-section {
+      background: transparent;
+      padding: 0 0 300px;
+    }
+    .cards-inner {
+      width: 1130px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 140px;
+    }
+    .r-card {
+      display: flex;
+      width: 100%;
+      height: 346px;
+      overflow: hidden;
+    }
+    .r-card.reverse { flex-direction: row-reverse; }
+    .r-card.reverse .r-card-text { padding-left: 150px; }
+    .r-card-img {
+      width: 547px;
+      height: 329px;
+      flex-shrink: 0;
+      object-fit: cover;
+      align-self: center;
+    }
+    .r-card-text {
+      flex: 1;
+      background: transparent;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 40px 0;
+    }
+    .r-card-title {
+      font-family: 'Chillax', sans-serif;
+      font-weight: 600;
+      font-size: 35px;
+      color: #234B63;
+      line-height: 1.7;
+      letter-spacing: -0.7px;
+      margin-bottom: 22px;
+    }
+    .r-card-desc {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 400;
+      font-size: 20px;
+      color: #000;
+      line-height: 1.7;
+      letter-spacing: -0.44px;
+    }
+
+    /* ═══ 5. PARTNER ═══ */
+    .partner-section {
+      background: #fff;
+      padding: 180px 0 150px;
+    }
+    .partner-inner {
+      width: 100%;
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 155px;
+    }
+    .partner-title {
+      font-family: 'Chillax', sans-serif;
+      font-weight: 600;
+      font-size: 35px;
+      color: #1E8DCD;
+      letter-spacing: 0.3px;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+    .partner-desc {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 400;
+      font-size: 20px;
+      color: #111;
+      line-height: 1.6;
+      margin-bottom: 80px;
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .partner-logos {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      overflow: hidden;
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .partner-marquee-track {
+      display: flex;
+      width: max-content;
+      align-items: center;
+    }
+    .partner-marquee-track img {
+      height: 67px;
+      width: auto;
+      display: block;
+      flex-shrink: 0;
+      margin-right: 50px;
+    }
+    .partner-marquee-track.row1 {
+      animation: marquee-left 35s linear infinite;
+    }
+    .partner-marquee-track.row1 img,
+    .partner-marquee-track.row2 img {
+      height: 52px;
+    }
+    .partner-marquee-track.row2 {
+      animation: marquee-left 44s linear infinite;
+    }
+    .partner-marquee-track.row3 {
+      animation: marquee-left 40s linear infinite;
+    }
+    .partner-marquee-track.row3 img {
+      height: 60px;
+    }
+    .partner-marquee-track.row4 {
+      animation: marquee-left 48s linear infinite;
+    }
+    .partner-marquee-track.row5 {
+      animation: marquee-left 38s linear infinite;
+    }
+    .partner-marquee-track:hover {
+      animation-play-state: paused;
+    }
+    @keyframes marquee-left {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ═══ 6. HISTORY ═══ */
+    .history-header-wrap {
+      background: #fff;
+      padding: 90px 0 30px;
+    }
+    .history-section {
+      background: transparent;
+    }
+    .history-content-bg {
+      background: #f8fcfd;
+      padding: 55px 0 100px;
+    }
+    .history-inner {
+      width: 100%;
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 155px;
+    }
+    .history-header {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 0;
+    }
+    .history-header-logo {
+      height: 1em;
+      object-fit: contain;
+      vertical-align: middle;
+      position: relative;
+      top: -0.05em;
+      margin: 0 10px;
+    }
+    .history-title {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 800;
+      font-size: 35px;
+      color: #000;
+      letter-spacing: -0.7px;
+    }
+    /* 바디: 연도 컬럼 + 이벤트 컬럼 */
+    .history-body {
+      display: flex;
+      align-items: flex-start;
+      gap: 0;
+    }
+    /* 왼쪽: 연도 탭 */
+    .history-years {
+      width: 250px;
+      flex-shrink: 0;
+      position: relative;
+    }
+    .history-vline {
+      position: absolute;
+      left: 182px;
+      top: 6px;
+      bottom: 6px;
+      width: 2px;
+      background: #d9d9d9;
+    }
+    .history-year-item {
+      display: flex;
+      align-items: center;
+      height: 113px;
+      position: relative;
+      cursor: pointer;
+    }
+    .history-year-item:last-child { height: auto; padding-bottom: 6px; }
+    .history-dot {
+      position: absolute;
+      left: 171px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #d9d9d9;
+      z-index: 1;
+      flex-shrink: 0;
+      transition: background 0.2s;
+    }
+    .history-year-item.active .history-dot { background: #0968a7; }
+    .history-year-btn {
+      font-family: 'Chillax', sans-serif;
+      font-weight: 600;
+      font-size: 30px;
+      color: #d9d9d9;
+      letter-spacing: -0.6px;
+      line-height: 1.5;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: color 0.2s;
+    }
+    .history-year-item.active .history-year-btn { color: #0968a7; }
+    .history-year-item:hover .history-year-btn { color: #0968a7; }
+    .history-year-item:hover .history-dot { background: #0968a7; }
+    /* 오른쪽: 이벤트 */
+    .history-timelines {
+      flex: 1;
+      padding-left: 60px;
+    }
+    .history-timeline {
+      display: none;
+      flex-direction: column;
+      gap: 0;
+    }
+    .history-timeline.active { display: flex; }
+    .timeline-event {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      padding: 17px 0;
+      border-bottom: 0.5px solid rgba(9,104,167,0.12);
+    }
+    .timeline-event:last-child { border-bottom: none; }
+    .timeline-event-date {
+      font-family: 'Chillax', sans-serif;
+      font-weight: 500;
+      font-size: 21px;
+      color: #0968a7;
+      letter-spacing: -0.42px;
+      line-height: 1.5;
+      flex-shrink: 0;
+    }
+    .timeline-event-text {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 500;
+      font-size: 21px;
+      color: #0968a7;
+      line-height: 1.5;
+      letter-spacing: -0.42px;
+    }
+
+    /* ═══ 7. PATENT & CERT ═══ */
+    .patent-section {
+      background: #fff;
+      padding: 100px 0 80px;
+    }
+    .patent-inner {
+      width: 100%;
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 155px;
+    }
+    .section-title {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 800;
+      font-size: 32px;
+      color: #234B63;
+      letter-spacing: -0.3px;
+      margin-bottom: 50px;
+    }
+    .patent-cards {
+      display: flex;
+      gap: 28px;
+      margin-bottom: 50px;
+    }
+    .patent-card {
+      flex: 1;
+      border: 0.5px solid #d9e5ec;
+      overflow: hidden;
+    }
+    .patent-card img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .cert-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border: 0.5px solid #e8eef2;
+    }
+
+    /* ═══ 8. BROCHURE DOWNLOAD ═══ */
+    .download-section {
+      background: #fff;
+      padding: 0 0 80px;
+    }
+    .download-inner {
+      width: 100%;
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 155px;
+    }
+    .download-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      height: 140px;
+      border: 0.5px solid #1e8dcd;
+      padding: 0 56px;
+      text-decoration: none;
+      background: transparent;
+      cursor: pointer;
+      overflow: hidden;
+      position: relative;
+      transition: background 0.3s ease;
+    }
+    .download-btn::before {
+      content: '';
+      position: absolute;
+      right: 0; top: 50%;
+      transform: translate(50%, -50%) scale(0);
+      width: 200px; height: 200px;
+      background: #1e8dcd;
+      border-radius: 50%;
+      transition: transform 0.5s ease;
+      z-index: 0;
+    }
+    .download-btn:hover::before { transform: translate(50%, -50%) scale(6); }
+    .download-btn:hover .download-label { color: #fff; }
+    .download-btn:hover .download-icon { filter: brightness(0) invert(1); }
+    .download-label {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 800;
+      font-size: 28px;
+      color: #234B63;
+      letter-spacing: -0.3px;
+      position: relative;
+      z-index: 1;
+      transition: color 0.3s ease;
+    }
+    .download-icon {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: filter 0.3s ease;
+    }
+    .download-icon svg { width: 28px; height: 28px; }
+
+    /* ─── CTA ─── */
+    .cta-contact-btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 218px; height: 42px;
+      border: 0.8px solid #fff;
+      background: transparent;
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 800; font-size: 16px; color: #fff;
+      letter-spacing: 0.48px; text-decoration: none;
+      position: relative; overflow: hidden;
+    }
+    .cta-contact-btn::before {
+      content: ''; position: absolute; left: 0; top: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      width: 150px; height: 150px;
+      background: rgba(255,255,255,0.18);
+      border-radius: 50%; transition: transform 0.5s ease; z-index: 0;
+    }
+    .cta-contact-btn:hover::before { transform: translate(-50%, -50%) scale(5); }
+    .cta-contact-btn span { position: relative; z-index: 1; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      position: sticky; bottom: 0; z-index: 0;
+      min-width: 1100px; height: 442px; background: #2a2a2a;
+    }
+    .footer-inner { position: relative; width: 100%; max-width: 1440px; margin: 0 auto; height: 100%; }
+    .ft-company-info { position: absolute; right: 45px; top: 211px; font-family: 'Noto Sans KR', sans-serif; font-weight: 450; font-size: 13px; color: rgba(255,255,255,0.5); line-height: 23px; letter-spacing: -0.28px; white-space: pre-line; text-align: right; }
+    .ft-col-title { position: absolute; font-family: 'Chillax', sans-serif; font-weight: 600; font-size: 16px; color: #fff; white-space: nowrap; margin: 0; top: 41px; letter-spacing: 0.54px; line-height: 28.8px; }
+    .ft-link { position: absolute; font-family: 'Nanum Square', 'NanumSquare', sans-serif; font-weight: 500; font-size: 14px; color: #fff; white-space: nowrap; text-decoration: none; line-height: 22.5px; letter-spacing: 0.15px; opacity: 1; transition: opacity 0.2s; }
+    .ft-link:hover { opacity: 0.55; }
+    .ft-link.ft-en { font-family: 'Chillax', sans-serif; font-weight: 400; line-height: 16.5px; }
+    .ft-sep { position: absolute; height: 0.5px; background: rgba(255,255,255,0.3); }
+    .ft-divider { position: absolute; left: 45px; right: 45px; height: 0.5px; background: rgba(255,255,255,0.2); }
+    .ft-bottom-link { position: absolute; font-family: 'Noto Sans KR', sans-serif; font-weight: 300; font-size: 13px; color: rgba(255,255,255,0.8); text-decoration: none; white-space: nowrap; top: 323px; line-height: 23px; letter-spacing: -0.28px; transition: opacity 0.2s; }
+    .ft-bottom-link:hover { opacity: 0.55; }
+    .ft-bottom-link.fw-bold { font-weight: 500; color: #fff; }
+    .ft-social { position: absolute; line-height: 0; opacity: 1; transition: opacity 0.2s, transform 0.2s; top: 323px; }
+    .ft-social:hover { opacity: 0.7; transform: scale(1.1); }
+    .ft-copyright { position: absolute; left: 45px; top: 357px; font-family: 'Noto Sans KR', sans-serif; font-weight: 300; font-size: 12px; color: rgba(255,255,255,0.8); white-space: pre-line; margin: 0; }
+
+    /* ─── 푸터 오버레이 효과 ─── */
+    body > *:not(header):not(footer):not(.floating-ecoasset):not(.breadcrumb) {
+      position: relative; z-index: 1; background: inherit;
+    }
+
+    /* ─── 스크롤 등장 모션 ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s cubic-bezier(0.4, 0, 0.2, 1), transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal:not(.visible) {
+      transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── HEADER ─── -->
+  <header id="header">
+    <div class="header-inner">
+
+      <!-- Logo -->
+      <a class="logo" href="index.html">
+        <img src="assets/logo.png" alt="ecobell" id="header-logo">
+      </a>
+
+      <!-- GNB -->
+      <nav id="main-nav">
+        <div class="nav-item" data-menu="company">
+          <a class="nav-link" href="#">Company</a>
+        </div>
+        <div class="nav-item" data-menu="solution">
+          <a class="nav-link" href="#">Solution</a>
+        </div>
+        <div class="nav-item" data-menu="platform">
+          <a class="nav-link" href="#">Platform</a>
+        </div>
+        <div class="nav-item" data-menu="insight">
+          <a class="nav-link" href="insight.html">Insight</a>
+        </div>
+        <div class="nav-item" data-menu="contact">
+          <a class="nav-link" href="notice.html">Contact Us</a>
+        </div>
+      </nav>
+
+      <!-- LNB Dropdown -->
+      <div class="lnb" id="lnb">
+        <div class="lnb-inner">
+          <!-- Company -->
+          <div class="lnb-col" data-col="company">
+            <a href="ceo.html">CEO 인사말</a>
+            <a href="company.html" class="active-page">기업소개</a>
+            <a href="press.html">보도자료</a>
+            <a href="archive.html">아카이브</a>
+          </div>
+          <!-- Solution -->
+          <div class="lnb-col" data-col="solution">
+            <a href="#">전체 솔루션 맵</a>
+            <a href="#" class="en">ecoNODE</a>
+            <div class="lnb-sep"></div>
+            <a href="#">태양광 솔루션</a>
+          </div>
+          <!-- Platform -->
+          <div class="lnb-col" data-col="platform">
+            <a href="#" class="en">eco Asset</a>
+            <a href="#" class="en">Energy Asset</a>
+          </div>
+          <!-- Insight -->
+          <div class="lnb-col" data-col="insight">
+            <a href="https://www.netzeronews.kr/" class="en ext" target="_blank" rel="noopener noreferrer">NetZero News</a>
+            <a href="insight.html?page=eco">친환경 기업정보</a>
+            <a href="insight.html?page=green">그린카 계산기</a>
+          </div>
+          <!-- Contact Us -->
+          <div class="lnb-col" data-col="contact">
+            <a href="notice.html">공지사항</a>
+            <a href="directions.html">오시는 길</a>
+            <a href="contact.html">문의하기</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Search Overlay -->
+      <div class="search-overlay" id="search-overlay">
+        <div class="search-content">
+          <div class="search-input-row">
+            <input class="search-input" type="text" placeholder="검색어를 입력해주세요." id="search-input" autocomplete="off">
+            <button class="search-submit" aria-label="검색">
+              <svg width="17" height="17" viewBox="0 0 17 17" fill="none">
+                <circle cx="7" cy="7" r="5" stroke="#000" stroke-width="1.5"/>
+                <line x1="11" y1="11" x2="16" y2="16" stroke="#000" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </button>
+          </div>
+          <div class="search-divider"></div>
+          <div class="search-tags">
+            <button class="search-tag" data-keyword="에코벨">#에코벨</button>
+            <button class="search-tag" data-keyword="에코에셋">#에코에셋</button>
+            <button class="search-tag" data-keyword="에너지에셋">#에너지에셋</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Header Right -->
+      <div class="header-right">
+        <span class="gnb-sep">|</span>
+        <div class="search-icon-wrap">
+          <button class="search-btn" aria-label="검색" id="search-open-btn">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+              <path d="M21.1063 19.1469L15.4344 14.5406C17.7719 11.3438 17.5313 6.7719 14.6094 3.8844C13.0626 2.33752 11 1.47815 8.80005 1.47815C6.60005 1.47815 4.53755 2.33752 2.99067 3.8844C-0.206201 7.08127 -0.206201 12.3063 2.99067 15.5031C4.53755 17.05 6.60005 17.9094 8.80005 17.9094C10.8969 17.9094 12.8563 17.1188 14.4032 15.7094L20.1438 20.35C20.2813 20.4531 20.4532 20.5219 20.6251 20.5219C20.8657 20.5219 21.0719 20.4188 21.2094 20.2469C21.4844 19.9032 21.4501 19.4219 21.1063 19.1469ZM8.80005 16.3625C7.01255 16.3625 5.36255 15.675 4.09067 14.4032C1.47817 11.7907 1.47817 7.56252 4.09067 4.9844C5.36255 3.71252 7.01255 3.02502 8.80005 3.02502C10.5875 3.02502 12.2375 3.71252 13.5094 4.9844C16.1219 7.5969 16.1219 11.825 13.5094 14.4032C12.2719 15.675 10.5875 16.3625 8.80005 16.3625Z" fill="#000"/>
+            </svg>
+          </button>
+          <button class="close-btn" aria-label="닫기" id="search-close-btn">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <line x1="1" y1="1" x2="17" y2="17" stroke="#000" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="17" y1="1" x2="1" y2="17" stroke="#000" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <span class="search-tooltip">검색</span>
+        </div>
+        <a class="demo-btn" href="contact.html">
+          <span class="demo-text">문의하기</span>
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ═══ 1. HERO ═══ -->
+    <div class="hero">
+      <div class="breadcrumb">
+        <a href="index.html" class="breadcrumb-home" aria-label="홈">
+          <svg width="11" height="12" viewBox="0 0 11 12" fill="none">
+            <path d="M1 5L5.5 1L10 5V11H7V8H4V11H1V5Z" stroke="#1e8dcd" stroke-width="1.1" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <span class="breadcrumb-sep">
+          <svg width="5" height="10" viewBox="0 0 5 10" fill="none">
+            <path d="M1 1L4 5L1 9" stroke="#1e8dcd" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span>Company</span>
+        <span class="breadcrumb-sep">
+          <svg width="5" height="10" viewBox="0 0 5 10" fill="none">
+            <path d="M1 1L4 5L1 9" stroke="#1e8dcd" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <a href="" onclick="location.reload();return false;">기업소개</a>
+      </div>
+      <div class="hero-bg"></div>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <h1 class="hero-title">탄소 데이터의 무한한 연결로<br>지속가능한 미래를 만듭니다</h1>
+      </div>
+    </div>
+
+    <!-- ═══ 2. MISSION (sticky wrapper) ═══ -->
+    <div class="mission-wrapper">
+      <div class="mission-section">
+        <div class="mission-bg"></div>
+        <div class="mission-overlay"></div>
+        <div class="mission-navy"></div>
+        <p class="mission-text">
+          복잡한 탄소 규제와 에너지 관리의 불편을 줄이고<br>
+          실시간 데이터로 더 명확한 친환경 해법을 제시하겠습니다.
+        </p>
+        <div class="overlay-text-block">
+          <div class="overlay-text-wrap"><p class="overlay-text">이제 에코벨과 함께 기업과 환경이 긴밀하게 연결되며,</p></div>
+          <div class="overlay-text-wrap"><p class="overlay-text">산업과 자연이 함께 성장하는 내일을 만날 것입니다.</p></div>
+        </div>
+        <div class="mission-fadeout"></div>
+      </div>
+    </div>
+
+    <!-- ═══ 3+4. IDENTITY + CARDS (공유 그라데이션 배경) ═══ -->
+    <div class="identity-cards-wrap">
+    <section class="identity-section">
+      <p class="identity-subtitle gsap-text">통합된 탄소 데이터망을 활용해<br>탄소 감축 증명 인프라 서비스를 제공하는</p>
+      <img class="identity-logo" src="assets/company-logo-white.png" alt="에코벨 로고">
+      <p class="identity-tagline gsap-text">기후테크 자산화 솔루션 전문기업</p>
+      <p class="identity-desc gsap-text">
+        에코벨은 '<span style="font-weight:600;">에너지를 가치로 잇다</span>'라는 슬로건 아래,<br>에너지 전환 시장의 원천 데이터를 정밀하게 수집하는 <span style="color:#1E8DCD;font-weight:600;">통합 데이터망 인프라</span>를 구축합니다.<br>
+        자체 RTU 솔루션 기반의 탄소 감축 증명(MRV) 기술력을 바탕으로,<br>환경적 가치를 경제적 자산으로 전환하여 실질적인 에너지 선순환 구조를 완성해 갑니다.
+      </p>
+    </section>
+    <!-- cards-section 이후 z-index 복원 -->
+    <style>
+      .cards-section, .partner-section, .history-header-wrap, .history-section, .patent-section, .download-section {
+        position: relative; z-index: 2;
+      }
+    </style>
+
+    <!-- ═══ 4. 3R CARDS ═══ -->
+    <section class="cards-section">
+      <div class="cards-inner">
+        <!-- Retrieve -->
+        <div class="r-card">
+          <div class="r-card-text">
+            <span class="r-card-title">Retrieve</span>
+            <p class="r-card-desc">
+              탄소 발생부터 에너지 발전과 소비까지, 전 과정에<br>
+              ecoNODE를 설치해 실시간 수집 체계를 완성합니다.<br>
+              분산된 현장 데이터의 점유율을 확대하고<br>
+              포집된 에너지를 보다 체계적으로 운영합니다.
+            </p>
+          </div>
+          <img class="r-card-img" src="assets/company-retrieve-bg.png" alt="Retrieve">
+        </div>
+        <!-- Refine -->
+        <div class="r-card reverse">
+          <div class="r-card-text">
+            <span class="r-card-title">Refine</span>
+            <p class="r-card-desc">
+              수집된 원천 데이터를 탄소 시장 표준(MRV)에 맞춰<br>
+              변형 없이 투명하게 규격화하는 기술을 지향합니다.<br>
+              철저한 무결성 검증을 통해 있는 그대로의 정보를<br>
+              거래 가능한 자산, 그 이상으로 제시합니다.
+            </p>
+          </div>
+          <img class="r-card-img" src="assets/company-refine-bg.png" alt="Refine">
+        </div>
+        <!-- Realize -->
+        <div class="r-card">
+          <div class="r-card-text">
+            <span class="r-card-title">Realize</span>
+            <p class="r-card-desc">
+              정제된 데이터를 탄소배출권 시장 및 외부 가치 체계와<br>
+              직접 연동하는 통합 프레임워크를 실현합니다.<br>
+              기업의 감축 실적을 재무적 이익으로 최종 전환하는<br>
+              전 과정을 매끄럽게 디자인합니다.
+            </p>
+          </div>
+          <img class="r-card-img" src="assets/company-realize-bg.png" alt="Realize">
+        </div>
+      </div>
+    </section>
+    </div><!-- /identity-cards-wrap -->
+
+    <!-- ═══ 5. PARTNER ═══ -->
+    <section class="partner-section">
+      <div class="partner-inner">
+        <h2 class="partner-title reveal">Partner</h2>
+        <p class="partner-desc reveal">
+          역량 있는 파트너들과 기술을 공유하고 협력하여 기후테크 생태계를 넓히고<br>
+          기업과 환경을 연결하는 탄소 데이터의 가치를 만들어갑니다.
+        </p>
+        <div class="partner-logos">
+          <div class="partner-marquee-track row1">
+            <img src="assets/company-partners-row1.png" alt="파트너 로고">
+            <img src="assets/company-partners-row1.png" alt="파트너 로고">
+          </div>
+          <div class="partner-marquee-track row2">
+            <img src="assets/company-partners-row2.png" alt="파트너 로고">
+            <img src="assets/company-partners-row2.png" alt="파트너 로고">
+          </div>
+          <div class="partner-marquee-track row3">
+            <img src="assets/company-partners-row3.png" alt="파트너 로고">
+            <img src="assets/company-partners-row3.png" alt="파트너 로고">
+          </div>
+          <div class="partner-marquee-track row4">
+            <img src="assets/company-partners-row4.png" alt="파트너 로고">
+            <img src="assets/company-partners-row4.png" alt="파트너 로고">
+          </div>
+          <div class="partner-marquee-track row5">
+            <img src="assets/company-partners-row5.png" alt="파트너 로고">
+            <img src="assets/company-partners-row5.png" alt="파트너 로고">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 6. HISTORY ═══ -->
+    <div class="history-header-wrap">
+      <div class="history-inner">
+        <div class="history-header reveal">
+          <span class="history-title">기업과 환경을 잇는 <img class="history-header-logo" src="assets/logo.png" alt="에코벨"> 히스토리</span>
+        </div>
+      </div>
+    </div>
+    <section class="history-section">
+      <div class="history-content-bg">
+      <div class="history-inner">
+        <!-- 바디: 연도 탭(좌) + 이벤트(우) -->
+        <div class="history-body reveal">
+
+          <!-- 왼쪽: 세로 연도 탭 -->
+          <div class="history-years">
+            <div class="history-vline"></div>
+            <div class="history-year-item active" data-year="2025">
+              <div class="history-dot"></div>
+              <button class="history-year-btn">2025</button>
+            </div>
+            <div class="history-year-item" data-year="2024">
+              <div class="history-dot"></div>
+              <button class="history-year-btn">2024</button>
+            </div>
+            <div class="history-year-item" data-year="2023">
+              <div class="history-dot"></div>
+              <button class="history-year-btn">2023</button>
+            </div>
+          </div>
+
+          <!-- 오른쪽: 이벤트 목록 -->
+          <div class="history-timelines">
+
+            <!-- 2025 -->
+            <div class="history-timeline active" data-year="2025">
+              <div class="timeline-event">
+                <span class="timeline-event-date">2025.12</span>
+                <span class="timeline-event-text">제2 차 유상증자 실시</span>
+              </div>
+              <div class="timeline-event">
+                <span class="timeline-event-date">2025.10</span>
+                <span class="timeline-event-text">이삭지이에스·이아피그리드, VPP(가상발전소) 운영 사업 업무협약(MOU) 체결</span>
+              </div>
+              <div class="timeline-event">
+                <span class="timeline-event-date">2025.08</span>
+                <span class="timeline-event-text">중소벤처기업부 '초기창업패키지 지원사업' 선정</span>
+              </div>
+              <div class="timeline-event">
+                <span class="timeline-event-date">2025.02</span>
+                <span class="timeline-event-text">BIXPO KEPCO '전국 8대 에너지 혁신기업' 선정</span>
+              </div>
+              <div class="timeline-event">
+                <span class="timeline-event-date">2025.01</span>
+                <span class="timeline-event-text">기업부설연구소 설립</span>
+              </div>
+              <div class="timeline-event">
+                <span class="timeline-event-date">2025.01</span>
+                <span class="timeline-event-text">빅데이터 기반 AI ESG 컨설팅 시스템 특허 등록</span>
+              </div>
+              <div class="timeline-event">
+                <span class="timeline-event-date">2025.01</span>
+                <span class="timeline-event-text">기업 탄소 자산관리 인프라 서비스 'ecoASSET v1.0' 출시</span>
+              </div>
+            </div>
+
+            <!-- 2024 -->
+            <div class="history-timeline" data-year="2024">
+              <div class="timeline-event">
+                <span class="timeline-event-date">2024.11</span>
+                <span class="timeline-event-text">캔 압착 시스템 관련 기술 특허 등록</span>
+              </div>
+              <div class="timeline-event">
+                <span class="timeline-event-date">2024.11</span>
+                <span class="timeline-event-text">㈜이도, 폐기물 및 신재생에너지 탄소 순환 공정관리 업무협약</span>
+              </div>
+              <div class="timeline-event">
+                <span class="timeline-event-date">2024.07</span>
+                <span class="timeline-event-text">수소/전기차 전환 탄소 저감 산출 시스템 특허 등록</span>
+              </div>
+              <div class="timeline-event">
+                <span class="timeline-event-date">2024.06</span>
+                <span class="timeline-event-text">ISO 9001(품질경영시스템)·14001(환경경영시스템)·45001(안전보건경영시스템) 인증</span>
+              </div>
+              <div class="timeline-event">
+                <span class="timeline-event-date">2024.06</span>
+                <span class="timeline-event-text">전북테크노파크(JBTP), RE100 에너지솔루션 얼라이언스 참여 및 기술 동향 공유</span>
+              </div>
+            </div>
+
+            <!-- 2023 -->
+            <div class="history-timeline" data-year="2023">
+              <div class="timeline-event">
+                <span class="timeline-event-date">2023.12</span>
+                <span class="timeline-event-text">제1 차 유상증자 실시</span>
+              </div>
+              <div class="timeline-event">
+                <span class="timeline-event-date">2023.11</span>
+                <span class="timeline-event-text">벤처기업 인증</span>
+              </div>
+              <div class="timeline-event">
+                <span class="timeline-event-date">2023.09</span>
+                <span class="timeline-event-text">한국EV기술인협회, 배터리 ESG 및 탄소 배출권 활성화 업무협약 체결</span>
+              </div>
+              <div class="timeline-event">
+                <span class="timeline-event-date">2023.09</span>
+                <span class="timeline-event-text">연구개발전담부서 설립</span>
+              </div>
+              <div class="timeline-event">
+                <span class="timeline-event-date">2023.09</span>
+                <span class="timeline-event-text">그린플라스틱연합, 탄소 순환 공정관리 기술개발 공동 협력</span>
+              </div>
+              <div class="timeline-event">
+                <span class="timeline-event-date">2023.09</span>
+                <span class="timeline-event-text">한국여성경제인협회 협업</span>
+              </div>
+              <div class="timeline-event">
+                <span class="timeline-event-date">2023.02</span>
+                <span class="timeline-event-text">주식회사 에코벨 법인 설립</span>
+              </div>
+            </div>
+
+          </div><!-- /history-timelines -->
+        </div><!-- /history-body -->
+      </div>
+      </div><!-- /history-content-bg -->
+    </section>
+
+    <!-- ═══ 7. PATENT & CERT ═══ -->
+    <section class="patent-section">
+      <div class="patent-inner">
+        <h2 class="section-title reveal">특허 및 지적 재산권 보유 현황</h2>
+        <div class="patent-cards reveal">
+          <div class="patent-card">
+            <img src="assets/company-patent1.png" alt="캔 압착기 특허 등록 제10-2730949 호">
+          </div>
+          <div class="patent-card">
+            <img src="assets/company-patent2.png" alt="수소/전기차 전환 탄소절감 특허 등록 제10-2688731 호">
+          </div>
+          <div class="patent-card">
+            <img src="assets/company-patent3.png" alt="빅데이터 기반의 AI 맞춤형 ESG 컨설팅 특허 등록 제10-2757776 호">
+          </div>
+        </div>
+        <div class="cert-grid reveal">
+          <div class="cert-item">
+            <img src="assets/company-cert1.png" alt="서울지방중소벤처기업 인증">
+          </div>
+          <div class="cert-item">
+            <img src="assets/company-cert2.png" alt="부설연구소 인증">
+          </div>
+          <div class="cert-item">
+            <img src="assets/company-cert3.png" alt="ISO 14001 환경경영시스템 인증">
+          </div>
+          <div class="cert-item">
+            <img src="assets/company-cert4.png" alt="여성기업 인증">
+          </div>
+          <div class="cert-item">
+            <img src="assets/company-cert5.png" alt="ISO 9001 품질경영시스템 인증">
+          </div>
+          <div class="cert-item">
+            <img src="assets/company-cert6.png" alt="ISO 45001 경영 시스템 인증">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 8. BROCHURE DOWNLOAD ═══ -->
+    <section class="download-section">
+      <div class="download-inner">
+        <a class="download-btn reveal" href="archive.html">
+          <span class="download-label">기업소개서 다운로드</span>
+          <span class="download-icon">
+            <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M14 4V20M14 20L8 14M14 20L20 14" stroke="#234B63" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M4 22H24" stroke="#234B63" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </span>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ─── CTA 섹션 ─── -->
+  <section style="position:relative;width:100%;height:296px;overflow:hidden;display:flex;align-items:center;justify-content:center;">
+    <div style="position:absolute;inset:0;background:url('assets/cta-bg.png') center/cover no-repeat;"></div>
+    <div style="position:absolute;inset:0;background:rgba(0,49,77,0.85);"></div>
+    <div style="position:relative;text-align:center;">
+      <p style="font-family:'Nanum Square','NanumSquare',sans-serif;font-weight:900;font-size:30px;color:#fff;letter-spacing:0.84px;line-height:40px;margin:0 0 8px;">무엇이든 물어보세요</p>
+      <p style="font-family:'Nanum Square','NanumSquare',sans-serif;font-weight:500;font-size:16px;color:#fff;letter-spacing:0.84px;line-height:40px;margin:0 0 18px;">특정 비즈니스 솔루션 문의부터 일반 문의까지 에코벨이 도와드립니다.</p>
+      <a href="contact.html" class="cta-contact-btn"><span>문의하기</span></a>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ─── -->
+  <footer>
+    <div class="footer-inner">
+
+      <p class="ft-company-info">㈜에코벨
+사업자 등록번호 : 598-87-02578  |  대표 : 김소연
+호스팅 서비스 : 주식회사 에코벨 | 통신판매업신고번호 : 2023-서울금천-1822</p>
+
+      <p class="ft-col-title" style="left:45px;">회사정보</p>
+      <p class="ft-col-title" style="left:202px;">솔루션</p>
+      <p class="ft-col-title" style="left:374px;">플랫폼</p>
+      <p class="ft-col-title" style="left:554px;">인사이트</p>
+      <p class="ft-col-title" style="left:750px;">문의하기</p>
+
+      <a class="ft-link" href="ceo.html" style="left:45px;top:86px;">CEO 인사말</a>
+      <a class="ft-link" href="company.html" style="left:45px;top:121px;">회사소개</a>
+      <a class="ft-link" href="press.html" style="left:45px;top:156px;">보도자료</a>
+      <a class="ft-link" href="archive.html" style="left:45px;top:191px;">아카이브</a>
+
+      <a class="ft-link" href="#" style="left:202px;top:87px;">전체 솔루션 맵</a>
+      <a class="ft-link ft-en" href="#" style="left:202px;top:121px;">ecoNODE</a>
+      <div class="ft-sep" style="left:202px;top:161px;width:80px;"></div>
+      <a class="ft-link" href="#" style="left:202px;top:191px;">태양광 솔루션</a>
+
+      <a class="ft-link ft-en" href="#" style="left:374px;top:87px;">eco Asset</a>
+      <a class="ft-link ft-en" href="#" style="left:374px;top:121px;">Energy Asset</a>
+
+      <a class="ft-link ft-en" href="https://www.netzeronews.kr/" target="_blank" rel="noopener noreferrer" style="left:554px;top:86px;">NetZero News
+        <svg width="6" height="6" viewBox="0 0 8 8" fill="none" style="margin-left:2px;vertical-align:middle;"><path d="M1 7L7 1M7 1H3M7 1V5" stroke="#fff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a class="ft-link" href="insight.html?page=eco" style="left:554px;top:121px;">친환경 기업정보</a>
+      <a class="ft-link" href="insight.html?page=green" style="left:554px;top:156px;">그린카 계산기</a>
+
+      <a class="ft-link ft-en" href="notice.html" style="left:750px;top:87px;">공지사항</a>
+      <a class="ft-link ft-en" href="directions.html" style="left:750px;top:121px;">오시는길</a>
+      <a class="ft-link ft-en" href="contact.html" style="left:750px;top:156px;">문의하기</a>
+
+      <div class="ft-divider" style="top:305px;"></div>
+
+      <a class="ft-bottom-link fw-bold" href="#" style="left:45px;">개인정보처리방침</a>
+      <a class="ft-bottom-link" href="#" style="left:173px;">이용약관</a>
+      <a class="ft-bottom-link" href="#" style="left:250px;">이메일무단수집거부</a>
+      <a class="ft-bottom-link" href="faq.html" style="left:383px;">자주 묻는 질문(FAQ)</a>
+
+      <a class="ft-social" href="https://www.youtube.com/@yt_ecobell" target="_blank" rel="noopener noreferrer" aria-label="YouTube" style="right:135px;">
+        <svg width="22" height="23" viewBox="0 0 22 23" fill="none"><rect x="1.5" y="5" width="19" height="13" rx="3" stroke="#fff" stroke-width="1.3"/><polygon points="8.5,8.5 15.5,11.5 8.5,14.5" fill="#fff"/></svg>
+      </a>
+      <a class="ft-social" href="https://www.instagram.com/ecobell.co.kr/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" style="right:90px;">
+        <svg width="22" height="23" viewBox="0 0 22 23" fill="none"><rect x="2" y="2.5" width="18" height="18" rx="5" stroke="#fff" stroke-width="1.3"/><circle cx="11" cy="11.5" r="4" stroke="#fff" stroke-width="1.3"/><circle cx="16" cy="6.5" r="1.1" fill="#fff"/></svg>
+      </a>
+      <a class="ft-social" href="https://www.facebook.com/ecobell.co.kr" target="_blank" rel="noopener noreferrer" aria-label="Facebook" style="right:46px;">
+        <svg width="22" height="23" viewBox="0 0 22 23" fill="none"><path d="M12.5 11.5H14.8L15.5 8.5H12.5V6.8C12.5 5.9 12.9 5.2 14.2 5.2H15.8V2.6C15.8 2.6 14.3 2.3 12.9 2.3C10.1 2.3 8.5 3.9 8.5 6.5V8.5H5.8V11.5H8.5V20.5H12.5V11.5Z" fill="#fff"/></svg>
+      </a>
+      <p class="ft-copyright">서울시 금천구 시흥대로 193, 701호(08635)
+ⓒ ecobell Co., Ltd. All rights reserved.</p>
+
+    </div>
+  </footer>
+
+  <!-- ─── 플로팅 eco Asset 버튼 ─── -->
+  <a class="floating-ecoasset" href="#" aria-label="eco Asset 바로가기">
+    <img src="ecoasset_badge.png" alt="eco Asset">
+  </a>
+
+  <script>
+    const header = document.getElementById('header');
+
+    // ─── 헤더 스크롤 (그림자 + 숨김) ───
+    let _lastScrollY = window.scrollY;
+    window.addEventListener('scroll', () => {
+      const cur = window.scrollY;
+      header.classList.toggle('scrolled', cur > 10);
+      if (cur > _lastScrollY && cur > 80) {
+        header.classList.add('gnb-hidden');
+      } else {
+        header.classList.remove('gnb-hidden');
+      }
+      if (cur > _lastScrollY && header.classList.contains('search-open')) closeSearch();
+      _lastScrollY = cur;
+    }, { passive: true });
+
+    // ─── GNB / LNB 인터랙션 ───
+    const nav      = document.getElementById('main-nav');
+    const lnb      = document.getElementById('lnb');
+    const navItems = document.querySelectorAll('.nav-item');
+    const lnbCols  = document.querySelectorAll('.lnb-col');
+    let closeTimer;
+
+    function openLnb(menuName) {
+      clearTimeout(closeTimer);
+      nav.classList.add('lnb-open');
+      lnb.classList.add('open');
+      navItems.forEach(item => { item.classList.toggle('lnb-active', item.dataset.menu === menuName); });
+      lnbCols.forEach(col  => { col.classList.toggle('active', col.dataset.col === menuName); });
+    }
+
+    function schedulClose() {
+      closeTimer = setTimeout(() => {
+        nav.classList.remove('lnb-open');
+        lnb.classList.remove('open');
+        navItems.forEach(i => i.classList.remove('lnb-active'));
+        lnbCols.forEach(c => c.classList.remove('active'));
+      }, 120);
+    }
+
+    navItems.forEach(item => {
+      item.addEventListener('mouseenter', () => openLnb(item.dataset.menu));
+      item.addEventListener('mouseleave', schedulClose);
+    });
+    lnb.addEventListener('mouseenter', () => clearTimeout(closeTimer));
+    lnb.addEventListener('mouseleave', schedulClose);
+    lnbCols.forEach(col => {
+      col.addEventListener('mouseenter', () => {
+        const menu = col.dataset.col;
+        navItems.forEach(item => { item.classList.toggle('lnb-active', item.dataset.menu === menu); });
+        lnbCols.forEach(c  => { c.classList.toggle('active', c.dataset.col === menu); });
+      });
+    });
+
+    // ─── 검색창 토글 ───
+    const searchOverlay  = document.getElementById('search-overlay');
+    const searchInput    = document.getElementById('search-input');
+    const searchOpenBtn  = document.getElementById('search-open-btn');
+    const searchCloseBtn = document.getElementById('search-close-btn');
+
+    function openSearch() {
+      header.classList.add('search-open');
+      searchOverlay.classList.add('open');
+      nav.classList.remove('lnb-open');
+      lnb.classList.remove('open');
+      navItems.forEach(i => i.classList.remove('lnb-active'));
+      lnbCols.forEach(c => c.classList.remove('active'));
+      setTimeout(() => searchInput.focus(), 50);
+    }
+    function closeSearch() {
+      header.classList.remove('search-open');
+      searchOverlay.classList.remove('open');
+    }
+
+    searchOpenBtn.addEventListener('click', openSearch);
+    searchCloseBtn.addEventListener('click', closeSearch);
+
+    document.querySelectorAll('.search-tag').forEach(tag => {
+      tag.addEventListener('click', () => { searchInput.value = tag.dataset.keyword; searchInput.focus(); });
+    });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSearch(); });
+    document.querySelector('.search-submit').addEventListener('click', () => {
+      const kw = searchInput.value.trim();
+      if (kw) window.location.href = 'search.html?q=' + encodeURIComponent(kw);
+    });
+    searchInput.addEventListener('keydown', e => {
+      if (e.key === 'Enter') { const kw = searchInput.value.trim(); if (kw) window.location.href = 'search.html?q=' + encodeURIComponent(kw); }
+    });
+
+    // ─── 히스토리 연도 탭 전환 ───
+    document.querySelectorAll('.history-year-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const year = item.dataset.year;
+        document.querySelectorAll('.history-year-item').forEach(i => i.classList.remove('active'));
+        document.querySelectorAll('.history-timeline').forEach(t => t.classList.remove('active'));
+        item.classList.add('active');
+        document.querySelector(`.history-timeline[data-year="${year}"]`).classList.add('active');
+      });
+    });
+
+    // ─── 스크롤 등장 모션 ───
+    const revealEls = document.querySelectorAll('.reveal');
+    const revealTimers = new Map();
+    let scrollingUp = false;
+    let lastScrollY = window.scrollY;
+    window.addEventListener('scroll', () => {
+      scrollingUp = window.scrollY < lastScrollY;
+      lastScrollY = window.scrollY;
+    }, { passive: true });
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const el = entry.target;
+        const delay = parseInt(el.dataset.revealDelay) || 0;
+        if (revealTimers.has(el)) { clearTimeout(revealTimers.get(el)); revealTimers.delete(el); }
+        if (entry.intersectionRatio >= 0.1) {
+          const actualDelay = scrollingUp ? 0 : delay;
+          const up = scrollingUp;
+          const t = setTimeout(() => {
+            if (up) el.style.transform = 'translateY(0)';
+            else el.style.transform = '';
+            el.classList.add('visible');
+          }, actualDelay);
+          revealTimers.set(el, t);
+        } else if (entry.intersectionRatio === 0) {
+          el.style.transform = '';
+          el.classList.remove('visible');
+        }
+      });
+    }, { threshold: [0, 0.1] });
+
+    revealEls.forEach(el => revealObserver.observe(el));
+  </script>
+  <script src="assets/admin-trigger.js"></script>
+
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    // ─── Mission 전체: pin + 타임라인 ───
+    const missionTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: '.mission-section',
+        pin: true,
+        start: 'top top',
+        end: '+=240%',
+        scrub: 1,
+        onLeave: () => missionTl.progress(1),
+      }
+    });
+
+    // 0.0 ~ 1.0: 배경 줌인 (전 구간 지속, 1.2 도달 시점 ≈ 0.31)
+    missionTl.to('.mission-bg', { scale: 1.65, ease: 'none', duration: 1 }, 0);
+
+    // 0.31 ~ 0.50: 기존 텍스트 위로 + 페이드아웃 (줌 1.2 도달과 동시)
+    missionTl.to('.mission-text', { opacity: 0, y: -30, ease: 'none', duration: 0.12 }, 0.31);
+
+    // 0.31 ~ 0.72: 네이비 페이드인 (줌 1.2 도달과 동시)
+    missionTl.to('.mission-navy', { opacity: 1, ease: 'none', duration: 0.41 }, 0.31);
+
+    // 0.48 ~ 0.72: 오버레이 텍스트 아래서 잘려 올라오기
+    missionTl.fromTo('.overlay-text', { y: '100%' }, { y: '0%', ease: 'none', duration: 0.10 }, 0.40);
+
+    // 0.74 ~ 1.0: 흰 배경 페이드인 → 네이비 완전히 가려진 후 핀 해제
+    missionTl.to('.mission-fadeout', { opacity: 1, ease: 'none', duration: 0.12 }, 0.85);
+
+    // ─── 5. Identity 텍스트: fade-in stagger ───
+    gsap.to('.identity-section .gsap-text', {
+      opacity: 1,
+      y: 0,
+      duration: 0.85,
+      stagger: 0.14,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: '.identity-section',
+        start: 'top 55%',
+        toggleActions: 'play none none reverse'
+      }
+    });
+
+    // ─── 6. Identity 로고: 로고 자체 진입 시 fade-in ───
+    gsap.fromTo('.identity-logo',
+      { opacity: 0, y: 24 },
+      {
+        opacity: 1, y: 0,
+        duration: 1.0,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: '.identity-logo',
+          start: 'top 78%',
+          toggleActions: 'play none none reverse'
+        }
+      }
+    );
+
+    // ─── 7. 카드: 진입 시 위로 떠오르기, 이탈 시 fade-out ───
+    gsap.utils.toArray('.r-card').forEach(card => {
+      gsap.set(card, { opacity: 0, y: 70 });
+
+      ScrollTrigger.create({
+        trigger: card,
+        start: 'top 70%',
+        end: 'bottom 8%',
+        onEnter: () => gsap.to(card, { opacity: 1, y: 0, duration: 0.85, ease: 'power2.out' }),
+        onLeave: () => gsap.to(card, { opacity: 0, duration: 0.5, ease: 'power1.in' }),
+        onEnterBack: () => gsap.to(card, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' }),
+        onLeaveBack: () => gsap.to(card, { opacity: 0, y: 70, duration: 0.4, ease: 'power1.in' }),
+      });
+    });
+  </script>
+</body>
+</html>
