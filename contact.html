@@ -1657,6 +1657,10 @@
   </a>
 
   <script>
+    // 새로고침 시 브라우저 스크롤 위치 복원 비활성화
+    if (history.scrollRestoration) history.scrollRestoration = 'manual';
+    window.scrollTo(0, 0);
+
     // ─── 폼 타입 설정 ───
     const FORM_TYPES = {
       partnership: { title: '파트너십 & 비즈니스', field2: '소속/회사명', fileLabel: '첨부파일', fileReq: false },

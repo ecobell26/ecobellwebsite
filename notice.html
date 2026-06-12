@@ -1384,6 +1384,10 @@
   </footer>
 
   <script>
+    // 새로고침 시 브라우저 스크롤 위치 복원 비활성화
+    if (history.scrollRestoration) history.scrollRestoration = 'manual';
+    window.scrollTo(0, 0);
+
     // ─── 첨부파일 팝업 (전역) ───
     let _noticesMap = {};
     function showAttachPopup(e, id) {

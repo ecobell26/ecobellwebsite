@@ -598,6 +598,10 @@
   </footer>
 
   <script>
+    // 새로고침 시 브라우저 스크롤 위치 복원 비활성화
+    if (history.scrollRestoration) history.scrollRestoration = 'manual';
+    window.scrollTo(0, 0);
+
     // ─── 헤더 스크롤 ───
     let _lastScrollY = window.scrollY;
     window.addEventListener('scroll', () => {

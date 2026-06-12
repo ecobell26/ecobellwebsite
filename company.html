@@ -9,6 +9,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&family=Nanum+Square:wght@400;700;800&display=swap" rel="stylesheet">
   <link href="https://api.fontshare.com/v2/css?f[]=chillax@400,500,600,700&display=swap" rel="stylesheet">
   <style>
+    @font-face {
+      font-family: 'Kakao OTF';
+      src: url('assets/fonts/KakaoOTFRegular.otf') format('opentype');
+      font-weight: 400;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Kakao OTF';
+      src: url('assets/fonts/KakaoOTFBold.otf') format('opentype');
+      font-weight: 700;
+      font-style: normal;
+    }
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; overscroll-behavior: none; }
     body {
@@ -341,7 +353,7 @@
     .breadcrumb-sep { width: 5px; height: 10px; display: flex; align-items: center; }
     .breadcrumb a, .breadcrumb span {
       font-family: 'Chillax', sans-serif; font-weight: 400; font-size: 13px;
-      color: #1e8dcd; text-decoration: none; letter-spacing: 0.13px;
+      color: #ffffff; text-decoration: none; letter-spacing: 0.13px;
     }
     .breadcrumb a[href]:not(.breadcrumb-home):hover { opacity: 0.7; }
 
@@ -357,25 +369,52 @@
     }
     .hero-bg {
       position: absolute; inset: 0;
-      background: url('assets/company-hero-bg.png') top/cover no-repeat;
+      background: url('assets/company-hero-bg2.png') top/cover no-repeat;
+    }
+    @keyframes hero-chevron-bounce {
+      /* 시작: 위에서 보이지 않음 */
+      0%    { transform: translateX(-50%) translateY(-6px);  opacity: 0;   animation-timing-function: ease-out; }
+      /* 1. 나타나며 아래 반동 */
+      7%    { transform: translateX(-50%) translateY(18px);  opacity: 0.6; animation-timing-function: ease-in-out; }
+      /* 2. 위로 살짝 떠오르기 */
+      20%   { transform: translateX(-50%) translateY(-4px);  opacity: 0.6; }
+      /* 3. 아래 반동 */
+      34%   { transform: translateX(-50%) translateY(16px);  opacity: 0.6; }
+      /* 4. 위로 떠오르며 빠르게 사라지기 */
+      48%   { transform: translateX(-50%) translateY(-12px); opacity: 0;   }
+      /* 다음 루프 준비 */
+      100%  { transform: translateX(-50%) translateY(-6px);  opacity: 0;   }
+    }
+    .hero-chevron {
+      position: absolute;
+      bottom: 44px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 55px;
+      height: 20px;
+      animation: hero-chevron-bounce 5s linear infinite;
+      pointer-events: none;
     }
     .hero-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to bottom, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.15) 100%);
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 443px;
+      background: linear-gradient(to bottom, rgba(149,186,207,1) 0%, rgba(30,141,205,0) 100%);
     }
     .hero-content {
       position: absolute;
-      left: 0; right: 0; top: 180px;
+      left: 0; right: 0; top: 135px;
       text-align: center;
     }
     .hero-title {
-      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 750;
+      font-family: 'Kakao OTF', 'Noto Sans KR', sans-serif;
+      font-weight: 700;
       font-size: 45px;
-      color: #234B63;
+      color: #fff;
       line-height: 1.4;
-      letter-spacing: 1px;
+      letter-spacing: 0.45px;
       text-align: center;
+      opacity: 0;
     }
 
     /* ═══ 2. MISSION ═══ */
@@ -393,7 +432,7 @@
     }
     .mission-bg {
       position: absolute; inset: 0;
-      background: url('assets/company-section2-bg.png') center/cover no-repeat;
+      background: url('assets/company-section2-bg2.png') center/cover no-repeat;
       transform-origin: center center;
       will-change: transform;
     }
@@ -407,12 +446,12 @@
       top: 50%; transform: translateY(-50%);
       z-index: 1;
       text-align: center;
-      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 750;
+      font-family: 'Kakao OTF', 'Noto Sans KR', sans-serif;
+      font-weight: 700;
       font-size: 33px;
       color: #fff;
-      line-height: 1.70;
-      letter-spacing: -0.3px;
+      line-height: 1.37;
+      letter-spacing: 0;
     }
 
     /* ═══ 3. NAVY OVERLAY ═══ */
@@ -420,7 +459,6 @@
       position: absolute; inset: 0;
       background: #1c2134;
       opacity: 0;
-      will-change: opacity;
     }
     .overlay-text-block {
       position: absolute;
@@ -434,15 +472,14 @@
       padding-bottom: 4px;
     }
     .overlay-text {
-      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 750;
+      font-family: 'Kakao OTF', 'Noto Sans KR', sans-serif;
+      font-weight: 700;
       font-size: 33px;
       color: #fff;
-      line-height: 1.70;
-      letter-spacing: -0.3px;
+      line-height: 1.37;
+      letter-spacing: 0;
       text-align: center;
       transform: translateY(100%);
-      will-change: transform;
     }
 
     .mission-fadeout {
@@ -461,7 +498,7 @@
     .identity-section {
       position: relative;
       background: transparent;
-      padding: 120px 0 100px;
+      padding: 0 0 200px;
       text-align: center;
     }
     /* GSAP 텍스트 초기 상태 */
@@ -469,49 +506,33 @@
       opacity: 0;
       transform: translateY(40px);
     }
-    .identity-subtitle {
-      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 700;
-      font-size: 21px;
-      color: #234B63;
-      line-height: 1.75;
-      letter-spacing: -0.3px;
-      margin-bottom: 41px;
-      margin-top: -30px;
-    }
     .identity-logo {
       display: block;
-      width: 360px;
-      margin: 0 auto 63px;
+      width: 760px;
+      margin: 0 auto 40px;
       object-fit: contain;
-      opacity: 0;
     }
-    .identity-tagline {
-      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 800;
-      font-size: 24px;
-      color: #234B63;
-      line-height: 1.4;
-      margin-bottom: 55px;
-      margin-top: -10px;
+    .identity-tagline-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 174px;
     }
-    .identity-desc {
-      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 400;
-      font-size: 19px;
-      color: #000;
-      line-height: 1.78;
-      letter-spacing: -0.44px;
-      text-align: center;
-      max-width: 780px;
-      margin: 0 auto;
-      margin-bottom: 100px;
+    .identity-tag-left,
+    .identity-tag-right {
+      font-family: 'Kakao OTF', 'Noto Sans KR', sans-serif;
+      font-weight: 700;
+      font-size: 30px;
+      color: #00304d;
+      line-height: 1.37;
+      letter-spacing: 0;
     }
+    .identity-tag-left { text-align: left; }
+    .identity-tag-right { text-align: right; }
 
     /* ═══ 4. 3R CARDS ═══ */
     .cards-section {
       background: transparent;
-      padding: 0 0 300px;
+      padding: 0 0 200px;
     }
     .cards-inner {
       width: 1130px;
@@ -525,41 +546,177 @@
       width: 100%;
       height: 346px;
       overflow: hidden;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 0.35s ease;
+    }
+    .r-card:hover {
+      transform: translateY(-8px);
+    }
+    .r-card:hover .r-card-img {
+      transform: scale(1.04);
+    }
+    .r-card-img {
+      transition: transform 0.45s ease;
     }
     .r-card.reverse { flex-direction: row-reverse; }
-    .r-card.reverse .r-card-text { padding-left: 150px; }
-    .r-card-img {
-      width: 547px;
-      height: 329px;
+    .r-card-img-wrap {
+      position: relative;
+      width: 576px;
+      height: 346px;
       flex-shrink: 0;
+      overflow: hidden;
+      border-radius: 20px;
+    }
+    .r-card:hover .r-card-title-arrow {
+      transform: translate(3px, -3px);
+    }
+    .r-card-img {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
-      align-self: center;
+    }
+    .r-card-overlay {
+      position: absolute;
+      inset: 0;
+      border-radius: 20px;
+      background: linear-gradient(to top, rgba(57,115,149,0.9) 0%, rgba(255,255,255,0) 60%);
+      pointer-events: none;
+    }
+    .r-card-title {
+      position: absolute;
+      bottom: 24px;
+      left: 36px;
+      font-family: 'Chillax', sans-serif;
+      font-weight: 600;
+      font-size: 30px;
+      color: #ffffff;
+      line-height: 1.21;
+      letter-spacing: -0.6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .r-card-title-arrow {
+      width: 22px;
+      height: 22px;
+      flex-shrink: 0;
+      transition: transform 0.3s ease;
     }
     .r-card-text {
       flex: 1;
-      background: transparent;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 40px 0;
+      padding: 0 60px 0 0;
     }
-    .r-card-title {
-      font-family: 'Chillax', sans-serif;
-      font-weight: 600;
-      font-size: 35px;
-      color: #234B63;
-      line-height: 1.7;
-      letter-spacing: -0.7px;
-      margin-bottom: 22px;
+    .r-card.reverse .r-card-text {
+      padding: 0 0 0 100px;
+    }
+    .r-card-logo {
+      display: block;
+      margin-bottom: 26px;
     }
     .r-card-desc {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
       font-weight: 400;
-      font-size: 20px;
+      font-size: 19px;
       color: #000;
       line-height: 1.7;
       letter-spacing: -0.44px;
     }
+
+    /* ═══ PoD ═══ */
+    .pod-section {
+      background: #fff;
+      padding: 170px 0 140px;
+    }
+    .pod-inner {
+      width: 1130px;
+      margin: 0 auto;
+    }
+    .pod-header { margin-bottom: 52px; }
+    .pod-label {
+      display: block;
+      font-family: 'Chillax Variable', 'Chillax', sans-serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: #1E8DCD;
+      letter-spacing: 0.06em;
+      margin-bottom: 18px;
+    }
+    .pod-heading {
+      font-family: 'Kakao OTF', 'KakaoOTF', sans-serif;
+      font-weight: 600;
+      font-size: 30px;
+      color: #000;
+      line-height: 1.48;
+      letter-spacing: -0.8px;
+    }
+    .pod-cards {
+      display: flex;
+      gap: 10px;
+      height: 440px;
+    }
+    .pod-card {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      flex: 1;
+      cursor: pointer;
+      transition: flex 0.72s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .pod-card.active { flex: 5; }
+    .pod-card-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+    }
+    .pod-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.30) 0%, rgba(0,0,0,0) 100%);
+      opacity: 0;
+      transition: opacity 0.35s ease 0.28s;
+      pointer-events: none;
+    }
+    .pod-card.active .pod-card-overlay { opacity: 1; }
+    .pod-card-text {
+      position: absolute;
+      left: 0; top: 0; right: 0;
+      padding: 59px 40px 0 66px;
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      transform: translateX(-10px);
+      transition: opacity 0s, transform 0s;
+      pointer-events: none;
+    }
+    .pod-card.active .pod-card-text {
+      opacity: 1;
+      transform: none;
+      transition: opacity 0.28s ease 0.68s, transform 0.28s ease 0.68s;
+    }
+    .pod-card-title {
+      font-family: 'Kakao OTF', 'KakaoOTF', sans-serif;
+      font-weight: 600;
+      font-size: 28px;
+      color: #fff;
+      line-height: 1.45;
+      letter-spacing: 0;
+      margin: 0 0 20px;
+    }
+    .pod-card-desc {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 500;
+      font-size: 17px;
+      color: #fff;
+      line-height: 1.6;
+      letter-spacing: 0;
+    }
+    .pod-card-text--white .pod-card-title,
+    .pod-card-text--white .pod-card-desc { color: #fff; }
 
     /* ═══ 5. PARTNER ═══ */
     .partner-section {
@@ -1060,18 +1217,18 @@
       <div class="breadcrumb">
         <a href="index.html" class="breadcrumb-home" aria-label="홈">
           <svg width="11" height="12" viewBox="0 0 11 12" fill="none">
-            <path d="M1 5L5.5 1L10 5V11H7V8H4V11H1V5Z" stroke="#1e8dcd" stroke-width="1.1" stroke-linejoin="round"/>
+            <path d="M1 5L5.5 1L10 5V11H7V8H4V11H1V5Z" stroke="#ffffff" stroke-width="1.1" stroke-linejoin="round"/>
           </svg>
         </a>
         <span class="breadcrumb-sep">
           <svg width="5" height="10" viewBox="0 0 5 10" fill="none">
-            <path d="M1 1L4 5L1 9" stroke="#1e8dcd" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M1 1L4 5L1 9" stroke="#ffffff" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </span>
         <span>Company</span>
         <span class="breadcrumb-sep">
           <svg width="5" height="10" viewBox="0 0 5 10" fill="none">
-            <path d="M1 1L4 5L1 9" stroke="#1e8dcd" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M1 1L4 5L1 9" stroke="#ffffff" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </span>
         <a href="" onclick="location.reload();return false;">기업소개</a>
@@ -1081,6 +1238,9 @@
       <div class="hero-content">
         <h1 class="hero-title">탄소 데이터의 무한한 연결로<br>지속가능한 미래를 만듭니다</h1>
       </div>
+      <svg class="hero-chevron" viewBox="0 0 110 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polyline points="6,6 55,34 104,6" stroke="white" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
     </div>
 
     <!-- ═══ 2. MISSION (sticky wrapper) ═══ -->
@@ -1094,7 +1254,7 @@
           실시간 데이터로 더 명확한 친환경 해법을 제시하겠습니다.
         </p>
         <div class="overlay-text-block">
-          <div class="overlay-text-wrap"><p class="overlay-text">이제 에코벨과 함께 기업과 환경이 긴밀하게 연결되며,</p></div>
+          <div class="overlay-text-wrap"><p class="overlay-text">이제 에코벨과 함께 모든 기업이 환경적 부담에서 벗어나,</p></div>
           <div class="overlay-text-wrap"><p class="overlay-text">산업과 자연이 함께 성장하는 내일을 만날 것입니다.</p></div>
         </div>
         <div class="mission-fadeout"></div>
@@ -1104,13 +1264,11 @@
     <!-- ═══ 3+4. IDENTITY + CARDS (공유 그라데이션 배경) ═══ -->
     <div class="identity-cards-wrap">
     <section class="identity-section">
-      <p class="identity-subtitle gsap-text">통합된 탄소 데이터망을 활용해<br>탄소 감축 증명 인프라 서비스를 제공하는</p>
-      <img class="identity-logo" src="assets/company-logo-white.png" alt="에코벨 로고">
-      <p class="identity-tagline gsap-text">기후테크 자산화 솔루션 전문기업</p>
-      <p class="identity-desc gsap-text">
-        에코벨은 '<span style="font-weight:600;">에너지를 가치로 잇다</span>'라는 슬로건 아래,<br>에너지 전환 시장의 원천 데이터를 정밀하게 수집하는 <span style="color:#1E8DCD;font-weight:600;">통합 데이터망 인프라</span>를 구축합니다.<br>
-        자체 RTU 솔루션 기반의 탄소 감축 증명(MRV) 기술력을 바탕으로,<br>환경적 가치를 경제적 자산으로 전환하여 실질적인 에너지 선순환 구조를 완성해 갑니다.
-      </p>
+      <img class="identity-logo gsap-text" src="assets/company-logo-white2.png" alt="에코벨 로고">
+      <div class="identity-tagline-row gsap-text">
+        <p class="identity-tag-left">편리한 친환경 산업을 위한</p>
+        <p class="identity-tag-right">기후테크 자산화 솔루션 기업</p>
+      </div>
     </section>
     <!-- cards-section 이후 z-index 복원 -->
     <style>
@@ -1123,9 +1281,9 @@
     <section class="cards-section">
       <div class="cards-inner">
         <!-- Retrieve -->
-        <div class="r-card">
+        <a class="r-card" href="econode.html">
           <div class="r-card-text">
-            <span class="r-card-title">Retrieve</span>
+            <img class="r-card-logo" src="assets/card-retrieve-logo.png" alt="ecoNODE" style="width:244px;height:38px">
             <p class="r-card-desc">
               탄소 발생부터 에너지 발전과 소비까지, 전 과정에<br>
               ecoNODE를 설치해 실시간 수집 체계를 완성합니다.<br>
@@ -1133,12 +1291,16 @@
               포집된 에너지를 보다 체계적으로 운영합니다.
             </p>
           </div>
-          <img class="r-card-img" src="assets/company-retrieve-bg.png" alt="Retrieve">
-        </div>
+          <div class="r-card-img-wrap">
+            <img class="r-card-img" src="assets/card-retrieve-bg.png" alt="Retrieve">
+            <div class="r-card-overlay"></div>
+            <span class="r-card-title">Retrieve<svg class="r-card-title-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 17L17 7M17 7H9M17 7V15" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </div>
+        </a>
         <!-- Refine -->
-        <div class="r-card reverse">
+        <a class="r-card reverse" href="e-asset.html">
           <div class="r-card-text">
-            <span class="r-card-title">Refine</span>
+            <img class="r-card-logo" src="assets/card-refine-logo3.png" alt="E-Asset" style="width:277px;height:55px">
             <p class="r-card-desc">
               수집된 원천 데이터를 탄소 시장 표준(MRV)에 맞춰<br>
               변형 없이 투명하게 규격화하는 기술을 지향합니다.<br>
@@ -1146,12 +1308,16 @@
               거래 가능한 자산, 그 이상으로 제시합니다.
             </p>
           </div>
-          <img class="r-card-img" src="assets/company-refine-bg.png" alt="Refine">
-        </div>
+          <div class="r-card-img-wrap">
+            <img class="r-card-img" src="assets/card-refine-bg.png" alt="Refine">
+            <div class="r-card-overlay"></div>
+            <span class="r-card-title">Refine<svg class="r-card-title-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 17L17 7M17 7H9M17 7V15" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </div>
+        </a>
         <!-- Realize -->
-        <div class="r-card">
+        <a class="r-card" href="ecoasset.html">
           <div class="r-card-text">
-            <span class="r-card-title">Realize</span>
+            <img class="r-card-logo" src="assets/card-realize-logo.png" alt="ecoASSET" style="width:321px;height:54px">
             <p class="r-card-desc">
               정제된 데이터를 탄소배출권 시장 및 외부 가치 체계와<br>
               직접 연동하는 통합 프레임워크를 실현합니다.<br>
@@ -1159,10 +1325,81 @@
               전 과정을 매끄럽게 디자인합니다.
             </p>
           </div>
-          <img class="r-card-img" src="assets/company-realize-bg.png" alt="Realize">
+          <div class="r-card-img-wrap">
+            <img class="r-card-img" src="assets/card-realize-bg.png" alt="Realize">
+            <div class="r-card-overlay"></div>
+            <span class="r-card-title">Realize<svg class="r-card-title-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 17L17 7M17 7H9M17 7V15" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- ═══ PoD ═══ -->
+    <section class="pod-section">
+      <div class="pod-inner">
+        <div class="pod-header">
+          <span class="pod-label">PoD</span>
+          <h2 class="pod-heading">환경적 기여가 기업 성장의 원동력이 되도록<br>여러분의 사업과 기후테크 기술을 하나씩 연결합니다.</h2>
+        </div>
+        <div class="pod-cards" id="podCards">
+          <div class="pod-card active" data-pod="0">
+            <div class="pod-card-bg" style="background-image:url('assets/pod-card1-bg.png')"></div>
+            <div class="pod-card-overlay"></div>
+            <div class="pod-card-text">
+              <h3 class="pod-card-title">독자적 데이터 수집 인프라</h3>
+              <p class="pod-card-desc">자체 RTU(ecoNODE) 수집망 고도화로<br>현장의 에너지 실측 데이터를 번거로움 없이 수집하며<br>분산된 데이터의 무결한 확보를 선제적으로 완성합니다.</p>
+            </div>
+          </div>
+          <div class="pod-card" data-pod="1">
+            <div class="pod-card-bg" style="background-image:url('assets/pod-card2-bg.png')"></div>
+            <div class="pod-card-overlay"></div>
+            <div class="pod-card-text">
+              <h3 class="pod-card-title">에너지 데이터의 자본화</h3>
+              <p class="pod-card-desc">기업의 탄소 감축 실적을 재무적 자산으로<br>즉각 전환하며 데이터 조작 없는 투명한<br>MRV 자산화 인프라 플랫폼을 안정적으로 구축합니다.</p>
+            </div>
+          </div>
+          <div class="pod-card" data-pod="2">
+            <div class="pod-card-bg" style="background-image:url('assets/pod-card3-bg.png')"></div>
+            <div class="pod-card-overlay"></div>
+            <div class="pod-card-text">
+              <h3 class="pod-card-title">글로벌 규제 대응 확장성</h3>
+              <p class="pod-card-desc">글로벌 탄소 규제와 공시 의무화 요구에<br>실시간으로 선제 대응하며 기업의 생존을 담보하는<br>통합 컴플라이언스 및 VPP 인프라를 실현합니다.</p>
+            </div>
+          </div>
+          <div class="pod-card" data-pod="3">
+            <div class="pod-card-bg" style="background-image:url('assets/pod-card4-bg.png')"></div>
+            <div class="pod-card-text pod-card-text--white">
+              <h3 class="pod-card-title">What's NEXT?</h3>
+              <p class="pod-card-desc">비즈니스 영역을 다각도로 넓히며<br>여러분의 사업에 기후테크 기술을<br>더 긴밀하게 결합합니다.</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
+    <script>
+      (function() {
+        const wrap  = document.getElementById('podCards');
+        const cards = wrap.querySelectorAll('.pod-card');
+        let current = 0, timer = null, paused = false;
+
+        function activate(idx) {
+          cards.forEach((c, i) => c.classList.toggle('active', i === idx));
+          current = idx;
+        }
+
+        function startTimer() {
+          clearInterval(timer);
+          timer = setInterval(() => activate((current + 1) % cards.length), 4000);
+        }
+
+        wrap.addEventListener('mouseenter', () => { paused = true;  clearInterval(timer); });
+        wrap.addEventListener('mouseleave', () => { paused = false; startTimer(); });
+        cards.forEach((c, i) => c.addEventListener('mouseenter', () => activate(i)));
+
+        startTimer();
+      })();
+    </script>
+
     </div><!-- /identity-cards-wrap -->
 
     <!-- ═══ 5. PARTNER ═══ -->
@@ -1457,6 +1694,10 @@
   </a>
 
   <script>
+    // 새로고침 시 브라우저 스크롤 위치 복원 비활성화
+    if (history.scrollRestoration) history.scrollRestoration = 'manual';
+    window.scrollTo(0, 0);
+
     const header = document.getElementById('header');
 
     // ─── 헤더 스크롤 (그림자 + 숨김) ───
@@ -1598,20 +1839,28 @@
   <script>
     gsap.registerPlugin(ScrollTrigger);
 
+    // ─── Hero 타이틀 등장 ───
+    gsap.fromTo('.hero-title',
+      { opacity: 0, y: 28 },
+      { opacity: 1, y: 0, duration: 0.9, ease: 'power2.out', delay: 0.3 }
+    );
+
     // ─── Mission 전체: pin + 타임라인 ───
     const missionTl = gsap.timeline({
       scrollTrigger: {
         trigger: '.mission-section',
         pin: true,
+        anticipatePin: 1,
         start: 'top top',
         end: '+=240%',
-        scrub: 1,
+        scrub: 0.5,
+        fastScrollEnd: true,
         onLeave: () => missionTl.progress(1),
       }
     });
 
-    // 0.0 ~ 1.0: 배경 줌인 (전 구간 지속, 1.2 도달 시점 ≈ 0.31)
-    missionTl.to('.mission-bg', { scale: 1.65, ease: 'none', duration: 1 }, 0);
+    // 0.0 ~ 1.0: 배경 줌인 (전 구간 지속)
+    missionTl.to('.mission-bg', { scale: 1.9, ease: 'none', duration: 1 }, 0);
 
     // 0.31 ~ 0.50: 기존 텍스트 위로 + 페이드아웃 (줌 1.2 도달과 동시)
     missionTl.to('.mission-text', { opacity: 0, y: -30, ease: 'none', duration: 0.12 }, 0.31);
@@ -1619,40 +1868,25 @@
     // 0.31 ~ 0.72: 네이비 페이드인 (줌 1.2 도달과 동시)
     missionTl.to('.mission-navy', { opacity: 1, ease: 'none', duration: 0.41 }, 0.31);
 
-    // 0.48 ~ 0.72: 오버레이 텍스트 아래서 잘려 올라오기
-    missionTl.fromTo('.overlay-text', { y: '100%' }, { y: '0%', ease: 'none', duration: 0.10 }, 0.40);
+    // 0.38 ~ 0.48: 오버레이 텍스트 아래서 잘려 올라오기
+    missionTl.fromTo('.overlay-text', { y: '100%' }, { y: '0%', ease: 'none', duration: 0.10 }, 0.38);
 
     // 0.74 ~ 1.0: 흰 배경 페이드인 → 네이비 완전히 가려진 후 핀 해제
     missionTl.to('.mission-fadeout', { opacity: 1, ease: 'none', duration: 0.12 }, 0.85);
 
-    // ─── 5. Identity 텍스트: fade-in stagger ───
+    // ─── 5. Identity: logo + tagline row fade-in stagger ───
     gsap.to('.identity-section .gsap-text', {
       opacity: 1,
       y: 0,
-      duration: 0.85,
-      stagger: 0.14,
+      duration: 0.9,
+      stagger: 0.18,
       ease: 'power2.out',
       scrollTrigger: {
         trigger: '.identity-section',
-        start: 'top 55%',
+        start: 'top 60%',
         toggleActions: 'play none none reverse'
       }
     });
-
-    // ─── 6. Identity 로고: 로고 자체 진입 시 fade-in ───
-    gsap.fromTo('.identity-logo',
-      { opacity: 0, y: 24 },
-      {
-        opacity: 1, y: 0,
-        duration: 1.0,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: '.identity-logo',
-          start: 'top 78%',
-          toggleActions: 'play none none reverse'
-        }
-      }
-    );
 
     // ─── 7. 카드: 진입 시 위로 떠오르기, 이탈 시 fade-out ───
     gsap.utils.toArray('.r-card').forEach(card => {
@@ -1660,7 +1894,7 @@
 
       ScrollTrigger.create({
         trigger: card,
-        start: 'top 70%',
+        start: 'top 80%',
         end: 'bottom 8%',
         onEnter: () => gsap.to(card, { opacity: 1, y: 0, duration: 0.85, ease: 'power2.out' }),
         onLeave: () => gsap.to(card, { opacity: 0, duration: 0.5, ease: 'power1.in' }),
@@ -1669,5 +1903,186 @@
       });
     });
   </script>
+
+  <!-- ═══ 히어로 섹션 라인 애니메이션 ═══ -->
+  <script>
+    (function() {
+      const section = document.querySelector('.hero');
+      const canvas  = document.createElement('canvas');
+      canvas.style.cssText = 'position:absolute;inset:0;pointer-events:none;z-index:3;';
+      section.appendChild(canvas);
+      const ctx = canvas.getContext('2d');
+
+      let W, H, ptsA = [], ptsB = [];
+
+      function cubic(p0, p1, p2, p3, n) {
+        const out = [];
+        for (let i = 0; i <= n; i++) {
+          const t = i / n, u = 1 - t;
+          out.push({
+            x: u*u*u*p0[0] + 3*u*u*t*p1[0] + 3*u*t*t*p2[0] + t*t*t*p3[0],
+            y: u*u*u*p0[1] + 3*u*u*t*p1[1] + 3*u*t*t*p2[1] + t*t*t*p3[1],
+          });
+        }
+        return out;
+      }
+
+      // Catmull-Rom 스플라인 → 각 구간을 cubic bezier로 변환 (C1 자동 보장)
+      function catmullRom(pts, n) {
+        const out = [];
+        for (let i = 0; i < pts.length - 1; i++) {
+          const p0 = pts[Math.max(0, i-1)];
+          const p1 = pts[i];
+          const p2 = pts[i+1];
+          const p3 = pts[Math.min(pts.length-1, i+2)];
+          const cp1 = [p1[0]+(p2[0]-p0[0])/6, p1[1]+(p2[1]-p0[1])/6];
+          const cp2 = [p2[0]-(p3[0]-p1[0])/6, p2[1]-(p3[1]-p1[1])/6];
+          const seg = cubic(p1, cp1, cp2, p2, n);
+          if (i === 0) out.push(...seg); else out.push(...seg.slice(1));
+        }
+        return out;
+      }
+
+      // 경로를 등간격(아크-렝스 기준)으로 리샘플링 → 전 구간 속도 균일
+      function resample(pts, step) {
+        const out = [pts[0]];
+        let acc = 0;
+        for (let i = 1; i < pts.length; i++) {
+          const dx = pts[i].x - pts[i-1].x, dy = pts[i].y - pts[i-1].y;
+          const d  = Math.sqrt(dx*dx + dy*dy);
+          acc += d;
+          while (acc >= step) {
+            acc -= step;
+            const t = 1 - acc / d;
+            out.push({ x: pts[i-1].x + dx*t, y: pts[i-1].y + dy*t });
+          }
+        }
+        return out;
+      }
+
+      function buildPath() {
+        const k  = 0.5523;             // 완전한 원 근사
+        const r  = H * 0.33;           // 원 반지름 (훨씬 큰 원)
+        const cx = W * 0.28 - 100;     // 원 중심 x (왼쪽으로 100 이동)
+        const cy = H * 0.52 + 50;      // 원 중심 y (50 아래 이동)
+
+        // 완전한 원 루프 (시작 = 원의 상단, 수평 접선)
+        const s1 = cubic([cx,cy-r],[cx+k*r,cy-r],[cx+r,cy-k*r],[cx+r,cy], 70);
+        const s2 = cubic([cx+r,cy],[cx+r,cy+k*r],[cx+k*r,cy+r],[cx,cy+r], 70);
+        const s3 = cubic([cx,cy+r],[cx-k*r,cy+r],[cx-r,cy+k*r],[cx-r,cy], 70);
+        const s4 = cubic([cx-r,cy],[cx-r,cy-k*r],[cx-k*r,cy-r],[cx,cy-r], 70);
+
+        // 루프 완료 후 우하단으로 흘러 사라짐 (수평 접선으로 C1 연속)
+        const C  = cubic([cx,cy-r],[cx+W*0.10,cy-r],[W*0.68,H*0.52],[W*0.80,H*0.68], 80);
+        const D  = cubic([W*0.80,H*0.68],[W*0.90,H*0.80],[W*0.97,H*0.90],[W+80,H*0.95], 70);
+
+        const raw = [...s1,...s2.slice(1),...s3.slice(1),...s4.slice(1),...C.slice(1),...D.slice(1)];
+        ptsA = resample(raw, 4);
+        ptsB = ptsA.map(p => ({ x: W - p.x, y: H - p.y }));
+      }
+
+      const trail    = [];
+      const MAX_TRAIL = 120;
+      const SPEED     = 1.9;
+      const DOT_GAP   = 18;   // 잔상 원 사이 간격 (포인트 수)
+      const DOT_R     = 40;   // 원 반지름 (lineWidth 80의 절반)
+      const HEAD_PTS  = 18;   // 머리 부분 실선 포인트 수
+
+      let headIdx   = 0;
+      let curPts    = [];
+      let useA      = true;
+      let pauseLeft = 0;
+      const PAUSE   = 0;
+
+      function tick() {
+        ctx.clearRect(0, 0, W, H);
+
+        // 일시정지 중: 아무것도 그리지 않음
+        if (pauseLeft > 0) {
+          if (--pauseLeft === 0) {
+            useA    = !useA;
+            curPts  = useA ? ptsA : ptsB;
+            trail.length = 0;
+            headIdx = 0;
+          }
+          requestAnimationFrame(tick);
+          return;
+        }
+
+        if (!curPts || curPts.length < 2) { requestAnimationFrame(tick); return; }
+
+        headIdx += SPEED;
+        if (headIdx >= curPts.length) {
+          trail.length = 0;
+          headIdx  = 0;
+          pauseLeft = PAUSE;
+          requestAnimationFrame(tick);
+          return;
+        }
+
+        const hp = curPts[Math.floor(headIdx)];
+        trail.push({ x: hp.x, y: hp.y });
+        if (trail.length > MAX_TRAIL) trail.shift();
+        if (trail.length < 2) { requestAnimationFrame(tick); return; }
+
+        const tailEnd = Math.max(0, trail.length - HEAD_PTS);
+
+        // 마지막 원 위치 계산
+        const HEAD_GAP = 12;
+        let lastCircleIdx = tailEnd;
+        for (let i = tailEnd; i < trail.length; i += HEAD_GAP) lastCircleIdx = i;
+
+        // ── 연결선: 부드러운 곡선 (quadratic midpoint smoothing) ──
+        ctx.beginPath();
+        ctx.moveTo(trail[0].x, trail[0].y);
+        for (let i = 1; i < lastCircleIdx; i++) {
+          const mx = (trail[i].x + trail[i+1].x) / 2;
+          const my = (trail[i].y + trail[i+1].y) / 2;
+          ctx.quadraticCurveTo(trail[i].x, trail[i].y, mx, my);
+        }
+        if (lastCircleIdx > 0) ctx.lineTo(trail[lastCircleIdx].x, trail[lastCircleIdx].y);
+        ctx.lineWidth   = DOT_R * 2;
+        ctx.lineCap     = 'round';
+        ctx.lineJoin    = 'round';
+        const grad = ctx.createLinearGradient(trail[0].x, trail[0].y, trail[lastCircleIdx].x, trail[lastCircleIdx].y);
+        grad.addColorStop(0, 'rgba(255,255,255,0)');
+        grad.addColorStop(1, 'rgba(255,255,255,0.10)');
+        ctx.strokeStyle = grad;
+        ctx.stroke();
+
+        // ── 꼬리: 간격 있는 원으로 잔상 ──
+        for (let i = 0; i < tailEnd; i += DOT_GAP) {
+          const alpha = 0.30 * Math.pow((i + 1) / trail.length, 2.5);
+          ctx.beginPath();
+          ctx.arc(trail[i].x, trail[i].y, DOT_R, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255,255,255,${alpha.toFixed(3)})`;
+          ctx.fill();
+        }
+
+        // ── 머리: 원으로 (촘촘하고 불투명하게) ──
+        for (let i = tailEnd; i < trail.length; i += HEAD_GAP) {
+          const alpha = 0.30 * (i - tailEnd + 1) / HEAD_PTS;
+          ctx.beginPath();
+          ctx.arc(trail[i].x, trail[i].y, DOT_R, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255,255,255,${Math.min(alpha, 0.30).toFixed(3)})`;
+          ctx.fill();
+        }
+
+        requestAnimationFrame(tick);
+      }
+
+      function resize() {
+        W = canvas.width  = section.offsetWidth  || window.innerWidth;
+        H = canvas.height = section.offsetHeight || window.innerHeight;
+        buildPath();
+        curPts = ptsA; trail.length = 0; headIdx = 0; useA = true; pauseLeft = 0;
+      }
+
+      resize();
+      window.addEventListener('resize', resize);
+      tick();
+    })();
+  </script>
+
 </body>
 </html>
