@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>에코벨류 - Ecobell</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&family=Nanum+Square:wght@400;700;800&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=chillax@400,500,600,700&display=swap" rel="stylesheet">
+  <style>
+    @font-face {
+      font-family: 'Kakao OTF';
+      src: url('assets/fonts/KakaoOTFRegular.otf') format('opentype');
+      font-weight: 400;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Kakao OTF';
+      src: url('assets/fonts/KakaoOTFBold.otf') format('opentype');
+      font-weight: 700;
+      font-style: normal;
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; overscroll-behavior: none; }
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      min-width: 1100px;
+      background: #fff;
+      color: #000;
+    }
+
+    /* ─── HEADER ─── */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0; min-width: 1100px;
+      height: 69px;
+      background: #fff;
+      z-index: 999;
+      transition: box-shadow 0.3s ease, transform 0.35s cubic-bezier(0.4,0,0.2,1), background 0.5s ease;
+    }
+    header.scrolled { box-shadow: 0 2px 16px rgba(0,0,0,0.07); background: #fff; }
+    header.gnb-hidden { transform: translateY(-100%); }
+    .header-inner {
+      position: relative;
+      width: 100%; max-width: 1440px;
+      height: 100%; margin: 0 auto;
+      display: flex; align-items: center;
+    }
+    .logo {
+      position: absolute; left: 44px;
+      top: 50%; transform: translateY(-50%);
+      width: 110px; height: 26px;
+      transition: opacity 0.2s;
+    }
+    .logo img { width: 100%; height: 100%; object-fit: contain; }
+    .logo:hover { opacity: 0.75; }
+    nav {
+      position: absolute; left: 198px; right: 324px;
+      top: 0; display: flex; align-items: stretch; height: 69px;
+    }
+    .nav-item {
+      position: relative; display: flex; align-items: center;
+      transition: transform 0.38s cubic-bezier(0.4,0,0.2,1);
+    }
+    nav.lnb-open .nav-item:nth-child(1) { transform: translateX(0px); }
+    nav.lnb-open .nav-item:nth-child(2) { transform: translateX(25px); }
+    nav.lnb-open .nav-item:nth-child(3) { transform: translateX(53px); }
+    nav.lnb-open .nav-item:nth-child(4) { transform: translateX(87px); }
+    nav.lnb-open .nav-item:nth-child(5) { transform: translateX(111px); }
+    .nav-link {
+      font-family: 'Chillax', sans-serif; font-weight: 500;
+      font-size: 15.5px; color: #000; text-decoration: none;
+      letter-spacing: 0.46px; line-height: 1.6;
+      padding: 0 17px; white-space: nowrap; position: relative;
+    }
+    .nav-link::after {
+      content: ''; position: absolute; left: 17px; right: 17px;
+      bottom: 18px; height: 1.5px; background: #000;
+      transform: scaleX(0); transition: transform 0.22s ease;
+    }
+    .nav-item:not(.lnb-active) .nav-link:hover::after { transform: scaleX(1); }
+    .nav-item.lnb-active .nav-link { font-weight: 600; }
+
+    /* LNB */
+    .lnb {
+      position: fixed; top: 69px; left: 0; right: 0;
+      background: #fff; z-index: 998;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+      height: 0; overflow: hidden;
+      transition: height 0.28s cubic-bezier(0.4,0,0.2,1);
+      min-width: 1100px;
+    }
+    .lnb-inner {
+      position: relative; width: 100%; max-width: 1440px;
+      margin: 0 auto; height: 100%;
+    }
+    .lnb.open { height: 180px; }
+    .lnb-col {
+      position: absolute; top: 24px;
+      display: flex; flex-direction: column; gap: 12px;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.22s ease;
+    }
+    .lnb-col[data-col="company"]  { left: 187px; }
+    .lnb-col[data-col="platform"] { left: 319px; }
+    .lnb-col[data-col="solution"] { left: 451px; }
+    .lnb-col[data-col="insight"]  { left: 584px; }
+    .lnb-col[data-col="contact"]  { left: 716px; }
+    .lnb-col.active { opacity: 1; pointer-events: auto; }
+    .lnb-col a {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 700; font-size: 14px; color: #000;
+      text-decoration: none; white-space: nowrap;
+      line-height: 1.6; letter-spacing: -0.14px;
+    }
+    .lnb-col a.en {
+      font-family: 'Chillax', sans-serif;
+      font-weight: 500; letter-spacing: 0.3px;
+    }
+    .lnb-col a:hover { color: #1e8dcd; }
+    .lnb-col a.active-page { color: #1e8dcd; }
+    .lnb-sep { height: 0.5px; background: rgba(0,0,0,0.12); }
+
+    /* Header right */
+    .header-right {
+      position: absolute; right: 44px;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .gnb-sep { color: rgba(0,0,0,0.2); font-size: 16px; line-height: 1; user-select: none; }
+    .search-icon-wrap { position: relative; display: flex; align-items: center; }
+    .search-btn, .close-btn {
+      background: none; border: none; cursor: pointer; padding: 6px;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+    .close-btn { position: absolute; opacity: 0; pointer-events: none; transform: rotate(-90deg) scale(0.7); }
+    header.search-open .search-btn { opacity: 0; pointer-events: none; transform: rotate(90deg) scale(0.7); }
+    header.search-open .close-btn { opacity: 0.6; pointer-events: auto; transform: rotate(0deg) scale(1); }
+    .search-tooltip {
+      position: absolute; bottom: -28px; left: 50%; transform: translateX(-50%);
+      background: #222; color: #fff; font-size: 11px;
+      padding: 3px 8px; border-radius: 4px; white-space: nowrap;
+      opacity: 0; pointer-events: none; transition: opacity 0.15s;
+    }
+    .search-icon-wrap:hover .search-tooltip { opacity: 1; }
+    header.search-open .search-tooltip { opacity: 0 !important; pointer-events: none; }
+    .demo-btn {
+      display: inline-flex; align-items: center;
+      border: 1.5px solid #000; border-radius: 200px;
+      padding: 7px 18px; text-decoration: none;
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 700; font-size: 14px; color: #000;
+      transition: background 0.2s, color 0.2s;
+    }
+    .demo-btn:hover { background: #000; color: #fff; }
+
+    /* Search overlay */
+    .search-overlay {
+      position: fixed; top: 69px; left: 0; right: 0;
+      background: #fff; z-index: 997;
+      height: 0; overflow: hidden;
+      transition: height 0.28s cubic-bezier(0.4,0,0.2,1);
+      min-width: 1100px;
+    }
+    .search-overlay.open { height: 202px; }
+    .search-content {
+      max-width: 1440px; margin: 0 auto;
+      padding: 40px 155px 0;
+    }
+    .search-input-row { display: flex; align-items: center; gap: 12px; }
+    .search-input {
+      flex: 1; font-size: 18px; border: none; outline: none;
+      font-family: 'Noto Sans KR', sans-serif;
+    }
+    .search-submit { background: none; border: none; cursor: pointer; padding: 4px; }
+    .search-divider { height: 1px; background: #000; margin-top: 10px; }
+    .search-tags { display: flex; gap: 8px; margin-top: 16px; }
+    .search-tag {
+      border: 1px solid #ddd; border-radius: 200px;
+      padding: 5px 12px; font-size: 13px; cursor: pointer;
+      background: none; font-family: 'Noto Sans KR', sans-serif;
+      transition: background 0.15s;
+    }
+    .search-tag:hover { background: #f5f5f5; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      position: sticky; bottom: 0; z-index: 0;
+      min-width: 1100px; height: 442px; background: #2a2a2a;
+    }
+    .footer-inner { position: relative; width: 100%; max-width: 1440px; margin: 0 auto; height: 100%; }
+    .ft-company-info { position: absolute; right: 45px; top: 211px; font-family: 'Noto Sans KR', sans-serif; font-weight: 450; font-size: 13px; color: rgba(255,255,255,0.5); line-height: 23px; letter-spacing: -0.28px; white-space: pre-line; text-align: right; }
+    .ft-col-title { position: absolute; font-family: 'Chillax', sans-serif; font-weight: 600; font-size: 16px; color: #fff; white-space: nowrap; margin: 0; top: 41px; letter-spacing: 0.54px; line-height: 28.8px; }
+    .ft-link { position: absolute; font-family: 'Nanum Square', 'NanumSquare', sans-serif; font-weight: 500; font-size: 14px; color: #fff; white-space: nowrap; text-decoration: none; line-height: 22.5px; letter-spacing: 0.15px; opacity: 1; transition: opacity 0.2s; }
+    .ft-link:hover { opacity: 0.55; }
+    .ft-link.ft-en { font-family: 'Chillax', sans-serif; font-weight: 400; line-height: 16.5px; }
+    .ft-sep { position: absolute; height: 0.5px; background: rgba(255,255,255,0.3); }
+    .ft-divider { position: absolute; left: 45px; right: 45px; height: 0.5px; background: rgba(255,255,255,0.2); }
+    .ft-bottom-link { position: absolute; font-family: 'Noto Sans KR', sans-serif; font-weight: 300; font-size: 13px; color: rgba(255,255,255,0.8); text-decoration: none; white-space: nowrap; top: 323px; line-height: 23px; letter-spacing: -0.28px; transition: opacity 0.2s; }
+    .ft-bottom-link:hover { opacity: 0.55; }
+    .ft-bottom-link.fw-bold { font-weight: 500; color: #fff; }
+    .ft-social { position: absolute; line-height: 0; opacity: 1; transition: opacity 0.2s, transform 0.2s; top: 323px; }
+    .ft-social:hover { opacity: 0.7; transform: scale(1.1); }
+    .ft-copyright { position: absolute; left: 45px; top: 357px; font-family: 'Noto Sans KR', sans-serif; font-weight: 300; font-size: 12px; color: rgba(255,255,255,0.8); white-space: pre-line; margin: 0; }
+
+    /* ─── FLOATING ─── */
+    .floating-ecoasset { position: fixed; right: 44px; bottom: 44px; width: 65px; height: 48px; cursor: pointer; z-index: 500; transition: transform 0.2s ease, opacity 0.2s; text-decoration: none; }
+    .floating-ecoasset:hover { transform: scale(1.08); opacity: 0.9; }
+    .floating-ecoasset img { width: 100%; height: 100%; object-fit: contain; }
+
+    /* ─── COMMON ─── */
+    body > *:not(header):not(footer):not(.floating-ecoasset) {
+      position: relative; z-index: 1; background: inherit;
+    }
+    .reveal {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity 0.65s cubic-bezier(0.4,0,0.2,1), transform 0.65s cubic-bezier(0.4,0,0.2,1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ═══ ECOVAL PAGE ═══ */
+
+    /* Hero */
+    .ev-hero {
+      margin-top: 69px;
+      position: relative;
+      height: 500px;
+      overflow: hidden;
+      background: #1a3040;
+    }
+    .ev-hero-bg {
+      position: absolute; inset: 0;
+      background: url('assets/ecoval-hero-bg.png') center/cover no-repeat;
+    }
+    .ev-hero-overlay {
+      position: absolute; inset: 0;
+      background: rgba(0,0,0,0.52);
+    }
+    .ev-hero-content {
+      position: relative; z-index: 2;
+      max-width: 1440px; margin: 0 auto;
+      padding: 0 155px;
+      height: 100%;
+      display: flex; flex-direction: column;
+      justify-content: center;
+    }
+    .ev-hero-breadcrumb {
+      display: flex; align-items: center; gap: 6px;
+      font-family: 'Chillax', sans-serif;
+      font-size: 13px; color: rgba(255,255,255,0.7);
+      margin-bottom: 32px;
+    }
+    .ev-hero-breadcrumb a { color: rgba(255,255,255,0.7); text-decoration: none; }
+    .ev-hero-breadcrumb a:hover { color: #fff; }
+    .ev-hero-breadcrumb svg { opacity: 0.6; flex-shrink: 0; }
+    .ev-hero-label {
+      font-family: 'Chillax', sans-serif;
+      font-weight: 700; font-size: 35px;
+      color: #fff; margin-bottom: 20px;
+      letter-spacing: 0.5px;
+    }
+    .ev-hero-sub {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 800; font-size: 22px;
+      color: #fff; margin-bottom: 18px;
+      letter-spacing: -0.44px;
+    }
+    .ev-hero-desc {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 500; font-size: 16px;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.7; max-width: 700px;
+      margin-bottom: 36px; word-break: keep-all;
+    }
+    .ev-hero-btn {
+      display: inline-flex; align-items: center;
+      border: 1.5px solid rgba(255,255,255,0.7);
+      border-radius: 200px; padding: 11px 26px;
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 900; font-size: 14px; color: #fff;
+      text-decoration: none; align-self: flex-start;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .ev-hero-btn:hover { background: rgba(255,255,255,0.15); border-color: #fff; }
+
+    /* Page label bar */
+    .ev-page-bar {
+      background: #3694aa;
+      height: 57px;
+      display: flex; align-items: center;
+      position: relative; z-index: 2;
+    }
+    .ev-page-bar-inner {
+      max-width: 1440px; margin: 0 auto;
+      padding: 0 155px;
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 800; font-size: 20px; color: #fff;
+    }
+
+    /* Tab nav */
+    .ev-tabs {
+      display: flex;
+      position: sticky;
+      top: 69px;
+      z-index: 100;
+      background: #000;
+    }
+    .ev-tab {
+      flex: 1;
+      height: 70px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 800; font-size: 18px;
+      color: rgba(255,255,255,0.6);
+      text-decoration: none; cursor: pointer;
+      background: #000;
+      transition: background 0.2s, color 0.2s;
+      border: none;
+    }
+    .ev-tab:hover { background: #1a1a1a; color: #fff; }
+    .ev-tab.active {
+      background: #139b9b;
+      color: #fff;
+    }
+
+    /* Section common */
+    .ev-section {
+      background: #f5f5f5;
+      padding: 100px 0 80px;
+    }
+    .ev-section.white { background: #fff; }
+    .ev-inner {
+      max-width: 1440px; margin: 0 auto;
+      padding: 0 155px;
+    }
+    .ev-section-tag {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 700; font-size: 14px;
+      color: #139b9b; letter-spacing: 1px;
+      margin-bottom: 16px; text-transform: uppercase;
+    }
+    .ev-section-q {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 700; font-size: 38px;
+      color: #139b9b; margin-bottom: 20px;
+      letter-spacing: -0.5px; line-height: 1.3;
+    }
+    .ev-section-title {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 700; font-size: 38px;
+      color: #000; margin-bottom: 20px;
+      letter-spacing: -0.5px; line-height: 1.3;
+    }
+    .ev-section-sub {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 500; font-size: 16px;
+      color: #444; margin-bottom: 10px;
+      line-height: 1.7; word-break: keep-all;
+    }
+    .ev-section-body {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 500; font-size: 20px;
+      color: #000; margin-bottom: 60px;
+      line-height: 1.7; word-break: keep-all;
+      max-width: 941px;
+    }
+
+    /* Section 1 - 에코벨류란? intro bar */
+    .ev-intro-bar {
+      background: #fff;
+      padding: 60px 0 50px;
+    }
+    .ev-intro-heading {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 800; font-size: 30px;
+      color: #000; line-height: 1.4;
+      word-break: keep-all; max-width: 980px;
+    }
+
+    /* Product cards grid */
+    .ev-product-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 48px;
+    }
+    .ev-product-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 32px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: box-shadow 0.2s;
+    }
+    .ev-product-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+    .ev-product-card-title {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 800; font-size: 22px; color: #000;
+      letter-spacing: -0.3px;
+    }
+    .ev-product-card-title.teal { color: #139b9b; font-weight: 700; }
+    .ev-product-card-desc {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 14px; color: #555; line-height: 1.7;
+      word-break: keep-all;
+    }
+    .ev-product-card-link {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 16px; color: #139b9b; text-decoration: none;
+      font-weight: 400; margin-top: 4px;
+      transition: opacity 0.2s;
+    }
+    .ev-product-card-link:hover { opacity: 0.7; }
+
+    /* ecoASSET circle illustration */
+    .ev-ecoasset-wrap {
+      display: flex; align-items: center; justify-content: center;
+      position: relative; margin-top: 60px;
+    }
+    .ev-circle-outer {
+      width: 285px; height: 285px; border-radius: 50%;
+      background: #f5f5f5;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .ev-circle-inner {
+      width: 251px; height: 251px; border-radius: 50%;
+      background: #fff;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 8px;
+    }
+    .ev-circle-inner img { display: block; }
+
+    /* Strength cards */
+    .ev-strength-list {
+      display: flex; flex-direction: column; gap: 24px;
+      margin-top: 60px;
+    }
+    .ev-strength-card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 40px 50px;
+      display: flex;
+      align-items: flex-start;
+      gap: 40px;
+    }
+    .ev-strength-badge {
+      flex-shrink: 0;
+      width: 72px; height: 72px;
+      background: #139b9b;
+      border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Chillax', sans-serif;
+      font-weight: 700; font-size: 32px; color: #fff;
+    }
+    .ev-strength-content { flex: 1; }
+    .ev-strength-title {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 700; font-size: 26px; color: #000;
+      margin-bottom: 12px; line-height: 1.4;
+      word-break: keep-all;
+    }
+    .ev-strength-sub {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 15px; color: #555;
+      line-height: 1.7; margin-bottom: 16px;
+      word-break: keep-all;
+    }
+    .ev-strength-bullets {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 14px; color: #444;
+      line-height: 2; padding-left: 16px;
+    }
+    .ev-strength-icon-wrap {
+      flex-shrink: 0;
+      width: 100px; height: 100px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .ev-strength-icon-wrap img { width: 80px; height: 80px; object-fit: contain; }
+
+    /* FAQ */
+    .ev-faq-list {
+      margin-top: 60px;
+      border-top: 1.5px solid #e0e0e0;
+    }
+    .ev-faq-item {
+      border-bottom: 1px solid #e0e0e0;
+    }
+    .ev-faq-q {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 28px 8px;
+      cursor: pointer;
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 18px; font-weight: 400; color: #000;
+      transition: color 0.2s;
+      user-select: none;
+    }
+    .ev-faq-q:hover { color: #139b9b; }
+    .ev-faq-item.open .ev-faq-q { color: #139b9b; font-weight: 700; }
+    .ev-faq-chevron {
+      flex-shrink: 0;
+      width: 24px; height: 24px;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform 0.3s ease;
+    }
+    .ev-faq-item.open .ev-faq-chevron { transform: rotate(180deg); }
+    .ev-faq-a {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.35s cubic-bezier(0.4,0,0.2,1), padding 0.35s;
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 15px; color: #555; line-height: 1.8;
+      padding: 0 8px; word-break: keep-all;
+    }
+    .ev-faq-item.open .ev-faq-a {
+      max-height: 300px;
+      padding: 0 8px 28px;
+    }
+
+    /* CTA Banner */
+    .ev-cta {
+      position: relative;
+      height: 296px;
+      overflow: hidden;
+    }
+    .ev-cta-bg {
+      position: absolute; inset: 0;
+      background: url('assets/ecoval-cta-bg.png') center/cover no-repeat;
+    }
+    .ev-cta-overlay {
+      position: absolute; inset: 0;
+      background: rgba(0,48,77,0.82);
+    }
+    .ev-cta-content {
+      position: relative; z-index: 2;
+      height: 100%;
+      display: flex; align-items: center; justify-content: space-between;
+      max-width: 1440px; margin: 0 auto;
+      padding: 0 155px;
+    }
+    .ev-cta-text {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 700; font-size: 28px;
+      color: #fff; line-height: 1.5;
+      word-break: keep-all;
+    }
+    .ev-cta-btn {
+      flex-shrink: 0;
+      display: inline-flex; align-items: center; gap: 10px;
+      border: 1.5px solid rgba(255,255,255,0.7);
+      border-radius: 200px; padding: 12px 28px;
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 800; font-size: 16px; color: #fff;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .ev-cta-btn:hover { background: rgba(255,255,255,0.15); border-color: #fff; }
+  </style>
+</head>
+<body>
+
+  <!-- ─── HEADER ─── -->
+  <header id="header">
+    <div class="header-inner">
+      <a class="logo" href="index.html">
+        <img src="assets/logo.png" alt="ecobell" id="header-logo">
+      </a>
+      <nav id="main-nav">
+        <div class="nav-item" data-menu="company">
+          <a class="nav-link" href="#">Company</a>
+        </div>
+        <div class="nav-item" data-menu="platform">
+          <a class="nav-link" href="#">Project</a>
+        </div>
+        <div class="nav-item lnb-active" data-menu="solution">
+          <a class="nav-link" href="#">Solution</a>
+        </div>
+        <div class="nav-item" data-menu="insight">
+          <a class="nav-link" href="insight.html">Insight</a>
+        </div>
+        <div class="nav-item" data-menu="contact">
+          <a class="nav-link" href="notice.html">Contact Us</a>
+        </div>
+      </nav>
+
+      <!-- LNB Dropdown -->
+      <div class="lnb" id="lnb">
+        <div class="lnb-inner">
+          <div class="lnb-col" data-col="company">
+            <a href="ceo.html">CEO 인사말</a>
+            <a href="company.html">기업소개</a>
+            <a href="press.html">보도자료</a>
+            <a href="archive.html">아카이브</a>
+          </div>
+          <div class="lnb-col" data-col="platform">
+            <a href="#">태양광 솔루션</a>
+          </div>
+          <div class="lnb-col" data-col="solution">
+            <a href="ecoval.html" class="en active-page">ecoValue</a>
+            <a href="#" class="en">ecoNODE</a>
+            <a href="#" class="en">E-ASSET</a>
+            <a href="#" class="en">ecoASSET</a>
+          </div>
+          <div class="lnb-col" data-col="insight">
+            <a href="https://www.netzeronews.kr/" class="en ext" target="_blank" rel="noopener noreferrer">NetZero News</a>
+            <a href="insight.html?page=eco">친환경 기업정보</a>
+            <a href="insight.html?page=green">그린카 계산기</a>
+          </div>
+          <div class="lnb-col" data-col="contact">
+            <a href="notice.html">공지사항</a>
+            <a href="directions.html">오시는 길</a>
+            <a href="contact.html">문의하기</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Search Overlay -->
+      <div class="search-overlay" id="search-overlay">
+        <div class="search-content">
+          <div class="search-input-row">
+            <input class="search-input" type="text" placeholder="검색어를 입력해주세요." id="search-input" autocomplete="off">
+            <button class="search-submit" aria-label="검색">
+              <svg width="17" height="17" viewBox="0 0 17 17" fill="none">
+                <circle cx="7" cy="7" r="5" stroke="#000" stroke-width="1.5"/>
+                <line x1="11" y1="11" x2="16" y2="16" stroke="#000" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </button>
+          </div>
+          <div class="search-divider"></div>
+          <div class="search-tags">
+            <button class="search-tag" data-keyword="에코벨류">#에코벨류</button>
+            <button class="search-tag" data-keyword="탄소자산화">#탄소자산화</button>
+            <button class="search-tag" data-keyword="MRV">#MRV</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Header Right -->
+      <div class="header-right">
+        <span class="gnb-sep">|</span>
+        <div class="search-icon-wrap">
+          <button class="search-btn" aria-label="검색" id="search-open-btn">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+              <path d="M21.1063 19.1469L15.4344 14.5406C17.7719 11.3438 17.5313 6.7719 14.6094 3.8844C13.0626 2.33752 11 1.47815 8.80005 1.47815C6.60005 1.47815 4.53755 2.33752 2.99067 3.8844C-0.206201 7.08127 -0.206201 12.3063 2.99067 15.5031C4.53755 17.05 6.60005 17.9094 8.80005 17.9094C10.8969 17.9094 12.8563 17.1188 14.4032 15.7094L20.1438 20.35C20.2813 20.4531 20.4532 20.5219 20.6251 20.5219C20.8657 20.5219 21.0719 20.4188 21.2094 20.2469C21.4844 19.9032 21.4501 19.4219 21.1063 19.1469ZM8.80005 16.3625C7.01255 16.3625 5.36255 15.675 4.09067 14.4032C1.47817 11.7907 1.47817 7.56252 4.09067 4.9844C5.36255 3.71252 7.01255 3.02502 8.80005 3.02502C10.5875 3.02502 12.2375 3.71252 13.5094 4.9844C16.1219 7.5969 16.1219 11.825 13.5094 14.4032C12.2719 15.675 10.5875 16.3625 8.80005 16.3625Z" fill="#000"/>
+            </svg>
+          </button>
+          <button class="close-btn" aria-label="닫기" id="search-close-btn">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <line x1="1" y1="1" x2="17" y2="17" stroke="#000" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="17" y1="1" x2="1" y2="17" stroke="#000" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <span class="search-tooltip">검색</span>
+        </div>
+        <a class="demo-btn" href="contact.html">
+          <span class="demo-text">문의하기</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ═══ HERO ═══ -->
+    <div class="ev-hero">
+      <div class="ev-hero-bg"></div>
+      <div class="ev-hero-overlay"></div>
+      <div class="ev-hero-content">
+        <div class="ev-hero-breadcrumb">
+          <a href="index.html">
+            <svg width="11" height="12" viewBox="0 0 11 12" fill="none">
+              <path d="M1 5L5.5 1L10 5V11H7V8H4V11H1V5Z" stroke="rgba(255,255,255,0.7)" stroke-width="1.1" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <svg width="5" height="10" viewBox="0 0 5 10" fill="none"><path d="M1 1L4 5L1 9" stroke="rgba(255,255,255,0.5)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>Solution</span>
+          <svg width="5" height="10" viewBox="0 0 5 10" fill="none"><path d="M1 1L4 5L1 9" stroke="rgba(255,255,255,0.5)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>에코벨류</span>
+        </div>
+        <p class="ev-hero-label">에코벨류 ecoValue</p>
+        <p class="ev-hero-sub">기업의 에너지·탄소 비즈니스를 혁신하는 데이터 자산화 인프라</p>
+        <p class="ev-hero-desc">독자적인 디지털 MRV(측정·보고·검증) 기술 기반의 End-to-End 통합 프레임워크를 통해 Seamless한 상시 에너지 통제 및 인프라적 신뢰성을 제공하며 기후 테크로의 가치 전환을 지원합니다.</p>
+        <a class="ev-hero-btn" href="contact.html">상담 및 문의</a>
+      </div>
+    </div>
+
+    <!-- ═══ PAGE BAR ═══ -->
+    <div class="ev-page-bar">
+      <div class="ev-page-bar-inner">에코벨류</div>
+    </div>
+
+    <!-- ═══ TAB NAV ═══ -->
+    <div class="ev-tabs" id="ev-tabs">
+      <a class="ev-tab active" href="#about" data-section="about">에코벨류란?</a>
+      <a class="ev-tab" href="#strength" data-section="strength">주요 강점</a>
+      <a class="ev-tab" href="#features" data-section="features">대표 기능</a>
+      <a class="ev-tab" href="#faq" data-section="faq">자주 묻는 질문</a>
+    </div>
+
+    <!-- ═══ 1. 에코벨류란? ═══ -->
+    <div class="ev-intro-bar" id="about">
+      <div class="ev-inner">
+        <p class="ev-intro-heading reveal">에너지·탄소 비즈니스를 혁신하는 통합 솔루션,<br>에코벨류로 데이터의 자산화를 시작하세요.</p>
+      </div>
+    </div>
+
+    <section class="ev-section">
+      <div class="ev-inner">
+        <p class="ev-section-q reveal">에코벨류는 어떤 서비스인가요?</p>
+        <p class="ev-section-sub reveal">단순 발전소 시공을 넘어 생성형 AI 자산화 기술까지 갖춘, 에코벨의 에너지·탄소 통합 솔루션입니다.</p>
+        <p class="ev-section-body reveal">에코벨류는 자체 개발한 디지털 MRV 기술로 에너지·탄소 데이터를 실시간 통제하고 자산화하는 통합 솔루션입니다. 전 과정을 아우르는 국내 유일의 체계로 데이터 신뢰성과 자산 가치를 동시에 실현합니다.</p>
+
+        <div class="ev-product-grid">
+          <div class="ev-product-card reveal">
+            <p class="ev-product-card-title">에코노드 (ecoNODE)</p>
+            <p class="ev-product-card-desc">dMRV 기반의 센서 연동으로 발전량 및 탄소배출 값을 실시간 수집하는 현장 RTU 장치</p>
+            <a class="ev-product-card-link" href="#">자세히 보기 〉</a>
+          </div>
+          <div class="ev-product-card reveal">
+            <p class="ev-product-card-title teal">태양광 발전소 구축 사업</p>
+            <p class="ev-product-card-desc">정부 지원 사업 매칭 기반의 인프라 조성 및 관리자 O&amp;M 자립을 지원하는 구축 솔루션</p>
+            <a class="ev-product-card-link" href="#">자세히 보기 〉</a>
+          </div>
+          <div class="ev-product-card reveal">
+            <p class="ev-product-card-title">에너지에셋 (E-ASSET)</p>
+            <p class="ev-product-card-desc">발전 효율 및 장비 상태를 실시간 시각화하는 신재생에너지 발전 관제 솔루션</p>
+            <a class="ev-product-card-link" href="#">자세히 보기 〉</a>
+          </div>
+          <div class="ev-product-card reveal">
+            <p class="ev-product-card-title teal">에코에셋 (ecoASSET)</p>
+            <p class="ev-product-card-desc">온실가스 감축 성과 데이터를 탄소 크레딧 기반으로 관리하는 특화 회계 솔루션</p>
+            <a class="ev-product-card-link" href="#">자세히 보기 〉</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 2. 주요 강점 ═══ -->
+    <section class="ev-section" id="strength">
+      <div class="ev-inner">
+        <p class="ev-section-title reveal">에코벨류가 탄소시장에서 왜 중요해지고 있을까요?</p>
+        <p class="ev-section-body reveal">에코밸류는 기존의 단순 사후 계산 방식에서 벗어나, 현장 데이터 수집부터 에너지 자산화를 거쳐 최종 감축 성과를 탄소 크레딧 가치로 막힘없이 연결하는 독보적인 통합 데이터 밸류체인 솔루션입니다.</p>
+
+        <div class="ev-strength-list">
+          <div class="ev-strength-card reveal">
+            <div class="ev-strength-badge">1</div>
+            <div class="ev-strength-content">
+              <p class="ev-strength-title">사업 유형과 시장 경계를 허무는 탄소 크레딧 범용 대응력 확보</p>
+              <p class="ev-strength-sub">단일 시장 규격에 매몰된 구조에서 벗어나, 국내 KOC 및 글로벌 VCM 시장을 통합 아우르는 멀티 크레딧 관리를 구현합니다.</p>
+              <ul class="ev-strength-bullets">
+                <li>ecoNODE 기반 멀티 데이터 포집 기술을 통한 감축 사업별 실시간 데이터 수집</li>
+                <li>국내 상쇄제도와 글로벌 VCM 기준을 동시에 충족하는 멀티 표준화 엔진 탑재</li>
+                <li>시장 다변화에 즉각 대응 가능한 유연한 데이터 암호화 및 타임스탬프 처리</li>
+              </ul>
+            </div>
+            <div class="ev-strength-icon-wrap">
+              <img src="assets/ecoval-icon-auto.png" alt="">
+            </div>
+          </div>
+          <div class="ev-strength-card reveal">
+            <div class="ev-strength-badge">2</div>
+            <div class="ev-strength-content">
+              <p class="ev-strength-title">글로벌 규제 장벽을 넘는 무결점 탄소 데이터 자산화</p>
+              <p class="ev-strength-sub">엑셀 수작업에 의존하는 산정 방식을 넘어, 글로벌 규제 실사 요건을 충족하는 위·변조 불가능한 정량 데이터 자산을 확보합니다.</p>
+              <ul class="ev-strength-bullets">
+                <li>탄소 감축량 측정·보고·검증 전 과정의 디지털 자동화 MRV 플랫폼 제공</li>
+                <li>블록체인 분산 원장 기술 적용을 통한 데이터 임의 수정 및 유실 가능성 원천 차단</li>
+                <li>EU CBAM 보고 및 RE100 이행 증명용 규제 적격성 기반 데이터 시각화 지원</li>
+              </ul>
+            </div>
+            <div class="ev-strength-icon-wrap">
+              <img src="assets/ecoval-icon-block.png" alt="">
+            </div>
+          </div>
+          <div class="ev-strength-card reveal">
+            <div class="ev-strength-badge">3</div>
+            <div class="ev-strength-content">
+              <p class="ev-strength-title">리스크를 원천 차단하는 전 주기 수직 계열화 인프라 제공</p>
+              <p class="ev-strength-sub">사업 파편화로 인한 지연을 차단하고, 단일 파이프라인 통합을 통해 가동률 및 수익성을 극대화합니다.</p>
+              <ul class="ev-strength-bullets">
+                <li>내부 실적 데이터 활용을 통한 사전 행정 수속 및 금융 조달 기간 단축</li>
+                <li>ecoAsset 시스템 연동 기반의 준공 후 유지보수 및 자산 관리 파이프라인 일원화</li>
+                <li>전담 관제 조직의 주기적 예방 점검을 통한 설비 고장 및 가동률 리스크 제어</li>
+              </ul>
+            </div>
+            <div class="ev-strength-icon-wrap">
+              <img src="assets/ecoval-icon-network.png" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 3. 대표 기능 ═══ -->
+    <section class="ev-section white" id="features">
+      <div class="ev-inner">
+        <p class="ev-section-title reveal">탄소자산화를 위한 핵심 기능 한눈에 보기</p>
+        <p class="ev-section-body reveal">탄소자산화 전 주기에 필요한 핵심 기능을 하나의 단일 파이프라인 플랫폼으로 통합 제공합니다.</p>
+
+        <div class="ev-product-grid reveal">
+          <div class="ev-product-card" style="border: 1.5px solid #e8e8e8; border-radius: 20px; padding: 40px;">
+            <div style="width:56px;height:56px;background:#139b9b;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+              <span style="font-family:'Chillax',sans-serif;font-weight:700;font-size:24px;color:#fff;">1</span>
+            </div>
+            <p class="ev-product-card-title">데이터 수집 (Retrieve)</p>
+            <p class="ev-product-card-desc">ecoNODE 기반 현장 RTU 센서로 에너지·탄소 데이터를 실시간 수집하여 원천 데이터를 확보합니다.</p>
+          </div>
+          <div class="ev-product-card" style="border: 1.5px solid #e8e8e8; border-radius: 20px; padding: 40px;">
+            <div style="width:56px;height:56px;background:#139b9b;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+              <span style="font-family:'Chillax',sans-serif;font-weight:700;font-size:24px;color:#fff;">2</span>
+            </div>
+            <p class="ev-product-card-title">데이터 정제 (Refine)</p>
+            <p class="ev-product-card-desc">수집된 원천 데이터를 탄소 시장 표준(MRV)에 맞춰 변형 없이 투명하게 규격화하는 기술을 제공합니다.</p>
+          </div>
+          <div class="ev-product-card" style="border: 1.5px solid #e8e8e8; border-radius: 20px; padding: 40px;">
+            <div style="width:56px;height:56px;background:#139b9b;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+              <span style="font-family:'Chillax',sans-serif;font-weight:700;font-size:24px;color:#fff;">3</span>
+            </div>
+            <p class="ev-product-card-title">데이터 자산화 (Realize)</p>
+            <p class="ev-product-card-desc">정제된 데이터를 탄소배출권 시장 및 외부 가치 체계와 직접 연동하여 기업의 감축 실적을 재무적 이익으로 전환합니다.</p>
+          </div>
+          <div class="ev-product-card" style="border: 1.5px solid #e8e8e8; border-radius: 20px; padding: 40px; background: #f8fffe;">
+            <div style="width:56px;height:56px;background:#277171;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <p class="ev-product-card-title">통합 관리 (Manage)</p>
+            <p class="ev-product-card-desc">ecoASSET 시스템을 통해 탄소 크레딧 회계부터 포트폴리오 관리까지 하나의 플랫폼에서 완성합니다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 4. 자주 묻는 질문 ═══ -->
+    <section class="ev-section" id="faq">
+      <div class="ev-inner">
+        <p class="ev-section-title reveal">자주 묻는 질문</p>
+
+        <div class="ev-faq-list reveal">
+          <div class="ev-faq-item">
+            <div class="ev-faq-q">
+              <span>ecoNODE란 무엇인가요?</span>
+              <span class="ev-faq-chevron">
+                <svg width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M1 1L8 8L15 1" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </div>
+            <div class="ev-faq-a">ecoNODE는 에코벨이 자체 개발한 현장 RTU(Remote Terminal Unit) 장치로, dMRV 기반의 센서 연동을 통해 발전량 및 탄소배출 값을 실시간으로 수집합니다. 태양광, 풍력 등 신재생에너지 현장에 설치되어 데이터를 중앙 플랫폼으로 전송합니다.</div>
+          </div>
+          <div class="ev-faq-item">
+            <div class="ev-faq-q">
+              <span>E-ASSET(에너지에셋)은 어떤 플랫폼인가요?</span>
+              <span class="ev-faq-chevron">
+                <svg width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M1 1L8 8L15 1" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </div>
+            <div class="ev-faq-a">E-ASSET(에너지에셋)은 발전 효율 및 장비 상태를 실시간으로 시각화하는 신재생에너지 발전 관제 솔루션입니다. 이상 감지, 발전량 예측, 유지보수 스케줄링 등의 기능을 통합 제공합니다.</div>
+          </div>
+          <div class="ev-faq-item">
+            <div class="ev-faq-q">
+              <span>ecoASSET(에코에셋)은 어떤 플랫폼인가요?</span>
+              <span class="ev-faq-chevron">
+                <svg width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M1 1L8 8L15 1" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </div>
+            <div class="ev-faq-a">ecoASSET(에코에셋)은 온실가스 감축 성과 데이터를 탄소 크레딧 기반으로 관리하는 특화 회계 솔루션입니다. 국내 KOC 및 글로벌 VCM 시장에 대응하는 멀티 크레딧 관리 기능을 제공합니다.</div>
+          </div>
+          <div class="ev-faq-item">
+            <div class="ev-faq-q">
+              <span>태양광 솔루션 견적 신청은 어떻게 해야 하나요?</span>
+              <span class="ev-faq-chevron">
+                <svg width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M1 1L8 8L15 1" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </div>
+            <div class="ev-faq-a">태양광 솔루션 견적은 에코벨 홈페이지 문의하기 페이지를 통해 신청하실 수 있습니다. 설치 규모, 위치, 용도 등의 정보를 함께 남겨주시면 담당자가 빠르게 안내드립니다.</div>
+          </div>
+          <div class="ev-faq-item">
+            <div class="ev-faq-q">
+              <span>탄소자산화가 무엇인가요?</span>
+              <span class="ev-faq-chevron">
+                <svg width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M1 1L8 8L15 1" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </div>
+            <div class="ev-faq-a">탄소자산화란 온실가스 감축 활동을 통해 발생한 탄소 크레딧을 측정·검증하고 이를 거래 가능한 자산으로 전환하는 과정입니다. 에코벨류는 데이터 수집부터 크레딧 발행까지 전 과정을 자동화된 파이프라인으로 지원합니다.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ CTA ═══ -->
+    <div class="ev-cta">
+      <div class="ev-cta-bg"></div>
+      <div class="ev-cta-overlay"></div>
+      <div class="ev-cta-content">
+        <p class="ev-cta-text">무엇이든 물어보세요<br>에코벨 IR 관련 문의를 도와드립니다.</p>
+        <a class="ev-cta-btn" href="contact.html">문의하기</a>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ─── FOOTER ─── -->
+  <footer>
+    <div class="footer-inner">
+      <p class="ft-company-info">㈜에코벨
+사업자 등록번호 : 598-87-02578  |  대표 : 김소연
+호스팅 서비스 : 주식회사 에코벨 | 통신판매업신고번호 : 2023-서울금천-1822</p>
+
+      <p class="ft-col-title" style="left:45px;">회사정보</p>
+      <p class="ft-col-title" style="left:202px;">프로젝트</p>
+      <p class="ft-col-title" style="left:374px;">솔루션</p>
+      <p class="ft-col-title" style="left:554px;">인사이트</p>
+      <p class="ft-col-title" style="left:750px;">문의하기</p>
+
+      <a class="ft-link" href="ceo.html" style="left:45px;top:86px;">CEO 인사말</a>
+      <a class="ft-link" href="company.html" style="left:45px;top:121px;">기업소개</a>
+      <a class="ft-link" href="press.html" style="left:45px;top:156px;">보도자료</a>
+      <a class="ft-link" href="archive.html" style="left:45px;top:191px;">아카이브</a>
+
+      <!-- 프로젝트 링크 -->
+      <a class="ft-link" href="#" style="left:202px;top:87px;">태양광 솔루션</a>
+
+      <!-- 솔루션 링크 -->
+      <a class="ft-link ft-en" href="ecoval.html" style="left:374px;top:87px;">ecoValue</a>
+      <a class="ft-link ft-en" href="#" style="left:374px;top:121px;">ecoNODE</a>
+      <a class="ft-link ft-en" href="#" style="left:374px;top:156px;">E-ASSET</a>
+      <a class="ft-link ft-en" href="#" style="left:374px;top:191px;">ecoASSET</a>
+
+      <a class="ft-link ft-en" href="https://www.netzeronews.kr/" target="_blank" rel="noopener noreferrer" style="left:554px;top:86px;">NetZero News
+        <svg width="6" height="6" viewBox="0 0 8 8" fill="none" style="margin-left:2px;vertical-align:middle;"><path d="M1 7L7 1M7 1H3M7 1V5" stroke="#fff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a class="ft-link" href="insight.html?page=eco" style="left:554px;top:121px;">친환경 기업정보</a>
+      <a class="ft-link" href="insight.html?page=green" style="left:554px;top:156px;">그린카 계산기</a>
+
+      <a class="ft-link ft-en" href="notice.html" style="left:750px;top:87px;">공지사항</a>
+      <a class="ft-link ft-en" href="directions.html" style="left:750px;top:121px;">오시는길</a>
+      <a class="ft-link ft-en" href="contact.html" style="left:750px;top:156px;">문의하기</a>
+
+      <div class="ft-divider" style="top:305px;"></div>
+
+      <a class="ft-bottom-link fw-bold" href="#" style="left:45px;">개인정보처리방침</a>
+      <a class="ft-bottom-link" href="#" style="left:173px;">이용약관</a>
+      <a class="ft-bottom-link" href="#" style="left:250px;">이메일무단수집거부</a>
+      <a class="ft-bottom-link" href="faq.html" style="left:383px;">자주 묻는 질문(FAQ)</a>
+
+      <a class="ft-social" href="https://www.youtube.com/@yt_ecobell" target="_blank" rel="noopener noreferrer" aria-label="YouTube" style="right:135px;">
+        <svg width="22" height="23" viewBox="0 0 22 23" fill="none"><rect x="1.5" y="5" width="19" height="13" rx="3" stroke="#fff" stroke-width="1.3"/><polygon points="8.5,8.5 15.5,11.5 8.5,14.5" fill="#fff"/></svg>
+      </a>
+      <a class="ft-social" href="https://www.instagram.com/ecobell.co.kr/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" style="right:90px;">
+        <svg width="22" height="23" viewBox="0 0 22 23" fill="none"><rect x="2" y="2.5" width="18" height="18" rx="5" stroke="#fff" stroke-width="1.3"/><circle cx="11" cy="11.5" r="4" stroke="#fff" stroke-width="1.3"/><circle cx="16" cy="6.5" r="1.1" fill="#fff"/></svg>
+      </a>
+      <a class="ft-social" href="https://www.facebook.com/ecobell.co.kr" target="_blank" rel="noopener noreferrer" aria-label="Facebook" style="right:46px;">
+        <svg width="22" height="23" viewBox="0 0 22 23" fill="none"><path d="M12.5 11.5H14.8L15.5 8.5H12.5V6.8C12.5 5.9 12.9 5.2 14.2 5.2H15.8V2.6C15.8 2.6 14.3 2.3 12.9 2.3C10.1 2.3 8.5 3.9 8.5 6.5V8.5H5.8V11.5H8.5V20.5H12.5V11.5Z" fill="#fff"/></svg>
+      </a>
+      <p class="ft-copyright">서울시 금천구 시흥대로 193, 701호(08635)
+ⓒ ecobell Co., Ltd. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ─── 플로팅 버튼 ─── -->
+  <a class="floating-ecoasset" href="#" aria-label="eco Asset 바로가기">
+    <img src="ecoasset_badge.png" alt="eco Asset">
+  </a>
+
+  <script>
+    if (history.scrollRestoration) history.scrollRestoration = 'manual';
+    window.scrollTo(0, 0);
+
+    const header = document.getElementById('header');
+
+    // 헤더 스크롤
+    let _lastScrollY = window.scrollY;
+    window.addEventListener('scroll', () => {
+      const cur = window.scrollY;
+      header.classList.toggle('scrolled', cur > 10);
+      if (cur > _lastScrollY && cur > 80) header.classList.add('gnb-hidden');
+      else header.classList.remove('gnb-hidden');
+      if (cur > _lastScrollY && header.classList.contains('search-open')) closeSearch();
+      _lastScrollY = cur;
+    }, { passive: true });
+
+    // GNB / LNB
+    const nav      = document.getElementById('main-nav');
+    const lnb      = document.getElementById('lnb');
+    const navItems = document.querySelectorAll('.nav-item');
+    const lnbCols  = document.querySelectorAll('.lnb-col');
+    let closeTimer;
+
+    function openLnb(menuName) {
+      clearTimeout(closeTimer);
+      nav.classList.add('lnb-open');
+      lnb.classList.add('open');
+      navItems.forEach(item => item.classList.toggle('lnb-active', item.dataset.menu === menuName));
+      lnbCols.forEach(col  => col.classList.toggle('active', col.dataset.col === menuName));
+    }
+    function schedulClose() {
+      closeTimer = setTimeout(() => {
+        nav.classList.remove('lnb-open');
+        lnb.classList.remove('open');
+        navItems.forEach(i => i.classList.remove('lnb-active'));
+        lnbCols.forEach(c => c.classList.remove('active'));
+      }, 120);
+    }
+    navItems.forEach(item => {
+      item.addEventListener('mouseenter', () => openLnb(item.dataset.menu));
+      item.addEventListener('mouseleave', schedulClose);
+    });
+    lnb.addEventListener('mouseenter', () => clearTimeout(closeTimer));
+    lnb.addEventListener('mouseleave', schedulClose);
+    lnbCols.forEach(col => {
+      col.addEventListener('mouseenter', () => {
+        const menu = col.dataset.col;
+        navItems.forEach(item => item.classList.toggle('lnb-active', item.dataset.menu === menu));
+        lnbCols.forEach(c  => c.classList.toggle('active', c.dataset.col === menu));
+      });
+    });
+
+    // 검색
+    const searchOverlay  = document.getElementById('search-overlay');
+    const searchInput    = document.getElementById('search-input');
+    const searchOpenBtn  = document.getElementById('search-open-btn');
+    const searchCloseBtn = document.getElementById('search-close-btn');
+    function openSearch() {
+      header.classList.add('search-open');
+      searchOverlay.classList.add('open');
+      nav.classList.remove('lnb-open');
+      lnb.classList.remove('open');
+      navItems.forEach(i => i.classList.remove('lnb-active'));
+      lnbCols.forEach(c => c.classList.remove('active'));
+      setTimeout(() => searchInput.focus(), 50);
+    }
+    function closeSearch() {
+      header.classList.remove('search-open');
+      searchOverlay.classList.remove('open');
+    }
+    searchOpenBtn.addEventListener('click', openSearch);
+    searchCloseBtn.addEventListener('click', closeSearch);
+    document.querySelectorAll('.search-tag').forEach(tag => {
+      tag.addEventListener('click', () => { searchInput.value = tag.dataset.keyword; searchInput.focus(); });
+    });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSearch(); });
+    document.querySelector('.search-submit').addEventListener('click', () => {
+      const kw = searchInput.value.trim();
+      if (kw) window.location.href = 'search.html?q=' + encodeURIComponent(kw);
+    });
+    searchInput.addEventListener('keydown', e => {
+      if (e.key === 'Enter') { const kw = searchInput.value.trim(); if (kw) window.location.href = 'search.html?q=' + encodeURIComponent(kw); }
+    });
+
+    // 스크롤 등장
+    const revealEls = document.querySelectorAll('.reveal');
+    const revealTimers = new Map();
+    let scrollingUp = false;
+    let lastScrollY = window.scrollY;
+    window.addEventListener('scroll', () => {
+      scrollingUp = window.scrollY < lastScrollY;
+      lastScrollY = window.scrollY;
+    }, { passive: true });
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const el = entry.target;
+        const delay = parseInt(el.dataset.revealDelay) || 0;
+        if (revealTimers.has(el)) { clearTimeout(revealTimers.get(el)); revealTimers.delete(el); }
+        if (entry.intersectionRatio >= 0.1) {
+          const t = setTimeout(() => {
+            if (scrollingUp) el.style.transform = 'translateY(0)';
+            else el.style.transform = '';
+            el.classList.add('visible');
+          }, scrollingUp ? 0 : delay);
+          revealTimers.set(el, t);
+        } else if (entry.intersectionRatio === 0) {
+          el.style.transform = '';
+          el.classList.remove('visible');
+        }
+      });
+    }, { threshold: [0, 0.1] });
+    revealEls.forEach(el => revealObserver.observe(el));
+
+    // 탭 네비게이션 - 스크롤 연동
+    const tabs = document.querySelectorAll('.ev-tab');
+    const sections = ['about', 'strength', 'features', 'faq'].map(id => document.getElementById(id));
+    const tabsEl = document.getElementById('ev-tabs');
+
+    function updateActiveTab() {
+      const scrollY = window.scrollY + 69 + tabsEl.offsetHeight + 10;
+      let activeIdx = 0;
+      sections.forEach((sec, i) => {
+        if (sec && sec.offsetTop <= scrollY) activeIdx = i;
+      });
+      tabs.forEach((tab, i) => tab.classList.toggle('active', i === activeIdx));
+    }
+    window.addEventListener('scroll', updateActiveTab, { passive: true });
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', e => {
+        e.preventDefault();
+        const id = tab.dataset.section;
+        const target = document.getElementById(id);
+        if (target) {
+          const offset = target.offsetTop - 69 - tabsEl.offsetHeight;
+          window.scrollTo({ top: offset, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // FAQ 아코디언
+    document.querySelectorAll('.ev-faq-q').forEach(q => {
+      q.addEventListener('click', () => {
+        const item = q.closest('.ev-faq-item');
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.ev-faq-item.open').forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+  </script>
+
+</body>
+</html>

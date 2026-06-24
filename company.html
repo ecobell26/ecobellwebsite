@@ -155,8 +155,8 @@
       transition: background 0.2s ease;
     }
     .lnb-col[data-col="company"]  { left: 187px; }
-    .lnb-col[data-col="solution"] { left: 319px; }
-    .lnb-col[data-col="platform"] { left: 451px; }
+    .lnb-col[data-col="platform"] { left: 319px; }
+    .lnb-col[data-col="solution"] { left: 451px; }
     .lnb-col[data-col="insight"]  { left: 584px; }
     .lnb-col[data-col="contact"]  { left: 716px; }
 
@@ -403,7 +403,7 @@
     }
     .hero-content {
       position: absolute;
-      left: 0; right: 0; top: 135px;
+      left: 0; right: 0; top: 155px;
       text-align: center;
     }
     .hero-title {
@@ -494,11 +494,14 @@
     .identity-cards-wrap {
       background: linear-gradient(to bottom, #ffffff 0%, #F3F8FB 100%);
     }
+    .identity-cards-group {
+      zoom: 0.95;
+    }
     /* ═══ 4. COMPANY IDENTITY ═══ */
     .identity-section {
       position: relative;
       background: transparent;
-      padding: 0 0 200px;
+      padding: 0 0 100px;
       text-align: center;
     }
     /* GSAP 텍스트 초기 상태 */
@@ -515,7 +518,7 @@
     .identity-tagline-row {
       display: flex;
       justify-content: space-between;
-      padding: 0 174px;
+      padding: 0 187px;
     }
     .identity-tag-left,
     .identity-tag-right {
@@ -539,7 +542,7 @@
       margin: 0 auto;
       display: flex;
       flex-direction: column;
-      gap: 140px;
+      gap: 100px;
     }
     .r-card {
       display: flex;
@@ -549,6 +552,7 @@
       text-decoration: none;
       cursor: pointer;
       transition: transform 0.35s ease;
+      zoom: 0.95;
     }
     .r-card:hover {
       transform: translateY(-8px);
@@ -608,7 +612,7 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 0 60px 0 0;
+      padding: 0 60px 0 50px;
     }
     .r-card.reverse .r-card-text {
       padding: 0 0 0 100px;
@@ -629,7 +633,7 @@
     /* ═══ PoD ═══ */
     .pod-section {
       background: #fff;
-      padding: 170px 0 140px;
+      padding: 170px 0 0;
     }
     .pod-inner {
       width: 1130px;
@@ -721,7 +725,7 @@
     /* ═══ 5. PARTNER ═══ */
     .partner-section {
       background: #fff;
-      padding: 180px 0 150px;
+      padding: 150px 0 150px;
     }
     .partner-inner {
       width: 100%;
@@ -772,26 +776,26 @@
       margin-right: 50px;
     }
     .partner-marquee-track.row1 {
-      animation: marquee-left 35s linear infinite;
+      animation: marquee-left 55s linear infinite;
     }
     .partner-marquee-track.row1 img,
     .partner-marquee-track.row2 img {
       height: 52px;
     }
     .partner-marquee-track.row2 {
-      animation: marquee-left 44s linear infinite;
+      animation: marquee-left 66s linear infinite;
     }
     .partner-marquee-track.row3 {
-      animation: marquee-left 40s linear infinite;
+      animation: marquee-left 60s linear infinite;
     }
     .partner-marquee-track.row3 img {
       height: 60px;
     }
     .partner-marquee-track.row4 {
-      animation: marquee-left 48s linear infinite;
+      animation: marquee-left 72s linear infinite;
     }
     .partner-marquee-track.row5 {
-      animation: marquee-left 38s linear infinite;
+      animation: marquee-left 57s linear infinite;
     }
     .partner-marquee-track:hover {
       animation-play-state: paused;
@@ -831,14 +835,13 @@
       letter-spacing: -0.7px;
       line-height: 52.5px;
     }
-    /* 바디: 연도 컬럼 + 이벤트 컬럼 */
+    /* 바디 */
     .history-body {
-      display: flex;
-      align-items: center;
       position: relative;
-      padding: 35px 0;
+      padding: 10px 0;
+      zoom: 0.95;
     }
-    /* 파란 박스: 뷰포트 왼쪽 끝 ~ 이벤트 패널 오른쪽 끝 */
+    /* 파란 박스 */
     .history-body::before {
       content: '';
       position: absolute;
@@ -848,79 +851,51 @@
       border-radius: 0 20px 20px 0;
       z-index: 0;
     }
-    /* 왼쪽: 연도 탭 */
-    .history-years {
-      width: 250px;
-      flex-shrink: 0;
-      position: relative;
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
-      padding-top: 35px;
-    }
     .history-vline {
       position: absolute;
-      left: 182px;
-      top: 85px;
-      bottom: 85px;
+      left: 181.5px;
+      top: 10px;
+      bottom: 10px;
       width: 2px;
       background: #d9d9d9;
-    }
-    .history-year-item {
-      height: 80px;
-      display: flex;
-      align-items: center;
-      position: relative;
-      cursor: pointer;
-    }
-    .history-dot {
-      position: absolute;
-      left: 172px;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      background: #d9d9d9;
       z-index: 1;
-      flex-shrink: 0;
-      transition: background 0.2s;
     }
-    .history-year-item.active .history-dot { background: #0968a7; }
-    .history-year-item.disabled {
-      pointer-events: none;
-      cursor: default;
+    .history-list {
+      position: relative;
+      z-index: 1;
+      padding: 50px 60px 50px 60px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
     }
-    .history-year-item.disabled .history-year-btn { color: #ebebeb; }
-    .history-year-item.disabled .history-dot { background: #ebebeb; }
-    .history-year-btn {
+    .history-year-group {
+      display: flex;
+      align-items: flex-start;
+    }
+    .history-year-heading {
       font-family: 'Chillax', sans-serif;
       font-weight: 600;
       font-size: 27px;
-      color: #d9d9d9;
+      color: #0968a7;
       letter-spacing: -0.6px;
-      line-height: 1.5;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 0;
-      transition: color 0.2s;
-    }
-    .history-year-item.active .history-year-btn { color: #0968a7; }
-    .history-year-item:hover .history-year-btn { color: #0968a7; }
-    .history-year-item:hover .history-dot { background: #0968a7; }
-    /* 오른쪽: 이벤트 패널 */
-    .history-timelines {
-      flex: 1;
+      width: 190px;
+      flex-shrink: 0;
       position: relative;
-      z-index: 1;
-      padding: 55px 60px 50px 60px;
-      display: grid;
-      overflow: hidden;
+      padding-top: 12px;
     }
-    /* 모든 패널 동시 렌더링, 위치는 GSAP translateY로 제어 */
-    .history-timeline {
-      grid-area: 1 / 1;
-      display: flex;
-      flex-direction: column;
+    .history-year-heading::after {
+      content: '';
+      position: absolute;
+      right: 58.5px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #0968a7;
+    }
+    .history-year-events {
+      flex: 1;
     }
     .timeline-event {
       padding: 12px 0;
@@ -967,13 +942,34 @@
     }
     .patent-card {
       flex: 1;
-      border: 0.5px solid #d9e5ec;
-      overflow: hidden;
+      background: #fff;
+      border: 1.5px solid #e8e8e8;
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 46px 40px 40px;
+      gap: 24px;
     }
     .patent-card img {
       width: 100%;
+      max-width: 208px;
       height: auto;
       display: block;
+    }
+    .patent-card-label {
+      font-family: 'Nanum Square', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      color: #333;
+      text-align: center;
+      line-height: 1.6;
+      letter-spacing: -0.28px;
+      word-break: keep-all;
+    }
+    .patent-reg {
+      font-weight: 400;
     }
     .cert-grid {
       display: grid;
@@ -987,86 +983,186 @@
       border: 0.5px solid #e8eef2;
     }
 
-    /* ═══ 8. BROCHURE DOWNLOAD ═══ */
-    .download-section {
+    /* ═══ 8. NEWS ═══ */
+    .company-news-section {
       background: #fff;
-      padding: 0 0 80px;
+      padding: 100px 0 80px;
     }
-    .download-inner {
+    .company-news-inner {
       width: 100%;
       max-width: 1440px;
       margin: 0 auto;
       padding: 0 155px;
     }
-    .download-btn {
+    .company-news-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      width: 100%;
-      height: 140px;
-      border: 0.5px solid #1e8dcd;
-      padding: 0 56px;
-      text-decoration: none;
-      background: transparent;
-      cursor: pointer;
-      overflow: hidden;
-      position: relative;
-      transition: background 0.3s ease;
+      margin-bottom: 48px;
     }
-    .download-btn::before {
-      content: '';
-      position: absolute;
-      right: 0; top: 50%;
-      transform: translate(50%, -50%) scale(0);
-      width: 200px; height: 200px;
-      background: #1e8dcd;
-      border-radius: 50%;
-      transition: transform 0.5s ease;
-      z-index: 0;
-    }
-    .download-btn:hover::before { transform: translate(50%, -50%) scale(6); }
-    .download-btn:hover .download-label { color: #fff; }
-    .download-btn:hover .download-icon { filter: brightness(0) invert(1); }
-    .download-label {
+    .company-news-title {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
       font-weight: 800;
-      font-size: 28px;
+      font-size: 35px;
       color: #234B63;
       letter-spacing: -0.3px;
-      position: relative;
-      z-index: 1;
-      transition: color 0.3s ease;
     }
-    .download-icon {
-      position: relative;
-      z-index: 1;
+    .company-news-controls {
       display: flex;
       align-items: center;
+      gap: 12px;
+    }
+    .company-news-nav {
+      display: flex;
+      align-items: center;
+      border: 1.5px solid #e8e8e8;
+      border-radius: 200px;
+      height: 44px;
+      overflow: hidden;
+    }
+    .company-news-nav-btn {
+      width: 39px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s;
+      padding: 0;
+    }
+    .company-news-nav-btn:hover:not(:disabled) { background: #f5f5f5; }
+    .company-news-nav-btn:disabled { opacity: 0.35; cursor: default; }
+    .company-news-nav-divider { width: 1px; height: 20px; background: #e8e8e8; flex-shrink: 0; }
+    .company-news-more {
+      display: inline-flex;
+      align-items: center;
       gap: 10px;
-      transition: filter 0.3s ease;
-    }
-    .download-icon svg { width: 28px; height: 28px; }
-
-    /* ─── CTA ─── */
-    .cta-contact-btn {
-      display: inline-flex; align-items: center; justify-content: center;
-      width: 218px; height: 42px;
-      border: 0.8px solid #fff;
-      background: transparent;
+      background: #00314D;
+      color: #fff;
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 800; font-size: 16px; color: #fff;
-      letter-spacing: 0.48px; text-decoration: none;
-      position: relative; overflow: hidden;
+      font-weight: 700;
+      font-size: 16px;
+      text-decoration: none;
+      padding: 12px 22px;
+      border-radius: 200px;
+      white-space: nowrap;
+      height: 44px;
+      box-sizing: border-box;
     }
-    .cta-contact-btn::before {
-      content: ''; position: absolute; left: 0; top: 50%;
-      transform: translate(-50%, -50%) scale(0);
-      width: 150px; height: 150px;
-      background: rgba(255,255,255,0.18);
-      border-radius: 50%; transition: transform 0.5s ease; z-index: 0;
+    .company-news-more svg { flex-shrink: 0; }
+    .company-news-carousel {
+      overflow: hidden;
     }
-    .cta-contact-btn:hover::before { transform: translate(-50%, -50%) scale(5); }
-    .cta-contact-btn span { position: relative; z-index: 1; }
+    .company-news-cards {
+      display: flex;
+      gap: 24px;
+      transition: transform 0.45s cubic-bezier(0.4,0,0.2,1);
+    }
+    .company-news-card {
+      flex: 0 0 calc((100% - 48px) / 3);
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .company-news-thumb {
+      width: 100%;
+      aspect-ratio: 290 / 170;
+      background: #e7e7e7;
+      background-size: cover;
+      background-position: center;
+      display: block;
+      border-radius: 20px;
+    }
+    .company-news-body { padding-top: 26px; padding-left: 6px; }
+    .company-news-text {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      color: #000;
+      line-height: 1.5;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      word-break: keep-all;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .company-news-date {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 400;
+      font-size: 13px;
+      color: #8c8c8c;
+      margin-top: 8px;
+      letter-spacing: -0.26px;
+    }
+    .company-news-card:hover .company-news-text { color: #1e8dcd; }
+
+    /* ═══ 9. CTA ═══ */
+    .company-cta-section {
+      background: #fff;
+      padding: 80px 0 110px;
+    }
+    .company-cta-inner {
+      width: 100%;
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 155px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
+    }
+    .company-cta-col {
+      background: #fff;
+      border: 1.5px solid #e7e7e7;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 42px 48px 42px 54px;
+      min-height: 235px;
+    }
+    .company-cta-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-start;
+      height: 100%;
+      flex: 1;
+    }
+    .company-cta-icon {
+      width: 90px;
+      height: 90px;
+      flex-shrink: 0;
+      margin-left: 24px;
+      align-self: flex-end;
+    }
+    .company-cta-heading {
+      font-family: 'Kakao OTF', 'Noto Sans KR', sans-serif;
+      font-weight: 700;
+      font-size: 25px;
+      color: #103e58;
+      letter-spacing: -0.3px;
+      line-height: 1.4;
+      margin-bottom: 32px;
+    }
+    .company-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: #00314d;
+      color: #fff;
+      font-family: 'Kakao OTF', 'Noto Sans KR', sans-serif;
+      font-weight: 400;
+      font-size: 18px;
+      text-decoration: none;
+      padding: 13px 16px;
+      border-radius: 200px;
+      white-space: nowrap;
+    }
+    .company-cta-btn svg { flex-shrink: 0; }
 
     /* ─── FOOTER ─── */
     footer {
@@ -1121,11 +1217,11 @@
         <div class="nav-item" data-menu="company">
           <a class="nav-link" href="#">Company</a>
         </div>
+        <div class="nav-item" data-menu="platform">
+          <a class="nav-link" href="#">Project</a>
+        </div>
         <div class="nav-item" data-menu="solution">
           <a class="nav-link" href="#">Solution</a>
-        </div>
-        <div class="nav-item" data-menu="platform">
-          <a class="nav-link" href="#">Platform</a>
         </div>
         <div class="nav-item" data-menu="insight">
           <a class="nav-link" href="insight.html">Insight</a>
@@ -1147,15 +1243,14 @@
           </div>
           <!-- Solution -->
           <div class="lnb-col" data-col="solution">
-            <a href="#">전체 솔루션 맵</a>
+            <a href="ecoval.html" class="en">ecoValue</a>
             <a href="#" class="en">ecoNODE</a>
-            <div class="lnb-sep"></div>
-            <a href="#">태양광 솔루션</a>
+            <a href="#" class="en">E-ASSET</a>
+            <a href="#" class="en">ecoASSET</a>
           </div>
           <!-- Platform -->
           <div class="lnb-col" data-col="platform">
-            <a href="#" class="en">eco Asset</a>
-            <a href="#" class="en">Energy Asset</a>
+            <a href="#">태양광 솔루션</a>
           </div>
           <!-- Insight -->
           <div class="lnb-col" data-col="insight">
@@ -1271,6 +1366,7 @@
 
     <!-- ═══ 3+4. IDENTITY + CARDS (공유 그라데이션 배경) ═══ -->
     <div class="identity-cards-wrap">
+    <div class="identity-cards-group">
     <section class="identity-section">
       <img class="identity-logo gsap-text" src="assets/company-logo-white2.png" alt="에코벨 로고">
       <div class="identity-tagline-row gsap-text">
@@ -1280,7 +1376,7 @@
     </section>
     <!-- cards-section 이후 z-index 복원 -->
     <style>
-      .cards-section, .partner-section, .history-section, .patent-section, .download-section {
+      .cards-section, .partner-section, .history-section, .patent-section, .company-news-section, .company-cta-section {
         position: relative; z-index: 2;
       }
     </style>
@@ -1341,6 +1437,7 @@
         </a>
       </div>
     </section>
+    </div><!-- /identity-cards-group -->
 
     <!-- ═══ PoD ═══ -->
     <section class="pod-section">
@@ -1452,123 +1549,49 @@
         </div>
 
         <div class="history-body reveal">
+          <div class="history-vline"></div>
+          <div class="history-list">
 
-          <!-- 왼쪽: 연도 탭 -->
-          <div class="history-years">
-            <div class="history-vline"></div>
-            <div class="history-year-item disabled" data-year="2026">
-              <div class="history-dot"></div>
-              <button class="history-year-btn">2026</button>
-            </div>
-            <div class="history-year-item active" data-year="2025">
-              <div class="history-dot"></div>
-              <button class="history-year-btn">2025</button>
-            </div>
-            <div class="history-year-item" data-year="2024">
-              <div class="history-dot"></div>
-              <button class="history-year-btn">2024</button>
-            </div>
-            <div class="history-year-item" data-year="2023">
-              <div class="history-dot"></div>
-              <button class="history-year-btn">2023</button>
-            </div>
-          </div>
-
-          <!-- 오른쪽: 이벤트 패널 -->
-          <div class="history-timelines">
-
-            <!-- 2026 -->
-            <div class="history-timeline" data-year="2026"></div>
-
-            <!-- 2025 -->
-            <div class="history-timeline active" data-year="2025">
-              <div class="timeline-event">
-                <div class="timeline-event-date">2025.12</div>
-                <div class="timeline-event-text">제2 차 유상증자 실시</div>
-              </div>
-              <div class="timeline-event">
-                <div class="timeline-event-date">2025.10</div>
-                <div class="timeline-event-text">이삭지이에스·이아피그리드, VPP(가상발전소) 운영 사업 업무협약(MOU) 체결</div>
-              </div>
-              <div class="timeline-event">
-                <div class="timeline-event-date">2025.08</div>
-                <div class="timeline-event-text">중소벤처기업부 '초기창업패키지 지원사업' 선정</div>
-              </div>
-              <div class="timeline-event">
-                <div class="timeline-event-date">2025.02</div>
-                <div class="timeline-event-text">BIXPO KEPCO '전국 8대 에너지 혁신기업' 선정</div>
-              </div>
-              <div class="timeline-event">
-                <div class="timeline-event-date">2025.01</div>
-                <div class="timeline-event-text">기업부설연구소 설립</div>
-              </div>
-              <div class="timeline-event">
-                <div class="timeline-event-date">2025.01</div>
-                <div class="timeline-event-text">빅데이터 기반 AI ESG 컨설팅 시스템 특허 등록</div>
-              </div>
-              <div class="timeline-event">
-                <div class="timeline-event-date">2025.01</div>
-                <div class="timeline-event-text">기업 탄소 자산관리 인프라 서비스 'ecoASSET v1.0' 출시</div>
+            <div class="history-year-group">
+              <div class="history-year-heading">2025</div>
+              <div class="history-year-events">
+                <div class="timeline-event"><div class="timeline-event-date">2025.12</div><div class="timeline-event-text">제2 차 유상증자 실시</div></div>
+                <div class="timeline-event"><div class="timeline-event-date">2025.10</div><div class="timeline-event-text">이삭지이에스·이아피그리드, VPP(가상발전소) 운영 사업 업무협약(MOU) 체결</div></div>
+                <div class="timeline-event"><div class="timeline-event-date">2025.08</div><div class="timeline-event-text">중소벤처기업부 '초기창업패키지 지원사업' 선정</div></div>
+                <div class="timeline-event"><div class="timeline-event-date">2025.02</div><div class="timeline-event-text">BIXPO KEPCO '전국 8대 에너지 혁신기업' 선정</div></div>
+                <div class="timeline-event"><div class="timeline-event-date">2025.01</div><div class="timeline-event-text">기업부설연구소 설립</div></div>
+                <div class="timeline-event"><div class="timeline-event-date">2025.01</div><div class="timeline-event-text">빅데이터 기반 AI ESG 컨설팅 시스템 특허 등록</div></div>
+                <div class="timeline-event"><div class="timeline-event-date">2025.01</div><div class="timeline-event-text">기업 탄소 자산관리 인프라 서비스 'ecoASSET v1.0' 출시</div></div>
               </div>
             </div>
 
-            <!-- 2024 -->
-            <div class="history-timeline" data-year="2024">
-              <div class="timeline-event">
-                <div class="timeline-event-date">2024.11</div>
-                <div class="timeline-event-text">캔 압착 시스템 관련 기술 특허 등록</div>
-              </div>
-              <div class="timeline-event">
-                <div class="timeline-event-date">2024.11</div>
-                <div class="timeline-event-text">㈜이도, 폐기물 및 신재생에너지 탄소 순환 공정관리 업무협약</div>
-              </div>
-              <div class="timeline-event">
-                <div class="timeline-event-date">2024.07</div>
-                <div class="timeline-event-text">수소/전기차 전환 탄소 저감 산출 시스템 특허 등록</div>
-              </div>
-              <div class="timeline-event">
-                <div class="timeline-event-date">2024.06</div>
-                <div class="timeline-event-text">ISO 9001(품질경영시스템)·14001(환경경영시스템)·45001(안전보건경영시스템) 인증</div>
-              </div>
-              <div class="timeline-event">
-                <div class="timeline-event-date">2024.06</div>
-                <div class="timeline-event-text">전북테크노파크(JBTP), RE100 에너지솔루션 얼라이언스 참여 및 기술 동향 공유</div>
+            <div class="history-year-group">
+              <div class="history-year-heading">2024</div>
+              <div class="history-year-events">
+                <div class="timeline-event"><div class="timeline-event-date">2024.11</div><div class="timeline-event-text">캔 압착 시스템 관련 기술 특허 등록</div></div>
+                <div class="timeline-event"><div class="timeline-event-date">2024.11</div><div class="timeline-event-text">㈜이도, 폐기물 및 신재생에너지 탄소 순환 공정관리 업무협약</div></div>
+                <div class="timeline-event"><div class="timeline-event-date">2024.07</div><div class="timeline-event-text">수소/전기차 전환 탄소 저감 산출 시스템 특허 등록</div></div>
+                <div class="timeline-event"><div class="timeline-event-date">2024.06</div><div class="timeline-event-text">ISO 9001(품질경영시스템)·14001(환경경영시스템)·45001(안전보건경영시스템) 인증</div></div>
+                <div class="timeline-event"><div class="timeline-event-date">2024.06</div><div class="timeline-event-text">전북테크노파크(JBTP), RE100 에너지솔루션 얼라이언스 참여 및 기술 동향 공유</div></div>
               </div>
             </div>
 
-            <!-- 2023 -->
-            <div class="history-timeline" data-year="2023">
-              <div class="timeline-event">
-                <div class="timeline-event-date">2023.12</div>
-                <div class="timeline-event-text">제1 차 유상증자 실시</div>
-              </div>
-              <div class="timeline-event">
-                <div class="timeline-event-date">2023.11</div>
-                <div class="timeline-event-text">벤처기업 인증</div>
-              </div>
-              <div class="timeline-event">
-                <div class="timeline-event-date">2023.09</div>
-                <div class="timeline-event-text">한국EV기술인협회, 배터리 ESG 및 탄소 배출권 활성화 업무협약 체결</div>
-              </div>
-              <div class="timeline-event">
-                <div class="timeline-event-date">2023.09</div>
-                <div class="timeline-event-text">연구개발전담부서 설립</div>
-              </div>
-              <div class="timeline-event">
-                <div class="timeline-event-date">2023.09</div>
-                <div class="timeline-event-text">그린플라스틱연합, 탄소 순환 공정관리 기술개발 공동 협력</div>
-              </div>
-              <div class="timeline-event">
-                <div class="timeline-event-date">2023.09</div>
-                <div class="timeline-event-text">한국여성경제인협회 협업</div>
-              </div>
-              <div class="timeline-event">
-                <div class="timeline-event-date">2023.02</div>
-                <div class="timeline-event-text">주식회사 에코벨 법인 설립</div>
+            <div class="history-year-group">
+              <div class="history-year-heading">2023</div>
+              <div class="history-year-events">
+                <div class="timeline-event"><div class="timeline-event-date">2023.12</div><div class="timeline-event-text">제1 차 유상증자 실시</div></div>
+                <div class="timeline-event"><div class="timeline-event-date">2023.11</div><div class="timeline-event-text">벤처기업 인증</div></div>
+                <div class="timeline-event"><div class="timeline-event-date">2023.11</div><div class="timeline-event-text">여성기업 인증</div></div>
+                <div class="timeline-event"><div class="timeline-event-date">2023.09</div><div class="timeline-event-text">한국EV기술인협회, 배터리 ESG 및 탄소 배출권 활성화 업무협약 체결</div></div>
+                <div class="timeline-event"><div class="timeline-event-date">2023.09</div><div class="timeline-event-text">연구개발전담부서 설립</div></div>
+                <div class="timeline-event"><div class="timeline-event-date">2023.09</div><div class="timeline-event-text">그린플라스틱연합, 탄소 순환 공정관리 기술개발 공동 협력</div></div>
+                <div class="timeline-event"><div class="timeline-event-date">2023.09</div><div class="timeline-event-text">한국여성경제인협회 협업</div></div>
+                <div class="timeline-event"><div class="timeline-event-date">2023.02</div><div class="timeline-event-text">㈜효진이앤하이 수소 및 가스 분석기 기구개발 협업</div></div>
+                <div class="timeline-event"><div class="timeline-event-date">2023.02</div><div class="timeline-event-text">주식회사 에코벨 법인 설립</div></div>
               </div>
             </div>
 
-          </div><!-- /history-timelines -->
+          </div><!-- /history-list -->
         </div><!-- /history-body -->
       </div>
     </section>
@@ -1579,13 +1602,16 @@
         <h2 class="section-title reveal">특허 및 지적 재산권 보유 현황</h2>
         <div class="patent-cards reveal">
           <div class="patent-card">
-            <img src="assets/company-patent1.png" alt="캔 압착기 특허 등록 제10-2730949 호">
+            <img src="assets/patent-doc1.png" alt="캔 압착기 특허증">
+            <p class="patent-card-label">캔 압착기<br><span class="patent-reg">특허 등록 제10-2730949 호</span></p>
           </div>
           <div class="patent-card">
-            <img src="assets/company-patent2.png" alt="수소/전기차 전환 탄소절감 특허 등록 제10-2688731 호">
+            <img src="assets/patent-doc2.png" alt="수소/전기차 전환 탄소절감 특허증">
+            <p class="patent-card-label">수소/전기차 전환 탄소절감에 대한<br>개인별 경제적 효용성 산출 시스템 및 방법<br><span class="patent-reg">특허 등록 제10-2688731 호</span></p>
           </div>
           <div class="patent-card">
-            <img src="assets/company-patent3.png" alt="빅데이터 기반의 AI 맞춤형 ESG 컨설팅 특허 등록 제10-2757776 호">
+            <img src="assets/patent-doc3.png" alt="빅데이터 기반의 AI 맞춤형 ESG 컨설팅 특허증">
+            <p class="patent-card-label">빅데이터 기반의 AI 맞춤형 ESG<br>컨설팅 서비스를 지원하는 시스템 및 방법<br><span class="patent-reg">특허 등록 제10-2757776 호</span></p>
           </div>
         </div>
         <div class="cert-grid reveal">
@@ -1611,33 +1637,60 @@
       </div>
     </section>
 
-    <!-- ═══ 8. BROCHURE DOWNLOAD ═══ -->
-    <section class="download-section">
-      <div class="download-inner">
-        <a class="download-btn reveal" href="archive.html">
-          <span class="download-label">기업소개서 다운로드</span>
-          <span class="download-icon">
-            <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M14 4V20M14 20L8 14M14 20L20 14" stroke="#234B63" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M4 22H24" stroke="#234B63" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-          </span>
-        </a>
+    <!-- ═══ 8. NEWS ═══ -->
+    <section class="company-news-section">
+      <div class="company-news-inner">
+        <div class="company-news-header reveal">
+          <h2 class="company-news-title">에코벨의 최근 소식을 확인하세요</h2>
+          <div class="company-news-controls">
+            <div class="company-news-nav">
+              <button class="company-news-nav-btn" id="news-prev" aria-label="이전">
+                <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M7 1L1 7L7 13" stroke="#234B63" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <div class="company-news-nav-divider"></div>
+              <button class="company-news-nav-btn" id="news-next" aria-label="다음">
+                <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M1 1L7 7L1 13" stroke="#234B63" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+            <a class="company-news-more" href="press.html">
+              보도자료 보러 가기
+              <svg width="9" height="16" viewBox="0 0 9 16" fill="none"><path d="M1 1L8 8L1 15" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="company-news-carousel reveal">
+          <div class="company-news-cards" id="company-news-cards"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 9. CTA ═══ -->
+    <section class="company-cta-section">
+      <div class="company-cta-inner">
+        <div class="company-cta-col reveal">
+          <div class="company-cta-left">
+            <p class="company-cta-heading">에코벨의 역량이 더 궁금하신가요?</p>
+            <a class="company-cta-btn" href="archive.html">
+              기업소개서 다운로드
+              <svg width="20" height="14" viewBox="0 0 20 14" fill="none"><path d="M0 7H16" stroke="white" stroke-width="1.5" stroke-linecap="round"/><path d="M10 1L17 7L10 13" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+          <img class="company-cta-icon" src="assets/company-brochure-icon.png" alt="">
+        </div>
+        <div class="company-cta-col reveal">
+          <div class="company-cta-left">
+            <p class="company-cta-heading">무엇이든 담당자와 이야기 해보세요</p>
+            <a class="company-cta-btn" href="contact.html">
+              담당자 문의하기
+              <svg width="20" height="14" viewBox="0 0 20 14" fill="none"><path d="M0 7H16" stroke="white" stroke-width="1.5" stroke-linecap="round"/><path d="M10 1L17 7L10 13" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+          <img class="company-cta-icon" src="assets/company-contact-icon.png" alt="">
+        </div>
       </div>
     </section>
 
   </main>
-
-  <!-- ─── CTA 섹션 ─── -->
-  <section style="position:relative;width:100%;height:296px;overflow:hidden;display:flex;align-items:center;justify-content:center;">
-    <div style="position:absolute;inset:0;background:url('assets/cta-bg.png') center/cover no-repeat;"></div>
-    <div style="position:absolute;inset:0;background:rgba(0,49,77,0.85);"></div>
-    <div style="position:relative;text-align:center;">
-      <p style="font-family:'Nanum Square','NanumSquare',sans-serif;font-weight:900;font-size:30px;color:#fff;letter-spacing:0.84px;line-height:40px;margin:0 0 8px;">무엇이든 물어보세요</p>
-      <p style="font-family:'Nanum Square','NanumSquare',sans-serif;font-weight:500;font-size:16px;color:#fff;letter-spacing:0.84px;line-height:40px;margin:0 0 18px;">특정 비즈니스 솔루션 문의부터 일반 문의까지 에코벨이 도와드립니다.</p>
-      <a href="contact.html" class="cta-contact-btn"><span>문의하기</span></a>
-    </div>
-  </section>
 
   <!-- ─── FOOTER ─── -->
   <footer>
@@ -1648,23 +1701,22 @@
 호스팅 서비스 : 주식회사 에코벨 | 통신판매업신고번호 : 2023-서울금천-1822</p>
 
       <p class="ft-col-title" style="left:45px;">회사정보</p>
-      <p class="ft-col-title" style="left:202px;">솔루션</p>
-      <p class="ft-col-title" style="left:374px;">플랫폼</p>
+      <p class="ft-col-title" style="left:202px;">프로젝트</p>
+      <p class="ft-col-title" style="left:374px;">솔루션</p>
       <p class="ft-col-title" style="left:554px;">인사이트</p>
       <p class="ft-col-title" style="left:750px;">문의하기</p>
 
       <a class="ft-link" href="ceo.html" style="left:45px;top:86px;">CEO 인사말</a>
-      <a class="ft-link" href="company.html" style="left:45px;top:121px;">회사소개</a>
+      <a class="ft-link" href="company.html" style="left:45px;top:121px;">기업소개</a>
       <a class="ft-link" href="press.html" style="left:45px;top:156px;">보도자료</a>
       <a class="ft-link" href="archive.html" style="left:45px;top:191px;">아카이브</a>
 
-      <a class="ft-link" href="#" style="left:202px;top:87px;">전체 솔루션 맵</a>
-      <a class="ft-link ft-en" href="#" style="left:202px;top:121px;">ecoNODE</a>
-      <div class="ft-sep" style="left:202px;top:161px;width:80px;"></div>
-      <a class="ft-link" href="#" style="left:202px;top:191px;">태양광 솔루션</a>
+      <a class="ft-link" href="#" style="left:202px;top:87px;">태양광 솔루션</a>
 
-      <a class="ft-link ft-en" href="#" style="left:374px;top:87px;">eco Asset</a>
-      <a class="ft-link ft-en" href="#" style="left:374px;top:121px;">Energy Asset</a>
+      <a class="ft-link ft-en" href="ecoval.html" style="left:374px;top:87px;">ecoValue</a>
+      <a class="ft-link ft-en" href="#" style="left:374px;top:121px;">ecoNODE</a>
+      <a class="ft-link ft-en" href="#" style="left:374px;top:156px;">E-ASSET</a>
+      <a class="ft-link ft-en" href="#" style="left:374px;top:191px;">ecoASSET</a>
 
       <a class="ft-link ft-en" href="https://www.netzeronews.kr/" target="_blank" rel="noopener noreferrer" style="left:554px;top:86px;">NetZero News
         <svg width="6" height="6" viewBox="0 0 8 8" fill="none" style="margin-left:2px;vertical-align:middle;"><path d="M1 7L7 1M7 1H3M7 1V5" stroke="#fff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -1798,18 +1850,6 @@
     });
 
 
-    // ─── 히스토리 연도 상태 ───
-    const historyYears = ['2025', '2024', '2023'];
-    let historyCurrentIdx = 0;
-
-    function updateHistoryDot(year) {
-      document.querySelectorAll('.history-year-item').forEach(i => {
-        if (!i.classList.contains('disabled')) i.classList.remove('active');
-      });
-      const item = document.querySelector(`.history-year-item[data-year="${year}"]`);
-      if (item) item.classList.add('active');
-    }
-
     // ─── 스크롤 등장 모션 ───
     const revealEls = document.querySelectorAll('.reveal');
     const revealTimers = new Map();
@@ -1842,6 +1882,91 @@
     }, { threshold: [0, 0.1] });
 
     revealEls.forEach(el => revealObserver.observe(el));
+
+    // ─── 보도자료 캐러셀 ───
+    (function() {
+      const track = document.getElementById('company-news-cards');
+      const prevBtn = document.getElementById('news-prev');
+      const nextBtn = document.getElementById('news-next');
+      if (!track) return;
+
+      let currentIndex = 0;
+      const VISIBLE = 3;
+
+      function updateNav() {
+        const total = track.querySelectorAll('.company-news-card').length;
+        const maxIndex = Math.max(0, total - VISIBLE);
+        if (prevBtn) prevBtn.disabled = currentIndex <= 0;
+        if (nextBtn) nextBtn.disabled = currentIndex >= maxIndex;
+      }
+
+      function slideTo(index) {
+        const card = track.querySelector('.company-news-card');
+        if (!card) return;
+        const total = track.querySelectorAll('.company-news-card').length;
+        const maxIndex = Math.max(0, total - VISIBLE);
+        currentIndex = Math.max(0, Math.min(index, maxIndex));
+        const cardW = card.offsetWidth + 24;
+        track.style.transform = `translateX(-${currentIndex * cardW}px)`;
+        updateNav();
+      }
+
+      if (prevBtn) prevBtn.addEventListener('click', () => slideTo(currentIndex - 1));
+      if (nextBtn) nextBtn.addEventListener('click', () => slideTo(currentIndex + 1));
+
+      fetch('press.html')
+        .then(r => r.text())
+        .then(html => {
+          const doc = new DOMParser().parseFromString(html, 'text/html');
+          const cards = Array.from(doc.querySelectorAll('.press-card'));
+          const items = cards.map(card => {
+            const thumb   = card.dataset.thumb || '';
+            const titleEl = card.querySelector('.press-card-title');
+            const dateEl  = card.querySelector('.press-card-date');
+            return {
+              thumb,
+              href:  titleEl ? titleEl.getAttribute('href') : 'press.html',
+              title: titleEl ? titleEl.textContent.trim() : '',
+              date:  dateEl  ? dateEl.textContent.trim()  : '',
+            };
+          }).filter(i => i.title);
+
+          items.sort((a, b) => b.date.localeCompare(a.date));
+
+          items.slice(0, 12).forEach(item => {
+            const thumbStyle = item.thumb ? `background-image:url('${item.thumb}')` : '';
+            const a = document.createElement('a');
+            a.className = 'company-news-card';
+            a.href = item.href || 'press.html';
+            a.innerHTML = `
+              <div class="company-news-thumb" style="${thumbStyle}"></div>
+              <div class="company-news-body">
+                <p class="company-news-text">${item.title}</p>
+                <p class="company-news-date">${item.date}</p>
+              </div>`;
+            track.appendChild(a);
+          });
+          updateNav();
+        })
+        .catch(() => {});
+    })();
+
+    // ─── 히스토리 세로선 위치 계산 ───
+    (function() {
+      const vline = document.querySelector('.history-vline');
+      const bodyEl = document.querySelector('.history-body');
+      const groups = document.querySelectorAll('.history-year-group');
+      const events = document.querySelectorAll('.history-list .timeline-event');
+      if (!vline || !bodyEl || !groups.length || !events.length) return;
+      const bodyRect = bodyEl.getBoundingClientRect();
+      const firstHeading = groups[0].querySelector('.history-year-heading');
+      const lastEv = events[events.length - 1];
+      const dotTop = firstHeading.getBoundingClientRect().top + firstHeading.offsetHeight / 2 - bodyRect.top;
+      const lineEnd = lastEv.getBoundingClientRect().bottom - bodyRect.top;
+      vline.style.top = dotTop + 'px';
+      vline.style.height = (lineEnd - dotTop + 70) + 'px';
+      vline.style.bottom = 'auto';
+    })();
   </script>
   <script src="assets/admin-trigger.js"></script>
 
@@ -1886,93 +2011,6 @@
     // 0.74 ~ 1.0: 흰 배경 페이드인 → 네이비 완전히 가려진 후 핀 해제
     missionTl.to('.mission-fadeout', { opacity: 1, ease: 'none', duration: 0.12 }, 0.85);
 
-    // ─── 히스토리 스크롤 (mission pin spacer 생성 이후에 측정해야 정확함) ───
-    (function() {
-      const panels = historyYears.map(y => document.querySelector(`.history-timeline[data-year="${y}"]`));
-      const containerEl = document.querySelector('.history-timelines');
-      const cs = window.getComputedStyle(containerEl);
-      const panelH = Math.round(containerEl.offsetHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom));
-
-      // 패널 높이 통일 + 초기 위치 설정
-      panels.forEach((p, i) => {
-        p.style.height = panelH + 'px';
-        gsap.set(p, { y: i * panelH });
-      });
-
-      function goToPanel(idx) {
-        panels.forEach((p, i) => gsap.set(p, { y: (i - idx) * panelH }));
-        historyCurrentIdx = idx;
-        updateHistoryDot(historyYears[idx]);
-      }
-
-      function animateToPanel(idx) {
-        panels.forEach((p, i) => {
-          gsap.to(p, { y: (i - idx) * panelH, duration: 0.55, ease: 'power2.inOut' });
-        });
-        historyCurrentIdx = idx;
-        updateHistoryDot(historyYears[idx]);
-      }
-
-      let locked = false;
-      let historyTriggerRef;
-
-      // 실제 스크롤 위치를 패널에 동기화 (ScrollTrigger가 올바른 진행도를 추적하도록)
-      function syncScrollToPanel(idx, onDone) {
-        if (!historyTriggerRef) return;
-        const target = historyTriggerRef.start + (idx / 2) * (historyTriggerRef.end - historyTriggerRef.start);
-        const startY = window.scrollY;
-        const dist = target - startY;
-        const t0 = performance.now();
-        const dur = 550;
-        function tick(now) {
-          const t = Math.min((now - t0) / dur, 1);
-          const ease = t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
-          window.scrollTo(0, startY + dist * ease);
-          if (t < 1) { requestAnimationFrame(tick); }
-          else { window.scrollTo(0, target); goToPanel(idx); locked = false; onDone && onDone(); }
-        }
-        requestAnimationFrame(tick);
-      }
-
-      historyTriggerRef = ScrollTrigger.create({
-        trigger: '.history-section',
-        pin: true,
-        start: 'bottom bottom',
-        end: '+=200%',
-        invalidateOnRefresh: true,
-        onUpdate: (self) => {
-          if (locked) return;
-          const idx = self.progress < 1/3 ? 0 : self.progress < 2/3 ? 1 : 2;
-          goToPanel(idx);
-        },
-      });
-
-      // wheel 인터셉트: 한 번 스크롤 = 한 패널 전환
-      window.addEventListener('wheel', (e) => {
-        if (!historyTriggerRef || !historyTriggerRef.isActive) return;
-        const dir = e.deltaY > 0 ? 1 : -1;
-        const newIdx = historyCurrentIdx + dir;
-        if (newIdx < 0 || newIdx > 2) return; // 범위 벗어나면 자연 스크롤
-        e.preventDefault();
-        if (locked) return;
-        locked = true;
-        animateToPanel(newIdx);
-        syncScrollToPanel(newIdx);
-      }, { passive: false });
-
-      // 클릭 전환
-      document.querySelectorAll('.history-year-item:not(.disabled)').forEach(item => {
-        item.addEventListener('click', () => {
-          const year = item.dataset.year;
-          const newIdx = historyYears.indexOf(year);
-          if (newIdx === historyCurrentIdx || locked) return;
-          locked = true;
-          animateToPanel(newIdx);
-          syncScrollToPanel(newIdx);
-        });
-      });
-    })();
-
     // ─── 5. Identity: logo + tagline row fade-in stagger ───
     gsap.to('.identity-section .gsap-text', {
       opacity: 1,
@@ -2003,109 +2041,151 @@
     });
   </script>
 
-  <!-- ═══ 히어로 섹션 라인 애니메이션 ═══ -->
+  <!-- ═══ 좌측 섹션 네비게이션 ═══ -->
+  <div id="section-nav-trigger"></div>
+  <nav id="section-nav">
+    <div class="section-nav-inner">
+      <ul>
+        <li data-idx="0"><span class="nav-dot"></span><span class="nav-label">Hero</span></li>
+        <li data-idx="1"><span class="nav-dot"></span><span class="nav-label">아이덴티티</span></li>
+        <li data-idx="2"><span class="nav-dot"></span><span class="nav-label">파트너사</span></li>
+        <li data-idx="3"><span class="nav-dot"></span><span class="nav-label">히스토리</span></li>
+        <li data-idx="4"><span class="nav-dot"></span><span class="nav-label">특허∙재산권</span></li>
+      </ul>
+    </div>
+  </nav>
+  <style>
+    #section-nav-trigger {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 48px;
+      height: 100%;
+      z-index: 99;
+      background: transparent;
+    }
+    #section-nav {
+      position: fixed;
+      left: 18px;
+      top: calc(50% - 35px);
+      background: transparent;
+      transform: translateY(-50%) translateX(calc(-100% - 40px));
+      opacity: 0;
+      transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1), opacity 1.2s ease;
+      z-index: 100;
+    }
+    #section-nav.visible {
+      transform: translateY(-50%) translateX(0);
+      opacity: 1;
+    }
+
+    .section-nav-inner {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 0 16px 16px 0;
+      padding: 0 20px 0 16px;
+      display: flex;
+      align-items: center;
+      height: 210px;
+    }
+    #section-nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    #section-nav li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+    }
+    #section-nav .nav-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: white;
+      opacity: 0.4;
+      flex-shrink: 0;
+      transition: opacity 0.3s ease;
+    }
+    #section-nav li.active .nav-dot {
+      opacity: 1;
+    }
+    #section-nav .nav-label {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 12px;
+      color: white;
+      white-space: nowrap;
+      opacity: 0;
+      transform: translateX(-4px);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      pointer-events: none;
+    }
+    #section-nav li:hover .nav-label,
+    #section-nav li.active .nav-label {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    #section-nav li:hover .nav-dot {
+      opacity: 1;
+    }
+  </style>
   <script>
-    (function() {
-      const section = document.querySelector('.hero');
-      const canvas  = document.createElement('canvas');
-      canvas.style.cssText = 'position:absolute;inset:0;pointer-events:none;z-index:3;';
-      section.appendChild(canvas);
-      const ctx = canvas.getContext('2d');
+    (function () {
+      const trigger = document.getElementById('section-nav-trigger');
+      const nav = document.getElementById('section-nav');
+      const navItems = document.querySelectorAll('#section-nav li');
+      const sectionClasses = ['hero', 'identity-section', 'partner-section', 'history-section', 'patent-section'];
+      const sections = sectionClasses.map(cls => document.querySelector('.' + cls));
 
-      let W, H;
+      let leaveTimer = null;
+      let scrollTimer = null;
+      let isHovering = false;
 
-      const trail     = [];
-      const MAX_TRAIL = 120;
-      const DOT_GAP   = 18;
-      const DOT_R     = 30;
-      const HEAD_PTS  = 18;
-      const HEAD_GAP  = 12;
+      function showNav() {
+        clearTimeout(leaveTimer);
+        nav.classList.add('visible');
+      }
 
-      let mouse = null;
-      let smooth = null; // 부드럽게 따라가는 현재 위치
-      const EASE = 0.05; // 낮을수록 더 느리게 따라옴
+      function scheduleHide() {
+        leaveTimer = setTimeout(() => nav.classList.remove('visible'), 200);
+      }
 
-      // 섹션 안에 마우스가 들어올 때만 추적
-      section.addEventListener('mousemove', e => {
-        const rect = canvas.getBoundingClientRect();
-        mouse = { x: e.clientX - rect.left, y: e.clientY - rect.top };
-        if (!smooth) smooth = { ...mouse }; // 첫 진입 시 즉시 이동
+      [trigger, nav].forEach(el => {
+        el.addEventListener('mouseenter', () => { isHovering = true; clearTimeout(scrollTimer); showNav(); });
+        el.addEventListener('mouseleave', () => { isHovering = false; scheduleHide(); });
       });
-      section.addEventListener('mouseleave', () => { mouse = null; });
 
-      function tick() {
-        ctx.clearRect(0, 0, W, H);
+      // 페이지 진입 시 자연스럽게 나타났다가 사라짐
+      showNav();
+      scrollTimer = setTimeout(() => { if (!isHovering) nav.classList.remove('visible'); }, 2500);
 
-        if (mouse && smooth) {
-          // lerp로 부드럽게 마우스를 향해 이동
-          smooth.x += (mouse.x - smooth.x) * EASE;
-          smooth.y += (mouse.y - smooth.y) * EASE;
-          trail.push({ x: smooth.x, y: smooth.y });
-          if (trail.length > MAX_TRAIL) trail.shift();
-        } else {
-          smooth = null;
-          // 마우스가 없으면 꼬리를 서서히 소멸
-          if (trail.length > 0) trail.shift();
-        }
+      navItems.forEach((li, i) => {
+        li.addEventListener('click', () => {
+          sections[i] && sections[i].scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      });
 
-        if (trail.length < 2) { requestAnimationFrame(tick); return; }
-
-        const tailEnd = Math.max(0, trail.length - HEAD_PTS);
-
-        let lastCircleIdx = tailEnd;
-        for (let i = tailEnd; i < trail.length; i += HEAD_GAP) lastCircleIdx = i;
-
-        // ── 연결선 ──
-        ctx.filter = 'blur(8px)';
-        ctx.beginPath();
-        ctx.moveTo(trail[0].x, trail[0].y);
-        for (let i = 1; i < lastCircleIdx; i++) {
-          const mx = (trail[i].x + trail[i+1].x) / 2;
-          const my = (trail[i].y + trail[i+1].y) / 2;
-          ctx.quadraticCurveTo(trail[i].x, trail[i].y, mx, my);
-        }
-        if (lastCircleIdx > 0) ctx.lineTo(trail[lastCircleIdx].x, trail[lastCircleIdx].y);
-        ctx.lineWidth   = DOT_R * 2;
-        ctx.lineCap     = 'round';
-        ctx.lineJoin    = 'round';
-        const grad = ctx.createLinearGradient(trail[0].x, trail[0].y, trail[lastCircleIdx].x, trail[lastCircleIdx].y);
-        grad.addColorStop(0, 'rgba(255,255,255,0)');
-        grad.addColorStop(1, 'rgba(255,255,255,0.10)');
-        ctx.strokeStyle = grad;
-        ctx.stroke();
-
-        // ── 꼬리: 잔상 ──
-        ctx.filter = 'blur(6px)';
-        for (let i = 0; i < tailEnd; i += DOT_GAP) {
-          const alpha = 0.30 * Math.pow((i + 1) / trail.length, 2.5);
-          ctx.beginPath();
-          ctx.arc(trail[i].x, trail[i].y, DOT_R, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(255,255,255,${alpha.toFixed(3)})`;
-          ctx.fill();
-        }
-
-        // ── 머리 ──
-        ctx.filter = 'blur(3px)';
-        for (let i = tailEnd; i < trail.length; i += HEAD_GAP) {
-          const alpha = 0.30 * (i - tailEnd + 1) / HEAD_PTS;
-          ctx.beginPath();
-          ctx.arc(trail[i].x, trail[i].y, DOT_R, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(255,255,255,${Math.min(alpha, 0.30).toFixed(3)})`;
-          ctx.fill();
-        }
-        ctx.filter = 'none';
-
-        requestAnimationFrame(tick);
+      function updateActive() {
+        const mid = window.innerHeight / 2;
+        let activeIdx = -1;
+        sections.forEach((sec, i) => {
+          if (!sec) return;
+          if (sec.getBoundingClientRect().top <= mid) activeIdx = i;
+        });
+        navItems.forEach((li, i) => li.classList.toggle('active', i === activeIdx));
       }
 
-      function resize() {
-        W = canvas.width  = section.offsetWidth  || window.innerWidth;
-        H = canvas.height = section.offsetHeight || window.innerHeight;
-      }
+      window.addEventListener('scroll', () => {
+        showNav();
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(() => { if (!isHovering) nav.classList.remove('visible'); }, 2000);
+        updateActive();
+      }, { passive: true });
 
-      resize();
-      window.addEventListener('resize', resize);
-      tick();
+      updateActive();
     })();
   </script>
 
