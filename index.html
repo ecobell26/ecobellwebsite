@@ -73,19 +73,11 @@
       transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    /*
-      GNB 일반 중심 위치:
-        Company 253.5 | Solution 360.5 | Platform 464.5 | Insight 563.5 | Contact Us 671.5
-      LNB 컬럼 중심 위치 (Figma):
-        Company 254   | Solution 408   | Platform 562   | Insight 716   | Contact Us 870
-      → translateX 변화량:
-        0        +48     +98      +153     +199
-    */
-    nav.lnb-open .nav-item:nth-child(1) { transform: translateX(0px); }
-    nav.lnb-open .nav-item:nth-child(2) { transform: translateX(25px); }
-    nav.lnb-open .nav-item:nth-child(3) { transform: translateX(53px); }
-    nav.lnb-open .nav-item:nth-child(4) { transform: translateX(87px); }
-    nav.lnb-open .nav-item:nth-child(5) { transform: translateX(111px); }
+    nav.lnb-open .nav-item {
+      transform: translateX(var(--lnb-tx, 0px));
+    }
+
+
 
     .nav-link {
       font-family: 'Chillax', sans-serif;
@@ -167,12 +159,7 @@
       gap: 0;
       transition: background 0.2s ease;
     }
-    /* Figma LNB 컬럼 x 좌표 (1440px 기준) */
-    .lnb-col[data-col="company"]  { left: 187px; }
-    .lnb-col[data-col="platform"] { left: 319px; }
-    .lnb-col[data-col="solution"] { left: 451px; }
-    .lnb-col[data-col="insight"]  { left: 584px; }
-    .lnb-col[data-col="contact"]  { left: 716px; }
+    /* LNB 컬럼 x 좌표: JS로 동적 계산 (positionLnbCols) */
 
     /* 호버된 컬럼 강조: 배경 + 상단 파란 띠 */
     .lnb-col.active {
@@ -843,7 +830,7 @@
         </div>
         <!-- Solution -->
         <div class="lnb-col" data-col="solution">
-          <a href="#" class="en">ecoValue</a>
+          <a href="ecoval.html" class="en">ecoValue</a>
           <a href="#" class="en">ecoNODE</a>
           <a href="#" class="en">E-ASSET</a>
           <a href="#" class="en">ecoASSET</a>
@@ -971,7 +958,7 @@
       <a class="ft-link" href="#" style="left:202px;top:87px;">태양광 솔루션</a>
 
       <!-- 솔루션 링크 -->
-      <a class="ft-link ft-en" href="#" style="left:374px;top:87px;">ecoValue</a>
+      <a class="ft-link ft-en" href="ecoval.html" style="left:374px;top:87px;">ecoValue</a>
       <a class="ft-link ft-en" href="#" style="left:374px;top:121px;">ecoNODE</a>
       <a class="ft-link ft-en" href="#" style="left:374px;top:156px;">E-ASSET</a>
       <a class="ft-link ft-en" href="#" style="left:374px;top:191px;">ecoASSET</a>
@@ -1066,12 +1053,48 @@
     const lnbCols  = document.querySelectorAll('.lnb-col');
     let closeTimer;
 
+    // GNB/LNB 정렬: Company 고정, 나머지 오른쪽으로 퍼짐
+    function setupHeaderLayout() {
+      const lnbInnerEl = lnb.querySelector('.lnb-inner');
+      const lnbRect = lnbInnerEl.getBoundingClientRect();
+      const items = Array.from(navItems);
+      const colWidth = lnbCols[0] ? lnbCols[0].offsetWidth : 132;
+
+      // Company(1번) 기준: 해당 col을 Company 정중앙 아래에 고정
+      const firstRect = items[0].getBoundingClientRect();
+      const firstCenterX = firstRect.left + firstRect.width / 2 - lnbRect.left;
+      const startLeft = firstCenterX - colWidth / 2;
+
+      items.forEach((item, i) => {
+        const menu = item.dataset.menu;
+        const col = lnb.querySelector(`.lnb-col[data-col="${menu}"]`);
+        if (!col) return;
+        const colLeft = startLeft + i * colWidth;
+        col.style.left = colLeft + 'px';
+        if (i === 0) {
+          // Company는 고정 (이동 없음)
+          item.style.setProperty('--lnb-tx', '0px');
+        } else {
+          const colCenterX = colLeft + colWidth / 2;
+          const itemRect = item.getBoundingClientRect();
+          const itemCenterX = itemRect.left + itemRect.width / 2 - lnbRect.left;
+          item.style.setProperty('--lnb-tx', `${colCenterX - itemCenterX}px`);
+        }
+      });
+    }
+    // 폰트 로딩 완료 후 정확한 위치 계산
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(setupHeaderLayout);
+    } else {
+      setupHeaderLayout();
+    }
+    window.addEventListener('resize', setupHeaderLayout);
+
     function openLnb(menuName) {
       clearTimeout(closeTimer);
 
-      // GNB 퍼짐 모션
+      // GNB 퍼짐 모션 + LNB 표시
       nav.classList.add('lnb-open');
-      // LNB 표시
       lnb.classList.add('open');
 
       // 활성 GNB 아이템 강조

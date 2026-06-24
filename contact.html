@@ -66,19 +66,11 @@
       transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    /*
-      GNB 일반 중심 위치:
-        Company 253.5 | Solution 360.5 | Platform 464.5 | Insight 563.5 | Contact Us 671.5
-      LNB 컬럼 중심 위치 (Figma):
-        Company 254   | Solution 408   | Platform 562   | Insight 716   | Contact Us 870
-      → translateX 변화량:
-        0        +48     +98      +153     +199
-    */
-    nav.lnb-open .nav-item:nth-child(1) { transform: translateX(0px); }
-    nav.lnb-open .nav-item:nth-child(2) { transform: translateX(25px); }
-    nav.lnb-open .nav-item:nth-child(3) { transform: translateX(53px); }
-    nav.lnb-open .nav-item:nth-child(4) { transform: translateX(87px); }
-    nav.lnb-open .nav-item:nth-child(5) { transform: translateX(111px); }
+    nav.lnb-open .nav-item {
+      transform: translateX(var(--lnb-tx, 0px));
+    }
+
+
 
     .nav-link {
       font-family: 'Chillax', sans-serif;
@@ -160,12 +152,7 @@
       gap: 0;
       transition: background 0.2s ease;
     }
-    /* Figma LNB 컬럼 x 좌표 (1440px 기준) */
-    .lnb-col[data-col="company"]  { left: 187px; }
-    .lnb-col[data-col="platform"] { left: 319px; }
-    .lnb-col[data-col="solution"] { left: 451px; }
-    .lnb-col[data-col="insight"]  { left: 584px; }
-    .lnb-col[data-col="contact"]  { left: 716px; }
+    /* LNB 컬럼 x 좌표: JS로 동적 계산 (positionLnbCols) */
 
     /* 호버된 컬럼 강조: 배경 + 상단 파란 띠 */
     .lnb-col.active {
@@ -1057,7 +1044,7 @@
         </div>
         <!-- Solution -->
         <div class="lnb-col" data-col="solution">
-          <a href="#" class="en">ecoValue</a>
+          <a href="ecoval.html" class="en">ecoValue</a>
           <a href="#" class="en">ecoNODE</a>
           <a href="#" class="en">E-ASSET</a>
           <a href="#" class="en">ecoASSET</a>
@@ -1531,48 +1518,57 @@
 
   <!-- ─── FOOTER ─── -->
   <footer>
-    <!-- 1440px: absolute layout -->
-    <div class="footer-inner" id="footer-abs">
+    <div class="footer-inner">
+
+      <!-- 회사 정보 -->
       <p class="ft-company-info">㈜에코벨
 사업자 등록번호 : 598-87-02578  |  대표 : 김소연
 호스팅 서비스 : 주식회사 에코벨 | 통신판매업신고번호 : 2023-서울금천-1822</p>
 
+      <!-- 컬럼 타이틀 -->
       <p class="ft-col-title" style="left:45px;">회사정보</p>
       <p class="ft-col-title" style="left:202px;">프로젝트</p>
       <p class="ft-col-title" style="left:374px;">솔루션</p>
       <p class="ft-col-title" style="left:554px;">인사이트</p>
       <p class="ft-col-title" style="left:750px;">문의하기</p>
 
+      <!-- 회사정보 링크 -->
       <a class="ft-link" href="ceo.html" style="left:45px;top:86px;">CEO 인사말</a>
       <a class="ft-link" href="#" style="left:45px;top:121px;">기업소개</a>
       <a class="ft-link" href="press.html" style="left:45px;top:156px;">보도자료</a>
       <a class="ft-link" href="archive.html" style="left:45px;top:191px;">아카이브</a>
 
-      <a class="ft-link" href="#" style="left:202px;top:87px;">전체 솔루션 맵</a>
-      <a class="ft-link ft-en" href="#" style="left:202px;top:121px;">ecoNODE</a>
-      <div class="ft-sep" style="left:202px;top:161px;width:80px;"></div>
-      <a class="ft-link" href="#" style="left:202px;top:191px;">태양광 솔루션</a>
+      <!-- Project 링크 -->
+      <a class="ft-link" href="#" style="left:202px;top:87px;">태양광 솔루션</a>
 
-      <a class="ft-link ft-en" href="#" style="left:374px;top:87px;">eco Asset</a>
-      <a class="ft-link ft-en" href="#" style="left:374px;top:121px;">Energy Asset</a>
+      <!-- 솔루션 링크 -->
+      <a class="ft-link ft-en" href="ecoval.html" style="left:374px;top:87px;">ecoValue</a>
+      <a class="ft-link ft-en" href="#" style="left:374px;top:121px;">ecoNODE</a>
+      <a class="ft-link ft-en" href="#" style="left:374px;top:156px;">E-ASSET</a>
+      <a class="ft-link ft-en" href="#" style="left:374px;top:191px;">ecoASSET</a>
 
+      <!-- 인사이트 링크 -->
       <a class="ft-link ft-en" href="https://www.netzeronews.kr/" target="_blank" rel="noopener noreferrer" style="left:554px;top:86px;">NetZero News
         <svg width="6" height="6" viewBox="0 0 8 8" fill="none" style="margin-left:2px;vertical-align:middle;"><path d="M1 7L7 1M7 1H3M7 1V5" stroke="#fff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
       <a class="ft-link" href="insight.html?page=eco" style="left:554px;top:121px;">친환경 기업정보</a>
       <a class="ft-link" href="insight.html?page=green" style="left:554px;top:156px;">그린카 계산기</a>
 
+      <!-- 문의하기 링크 -->
       <a class="ft-link ft-en" href="notice.html" style="left:750px;top:87px;">공지사항</a>
       <a class="ft-link ft-en" href="directions.html" style="left:750px;top:121px;">오시는길</a>
       <a class="ft-link ft-en" href="contact.html" style="left:750px;top:156px;">문의하기</a>
 
+      <!-- 디바이더 (y=305) -->
       <div class="ft-divider" style="top:305px;"></div>
 
+      <!-- 하단 링크 -->
       <a class="ft-bottom-link fw-bold" href="#" style="left:45px;">개인정보처리방침</a>
       <a class="ft-bottom-link" href="#" style="left:173px;">이용약관</a>
       <a class="ft-bottom-link" href="#" style="left:250px;">이메일무단수집거부</a>
       <a class="ft-bottom-link" href="faq.html" style="left:383px;">자주 묻는 질문(FAQ)</a>
 
+      <!-- 소셜 아이콘 (y=323) -->
       <a class="ft-social" href="https://www.youtube.com/@yt_ecobell" target="_blank" rel="noopener noreferrer" aria-label="YouTube" style="right:135px;">
         <svg width="22" height="23" viewBox="0 0 22 23" fill="none"><rect x="1.5" y="5" width="19" height="13" rx="3" stroke="#fff" stroke-width="1.3"/><polygon points="8.5,8.5 15.5,11.5 8.5,14.5" fill="#fff"/></svg>
       </a>
@@ -1582,72 +1578,11 @@
       <a class="ft-social" href="https://www.facebook.com/ecobell.co.kr" target="_blank" rel="noopener noreferrer" aria-label="Facebook" style="right:46px;">
         <svg width="22" height="23" viewBox="0 0 22 23" fill="none"><path d="M12.5 11.5H14.8L15.5 8.5H12.5V6.8C12.5 5.9 12.9 5.2 14.2 5.2H15.8V2.6C15.8 2.6 14.3 2.3 12.9 2.3C10.1 2.3 8.5 3.9 8.5 6.5V8.5H5.8V11.5H8.5V20.5H12.5V11.5Z" fill="#fff"/></svg>
       </a>
+
+      <!-- 저작권 -->
       <p class="ft-copyright">서울시 금천구 시흥대로 193, 701호(08635)
 ⓒ ecobell Co., Ltd. All rights reserved.</p>
-    </div>
 
-    <!-- 1080px: flex layout (hidden at 1440) -->
-    <div class="footer-inner" id="footer-flex" style="display:none;">
-      <p class="ft-company-info">㈜에코벨
-사업자 등록번호 : 598-87-02578  |  대표 : 김소연
-호스팅 서비스 : 주식회사 에코벨 | 통신판매업신고번호 : 2023-서울금천-1822</p>
-
-      <div class="ft-nav-group">
-        <div class="ft-nav-col">
-          <span class="ft-col-title">회사정보</span>
-          <a class="ft-link" href="ceo.html">CEO 인사말</a>
-          <a class="ft-link" href="company.html">회사소개</a>
-          <a class="ft-link" href="press.html">보도자료</a>
-          <a class="ft-link" href="archive.html">아카이브</a>
-        </div>
-        <div class="ft-nav-col">
-          <span class="ft-col-title">솔루션</span>
-          <a class="ft-link" href="#">전체 솔루션 맵</a>
-          <a class="ft-link ft-en" href="#">ecoNODE</a>
-          <div class="ft-sep"></div>
-          <a class="ft-link" href="#">태양광 솔루션</a>
-        </div>
-        <div class="ft-nav-col">
-          <span class="ft-col-title">플랫폼</span>
-          <a class="ft-link ft-en" href="#">eco Asset</a>
-          <a class="ft-link ft-en" href="#">Energy Asset</a>
-        </div>
-        <div class="ft-nav-col">
-          <span class="ft-col-title">인사이트</span>
-          <a class="ft-link ft-en" href="https://www.netzeronews.kr/" target="_blank" rel="noopener noreferrer">NetZero News ↗</a>
-          <a class="ft-link" href="insight.html?page=eco">친환경 기업정보</a>
-          <a class="ft-link" href="insight.html?page=green">그린카 계산기</a>
-        </div>
-        <div class="ft-nav-col">
-          <span class="ft-col-title">문의하기</span>
-          <a class="ft-link ft-en" href="contact.html">문의하기</a>
-          <a class="ft-link ft-en" href="notice.html">공지사항</a>
-          <a class="ft-link ft-en" href="#">오시는길</a>
-        </div>
-      </div>
-
-      <div class="ft-divider"></div>
-      <div class="ft-bottom-row">
-        <div class="ft-bottom-links">
-          <a class="ft-bottom-link fw-bold" href="#">개인정보처리방침</a>
-          <a class="ft-bottom-link" href="#">이용약관</a>
-          <a class="ft-bottom-link" href="#">이메일무단수집거부</a>
-        </div>
-        <div class="ft-socials">
-          <a class="ft-social" href="https://www.youtube.com/@yt_ecobell" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="1.5" y="4" width="15" height="10" rx="2.5" stroke="#000" stroke-width="1.3"/><polygon points="7,7 12.5,9 7,11" fill="#000"/></svg>
-          </a>
-          <a class="ft-social" href="https://www.instagram.com/ecobell.co.kr/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="2" y="2" width="14" height="14" rx="4" stroke="#000" stroke-width="1.3"/><circle cx="9" cy="9" r="3.2" stroke="#000" stroke-width="1.3"/><circle cx="13" cy="5" r="0.9" fill="#000"/></svg>
-          </a>
-          <a class="ft-social" href="https://www.facebook.com/ecobell.co.kr" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M10.5 9.5H12.3L12.8 7H10.5V5.8C10.5 5.1 10.8 4.5 11.8 4.5H13V2.3C13 2.3 11.9 2.1 10.9 2.1C8.7 2.1 7.5 3.4 7.5 5.5V7H5.3V9.5H7.5V16H10.5V9.5Z" fill="#000"/></svg>
-          </a>
-        </div>
-      </div>
-      <div class="ft-divider"></div>
-      <p class="ft-copyright">서울시 금천구 시흥대로 193, 701호(08635)
-ⓒ ecobell Co., Ltd. All rights reserved.</p>
     </div>
   </footer>
 
@@ -1958,12 +1893,48 @@
     const lnbCols  = document.querySelectorAll('.lnb-col');
     let closeTimer;
 
+    // GNB/LNB 정렬: Company 고정, 나머지 오른쪽으로 퍼짐
+    function setupHeaderLayout() {
+      const lnbInnerEl = lnb.querySelector('.lnb-inner');
+      const lnbRect = lnbInnerEl.getBoundingClientRect();
+      const items = Array.from(navItems);
+      const colWidth = lnbCols[0] ? lnbCols[0].offsetWidth : 132;
+
+      // Company(1번) 기준: 해당 col을 Company 정중앙 아래에 고정
+      const firstRect = items[0].getBoundingClientRect();
+      const firstCenterX = firstRect.left + firstRect.width / 2 - lnbRect.left;
+      const startLeft = firstCenterX - colWidth / 2;
+
+      items.forEach((item, i) => {
+        const menu = item.dataset.menu;
+        const col = lnb.querySelector(`.lnb-col[data-col="${menu}"]`);
+        if (!col) return;
+        const colLeft = startLeft + i * colWidth;
+        col.style.left = colLeft + 'px';
+        if (i === 0) {
+          // Company는 고정 (이동 없음)
+          item.style.setProperty('--lnb-tx', '0px');
+        } else {
+          const colCenterX = colLeft + colWidth / 2;
+          const itemRect = item.getBoundingClientRect();
+          const itemCenterX = itemRect.left + itemRect.width / 2 - lnbRect.left;
+          item.style.setProperty('--lnb-tx', `${colCenterX - itemCenterX}px`);
+        }
+      });
+    }
+    // 폰트 로딩 완료 후 정확한 위치 계산
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(setupHeaderLayout);
+    } else {
+      setupHeaderLayout();
+    }
+    window.addEventListener('resize', setupHeaderLayout);
+
     function openLnb(menuName) {
       clearTimeout(closeTimer);
 
-      // GNB 퍼짐 모션
+      // GNB 퍼짐 모션 + LNB 표시
       nav.classList.add('lnb-open');
-      // LNB 표시
       lnb.classList.add('open');
 
       // 활성 GNB 아이템 강조

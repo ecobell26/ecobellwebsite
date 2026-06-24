@@ -60,11 +60,6 @@
       align-items: center;
       transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    nav.lnb-open .nav-item:nth-child(1) { transform: translateX(0px); }
-    nav.lnb-open .nav-item:nth-child(2) { transform: translateX(25px); }
-    nav.lnb-open .nav-item:nth-child(3) { transform: translateX(53px); }
-    nav.lnb-open .nav-item:nth-child(4) { transform: translateX(87px); }
-    nav.lnb-open .nav-item:nth-child(5) { transform: translateX(111px); }
     .nav-link {
       font-family: 'Chillax', sans-serif;
       font-weight: 500;
@@ -128,11 +123,7 @@
       gap: 0;
       transition: background 0.2s ease;
     }
-    .lnb-col[data-col="company"]  { left: 187px; }
-    .lnb-col[data-col="platform"] { left: 319px; }
-    .lnb-col[data-col="solution"] { left: 451px; }
-    .lnb-col[data-col="insight"]  { left: 584px; }
-    .lnb-col[data-col="contact"]  { left: 716px; }
+    /* LNB 컬럼 x 좌표: JS로 동적 계산 (positionLnbCols) */
     .lnb-col.active { background: #fafcfd; border-top: 2px solid #1e8dcd; padding-top: 27px; }
     .lnb-col a {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
@@ -499,7 +490,7 @@
         </div>
         <!-- Solution -->
         <div class="lnb-col" data-col="solution">
-          <a href="#" class="en">ecoValue</a>
+          <a href="ecoval.html" class="en">ecoValue</a>
           <a href="#" class="en">ecoNODE</a>
           <a href="#" class="en">E-ASSET</a>
           <a href="#" class="en">ecoASSET</a>
@@ -625,6 +616,54 @@
   <!-- ─── FAQ 리스트 ─── -->
   <div class="faq-content" id="faq-list">
 
+    <div class="faq-item" data-category="에코벨류">
+      <div class="faq-question">
+        <span class="faq-question-text">에코벨류란 무엇인가요?</span>
+        <span class="faq-chevron">
+          <svg width="25" height="25" viewBox="0 0 25 25" fill="none"><path d="M6 9.5L12.5 16L19 9.5" stroke="#1E8DCD" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+      <div class="faq-answer">
+        에코벨류(ecoValue)는 에코벨이 자체 개발한 디지털 MRV 기술을 기반으로 에너지·탄소 데이터를 실시간으로 수집·검증하고, 이를 탄소 크레딧 자산으로 전환하는 통합 솔루션입니다. 태양광 발전소 구축부터 에코노드(RTU) 기반 데이터 수집, 에너지에셋 모니터링, 에코에셋 탄소자산화까지 전 주기를 하나의 파이프라인으로 연결합니다.
+      </div>
+    </div>
+
+    <div class="faq-item" data-category="에코벨류">
+      <div class="faq-question">
+        <span class="faq-question-text">에코벨류는 어떤 기업에 적합한가요?</span>
+        <span class="faq-chevron">
+          <svg width="25" height="25" viewBox="0 0 25 25" fill="none"><path d="M6 9.5L12.5 16L19 9.5" stroke="#1E8DCD" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+      <div class="faq-answer">
+        에코벨류는 신재생에너지 발전 사업자, RE100 이행이 필요한 제조·유통 기업, 탄소 감축 실적을 자산화하려는 ESG 경영 기업에 최적화되어 있습니다. 특히 온실가스 감축 데이터의 신뢰성 확보와 국내 KOC 및 글로벌 VCM 시장 참여를 목표로 하는 기업에 적합합니다.
+      </div>
+    </div>
+
+    <div class="faq-item" data-category="에코벨류">
+      <div class="faq-question">
+        <span class="faq-question-text">에코벨류 도입 절차는 어떻게 되나요?</span>
+        <span class="faq-chevron">
+          <svg width="25" height="25" viewBox="0 0 25 25" fill="none"><path d="M6 9.5L12.5 16L19 9.5" stroke="#1E8DCD" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+      <div class="faq-answer">
+        상단 메뉴의 '문의하기' 페이지에서 '데모 신청'을 통해 담당자와 상담을 시작하실 수 있습니다. 기업 규모와 현장 환경에 맞는 맞춤형 제안을 드리며, 태양광 발전소 구축부터 플랫폼 연동까지 단계별로 지원해 드립니다.
+      </div>
+    </div>
+
+    <div class="faq-item" data-category="에코벨류">
+      <div class="faq-question">
+        <span class="faq-question-text">에코벨류와 타 솔루션의 차이점은 무엇인가요?</span>
+        <span class="faq-chevron">
+          <svg width="25" height="25" viewBox="0 0 25 25" fill="none"><path d="M6 9.5L12.5 16L19 9.5" stroke="#1E8DCD" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+      <div class="faq-answer">
+        에코벨류는 단순 모니터링이나 사후 계산 방식에서 벗어나, 현장 데이터 수집(ecoNODE)→발전 관제(E-ASSET)→탄소자산화(ecoASSET)까지 전 과정을 단일 파이프라인으로 통합 제공하는 국내 유일의 솔루션입니다. 위·변조 불가능한 디지털 MRV 기술로 데이터 신뢰성을 보장하며, 국내외 탄소 시장 기준을 동시에 충족합니다.
+      </div>
+    </div>
+
     <div class="faq-item" data-category="ecoNODE">
       <div class="faq-question">
         <span class="faq-question-text">ecoNODE란 무엇인가요?</span>
@@ -724,37 +763,56 @@
   <!-- ─── FOOTER ─── -->
   <footer>
     <div class="footer-inner">
+
+      <!-- 회사 정보 -->
       <p class="ft-company-info">㈜에코벨
 사업자 등록번호 : 598-87-02578  |  대표 : 김소연
 호스팅 서비스 : 주식회사 에코벨 | 통신판매업신고번호 : 2023-서울금천-1822</p>
+
+      <!-- 컬럼 타이틀 -->
       <p class="ft-col-title" style="left:45px;">회사정보</p>
       <p class="ft-col-title" style="left:202px;">프로젝트</p>
       <p class="ft-col-title" style="left:374px;">솔루션</p>
       <p class="ft-col-title" style="left:554px;">인사이트</p>
       <p class="ft-col-title" style="left:750px;">문의하기</p>
+
+      <!-- 회사정보 링크 -->
       <a class="ft-link" href="ceo.html" style="left:45px;top:86px;">CEO 인사말</a>
       <a class="ft-link" href="#" style="left:45px;top:121px;">기업소개</a>
       <a class="ft-link" href="press.html" style="left:45px;top:156px;">보도자료</a>
       <a class="ft-link" href="archive.html" style="left:45px;top:191px;">아카이브</a>
-      <a class="ft-link" href="#" style="left:202px;top:87px;">전체 솔루션 맵</a>
-      <a class="ft-link ft-en" href="#" style="left:202px;top:121px;">ecoNODE</a>
-      <div class="ft-sep" style="left:202px;top:161px;width:80px;"></div>
-      <a class="ft-link" href="#" style="left:202px;top:191px;">태양광 솔루션</a>
-      <a class="ft-link ft-en" href="#" style="left:374px;top:87px;">eco Asset</a>
-      <a class="ft-link ft-en" href="#" style="left:374px;top:121px;">Energy Asset</a>
+
+      <!-- Project 링크 -->
+      <a class="ft-link" href="#" style="left:202px;top:87px;">태양광 솔루션</a>
+
+      <!-- 솔루션 링크 -->
+      <a class="ft-link ft-en" href="ecoval.html" style="left:374px;top:87px;">ecoValue</a>
+      <a class="ft-link ft-en" href="#" style="left:374px;top:121px;">ecoNODE</a>
+      <a class="ft-link ft-en" href="#" style="left:374px;top:156px;">E-ASSET</a>
+      <a class="ft-link ft-en" href="#" style="left:374px;top:191px;">ecoASSET</a>
+
+      <!-- 인사이트 링크 -->
       <a class="ft-link ft-en" href="https://www.netzeronews.kr/" target="_blank" rel="noopener noreferrer" style="left:554px;top:86px;">NetZero News
         <svg width="6" height="6" viewBox="0 0 8 8" fill="none" style="margin-left:2px;vertical-align:middle;"><path d="M1 7L7 1M7 1H3M7 1V5" stroke="#fff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
       <a class="ft-link" href="insight.html?page=eco" style="left:554px;top:121px;">친환경 기업정보</a>
       <a class="ft-link" href="insight.html?page=green" style="left:554px;top:156px;">그린카 계산기</a>
+
+      <!-- 문의하기 링크 -->
       <a class="ft-link ft-en" href="notice.html" style="left:750px;top:87px;">공지사항</a>
       <a class="ft-link ft-en" href="directions.html" style="left:750px;top:121px;">오시는길</a>
       <a class="ft-link ft-en" href="contact.html" style="left:750px;top:156px;">문의하기</a>
+
+      <!-- 디바이더 (y=305) -->
       <div class="ft-divider" style="top:305px;"></div>
+
+      <!-- 하단 링크 -->
       <a class="ft-bottom-link fw-bold" href="#" style="left:45px;">개인정보처리방침</a>
       <a class="ft-bottom-link" href="#" style="left:173px;">이용약관</a>
       <a class="ft-bottom-link" href="#" style="left:250px;">이메일무단수집거부</a>
       <a class="ft-bottom-link" href="faq.html" style="left:383px;">자주 묻는 질문(FAQ)</a>
+
+      <!-- 소셜 아이콘 (y=323) -->
       <a class="ft-social" href="https://www.youtube.com/@yt_ecobell" target="_blank" rel="noopener noreferrer" aria-label="YouTube" style="right:135px;">
         <svg width="22" height="23" viewBox="0 0 22 23" fill="none"><rect x="1.5" y="5" width="19" height="13" rx="3" stroke="#fff" stroke-width="1.3"/><polygon points="8.5,8.5 15.5,11.5 8.5,14.5" fill="#fff"/></svg>
       </a>
@@ -764,8 +822,11 @@
       <a class="ft-social" href="https://www.facebook.com/ecobell.co.kr" target="_blank" rel="noopener noreferrer" aria-label="Facebook" style="right:46px;">
         <svg width="22" height="23" viewBox="0 0 22 23" fill="none"><path d="M12.5 11.5H14.8L15.5 8.5H12.5V6.8C12.5 5.9 12.9 5.2 14.2 5.2H15.8V2.6C15.8 2.6 14.3 2.3 12.9 2.3C10.1 2.3 8.5 3.9 8.5 6.5V8.5H5.8V11.5H8.5V20.5H12.5V11.5Z" fill="#fff"/></svg>
       </a>
+
+      <!-- 저작권 -->
       <p class="ft-copyright">서울시 금천구 시흥대로 193, 701호(08635)
 ⓒ ecobell Co., Ltd. All rights reserved.</p>
+
     </div>
   </footer>
 
@@ -796,12 +857,59 @@
     const lnbCols  = document.querySelectorAll('.lnb-col');
     let closeTimer;
 
+    // GNB/LNB 정렬: Company 고정, 나머지 오른쪽으로 퍼짐
+    function setupHeaderLayout() {
+      const lnbInnerEl = lnb.querySelector('.lnb-inner');
+      const lnbRect = lnbInnerEl.getBoundingClientRect();
+      const items = Array.from(navItems);
+      const colWidth = lnbCols[0] ? lnbCols[0].offsetWidth : 132;
+
+      // Company(1번) 기준: 해당 col을 Company 정중앙 아래에 고정
+      const firstRect = items[0].getBoundingClientRect();
+      const firstCenterX = firstRect.left + firstRect.width / 2 - lnbRect.left;
+      const startLeft = firstCenterX - colWidth / 2;
+
+      items.forEach((item, i) => {
+        const menu = item.dataset.menu;
+        const col = lnb.querySelector(`.lnb-col[data-col="${menu}"]`);
+        if (!col) return;
+        const colLeft = startLeft + i * colWidth;
+        col.style.left = colLeft + 'px';
+        if (i === 0) {
+          // Company는 고정 (이동 없음)
+          item.style.setProperty('--lnb-tx', '0px');
+        } else {
+          const colCenterX = colLeft + colWidth / 2;
+          const itemRect = item.getBoundingClientRect();
+          const itemCenterX = itemRect.left + itemRect.width / 2 - lnbRect.left;
+          item.style.setProperty('--lnb-tx', `${colCenterX - itemCenterX}px`);
+        }
+      });
+    }
+    // 폰트 로딩 완료 후 정확한 위치 계산
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(setupHeaderLayout);
+    } else {
+      setupHeaderLayout();
+    }
+    window.addEventListener('resize', setupHeaderLayout);
+
     function openLnb(menuName) {
       clearTimeout(closeTimer);
+
+      // GNB 퍼짐 모션 + LNB 표시
       nav.classList.add('lnb-open');
       lnb.classList.add('open');
-      navItems.forEach(item => item.classList.toggle('lnb-active', item.dataset.menu === menuName));
-      lnbCols.forEach(col => col.classList.toggle('active', col.dataset.col === menuName));
+
+      // 활성 GNB 아이템 강조
+      navItems.forEach(item => {
+        item.classList.toggle('lnb-active', item.dataset.menu === menuName);
+      });
+
+      // 활성 LNB 컬럼 강조
+      lnbCols.forEach(col => {
+        col.classList.toggle('active', col.dataset.col === menuName);
+      });
     }
 
     function schedulClose() {
