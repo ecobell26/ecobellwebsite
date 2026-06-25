@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>에코노드 ecoNODE - Ecobell</title>
+  <title>에코에셋 ecoASSET - Ecobell</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&family=Nanum+Square:wght@400;700;800&display=swap" rel="stylesheet">
@@ -102,177 +102,6 @@
       .lnb-inner    { max-width: none; }
     }
 
-    /* ─── DATA SECTION ─── */
-    .en-data-section {
-      background: #fff;
-      padding: 100px 0 120px;
-    }
-    .en-data-inner {
-      max-width: 1440px; margin: 0 auto;
-      padding: 0 155px;
-    }
-    .en-data-title {
-      font-family: 'Noto Sans KR', sans-serif;
-      font-weight: 700; font-size: 33px;
-      color: #000; line-height: 1.3;
-      word-break: keep-all;
-      margin-bottom: 10px;
-    }
-    .en-data-subtitle {
-      font-family: 'Noto Sans KR', sans-serif;
-      font-weight: 400; font-size: 15px;
-      color: rgba(0,0,0,0.45);
-      margin-bottom: 70px;
-    }
-    /* Infographic flow */
-    .en-infographic {
-      display: flex; align-items: flex-start; gap: 0;
-    }
-    .en-info-step {
-      flex: 1; display: flex; flex-direction: column;
-    }
-    .en-info-visual {
-      width: 100%; aspect-ratio: 4/3;
-      border-radius: 10px;
-      margin-bottom: 28px;
-      overflow: hidden;
-    }
-    .en-info-visual svg { display: block; width: 100%; height: 100%; }
-    .en-info-step-num {
-      font-family: 'Chillax', sans-serif;
-      font-weight: 600; font-size: 12px;
-      color: #3694AA; letter-spacing: 1.5px;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-    .en-info-step-title {
-      font-family: 'Noto Sans KR', sans-serif;
-      font-weight: 700; font-size: 18px;
-      color: #000; margin-bottom: 16px;
-      line-height: 1.4;
-    }
-    .en-info-bullets {
-      list-style: none; display: flex; flex-direction: column; gap: 10px;
-    }
-    .en-info-bullets li {
-      font-family: 'Noto Sans KR', sans-serif;
-      font-size: 14px; color: rgba(0,0,0,0.65);
-      line-height: 1.6; word-break: keep-all;
-      padding-left: 14px; position: relative;
-    }
-    .en-info-bullets li::before {
-      content: '';
-      position: absolute; left: 0; top: 9px;
-      width: 5px; height: 5px;
-      border-radius: 50%; background: #3694AA;
-    }
-    .en-info-bullets li strong {
-      font-weight: 700; color: #000;
-      display: block;
-    }
-    /* Separator between steps */
-    .en-info-sep {
-      flex: 0 0 40px;
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Chillax', sans-serif;
-      font-weight: 300; font-size: 22px;
-      color: rgba(0,0,0,0.25);
-      padding-bottom: 28px; /* align with center of visual */
-      align-self: center;
-    }
-
-    /* ─── CUSTOMERS SECTION ─── */
-    .en-customers-section {
-      background: #F4F4F4;
-      padding: 100px 0 120px;
-    }
-    .en-customers-inner {
-      max-width: 1440px; margin: 0 auto;
-      padding: 0 155px;
-    }
-    .en-customers-sub {
-      font-family: 'Noto Sans KR', sans-serif;
-      font-weight: 400; font-size: 17px;
-      color: #000;
-      margin-top: 30px;
-    }
-    .en-case-grid {
-      display: flex; flex-direction: column;
-      gap: 14px; margin-top: 48px;
-    }
-    .en-case-card {
-      background: #fff; border-radius: 14px;
-      padding: 32px 40px;
-      display: grid;
-      grid-template-columns: 160px 1fr 40px 1fr;
-      gap: 32px; align-items: center;
-    }
-    .en-case-label-col {
-      display: flex; flex-direction: column; gap: 6px;
-    }
-    .en-case-num {
-      font-family: 'Chillax', sans-serif;
-      font-weight: 600; font-size: 11px;
-      color: #3694AA; letter-spacing: 1.5px;
-      text-transform: uppercase;
-    }
-    .en-case-title {
-      font-family: 'Noto Sans KR', sans-serif;
-      font-weight: 700; font-size: 14px;
-      color: #000; line-height: 1.45; word-break: keep-all;
-    }
-    /* Before: speech bubble */
-    .en-case-before {
-      background: #F7F7F7; border-radius: 12px;
-      padding: 22px 24px; position: relative;
-    }
-    .en-case-before-tag {
-      font-family: 'Noto Sans KR', sans-serif;
-      font-size: 10px; font-weight: 700;
-      color: rgba(0,0,0,0.35); letter-spacing: 0.5px;
-      text-transform: uppercase; margin-bottom: 10px;
-    }
-    .en-case-quote {
-      font-family: 'Noto Sans KR', sans-serif;
-      font-size: 14px; color: rgba(0,0,0,0.75);
-      line-height: 1.8; word-break: keep-all;
-      font-style: italic;
-    }
-    .en-case-quote::before {
-      content: '"'; font-size: 28px; color: rgba(0,0,0,0.1);
-      font-style: normal; line-height: 0;
-      vertical-align: -10px; margin-right: 4px;
-    }
-    .en-case-quote::after {
-      content: '"'; font-size: 28px; color: rgba(0,0,0,0.1);
-      font-style: normal; line-height: 0;
-      vertical-align: -10px; margin-left: 4px;
-    }
-    /* Arrow */
-    .en-case-arrow {
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Chillax', sans-serif;
-      font-size: 20px; font-weight: 300;
-      color: #3694AA; opacity: 0.5;
-    }
-    /* After */
-    .en-case-after {
-      background: #EDF7FB; border-radius: 12px;
-      padding: 22px 24px;
-    }
-    .en-case-after-tag {
-      font-family: 'Noto Sans KR', sans-serif;
-      font-size: 10px; font-weight: 700;
-      color: #3694AA; letter-spacing: 0.5px;
-      text-transform: uppercase; margin-bottom: 10px;
-    }
-    .en-case-result {
-      font-family: 'Noto Sans KR', sans-serif;
-      font-size: 14px; color: rgba(0,0,0,0.75);
-      line-height: 1.8; word-break: keep-all;
-    }
-    .en-case-result strong { color: #3694AA; font-weight: 700; }
-
     /* ─── FOOTER ─── */
     footer { position: sticky; bottom: 0; z-index: 0; min-width: 1100px; height: 442px; background: #2a2a2a; }
     .footer-inner { position: relative; width: 100%; max-width: 1440px; margin: 0 auto; height: 100%; }
@@ -350,7 +179,7 @@
     .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s cubic-bezier(0.4,0,0.2,1), transform 0.65s cubic-bezier(0.4,0,0.2,1); }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
-    /* ═══ ECONODE PAGE ═══ */
+    /* ═══ ECOASSET PAGE ═══ */
 
     /* ─── PAGE BAR ─── */
     .en-page-bar {
@@ -395,7 +224,7 @@
     }
     .en-hero-bg {
       position: absolute; inset: 0;
-      background: url('assets/econode-hero-bg.png') center / cover no-repeat;
+      background: url('assets/ecoasset-hero-bg.png') center / cover no-repeat;
     }
     .en-hero-overlay {
       position: absolute; inset: 0;
@@ -440,45 +269,6 @@
       transition: background 0.2s, border-color 0.2s;
     }
     .en-hero-btn:hover { background: rgba(255,255,255,0.15); border-color: #fff; }
-
-    /* Product + Badges */
-    .en-hero-right {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-    }
-    .en-product-img {
-      position: absolute;
-      left: 834px; top: 45px;
-      width: 646px; height: 554px;
-      object-fit: contain;
-      filter: drop-shadow(0 8px 32px rgba(0,0,0,0.2));
-    }
-    .en-badges {
-      position: absolute;
-      left: 0; top: 0;
-    }
-    .en-badge {
-      position: absolute;
-      display: inline-flex; align-items: center; gap: 8px;
-      background: #fff;
-      border-radius: 999px;
-      padding: 7px 14px 7px 10px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.12);
-      white-space: nowrap;
-      pointer-events: auto;
-    }
-    .en-badge:nth-child(1) { left: 1122px; top: 251px; }
-    .en-badge:nth-child(2) { left: 1014px; top: 299px; }
-    .en-badge-icon {
-      width: 20px; height: 20px; flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .en-badge span {
-      font-family: 'Noto Sans KR', sans-serif;
-      font-weight: 500; font-size: 13px; color: #000;
-      letter-spacing: -0.2px;
-    }
 
     /* ─── ABOUT ─── */
     .en-about {
@@ -624,12 +414,6 @@
       word-break: keep-all;
       padding-top: 8px;
     }
-    .en-feature-card-placeholder {
-      text-align: center;
-      color: rgba(0,0,0,0.2);
-      font-family: 'Noto Sans KR', sans-serif;
-      font-size: 14px;
-    }
 
   </style>
 </head>
@@ -673,9 +457,9 @@
           </div>
           <div class="lnb-col" data-col="solution">
             <a href="ecoval.html" class="en">ecoValue</a>
-            <a href="econode.html" class="en active-page">ecoNODE</a>
+            <a href="econode.html" class="en">ecoNODE</a>
             <a href="easset.html" class="en">E-ASSET</a>
-            <a href="ecoasset.html" class="en">ecoASSET</a>
+            <a href="ecoasset.html" class="en active-page">ecoASSET</a>
           </div>
           <div class="lnb-col" data-col="platform">
             <a href="#">태양광 솔루션</a>
@@ -707,9 +491,9 @@
           </div>
           <div class="search-divider"></div>
           <div class="search-tags">
-            <button class="search-tag" data-keyword="에코노드">#에코노드</button>
-            <button class="search-tag" data-keyword="ecoNODE">#ecoNODE</button>
-            <button class="search-tag" data-keyword="MRV">#MRV</button>
+            <button class="search-tag" data-keyword="에코에셋">#에코에셋</button>
+            <button class="search-tag" data-keyword="ecoASSET">#ecoASSET</button>
+            <button class="search-tag" data-keyword="탄소크레딧">#탄소크레딧</button>
           </div>
         </div>
       </div>
@@ -743,7 +527,7 @@
     <!-- ═══ PAGE BAR ═══ -->
     <div class="en-page-bar">
       <div class="en-page-bar-inner">
-        <span>에코노드</span>
+        <span>에코에셋</span>
         <div class="en-page-bar-crumb">
           <a href="index.html" aria-label="홈">
             <svg width="11" height="12" viewBox="0 0 11 12" fill="none">
@@ -757,11 +541,7 @@
           <svg width="5" height="10" viewBox="0 0 5 10" fill="none">
             <path d="M1 1L4 5L1 9" stroke="rgba(255,255,255,0.7)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-          <a href="ecoval.html">에코벨류</a>
-          <svg width="5" height="10" viewBox="0 0 5 10" fill="none">
-            <path d="M1 1L4 5L1 9" stroke="rgba(255,255,255,0.7)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          <span style="color:#fff;font-weight:500;">에코노드</span>
+          <span style="color:#fff;font-weight:500;">에코에셋</span>
         </div>
       </div>
     </div>
@@ -772,49 +552,21 @@
       <div class="en-hero-overlay"></div>
 
       <div class="en-hero-content">
-
-        <!-- Left -->
         <div class="en-hero-left">
-          <p class="en-hero-subtitle">dMRV 기반의 센서 연동으로<br>발전량 및 탄소배출 값을 실시간 수집하는 현장 RTU 장치</p>
-          <h1 class="en-hero-title">에코노드 <span>ecoNODE</span></h1>
+          <p class="en-hero-subtitle">온실가스 감축 성과 데이터를<br>탄소 크레딧 기반으로 관리하는 특화 회계 솔루션</p>
+          <h1 class="en-hero-title">에코에셋 <span>ecoASSET</span></h1>
           <a class="en-hero-btn" href="contact.html">상담 및 문의</a>
         </div>
-
-        <!-- Right: Product + Badges -->
-        <div class="en-hero-right">
-          <img class="en-product-img" src="assets/econode-product.png" alt="ecoNODE 제품">
-          <div class="en-badges">
-            <div class="en-badge">
-              <span class="en-badge-icon">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                  <circle cx="10" cy="10" r="10" fill="#3BBD6A"/>
-                  <path d="M5.5 10.5L8.5 13.5L14.5 7" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </span>
-              <span>걱정할 필요가 없는 데이터</span>
-            </div>
-            <div class="en-badge">
-              <span class="en-badge-icon">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                  <circle cx="10" cy="10" r="10" fill="#3BBD6A"/>
-                  <path d="M5.5 10.5L8.5 13.5L14.5 7" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </span>
-              <span>탄소 데이터 수집 최적화</span>
-            </div>
-          </div>
-        </div>
-
       </div>
     </div>
 
     <!-- ═══ ABOUT ═══ -->
     <section class="en-about">
       <div class="en-about-inner">
-        <p class="en-about-tag reveal">에너지의 흐름을 데이터 자산으로<br>기업 탄소 자산화의 시작!</p>
-        <p class="en-about-main reveal">ecoNODE는 에너지 자산의 효율적인 통합 관리를 위해<br>전력 신호를 데이터로 전환하는 <span style="color:#3694AA;">RTU 솔루션</span>입니다.</p>
+        <p class="en-about-tag reveal">탄소 감축 성과를 회계 자산으로,<br>탄소 크레딧 관리의 완성!</p>
+        <p class="en-about-main reveal">ecoASSET은 온실가스 감축 성과 데이터를 체계적으로 기록하고<br>탄소 크레딧으로 전환하여 관리하는 <span style="color:#3694AA;">특화 회계 솔루션</span>입니다.</p>
         <div class="en-about-sub-wrap reveal">
-          <p class="en-about-sub">실시간 계측과 누적 데이터 보존으로 정보의 연속성을 유지하며,<br>현장 중심의 정확한 수치를 바탕으로 정교한 에너지 관리 환경을 만듭니다.<br>이를 통해 데이터 유실이 없는 정밀한 모니터링 체계를 지원합니다.</p>
+          <p class="en-about-sub">감축 실적 데이터의 체계적인 기록과 크레딧 전환 과정을 일원화하여 탄소 자산의 가시성을 높입니다.<br>규제 대응과 시장 거래를 위한 정밀한 탄소 회계 환경을 만들며,<br>이를 통해 데이터 무결성이 보장된 온실가스 인벤토리 관리 체계를 지원합니다.</p>
         </div>
       </div>
     </section>
@@ -824,8 +576,8 @@
       <div class="en-features-inner">
         <div class="en-features-head reveal">
           <div>
-            <p class="en-features-label">에코노드만의 특장점</p>
-            <p class="en-features-title">온실가스 인벤토리의 모든 것을 한곳에</p>
+            <p class="en-features-label">에코에셋만의 특장점</p>
+            <p class="en-features-title">탄소 자산화를 위한 완전한 회계 솔루션</p>
           </div>
           <div class="en-features-nav">
             <div class="en-slide-counter">
@@ -848,299 +600,21 @@
 
         <div class="en-features-track-wrap reveal">
           <div class="en-features-track" id="en-track">
-            <div class="en-feature-card" data-title="온실가스 인벤토리의 모든 것을 한곳에">
+            <div class="en-feature-card" data-title="탄소 자산화를 위한 완전한 회계 솔루션">
               <div class="en-feature-card-img"></div>
-              <div class="en-feature-card-content">신재생에너지 발전량(자산)과 Scope 1, 2, 3 온실가스 배출량(부채) 데이터를 단일 장치 기반으로 통합 수집합니다. 현장의 이종 데이터들을 단일 규격으로 표준화하여 기업 전체의 GHG 인벤토리를 파편화 없이 일원화합니다.</div>
+              <div class="en-feature-card-content">온실가스 감축 성과를 탄소 크레딧으로 전환하는 전 과정을 단일 플랫폼에서 관리합니다. 감축 실적 입력부터 크레딧 발행, 거래 이력 관리까지 탄소 자산의 전 생애주기를 추적합니다.</div>
             </div>
-            <div class="en-feature-card" data-title="수기 입력 ZERO, 실시간 채록으로 무결성 선점">
+            <div class="en-feature-card" data-title="규제 대응 자동화, 보고서 원클릭 생성">
               <div class="en-feature-card-img"></div>
-              <div class="en-feature-card-content">태양광 인버터, 일사량계, 온도 센서 등 현장 설비의 물리적 원천 신호를 가공 없이 실시간 직접 채록합니다. 인적 개입이 없는 직독(Direct Read) 방식을 통해 데이터의 왜곡 및 위·변조 가능성을 물리적으로 차단합니다.</div>
+              <div class="en-feature-card-content">국내외 탄소 규제 기준에 맞는 온실가스 보고서를 자동으로 생성합니다. GHG Protocol, ISO 14064 등 국제 기준에 부합하는 형식으로 즉각 산출하여 검증 비용과 시간을 절감합니다.</div>
             </div>
-            <div class="en-feature-card" data-title="어떤 설비든 표준 프로토콜">
+            <div class="en-feature-card" data-title="데이터 무결성 보장, 감사 추적 가능">
               <div class="en-feature-card-img"></div>
-              <div class="en-feature-card-content">현장 설비별로 상이한 이기종 원시 전력 신호들을 자산화에 최적화된 표준 통신 규격으로 단일화합니다. 포맷이 표준화된 데이터는 추가 가공 없이 외부 관제 시스템 및 플랫폼에 즉각 통합 연동됩니다.</div>
-            </div>
-            <div class="en-feature-card" data-title="LTE 안테나로 전국 실시간 무선 연결">
-              <div class="en-feature-card-img"></div>
-              <div class="en-feature-card-content">인버터와 원격 서버를 연결하는 별도의 장거리 통신선 매설 공사 없이, 장치 자체에 탑재된 전용 무선 LTE망 모듈을 통해 데이터를 전송합니다. 외곽 지역의 분산형 발전 설비에서도 기기에 장착된 안테나를 활용하여 현장 데이터를 유실 없이 실시간으로 무선 송신합니다.</div>
-            </div>
-            <div class="en-feature-card" data-title="실측에 기상을 더해, 엣지 단에서 끝내는 계산">
-              <div class="en-feature-card-img"></div>
-              <div class="en-feature-card-content">현장에서 직접 채록한 무결성 발전 데이터에 외부에서 유입되는 기상 데이터를 매칭하고 보안 봉인(씰링) 기능을 수행합니다. 기기 내부에 계수측정 수식을 내장하여 직접 수집한 에너지 데이터와 외부 환경 데이터를 결합한 실질적인 탄소 배출 측정을 지원합니다.</div>
-            </div>
-            <div class="en-feature-card" data-title="계통 이상 즉시 포착, 엣지 단의 자체 데이터 보존">
-              <div class="en-feature-card-img"></div>
-              <div class="en-feature-card-content">계통 정전, 과전류, 설비 효율 저하 등 주변 전력 계통의 이상 신호를 실시간 엣지 단에서 포착하여 장치 내부에 로그 데이터를 저장합니다. 저장된 데이터를 통해 정보의 연속성을 유지하며, 장치 전면의 LCD 창을 통해 주요 발전 지표를 현장에서 즉각 시각화합니다.</div>
+              <div class="en-feature-card-content">모든 감축 실적 데이터는 변조 불가능한 방식으로 기록되며, 원본 데이터부터 최종 크레딧 발행까지 완전한 감사 추적(Audit Trail)을 제공합니다. 제3자 검증에도 즉각 대응 가능한 투명한 데이터 환경을 구축합니다.</div>
             </div>
           </div>
         </div>
 
-      </div>
-    </section>
-
-    <!-- ═══ DATA / INFOGRAPHIC SECTION ═══ -->
-    <section class="en-data-section">
-      <div class="en-data-inner">
-        <p class="en-data-title reveal">현장에서 겪던 데이터 누락,<br>에코노드가 바로잡다</p>
-
-        <div class="en-infographic reveal">
-
-          <!-- Step 1: 현장 -->
-          <div class="en-info-step">
-            <div class="en-info-visual">
-              <svg viewBox="0 0 320 240" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="320" height="240" fill="#F4F9FC"/>
-                <!-- Sun -->
-                <circle cx="72" cy="38" r="12" fill="#FBBF24" opacity="0.85"/>
-                <line x1="72" y1="20" x2="72" y2="14" stroke="#FBBF24" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
-                <line x1="86" y1="24" x2="90" y2="19" stroke="#FBBF24" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
-                <line x1="92" y1="38" x2="98" y2="38" stroke="#FBBF24" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
-                <line x1="58" y1="24" x2="54" y2="19" stroke="#FBBF24" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
-                <line x1="52" y1="38" x2="46" y2="38" stroke="#FBBF24" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
-                <!-- Solar panel 1 -->
-                <rect x="22" y="66" width="50" height="34" rx="2" fill="#1E5A7A" stroke="#3694AA" stroke-width="1"/>
-                <line x1="39" y1="66" x2="39" y2="100" stroke="#3694AA" stroke-width="0.5" opacity="0.6"/>
-                <line x1="55" y1="66" x2="55" y2="100" stroke="#3694AA" stroke-width="0.5" opacity="0.6"/>
-                <line x1="22" y1="83" x2="72" y2="83" stroke="#3694AA" stroke-width="0.5" opacity="0.6"/>
-                <!-- Solar panel 2 -->
-                <rect x="78" y="66" width="50" height="34" rx="2" fill="#1E5A7A" stroke="#3694AA" stroke-width="1"/>
-                <line x1="95" y1="66" x2="95" y2="100" stroke="#3694AA" stroke-width="0.5" opacity="0.6"/>
-                <line x1="111" y1="66" x2="111" y2="100" stroke="#3694AA" stroke-width="0.5" opacity="0.6"/>
-                <line x1="78" y1="83" x2="128" y2="83" stroke="#3694AA" stroke-width="0.5" opacity="0.6"/>
-                <!-- Solar panel 3 -->
-                <rect x="22" y="106" width="50" height="34" rx="2" fill="#1E5A7A" stroke="#3694AA" stroke-width="1"/>
-                <line x1="39" y1="106" x2="39" y2="140" stroke="#3694AA" stroke-width="0.5" opacity="0.6"/>
-                <line x1="55" y1="106" x2="55" y2="140" stroke="#3694AA" stroke-width="0.5" opacity="0.6"/>
-                <line x1="22" y1="123" x2="72" y2="123" stroke="#3694AA" stroke-width="0.5" opacity="0.6"/>
-                <!-- Solar panel 4 -->
-                <rect x="78" y="106" width="50" height="34" rx="2" fill="#1E5A7A" stroke="#3694AA" stroke-width="1"/>
-                <line x1="95" y1="106" x2="95" y2="140" stroke="#3694AA" stroke-width="0.5" opacity="0.6"/>
-                <line x1="111" y1="106" x2="111" y2="140" stroke="#3694AA" stroke-width="0.5" opacity="0.6"/>
-                <line x1="78" y1="123" x2="128" y2="123" stroke="#3694AA" stroke-width="0.5" opacity="0.6"/>
-                <!-- Wire panel → device -->
-                <line x1="128" y1="103" x2="155" y2="103" stroke="#888" stroke-width="1.2" stroke-dasharray="3,2"/>
-                <polygon points="152,100 158,103 152,106" fill="#888"/>
-                <!-- ecoNODE device -->
-                <rect x="160" y="58" width="86" height="126" rx="7" fill="#fff" stroke="#3694AA" stroke-width="1.5"/>
-                <!-- LCD screen -->
-                <rect x="170" y="68" width="66" height="58" rx="3" fill="#0d1f2f"/>
-                <text x="203" y="89" text-anchor="middle" font-family="monospace" font-size="11" fill="#3CD4D3" font-weight="bold">380V</text>
-                <text x="203" y="107" text-anchor="middle" font-family="monospace" font-size="11" fill="#5CD4D3">45kW</text>
-                <text x="203" y="121" text-anchor="middle" font-family="monospace" font-size="8" fill="#1E8DCD" opacity="0.7">12.3kWh</text>
-                <!-- Status LEDs -->
-                <circle cx="178" cy="142" r="3.5" fill="#3BBD6A"/>
-                <circle cx="190" cy="142" r="3.5" fill="#5CD4D3"/>
-                <circle cx="202" cy="142" r="3.5" fill="#E0E0E0"/>
-                <!-- Label -->
-                <text x="203" y="170" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#3694AA" font-weight="700" letter-spacing="0.5">ecoNODE</text>
-              </svg>
-            </div>
-            <p class="en-info-step-num">01 &nbsp;/&nbsp; Field</p>
-            <p class="en-info-step-title">정밀 데이터 채록</p>
-            <ul class="en-info-bullets">
-              <li><strong>원천 신호 직접 추출</strong>인버터 및 센서의 물리적 신호 실시간 감지</li>
-              <li><strong>인적 오류 제로</strong>가공 없는 직독(Direct Read) 방식으로 데이터 무결성 확보</li>
-            </ul>
-          </div>
-
-          <span class="en-info-sep">&gt;</span>
-
-          <!-- Step 2: 전송 -->
-          <div class="en-info-step">
-            <div class="en-info-visual">
-              <svg viewBox="0 0 320 240" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="320" height="240" fill="#F4F9FC"/>
-                <!-- ecoNODE device (left) -->
-                <rect x="28" y="72" width="74" height="116" rx="7" fill="#fff" stroke="#3694AA" stroke-width="1.5"/>
-                <!-- LCD -->
-                <rect x="38" y="82" width="54" height="44" rx="3" fill="#0d1f2f"/>
-                <text x="65" y="100" text-anchor="middle" font-family="monospace" font-size="10" fill="#3CD4D3" font-weight="bold">380V</text>
-                <text x="65" y="117" text-anchor="middle" font-family="monospace" font-size="10" fill="#5CD4D3">45kW</text>
-                <!-- LEDs -->
-                <circle cx="44" cy="140" r="3" fill="#3BBD6A"/>
-                <circle cx="55" cy="140" r="3" fill="#5CD4D3"/>
-                <!-- Label -->
-                <text x="65" y="176" text-anchor="middle" font-family="sans-serif" font-size="7.5" fill="#3694AA" font-weight="700" letter-spacing="0.5">ecoNODE</text>
-                <!-- Antenna pole -->
-                <line x1="65" y1="72" x2="65" y2="46" stroke="#555" stroke-width="1.8" stroke-linecap="round"/>
-                <line x1="65" y1="46" x2="55" y2="60" stroke="#555" stroke-width="1.5" stroke-linecap="round"/>
-                <line x1="65" y1="46" x2="75" y2="60" stroke="#555" stroke-width="1.5" stroke-linecap="round"/>
-                <!-- LTE signal arcs -->
-                <path d="M88 48 Q108 32 88 16" stroke="#3694AA" stroke-width="1.8" stroke-linecap="round" opacity="0.8"/>
-                <path d="M98 52 Q126 30 98 8" stroke="#3694AA" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
-                <path d="M108 56 Q148 26 108 -2" stroke="#3694AA" stroke-width="1.2" stroke-linecap="round" opacity="0.3"/>
-                <!-- LTE badge -->
-                <rect x="138" y="108" width="36" height="20" rx="10" fill="#3694AA"/>
-                <text x="156" y="122" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#fff" font-weight="800">LTE</text>
-                <!-- Dashed transmit line -->
-                <line x1="105" y1="128" x2="212" y2="128" stroke="#3694AA" stroke-width="1.2" stroke-dasharray="5,3" opacity="0.45"/>
-                <polygon points="209,124 217,128 209,132" fill="#3694AA" opacity="0.45"/>
-                <!-- Cloud -->
-                <path d="M234 158 Q228 142 244 139 Q247 125 264 128 Q279 127 277 140 Q290 140 288 153 Q286 166 271 165 L241 165 Q228 166 234 158 Z" fill="#fff" stroke="#3694AA" stroke-width="1.5"/>
-                <!-- Server rack below cloud -->
-                <rect x="244" y="170" width="32" height="24" rx="3" fill="#3694AA" opacity="0.12"/>
-                <rect x="247" y="173" width="26" height="5" rx="1.5" fill="#3694AA" opacity="0.3"/>
-                <rect x="247" y="181" width="26" height="5" rx="1.5" fill="#3694AA" opacity="0.3"/>
-                <circle cx="270" cy="175.5" r="1.5" fill="#3BBD6A"/>
-                <circle cx="270" cy="183.5" r="1.5" fill="#3BBD6A"/>
-                <text x="260" y="205" text-anchor="middle" font-family="sans-serif" font-size="7.5" fill="#3694AA" opacity="0.8" font-weight="600">클라우드 서버</text>
-              </svg>
-            </div>
-            <p class="en-info-step-num">02 &nbsp;/&nbsp; Transfer</p>
-            <p class="en-info-step-title">통합 데이터 무선 전송</p>
-            <ul class="en-info-bullets">
-              <li><strong>통신 매설 공사 제로</strong>장치 자체 탑재된 전용 무선 LTE망 모듈 활용</li>
-              <li><strong>전국 분산 발전소 연결</strong>외곽 지역에서도 데이터 유실 없는 실시간 송신</li>
-            </ul>
-          </div>
-
-          <span class="en-info-sep">&gt;</span>
-
-          <!-- Step 3: 연동 & 알림 -->
-          <div class="en-info-step">
-            <div class="en-info-visual">
-              <svg viewBox="0 0 320 240" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="320" height="240" fill="#F4F9FC"/>
-                <!-- Monitor (left) -->
-                <rect x="16" y="44" width="152" height="102" rx="6" fill="#2a2a2a"/>
-                <rect x="22" y="50" width="140" height="82" rx="3" fill="#0d1f2f"/>
-                <!-- Graph area fill -->
-                <polygon points="32,124 32,114 52,94 74,106 98,76 120,88 144,58 154,68 162,124" fill="#3CD4D3" opacity="0.1"/>
-                <!-- Graph line -->
-                <polyline points="32,114 52,94 74,106 98,76 120,88 144,58 154,68" stroke="#3CD4D3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <!-- Graph dots -->
-                <circle cx="32" cy="114" r="2.5" fill="#3CD4D3"/>
-                <circle cx="74" cy="106" r="2.5" fill="#3CD4D3"/>
-                <circle cx="98" cy="76" r="2.5" fill="#3CD4D3"/>
-                <circle cx="144" cy="58" r="2.5" fill="#3CD4D3"/>
-                <!-- Y-axis lines -->
-                <line x1="30" y1="60" x2="162" y2="60" stroke="#fff" stroke-width="0.3" opacity="0.1"/>
-                <line x1="30" y1="80" x2="162" y2="80" stroke="#fff" stroke-width="0.3" opacity="0.1"/>
-                <line x1="30" y1="100" x2="162" y2="100" stroke="#fff" stroke-width="0.3" opacity="0.1"/>
-                <line x1="30" y1="120" x2="162" y2="120" stroke="#fff" stroke-width="0.3" opacity="0.1"/>
-                <!-- Monitor stand -->
-                <rect x="88" y="146" width="8" height="18" rx="2" fill="#555"/>
-                <rect x="70" y="162" width="44" height="6" rx="3" fill="#555"/>
-                <!-- E-ASSET label -->
-                <text x="92" y="200" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#3694AA" font-weight="700" letter-spacing="0.5">E-ASSET</text>
-
-                <!-- Smartphone (right) -->
-                <rect x="202" y="34" width="86" height="158" rx="12" fill="#fff" stroke="#3694AA" stroke-width="1.5"/>
-                <!-- Home indicator -->
-                <rect x="232" y="178" width="26" height="4" rx="2" fill="#ddd"/>
-                <!-- Screen area -->
-                <rect x="208" y="48" width="74" height="122" rx="4" fill="#f7f7f7"/>
-                <!-- Status bar -->
-                <rect x="208" y="48" width="74" height="14" fill="#3694AA" opacity="0.9"/>
-                <text x="245" y="58" text-anchor="middle" font-family="sans-serif" font-size="6.5" fill="#fff" font-weight="600">E-ASSET</text>
-                <!-- KakaoTalk notification popup -->
-                <rect x="212" y="72" width="66" height="70" rx="8" fill="#FAE300"/>
-                <!-- Kakao icon circle -->
-                <circle cx="226" cy="87" r="9" fill="#3C1E1E"/>
-                <ellipse cx="226" cy="87" rx="6" ry="5" fill="#FAE300"/>
-                <circle cx="223" cy="86" r="1.2" fill="#3C1E1E"/>
-                <circle cx="229" cy="86" r="1.2" fill="#3C1E1E"/>
-                <path d="M223 89.5 Q226 91.5 229 89.5" stroke="#3C1E1E" stroke-width="1" stroke-linecap="round"/>
-                <!-- Notification text -->
-                <text x="240" y="84" font-family="sans-serif" font-size="6.5" fill="#3C1E1E" font-weight="800">[E-ASSET]</text>
-                <text x="240" y="94" font-family="sans-serif" font-size="6" fill="#3C1E1E">OO발전소 인버터</text>
-                <text x="240" y="103" font-family="sans-serif" font-size="6" fill="#3C1E1E">정상 가동 중</text>
-                <line x1="216" y1="110" x2="274" y2="110" stroke="#3C1E1E" stroke-width="0.5" opacity="0.2"/>
-                <text x="216" y="120" font-family="sans-serif" font-size="5.5" fill="#3C1E1E" opacity="0.7">누적 발전량 가시성 확보</text>
-                <text x="216" y="130" font-family="sans-serif" font-size="5.5" fill="#3C1E1E" opacity="0.7">방금 전</text>
-                <!-- Screen content below popup -->
-                <rect x="212" y="148" width="66" height="16" rx="3" fill="#eee"/>
-                <rect x="212" y="168" width="44" height="6" rx="3" fill="#ddd"/>
-              </svg>
-            </div>
-            <p class="en-info-step-num">03 &nbsp;/&nbsp; Platform &amp; Alert</p>
-            <p class="en-info-step-title">스마트 모니터링</p>
-            <ul class="en-info-bullets">
-              <li><strong>표준 프로토콜 변환</strong>이종 데이터 단일화로 플랫폼 즉각 통합 연동</li>
-              <li><strong>실시간 모니터링</strong>국내외 어디서나 주요 발전 지표 및 알림 확인</li>
-            </ul>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ═══ CUSTOMERS SECTION ═══ -->
-    <section class="en-customers-section">
-      <div class="en-customers-inner">
-        <p class="en-data-title reveal">에너지 자산화를 선도하는<br>기업들의 필수 선택</p>
-        <p class="en-customers-sub reveal">고객 사례</p>
-
-        <div class="en-case-grid reveal">
-
-          <!-- Case 1 -->
-          <div class="en-case-card">
-            <div class="en-case-label-col">
-              <p class="en-case-num">Case 01 &nbsp;/&nbsp; ESG</p>
-              <p class="en-case-title">글로벌 ESG &amp;<br>탄소 배출권 자산화</p>
-            </div>
-            <div class="en-case-before">
-              <p class="en-case-before-tag">Before</p>
-              <p class="en-case-quote">수기 입력하다 보면 담당자마다 숫자가 달라요. 외부 기관에 제출하려니 어떤 데이터를 믿어야 할지 모르겠더라고요.</p>
-            </div>
-            <div class="en-case-arrow">→</div>
-            <div class="en-case-after">
-              <p class="en-case-after-tag">After</p>
-              <p class="en-case-result">가공 없는 자동 수집으로 <strong>디지털 MRV(dMRV)를 구현</strong>했습니다. 인적 개입 없는 데이터 뱅크로 탄소 배출권 자산의 공신력을 확보했습니다.</p>
-            </div>
-          </div>
-
-          <!-- Case 2 -->
-          <div class="en-case-card">
-            <div class="en-case-label-col">
-              <p class="en-case-num">Case 02 &nbsp;/&nbsp; 대규모 발전</p>
-              <p class="en-case-title">상업용 대규모<br>발전 단지</p>
-            </div>
-            <div class="en-case-before">
-              <p class="en-case-before-tag">Before</p>
-              <p class="en-case-quote">발전소 100곳 데이터를 엑셀로 취합하는 데 하루가 걸렸어요. 그때쯤이면 이미 '실시간'이 아닌 거잖아요.</p>
-            </div>
-            <div class="en-case-arrow">→</div>
-            <div class="en-case-after">
-              <p class="en-case-after-tag">After</p>
-              <p class="en-case-result">이종 설비 신호를 단일 표준으로 묶어 <strong>누적 발전량을 실시간 통합 집계</strong>합니다. 오차 없는 정밀 로그로 수익성 분석이 즉시 가능해졌습니다.</p>
-            </div>
-          </div>
-
-          <!-- Case 3 -->
-          <div class="en-case-card">
-            <div class="en-case-label-col">
-              <p class="en-case-num">Case 03 &nbsp;/&nbsp; 분산 관리</p>
-              <p class="en-case-title">전국 단위<br>분산형 에너지 관리</p>
-            </div>
-            <div class="en-case-before">
-              <p class="en-case-before-tag">Before</p>
-              <p class="en-case-quote">외곽 발전소 장애 하나 확인하러 왕복 4시간이요. 통신선 공사비만 몇 천이고요. 사실상 관리가 안 됐어요.</p>
-            </div>
-            <div class="en-case-arrow">→</div>
-            <div class="en-case-after">
-              <p class="en-case-after-tag">After</p>
-              <p class="en-case-result">LTE 무선망으로 <strong>현장 방문 횟수를 최소화</strong>했습니다. 통신선 공사비 없이 전국 분산 발전소를 원격으로 통합 관리합니다.</p>
-            </div>
-          </div>
-
-          <!-- Case 4 -->
-          <div class="en-case-card">
-            <div class="en-case-label-col">
-              <p class="en-case-num">Case 04 &nbsp;/&nbsp; O&amp;M</p>
-              <p class="en-case-title">실시간 이상 진단 및<br>O&amp;M 자동화</p>
-            </div>
-            <div class="en-case-before">
-              <p class="en-case-before-tag">Before</p>
-              <p class="en-case-quote">정전이 언제 났는지, 얼마나 됐는지 알 수가 없어요. 결국 현장에 가봐야 아니까요.</p>
-            </div>
-            <div class="en-case-arrow">→</div>
-            <div class="en-case-after">
-              <p class="en-case-after-tag">After</p>
-              <p class="en-case-result">이상 신호를 엣지 단에서 즉각 포착하고 <strong>카카오톡 알림으로 동기화</strong>합니다. 꼭 필요한 시점에만 출동하는 데이터 기반 O&amp;M 환경을 완성했습니다.</p>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
 

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>404 - 페이지를 찾을 수 없습니다 | Ecobell</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&family=Nanum+Square:wght@400;700;800&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=chillax@400,500,600,700&display=swap" rel="stylesheet">
+  <style>
+    @font-face {
+      font-family: 'Kakao OTF';
+      src: url('assets/fonts/KakaoOTFRegular.otf') format('opentype');
+      font-weight: 400; font-style: normal;
+    }
+    @font-face {
+      font-family: 'Kakao OTF';
+      src: url('assets/fonts/KakaoOTFBold.otf') format('opentype');
+      font-weight: 700; font-style: normal;
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; overscroll-behavior: none; }
+    body { font-family: 'Noto Sans KR', sans-serif; min-width: 1100px; background: #fff; color: #000; }
+
+    /* ─── HEADER ─── */
+    header {
+      position: fixed; top: 0; left: 0; right: 0; min-width: 1100px;
+      height: 69px; background: #fff; z-index: 999;
+    }
+    .header-inner {
+      position: relative; width: 100%; max-width: 1440px;
+      height: 100%; margin: 0 auto; display: flex; align-items: center;
+    }
+    .logo { position: absolute; left: 44px; top: 50%; transform: translateY(-50%); width: 110px; height: 26px; transition: opacity 0.2s; }
+    .logo img { width: 100%; height: 100%; object-fit: contain; }
+    .logo:hover { opacity: 0.75; }
+
+    /* ─── HAMBURGER BUTTON ─── */
+    .hamburger-btn {
+      position: fixed; right: 44px; top: 34px; transform: translateY(-50%);
+      background: none; border: none; cursor: pointer;
+      display: flex; flex-direction: column; justify-content: center;
+      gap: 5px; padding: 8px; opacity: 0.75;
+      transition: opacity 0.2s;
+      z-index: 1002;
+    }
+    .hamburger-btn:hover { opacity: 1; }
+    .hamburger-btn span {
+      display: block; width: 22px; height: 1.8px;
+      background: #000; border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .hamburger-btn.open span:nth-child(1) { transform: translateY(6.8px) rotate(45deg); }
+    .hamburger-btn.open span:nth-child(2) { opacity: 0; }
+    .hamburger-btn.open span:nth-child(3) { transform: translateY(-6.8px) rotate(-45deg); }
+
+    /* ─── DRAWER MENU ─── */
+    .drawer-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.25);
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s ease; z-index: 1000;
+    }
+    .drawer-overlay.open { opacity: 1; pointer-events: auto; }
+    .drawer {
+      position: fixed; top: 0; right: 0; bottom: 0;
+      width: 200px; background: #fff;
+      z-index: 1001; padding: 50px 0 40px;
+      transform: translateX(100%);
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow-y: auto;
+    }
+    .drawer.open { transform: translateX(0); }
+    .drawer-close {
+      display: flex; align-items: center; justify-content: flex-end;
+      height: 69px; padding: 0 20px; flex-shrink: 0;
+    }
+    .drawer-close-btn {
+      background: none; border: none; cursor: pointer;
+      padding: 8px; opacity: 0.55; transition: opacity 0.2s;
+      display: flex; align-items: center;
+    }
+    .drawer-close-btn:hover { opacity: 1; }
+    .drawer-section { padding: 28px 36px 0; }
+    .drawer-section + .drawer-section { border-top: 0.5px solid rgba(0,0,0,0.08); margin-top: 20px; }
+    .drawer-category {
+      font-family: 'Chillax', sans-serif;
+      font-weight: 600; font-size: 12px;
+      color: rgba(0,0,0,0.35); letter-spacing: 1.2px;
+      text-transform: uppercase; margin-bottom: 12px;
+    }
+    .drawer-links { display: flex; flex-direction: column; gap: 2px; }
+    .drawer-links a {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 600; font-size: 14px;
+      color: #000; text-decoration: none;
+      padding: 7px 0; letter-spacing: 0.1px;
+      transition: color 0.15s;
+    }
+    .drawer-links a.en { font-family: 'Chillax', sans-serif; font-weight: 450; }
+    .drawer-links a:hover { color: #1e8dcd; }
+
+    @media (min-width: 1441px) {
+      .header-inner { max-width: none; }
+      .lnb-inner    { max-width: none; }
+    }
+
+    /* ─── FOOTER ─── */
+    footer { position: sticky; bottom: 0; z-index: 0; min-width: 1100px; height: 442px; background: #2a2a2a; }
+    .footer-inner { position: relative; width: 100%; max-width: 1440px; margin: 0 auto; height: 100%; }
+    .ft-company-info { position: absolute; right: 45px; top: 211px; font-family: 'Noto Sans KR', sans-serif; font-weight: 450; font-size: 13px; color: rgba(255,255,255,0.5); line-height: 23px; letter-spacing: -0.28px; white-space: pre-line; text-align: right; }
+    .ft-col-title { position: absolute; font-family: 'Chillax', sans-serif; font-weight: 600; font-size: 16px; color: #fff; white-space: nowrap; margin: 0; top: 41px; letter-spacing: 0.54px; line-height: 28.8px; }
+    .ft-link { position: absolute; font-family: 'Nanum Square', 'NanumSquare', sans-serif; font-weight: 500; font-size: 14px; color: #fff; white-space: nowrap; text-decoration: none; line-height: 22.5px; letter-spacing: 0.15px; opacity: 1; transition: opacity 0.2s; }
+    .ft-link:hover { opacity: 0.55; }
+    .ft-link.ft-en { font-family: 'Chillax', sans-serif; font-weight: 400; line-height: 16.5px; }
+    .ft-divider { position: absolute; left: 45px; right: 45px; height: 0.5px; background: rgba(255,255,255,0.2); }
+    .ft-bottom-link { position: absolute; font-family: 'Noto Sans KR', sans-serif; font-weight: 300; font-size: 13px; color: rgba(255,255,255,0.8); text-decoration: none; white-space: nowrap; top: 323px; line-height: 23px; letter-spacing: -0.28px; transition: opacity 0.2s; }
+    .ft-bottom-link:hover { opacity: 0.55; }
+    .ft-bottom-link.fw-bold { font-weight: 500; color: #fff; }
+    .ft-social { position: absolute; line-height: 0; opacity: 1; transition: opacity 0.2s, transform 0.2s; top: 323px; }
+    .ft-social:hover { opacity: 0.7; transform: scale(1.1); }
+    .ft-copyright { position: absolute; left: 45px; top: 357px; font-family: 'Noto Sans KR', sans-serif; font-weight: 300; font-size: 12px; color: rgba(255,255,255,0.8); white-space: pre-line; margin: 0; }
+
+    /* ─── FLOATING ─── */
+    /* ─── 플로팅 FAB ─── */
+    .floating-fab {
+      position: fixed;
+      right: 44px;
+      bottom: 44px;
+      display: flex;
+      align-items: center;
+      z-index: 500;
+    }
+    .floating-fab-menu {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow: hidden;
+      max-width: 0;
+      opacity: 0;
+      margin-right: 0;
+      transition: max-width 0.35s ease, opacity 0.25s ease, margin-right 0.35s ease;
+    }
+    .floating-fab:hover .floating-fab-menu {
+      max-width: 450px;
+      opacity: 1;
+      margin-right: 10px;
+    }
+    .floating-fab-item {
+      display: flex;
+      align-items: center;
+      height: 36px;
+      padding: 0 14px;
+      background: #fff;
+      border-radius: 18px;
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      color: #234B63;
+      text-decoration: none;
+      white-space: nowrap;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+      transition: background 0.15s, color 0.15s;
+      flex-shrink: 0;
+    }
+    .floating-fab-item:hover { background: #1E8DCD; color: #fff; }
+    .floating-fab-icon {
+      width: 65px;
+      height: 48px;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: transform 0.2s ease, opacity 0.2s;
+      text-decoration: none;
+      display: block;
+    }
+    .floating-fab-icon img { width: 100%; height: 100%; object-fit: contain; }
+    .floating-fab:hover .floating-fab-icon { transform: scale(1.08); opacity: 0.9; }
+
+    /* ─── COMMON ─── */
+    body > *:not(header):not(footer):not(.floating-fab):not(.drawer):not(.drawer-overlay):not(.hamburger-btn) { position: relative; z-index: 1; background: inherit; }
+
+    /* ─── 404 CONTENT ─── */
+    .not-found {
+      min-height: calc(100vh - 69px - 442px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 80px 0;
+      background: #fff;
+    }
+    .not-found-inner {
+      text-align: center;
+      transform: translateY(100px);
+    }
+    .not-found-heading {
+      display: flex; align-items: center; justify-content: center; gap: 16px;
+      margin-bottom: 28px;
+    }
+    .not-found-title {
+      font-family: 'Chillax', sans-serif;
+      font-weight: 500; font-size: 72px;
+      color: #3D4F5C;
+      letter-spacing: -1px; line-height: 1;
+    }
+    .not-found-title span {
+      font-weight: 500;
+    }
+    .not-found-icon {
+      width: 56px; height: 56px; flex-shrink: 0;
+    }
+    .not-found-desc {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 400; font-size: 16px;
+      color: rgba(0,0,0,0.55);
+      line-height: 1.9; letter-spacing: -0.2px;
+      margin-bottom: 32px;
+    }
+    .not-found-back {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 500; font-size: 15px;
+      color: #3694AA;
+      text-decoration: none;
+      letter-spacing: -0.1px;
+      transition: opacity 0.2s;
+    }
+    .not-found-back:hover { opacity: 0.7; }
+  </style>
+</head>
+<body>
+
+  <!-- ─── HEADER ─── -->
+  <header id="header">
+    <div class="header-inner">
+
+      <a class="logo" href="index.html">
+        <img src="assets/logo.png" alt="ecobell">
+      </a>
+
+    </div>
+  </header>
+
+  <!-- Hamburger (body 직속 → stacking context 독립) -->
+  <button class="hamburger-btn" id="hamburger-btn" aria-label="메뉴 열기">
+    <span></span><span></span><span></span>
+  </button>
+
+  <!-- Drawer overlay -->
+  <div class="drawer-overlay" id="drawer-overlay"></div>
+
+  <!-- Drawer menu -->
+  <div class="drawer" id="drawer">
+    <div class="drawer-section">
+      <p class="drawer-category">Company</p>
+      <div class="drawer-links">
+        <a href="ceo.html">CEO 인사말</a>
+        <a href="company.html">기업소개</a>
+        <a href="press.html">보도자료</a>
+        <a href="archive.html">아카이브</a>
+      </div>
+    </div>
+    <div class="drawer-section">
+      <p class="drawer-category">Solution</p>
+      <div class="drawer-links">
+        <a href="ecoval.html" class="en">ecoValue</a>
+        <a href="econode.html" class="en">ecoNODE</a>
+        <a href="easset.html" class="en">E-ASSET</a>
+        <a href="ecoasset.html" class="en">ecoASSET</a>
+      </div>
+    </div>
+    <div class="drawer-section">
+      <p class="drawer-category">Project</p>
+      <div class="drawer-links">
+        <a href="#">태양광 솔루션</a>
+      </div>
+    </div>
+    <div class="drawer-section">
+      <p class="drawer-category">Insight</p>
+      <div class="drawer-links">
+        <a href="https://www.netzeronews.kr/" class="en" target="_blank" rel="noopener noreferrer">NetZero News ↗</a>
+        <a href="insight.html?page=eco">친환경 기업정보</a>
+        <a href="insight.html?page=green">그린카 계산기</a>
+      </div>
+    </div>
+    <div class="drawer-section">
+      <p class="drawer-category">Contact Us</p>
+      <div class="drawer-links">
+        <a href="notice.html">공지사항</a>
+        <a href="directions.html">오시는 길</a>
+        <a href="contact.html">문의하기</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── 404 CONTENT ─── -->
+  <main class="not-found" style="margin-top:69px;">
+    <div class="not-found-inner">
+      <div class="not-found-heading">
+        <p class="not-found-title">404 <span>Error</span></p>
+        <svg class="not-found-icon" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="28" cy="28" r="28" fill="#E84040"/>
+          <rect x="25.5" y="13" width="5" height="20" rx="2.5" fill="#fff"/>
+          <circle cx="28" cy="40" r="3.5" fill="#fff"/>
+        </svg>
+      </div>
+      <p class="not-found-desc">요청하신 페이지를 찾을 수 없습니다.<br>입력하신 주소가 정확한지 다시 한번 확인해주세요.</p>
+      <a class="not-found-back" href="javascript:history.back()">이전 페이지로 돌아가기</a>
+    </div>
+  </main>
+
+
+  <!-- ─── 플로팅 FAB ─── -->
+  <div class="floating-fab">
+    <div class="floating-fab-menu">
+      <a href="https://ecoasset.co.kr" class="floating-fab-item" target="_blank" rel="noopener noreferrer">ecoASSET</a>
+      <a href="https://e-asset.co.kr" class="floating-fab-item" target="_blank" rel="noopener noreferrer">E-ASSET</a>
+    </div>
+    <a class="floating-fab-icon" href="ecoasset.html" aria-label="eco Asset 바로가기">
+      <img src="ecoasset_badge.png" alt="eco Asset">
+    </a>
+  </div>
+  <script>
+  (function(){
+    var fab = document.querySelector('.floating-fab');
+    if (!fab) return;
+    var y = 0, v = 0, lastSY = window.scrollY, lt = 0, raf = null;
+    var K = 100, D = 12;
+    function step(t) {
+      var dt = Math.min((t - lt) / 1000, 0.05);
+      lt = t;
+      v += (-K * y - D * v) * dt;
+      y += v * dt;
+      fab.style.transform = 'translateY(' + y.toFixed(2) + 'px)';
+      if (Math.abs(y) < 0.08 && Math.abs(v) < 0.08) {
+        fab.style.transform = ''; y = 0; v = 0; raf = null;
+      } else {
+        raf = requestAnimationFrame(step);
+      }
+    }
+    window.addEventListener('scroll', function() {
+      var d = window.scrollY - lastSY;
+      lastSY = window.scrollY;
+      v -= d * 1.8;
+      v = Math.max(-250, Math.min(250, v));
+      if (!raf) { lt = performance.now(); raf = requestAnimationFrame(step); }
+    }, { passive: true });
+  })();
+  </script>
+
+  <script>
+    const btn     = document.getElementById('hamburger-btn');
+    const drawer  = document.getElementById('drawer');
+    const overlay = document.getElementById('drawer-overlay');
+
+    function openDrawer() {
+      btn.classList.add('open');
+      drawer.classList.add('open');
+      overlay.classList.add('open');
+    }
+    function closeDrawer() {
+      btn.classList.remove('open');
+      drawer.classList.remove('open');
+      overlay.classList.remove('open');
+    }
+
+    btn.addEventListener('click', () => drawer.classList.contains('open') ? closeDrawer() : openDrawer());
+    overlay.addEventListener('click', closeDrawer);
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
+  </script>
+
+</body>
+</html>

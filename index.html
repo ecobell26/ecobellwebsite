@@ -455,96 +455,174 @@
     /* ─── HERO ─── */
     .hero {
       padding-top: 69px;
-      background: #fff;
-      text-align: center;
-      min-height: 441px;
+      background: linear-gradient(160deg, #f0f8ff 0%, #eaf6f2 55%, #dff0e8 100%);
+      min-height: 540px;
       display: flex;
-      flex-direction: column;
+      align-items: stretch;
+      overflow: hidden;
+      position: relative;
+    }
+    .hero-inner {
+      position: relative;
+      width: 100%; max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 106px;
+      display: flex;
       align-items: center;
-      justify-content: center;
-      padding-bottom: 60px;
+      justify-content: space-between;
+      gap: 40px;
+    }
+    .hero-text {
+      flex: 0 0 auto;
+      max-width: 520px;
+      padding: 80px 0 80px;
+      transform: translateY(-20px);
     }
     .hero-eyebrow {
       font-family: 'Chillax', sans-serif;
       font-weight: 600;
-      font-size: 23px;
+      font-size: 15px;
       color: #1e8dcd;
-      letter-spacing: 0.23px;
-      line-height: 1.3;
-      text-transform: capitalize;
-      margin-bottom: 18px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
     }
     .hero-title {
       font-family: 'Noto Sans KR', sans-serif;
       font-weight: 700;
-      font-size: 50px;
-      color: #000;
-      letter-spacing: 0.5px;
-      line-height: 1.3;
-      margin-bottom: 22px;
-      white-space: pre;
+      font-size: 56px;
+      color: #0d1f2d;
+      letter-spacing: -1px;
+      line-height: 1.25;
+      margin-bottom: 20px;
     }
     .hero-bar {
       display: inline-block;
-      width: 26px;
-      height: 10px;
-      margin: 0 10px;
+      width: 28px; height: 10px;
+      margin: 0 8px 5px;
       vertical-align: middle;
-      margin-bottom: 6px;
       background: linear-gradient(90deg, #50BC5D, #52B0AC, #0091BB, #234B63);
-      border-radius: 1px;
-    }
-
-    .hero-title .underlined {
-      display: inline;
+      border-radius: 2px;
     }
     .hero-desc {
       font-family: 'Noto Sans KR', sans-serif;
       font-weight: 400;
-      font-size: 17px;
-      color: #000;
-      letter-spacing: -0.34px;
-      line-height: 1.4;
-      text-transform: capitalize;
-      white-space: nowrap;
+      font-size: 16px;
+      color: #4a5568;
+      letter-spacing: -0.2px;
+      line-height: 1.7;
+      margin-bottom: 36px;
     }
+    .hero-btns {
+      display: flex;
+      gap: 12px;
+    }
+    .hero-btn-primary {
+      display: inline-flex; align-items: center;
+      height: 48px; padding: 0 28px;
+      background: #1e8dcd;
+      color: #fff;
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 700; font-size: 15px;
+      text-decoration: none; border-radius: 6px;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .hero-btn-primary:hover { background: #1679b5; transform: translateY(-1px); }
+    .hero-btn-outline {
+      display: inline-flex; align-items: center;
+      height: 48px; padding: 0 28px;
+      background: transparent;
+      color: #1e8dcd;
+      border: 1.5px solid #1e8dcd;
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 700; font-size: 15px;
+      text-decoration: none; border-radius: 6px;
+      transition: background 0.2s, color 0.2s, transform 0.15s;
+    }
+    .hero-btn-outline:hover { background: #f0f8ff; transform: translateY(-1px); }
+    .hero-illus {
+      flex: 0 0 auto;
+      width: 580px;
+      align-self: flex-end;
+    }
+    .hero-illus svg { display: block; width: 100%; height: auto; }
 
-    /* ─── SECTIONS ─── */
-    .section-gray-1 {
-      width: 1440px;
-      height: 408px;
-      background: #f6f6f6;
-    }
-    .white-gap { height: 119px; background: #fff; }
-
-    .section-solutions {
-      background: #f6f6f6;
-      min-height: 629px;
-    }
-    .solutions-inner {
-      width: 1440px;
-      margin: 0 auto;
-      padding: 120px 106px 80px;
-    }
-    .solutions-title {
-      font-family: 'Chillax', sans-serif;
-      font-weight: 600;
-      font-size: 50px;
-      color: #000;
-      letter-spacing: -1px;
-      line-height: 1.2;
-      margin-bottom: 48px;
-    }
-    .solutions-placeholder {
-      height: 350px;
-      background: #e8e8e8;
-      border-radius: 12px;
-    }
-    .section-white-content {
+    /* ─── FEATURE CARDS ─── */
+    .feature-section {
       background: #fff;
-      min-height: 400px;
+      padding: 64px 0 72px;
       border-bottom: 1px solid #f0f0f0;
     }
+    .feature-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 106px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 28px;
+    }
+    .feature-card {
+      padding: 36px 28px 32px;
+      border: 1px solid #e8edf2;
+      border-radius: 12px;
+      background: #fff;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .feature-card:hover { box-shadow: 0 8px 32px rgba(30,141,205,0.1); transform: translateY(-3px); }
+    .feature-icon {
+      width: 48px; height: 48px;
+      background: #eaf6ff;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px;
+    }
+    .feature-card-title {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 800; font-size: 15px;
+      color: #0d1f2d;
+      letter-spacing: -0.2px;
+      margin-bottom: 10px;
+    }
+    .feature-card-desc {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 400; font-size: 13.5px;
+      color: #6b7a8d;
+      line-height: 1.7;
+      letter-spacing: -0.1px;
+    }
+
+    /* ─── VALUE BANNER ─── */
+    .value-banner {
+      background: linear-gradient(135deg, #0d2d42 0%, #1e4d6b 50%, #1e8dcd 100%);
+      padding: 80px 106px;
+      text-align: center;
+    }
+    .value-banner-title {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 800; font-size: 32px;
+      color: #fff;
+      letter-spacing: -0.3px;
+      line-height: 1.4;
+      margin-bottom: 14px;
+    }
+    .value-banner-desc {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 400; font-size: 16px;
+      color: rgba(255,255,255,0.75);
+      letter-spacing: -0.2px;
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+    .value-banner-btn {
+      display: inline-flex; align-items: center;
+      height: 48px; padding: 0 32px;
+      background: #fff; color: #1e8dcd;
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 700; font-size: 15px;
+      text-decoration: none; border-radius: 6px;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    .value-banner-btn:hover { opacity: 0.9; transform: translateY(-1px); }
 
     /* ─── FOOTER ─── */
     footer {
@@ -668,20 +746,59 @@
     /* ─── 헤더 오버플로 ─── */
     header { overflow: visible; }
 
-    /* ─── 플로팅 eco Asset 버튼 ─── */
-    .floating-ecoasset {
+        /* ─── 플로팅 FAB ─── */
+    .floating-fab {
       position: fixed;
       right: 44px;
       bottom: 44px;
+      display: flex;
+      align-items: center;
+      z-index: 500;
+    }
+    .floating-fab-menu {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow: hidden;
+      max-width: 0;
+      opacity: 0;
+      margin-right: 0;
+      transition: max-width 0.35s ease, opacity 0.25s ease, margin-right 0.35s ease;
+    }
+    .floating-fab:hover .floating-fab-menu {
+      max-width: 450px;
+      opacity: 1;
+      margin-right: 10px;
+    }
+    .floating-fab-item {
+      display: flex;
+      align-items: center;
+      height: 36px;
+      padding: 0 14px;
+      background: #fff;
+      border-radius: 18px;
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      color: #234B63;
+      text-decoration: none;
+      white-space: nowrap;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+      transition: background 0.15s, color 0.15s;
+      flex-shrink: 0;
+    }
+    .floating-fab-item:hover { background: #1E8DCD; color: #fff; }
+    .floating-fab-icon {
       width: 65px;
       height: 48px;
       cursor: pointer;
-      z-index: 500;
+      flex-shrink: 0;
       transition: transform 0.2s ease, opacity 0.2s;
       text-decoration: none;
+      display: block;
     }
-    .floating-ecoasset:hover { transform: scale(1.08); opacity: 0.9; }
-    .floating-ecoasset img { width: 100%; height: 100%; object-fit: contain; }
+    .floating-fab-icon img { width: 100%; height: 100%; object-fit: contain; }
+    .floating-fab:hover .floating-fab-icon { transform: scale(1.08); opacity: 0.9; }
 
     /* ─── IFRAME 모달 ─── */
     .iframe-modal-backdrop {
@@ -781,7 +898,7 @@
     .cta-contact-btn span { position: relative; z-index: 1; }
 
     /* ─── 푸터 오버레이 효과 ─── */
-    body > *:not(header):not(footer):not(.floating-ecoasset):not(.iframe-modal-backdrop) {
+    body > *:not(header):not(footer):not(.floating-fab):not(.iframe-modal-backdrop) {
       position: relative;
       z-index: 1;
       background: #fff;
@@ -832,8 +949,8 @@
         <div class="lnb-col" data-col="solution">
           <a href="ecoval.html" class="en">ecoValue</a>
           <a href="econode.html" class="en">ecoNODE</a>
-          <a href="#" class="en">E-ASSET</a>
-          <a href="#" class="en">ecoASSET</a>
+          <a href="easset.html" class="en">E-ASSET</a>
+          <a href="ecoasset.html" class="en">ecoASSET</a>
         </div>
         <!-- Platform -->
         <div class="lnb-col" data-col="platform">
@@ -906,28 +1023,187 @@
     </div>
   </header>
 
-  <main style="padding-top:200px;">
+  <main>
 
     <!-- HERO -->
     <section class="hero">
-      <div style="transform: translateY(-130px);">
-        <p class="hero-eyebrow">Where Energy Becomes Value</p>
-        <h1 class="hero-title">에너지를 가치로 잇<span class="hero-bar"></span><span class="underlined">다</span></h1>
-        <p class="hero-desc">지속가능한 세상이 일상이 되도록, 에너지 자산화의 전 과정을 에코벨이 함께합니다.</p>
+      <div class="hero-inner">
+        <!-- 텍스트 -->
+        <div class="hero-text">
+          <p class="hero-eyebrow">Where Energy Becomes Value</p>
+          <h1 class="hero-title">에너지를 가치로<br>잇<span class="hero-bar"></span>다</h1>
+          <p class="hero-desc">지속가능한 세상이 일상이 되도록,<br>에너지 자산화의 전 과정을 에코벨이 함께합니다.</p>
+          <div class="hero-btns">
+            <a href="ecoval.html" class="hero-btn-primary">솔루션 보기</a>
+            <a href="contact.html" class="hero-btn-outline">문의하기</a>
+          </div>
+        </div>
+
+        <!-- 일러스트 -->
+        <div class="hero-illus">
+          <svg viewBox="0 0 580 420" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="gSky" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#d8eeff"/>
+                <stop offset="100%" stop-color="#c5eddf"/>
+              </linearGradient>
+              <linearGradient id="gH1" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#72cd90"/>
+                <stop offset="100%" stop-color="#4ab86e"/>
+              </linearGradient>
+              <linearGradient id="gH2" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#55c278"/>
+                <stop offset="100%" stop-color="#38a85c"/>
+              </linearGradient>
+              <linearGradient id="gFlow" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#1e8dcd" stop-opacity="0"/>
+                <stop offset="50%" stop-color="#1e8dcd" stop-opacity="0.8"/>
+                <stop offset="100%" stop-color="#3694AA" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+
+            <!-- 배경 -->
+            <rect width="580" height="420" fill="url(#gSky)" rx="16"/>
+
+            <!-- 언덕 레이어 -->
+            <ellipse cx="80"  cy="420" rx="260" ry="95" fill="url(#gH1)" opacity="0.55"/>
+            <ellipse cx="350" cy="415" rx="310" ry="90" fill="url(#gH2)" opacity="0.5"/>
+            <ellipse cx="560" cy="420" rx="200" ry="80" fill="url(#gH1)" opacity="0.45"/>
+
+            <!-- ── 풍력 발전기 ── -->
+            <g stroke="#2a6ea6" stroke-linecap="round" fill="none">
+              <!-- 기둥 -->
+              <line x1="88" y1="345" x2="88" y2="178" stroke-width="5"/>
+              <!-- 날개 3개 -->
+              <line x1="88" y1="180" x2="88" y2="128" stroke-width="3"/>
+              <line x1="88" y1="180" x2="46"  y2="205" stroke-width="3"/>
+              <line x1="88" y1="180" x2="130" y2="205" stroke-width="3"/>
+              <circle cx="88" cy="180" r="6" fill="#2a6ea6" stroke="none"/>
+            </g>
+
+            <!-- ── 남성 인물 (좌, x=205) ── -->
+            <g transform="translate(205,100)" stroke="#1e8dcd" stroke-width="2.6"
+               fill="rgba(30,141,205,0.07)" stroke-linecap="round" stroke-linejoin="round">
+              <!-- 머리 -->
+              <circle cx="0" cy="0" r="24" fill="rgba(30,141,205,0.1)"/>
+              <!-- 몸통 윤곽 (어깨→허리→골반) -->
+              <path d="M-24,24 C-32,30 -34,55 -30,90 Q-15,98 0,98 Q15,98 30,90 C34,55 32,30 24,24 C16,20 -16,20 -24,24 Z"/>
+              <!-- 왼팔 (어깨에서 팔꿈치→손) -->
+              <path d="M-32,35 C-46,48 -52,72 -50,98" fill="none"/>
+              <!-- 오른팔 -->
+              <path d="M32,35 C46,48 52,72 50,98" fill="none"/>
+              <!-- 왼 다리 -->
+              <path d="M-18,98 C-20,128 -20,158 -18,188" fill="none"/>
+              <!-- 오른 다리 -->
+              <path d="M18,98 C20,128 20,158 18,188" fill="none"/>
+              <!-- 발 -->
+              <path d="M-18,188 Q-26,192 -30,190" fill="none"/>
+              <path d="M18,188 Q26,192 30,190" fill="none"/>
+            </g>
+
+            <!-- ── 여성 인물 (우, x=400) ── -->
+            <g transform="translate(400,90)" stroke="#3694AA" stroke-width="2.6"
+               fill="rgba(54,148,170,0.07)" stroke-linecap="round" stroke-linejoin="round">
+              <!-- 머리 -->
+              <circle cx="0" cy="0" r="26" fill="rgba(54,148,170,0.1)"/>
+              <!-- 몸통 (허리 더 잘록, 골반 더 넓은 여성 형태) -->
+              <path d="M-26,26 C-34,34 -32,58 -36,88 Q-20,100 0,100 Q20,100 36,88 C32,58 34,34 26,26 C17,21 -17,21 -26,26 Z"/>
+              <!-- 왼팔 -->
+              <path d="M-34,38 C-50,55 -56,80 -54,108" fill="none"/>
+              <!-- 오른팔 -->
+              <path d="M34,38 C50,55 56,80 54,108" fill="none"/>
+              <!-- 왼 다리 -->
+              <path d="M-20,100 C-22,132 -22,162 -20,195" fill="none"/>
+              <!-- 오른 다리 -->
+              <path d="M20,100 C22,132 22,162 20,195" fill="none"/>
+              <!-- 발 -->
+              <path d="M-20,195 Q-28,200 -32,198" fill="none"/>
+              <path d="M20,195 Q28,200 32,198" fill="none"/>
+            </g>
+
+            <!-- ── 인물 간 데이터 흐름 연결선 ── -->
+            <path d="M238,108 Q310,52 374,102"
+                  stroke="url(#gFlow)" stroke-width="2" fill="none"/>
+            <!-- 점선 보조 -->
+            <path d="M238,108 Q310,52 374,102"
+                  stroke="#1e8dcd" stroke-width="1.5" fill="none"
+                  stroke-dasharray="5,5" opacity="0.35"/>
+            <!-- 흐르는 노드 -->
+            <circle cx="278" cy="75" r="5" fill="#1e8dcd" opacity="0.75"/>
+            <circle cx="310" cy="58" r="4" fill="#3694AA" opacity="0.7"/>
+            <circle cx="344" cy="72" r="5" fill="#1e8dcd" opacity="0.75"/>
+
+            <!-- 아래 흐름선 -->
+            <path d="M205,295 Q305,330 400,295"
+                  stroke="#3694AA" stroke-width="1.5" fill="none"
+                  stroke-dasharray="4,5" opacity="0.3"/>
+
+            <!-- ── 태양광 패널 (우측 하단) ── -->
+            <g transform="translate(462,262)" fill="#1e8dcd" opacity="0.75" stroke="none">
+              <rect x="0"  y="0"  width="26" height="17" rx="2"/>
+              <rect x="30" y="0"  width="26" height="17" rx="2"/>
+              <rect x="0"  y="21" width="26" height="17" rx="2"/>
+              <rect x="30" y="21" width="26" height="17" rx="2"/>
+              <line x1="13" y1="38" x2="13" y2="52" stroke="#1e8dcd" stroke-width="2.5"/>
+              <line x1="43" y1="38" x2="43" y2="52" stroke="#1e8dcd" stroke-width="2.5"/>
+              <line x1="4"  y1="52" x2="52" y2="52" stroke="#1e8dcd" stroke-width="2.5"/>
+            </g>
+
+            <!-- ── 도시 배경 실루엣 ── -->
+            <g fill="#1a3d5c" opacity="0.08">
+              <rect x="462" y="210" width="20" height="52"/>
+              <rect x="486" y="196" width="26" height="66"/>
+              <rect x="516" y="208" width="18" height="54"/>
+              <rect x="538" y="222" width="22" height="40"/>
+            </g>
+
+            <!-- 배경 데이터 노드 -->
+            <circle cx="155" cy="225" r="5" fill="#1e8dcd" opacity="0.25"/>
+            <circle cx="458" cy="188" r="4" fill="#3694AA" opacity="0.25"/>
+          </svg>
+        </div>
       </div>
     </section>
 
-    <div style="height:408px;"></div>
-
-    <!-- CTA 섹션 -->
-    <section style="position:relative;width:100%;height:296px;overflow:hidden;display:flex;align-items:center;justify-content:center;">
-      <div style="position:absolute;inset:0;background:url('assets/cta-bg.png') center/cover no-repeat;"></div>
-      <div style="position:absolute;inset:0;background:rgba(0,49,77,0.85);"></div>
-      <div style="position:relative;text-align:center;">
-        <p style="font-family:'Nanum Square','NanumSquare',sans-serif;font-weight:900;font-size:30px;color:#fff;letter-spacing:0.84px;line-height:40px;margin:0 0 8px;">무엇이든 물어보세요</p>
-        <p style="font-family:'Nanum Square','NanumSquare',sans-serif;font-weight:500;font-size:16px;color:#fff;letter-spacing:0.84px;line-height:40px;margin:0 0 18px;">특정 비즈니스 솔루션 문의부터 일반 문의까지 에코벨이 도와드립니다.</p>
-        <a href="contact.html" class="cta-contact-btn"><span>문의하기</span></a>
+    <!-- FEATURE CARDS -->
+    <section class="feature-section">
+      <div class="feature-inner">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="#1e8dcd" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <p class="feature-card-title">지속가능한 에너지 데이터</p>
+          <p class="feature-card-desc">현장에서 수집된 에너지 데이터를 실시간으로 연결하여 신뢰할 수 있는 디지털 MRV를 구현합니다.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 17l4-8 4 4 4-6 4 4" stroke="#1e8dcd" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 21h18" stroke="#1e8dcd" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </div>
+          <p class="feature-card-title">데이터 기반 발전 관제</p>
+          <p class="feature-card-desc">태양광·풍력 등 신재생에너지 발전 현황을 한눈에 모니터링하고 효율을 최적화합니다.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#1e8dcd" stroke-width="1.8"/><path d="M12 8v4l3 3" stroke="#1e8dcd" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </div>
+          <p class="feature-card-title">탄소자산화 플랫폼</p>
+          <p class="feature-card-desc">온실가스 감축 성과를 탄소 크레딧으로 전환하고 체계적으로 관리하는 특화 회계 솔루션입니다.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="#1e8dcd" stroke-width="1.8" stroke-linecap="round"/><circle cx="9" cy="7" r="4" stroke="#1e8dcd" stroke-width="1.8"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke="#1e8dcd" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </div>
+          <p class="feature-card-title">함께 만드는 탄소 중립</p>
+          <p class="feature-card-desc">파트너사와 함께 ESG 목표를 달성하고 지속가능한 에너지 생태계를 구축합니다.</p>
+        </div>
       </div>
+    </section>
+
+    <!-- VALUE BANNER -->
+    <section class="value-banner">
+      <p class="value-banner-title">에너지의 흐름을 연결하고,<br>세상의 가치를 바꿉니다</p>
+      <p class="value-banner-desc">지구 에너지와 탄소 데이터를 하나의 파이프라인으로 통합하여<br>지속가능한 미래를 위한 새로운 가치를 만들어냅니다.</p>
+      <a href="contact.html" class="value-banner-btn">문의하기</a>
     </section>
 
   </main>
@@ -960,8 +1236,8 @@
       <!-- 솔루션 링크 -->
       <a class="ft-link ft-en" href="ecoval.html" style="left:374px;top:87px;">ecoValue</a>
       <a class="ft-link ft-en" href="#" style="left:374px;top:121px;">ecoNODE</a>
-      <a class="ft-link ft-en" href="#" style="left:374px;top:156px;">E-ASSET</a>
-      <a class="ft-link ft-en" href="#" style="left:374px;top:191px;">ecoASSET</a>
+      <a class="ft-link ft-en" href="easset.html" style="left:374px;top:156px;">E-ASSET</a>
+      <a class="ft-link ft-en" href="ecoasset.html" style="left:374px;top:191px;">ecoASSET</a>
 
       <!-- 인사이트 링크 -->
       <a class="ft-link ft-en" href="https://www.netzeronews.kr/" target="_blank" rel="noopener noreferrer" style="left:554px;top:86px;">NetZero News
@@ -1002,10 +1278,16 @@
     </div>
   </footer>
 
-  <!-- ─── 플로팅 eco Asset 버튼 ─── -->
-  <a class="floating-ecoasset" href="#" aria-label="eco Asset 바로가기">
-    <img src="ecoasset_badge.png" alt="eco Asset">
-  </a>
+  <!-- ─── 플로팅 FAB ─── -->
+  <div class="floating-fab">
+    <div class="floating-fab-menu">
+      <a href="https://ecoasset.co.kr" class="floating-fab-item" target="_blank" rel="noopener noreferrer">ecoASSET</a>
+      <a href="https://e-asset.co.kr" class="floating-fab-item" target="_blank" rel="noopener noreferrer">E-ASSET</a>
+    </div>
+    <a class="floating-fab-icon" href="ecoasset.html" aria-label="eco Asset 바로가기">
+      <img src="ecoasset_badge.png" alt="eco Asset">
+    </a>
+  </div>
 
   <!-- ─── IFRAME 모달 ─── -->
   <div class="iframe-modal-backdrop" id="iframe-modal-backdrop">
@@ -1025,6 +1307,33 @@
       <iframe id="iframe-modal-frame" src="" title=""></iframe>
     </div>
   </div>
+  <script>
+  (function(){
+    var fab = document.querySelector('.floating-fab');
+    if (!fab) return;
+    var y = 0, v = 0, lastSY = window.scrollY, lt = 0, raf = null;
+    var K = 100, D = 12;
+    function step(t) {
+      var dt = Math.min((t - lt) / 1000, 0.05);
+      lt = t;
+      v += (-K * y - D * v) * dt;
+      y += v * dt;
+      fab.style.transform = 'translateY(' + y.toFixed(2) + 'px)';
+      if (Math.abs(y) < 0.08 && Math.abs(v) < 0.08) {
+        fab.style.transform = ''; y = 0; v = 0; raf = null;
+      } else {
+        raf = requestAnimationFrame(step);
+      }
+    }
+    window.addEventListener('scroll', function() {
+      var d = window.scrollY - lastSY;
+      lastSY = window.scrollY;
+      v -= d * 1.8;
+      v = Math.max(-250, Math.min(250, v));
+      if (!raf) { lt = performance.now(); raf = requestAnimationFrame(step); }
+    }, { passive: true });
+  })();
+  </script>
 
   <script>
     // 새로고침 시 브라우저 스크롤 위치 복원 비활성화

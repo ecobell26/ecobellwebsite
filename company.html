@@ -331,10 +331,59 @@
       .lnb-inner { max-width: none; }
     }
 
-    /* ─── 플로팅 버튼 ─── */
-    .floating-ecoasset { position: fixed; right: 44px; bottom: 44px; width: 65px; height: 48px; cursor: pointer; z-index: 500; transition: transform 0.2s ease, opacity 0.2s; text-decoration: none; }
-    .floating-ecoasset:hover { transform: scale(1.08); opacity: 0.9; }
-    .floating-ecoasset img { width: 100%; height: 100%; object-fit: contain; }
+        /* ─── 플로팅 FAB ─── */
+    .floating-fab {
+      position: fixed;
+      right: 44px;
+      bottom: 44px;
+      display: flex;
+      align-items: center;
+      z-index: 500;
+    }
+    .floating-fab-menu {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow: hidden;
+      max-width: 0;
+      opacity: 0;
+      margin-right: 0;
+      transition: max-width 0.35s ease, opacity 0.25s ease, margin-right 0.35s ease;
+    }
+    .floating-fab:hover .floating-fab-menu {
+      max-width: 450px;
+      opacity: 1;
+      margin-right: 10px;
+    }
+    .floating-fab-item {
+      display: flex;
+      align-items: center;
+      height: 36px;
+      padding: 0 14px;
+      background: #fff;
+      border-radius: 18px;
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      color: #234B63;
+      text-decoration: none;
+      white-space: nowrap;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+      transition: background 0.15s, color 0.15s;
+      flex-shrink: 0;
+    }
+    .floating-fab-item:hover { background: #1E8DCD; color: #fff; }
+    .floating-fab-icon {
+      width: 65px;
+      height: 48px;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: transform 0.2s ease, opacity 0.2s;
+      text-decoration: none;
+      display: block;
+    }
+    .floating-fab-icon img { width: 100%; height: 100%; object-fit: contain; }
+    .floating-fab:hover .floating-fab-icon { transform: scale(1.08); opacity: 0.9; }
 
     /* ─── BREADCRUMB ─── */
     .breadcrumb {
@@ -1182,7 +1231,7 @@
     .ft-copyright { position: absolute; left: 45px; top: 357px; font-family: 'Noto Sans KR', sans-serif; font-weight: 300; font-size: 12px; color: rgba(255,255,255,0.8); white-space: pre-line; margin: 0; }
 
     /* ─── 푸터 오버레이 효과 ─── */
-    body > *:not(header):not(footer):not(.floating-ecoasset):not(.breadcrumb) {
+    body > *:not(header):not(footer):not(.floating-fab):not(.breadcrumb) {
       position: relative; z-index: 1; background: inherit;
     }
 
@@ -1242,8 +1291,8 @@
         <div class="lnb-col" data-col="solution">
           <a href="ecoval.html" class="en">ecoValue</a>
           <a href="econode.html" class="en">ecoNODE</a>
-          <a href="#" class="en">E-ASSET</a>
-          <a href="#" class="en">ecoASSET</a>
+          <a href="easset.html" class="en">E-ASSET</a>
+          <a href="ecoasset.html" class="en">ecoASSET</a>
         </div>
         <!-- Platform -->
         <div class="lnb-col" data-col="platform">
@@ -1399,7 +1448,7 @@
           </div>
         </a>
         <!-- Refine -->
-        <a class="r-card reverse" href="e-asset.html">
+        <a class="r-card reverse" href="easset.html">
           <div class="r-card-text">
             <img class="r-card-logo" src="assets/card-refine-logo3.png" alt="E-Asset" style="width:277px;height:55px">
             <p class="r-card-desc">
@@ -1717,8 +1766,8 @@
       <!-- 솔루션 링크 -->
       <a class="ft-link ft-en" href="ecoval.html" style="left:374px;top:87px;">ecoValue</a>
       <a class="ft-link ft-en" href="#" style="left:374px;top:121px;">ecoNODE</a>
-      <a class="ft-link ft-en" href="#" style="left:374px;top:156px;">E-ASSET</a>
-      <a class="ft-link ft-en" href="#" style="left:374px;top:191px;">ecoASSET</a>
+      <a class="ft-link ft-en" href="easset.html" style="left:374px;top:156px;">E-ASSET</a>
+      <a class="ft-link ft-en" href="ecoasset.html" style="left:374px;top:191px;">ecoASSET</a>
 
       <!-- 인사이트 링크 -->
       <a class="ft-link ft-en" href="https://www.netzeronews.kr/" target="_blank" rel="noopener noreferrer" style="left:554px;top:86px;">NetZero News
@@ -1759,10 +1808,43 @@
     </div>
   </footer>
 
-  <!-- ─── 플로팅 eco Asset 버튼 ─── -->
-  <a class="floating-ecoasset" href="#" aria-label="eco Asset 바로가기">
-    <img src="ecoasset_badge.png" alt="eco Asset">
-  </a>
+  <!-- ─── 플로팅 FAB ─── -->
+  <div class="floating-fab">
+    <div class="floating-fab-menu">
+      <a href="https://ecoasset.co.kr" class="floating-fab-item" target="_blank" rel="noopener noreferrer">ecoASSET</a>
+      <a href="https://e-asset.co.kr" class="floating-fab-item" target="_blank" rel="noopener noreferrer">E-ASSET</a>
+    </div>
+    <a class="floating-fab-icon" href="ecoasset.html" aria-label="eco Asset 바로가기">
+      <img src="ecoasset_badge.png" alt="eco Asset">
+    </a>
+  </div>
+  <script>
+  (function(){
+    var fab = document.querySelector('.floating-fab');
+    if (!fab) return;
+    var y = 0, v = 0, lastSY = window.scrollY, lt = 0, raf = null;
+    var K = 100, D = 12;
+    function step(t) {
+      var dt = Math.min((t - lt) / 1000, 0.05);
+      lt = t;
+      v += (-K * y - D * v) * dt;
+      y += v * dt;
+      fab.style.transform = 'translateY(' + y.toFixed(2) + 'px)';
+      if (Math.abs(y) < 0.08 && Math.abs(v) < 0.08) {
+        fab.style.transform = ''; y = 0; v = 0; raf = null;
+      } else {
+        raf = requestAnimationFrame(step);
+      }
+    }
+    window.addEventListener('scroll', function() {
+      var d = window.scrollY - lastSY;
+      lastSY = window.scrollY;
+      v -= d * 1.8;
+      v = Math.max(-250, Math.min(250, v));
+      if (!raf) { lt = performance.now(); raf = requestAnimationFrame(step); }
+    }, { passive: true });
+  })();
+  </script>
 
   <script>
     // 새로고침 시 브라우저 스크롤 위치 복원 비활성화
