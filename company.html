@@ -81,6 +81,9 @@
       transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
+    nav.lnb-open .nav-item {
+      transform: translateX(var(--lnb-tx, 0px));
+    }
 
     .nav-link {
       font-family: 'Chillax', sans-serif;
@@ -1122,6 +1125,7 @@
       align-items: flex-start;
       height: 100%;
       flex: 1;
+      padding-bottom: 10px;
     }
     .company-cta-icon {
       width: 90px;
@@ -1129,14 +1133,16 @@
       flex-shrink: 0;
       margin-left: 24px;
       align-self: flex-end;
+      margin-bottom: 10px;
     }
     .company-cta-heading {
       font-family: 'Kakao OTF', 'Noto Sans KR', sans-serif;
       font-weight: 700;
-      font-size: 25px;
+      font-size: 22.5px;
       color: #103e58;
       letter-spacing: -0.3px;
       line-height: 1.4;
+      margin-top: 10px;
       margin-bottom: 32px;
     }
     .company-cta-btn {
@@ -1235,7 +1241,7 @@
         <!-- Solution -->
         <div class="lnb-col" data-col="solution">
           <a href="ecoval.html" class="en">ecoValue</a>
-          <a href="#" class="en">ecoNODE</a>
+          <a href="econode.html" class="en">ecoNODE</a>
           <a href="#" class="en">E-ASSET</a>
           <a href="#" class="en">ecoASSET</a>
         </div>

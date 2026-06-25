@@ -121,7 +121,7 @@
 
     /* LNB 활성 상태 GNB 스타일 */
     .nav-item.lnb-active .nav-link {
-      color: #ffffff;
+      color: #1e8dcd;
     }
 
     /* GNB 활성 시 파란 띠는 LNB 상단에 border-top으로 표시 */
@@ -821,7 +821,7 @@
       background: #fff;
       border: 0.5px solid rgba(0,0,0,0.2);
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      padding: 30px 50px 30px 100px;
+      padding: 30px 100px 30px 100px;
       display: flex;
       align-items: center;
       gap: 40px;
@@ -870,8 +870,20 @@
       flex-shrink: 0;
       width: 100px; height: 100px;
       display: flex; align-items: center; justify-content: center;
+      margin-right: 20px;
+      position: relative;
     }
-    .ev-strength-icon-wrap img { width: 80px; height: 80px; object-fit: contain; }
+    .ev-strength-icon-wrap::before {
+      content: '';
+      position: absolute;
+      width: 167px; height: 167px;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, rgba(19, 155, 155, 0.3) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .ev-strength-icon-wrap img { width: 88px; height: 88px; object-fit: contain; }
+    .ev-strength-list .ev-strength-card-wrap:nth-child(2) .ev-strength-icon-wrap img { width: 92px; height: 92px; }
 
     /* FAQ */
     .ev-faq-list {
@@ -1012,7 +1024,7 @@
         <!-- Solution -->
         <div class="lnb-col" data-col="solution">
           <a href="ecoval.html" class="en">ecoValue</a>
-          <a href="#" class="en">ecoNODE</a>
+          <a href="econode.html" class="en">ecoNODE</a>
           <a href="#" class="en">E-ASSET</a>
           <a href="#" class="en">ecoASSET</a>
         </div>
@@ -1161,7 +1173,7 @@
               <p class="ev-about-card-desc">dMRV 기반의 센서 연동으로 발전량 및 탄소배출 값을 실시간 수집하는 현장 RTU 장치</p>
               <div class="ev-about-card-row">
                 <p class="ev-about-card-title teal">에코노드 <span style="color:#000;font-weight:800;">(ecoNODE)</span></p>
-                <a class="ev-about-card-link" href="#">자세히 보기 〉</a>
+                <a class="ev-about-card-link" href="econode.html">자세히 보기 〉</a>
               </div>
             </div>
             <div class="ev-about-card reveal">

@@ -60,6 +60,9 @@
       transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
+    nav.lnb-open .nav-item {
+      transform: translateX(var(--lnb-tx, 0px));
+    }
 
     .nav-link {
       font-family: 'Chillax', sans-serif;
@@ -406,7 +409,7 @@
           </div>
           <div class="lnb-col" data-col="solution">
             <a href="#">전체 솔루션 맵</a>
-            <a href="#" class="en">ecoNODE</a>
+            <a href="econode.html" class="en">ecoNODE</a>
             <div class="lnb-sep"></div>
             <a href="#">태양광 솔루션</a>
           </div>

@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>에코노드 ecoNODE - Ecobell</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&family=Nanum+Square:wght@400;700;800&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=chillax@400,500,600,700&display=swap" rel="stylesheet">
+  <style>
+    @font-face {
+      font-family: 'Kakao OTF';
+      src: url('assets/fonts/KakaoOTFRegular.otf') format('opentype');
+      font-weight: 400; font-style: normal;
+    }
+    @font-face {
+      font-family: 'Kakao OTF';
+      src: url('assets/fonts/KakaoOTFBold.otf') format('opentype');
+      font-weight: 700; font-style: normal;
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; overscroll-behavior: none; }
+    body { font-family: 'Noto Sans KR', sans-serif; min-width: 1100px; background: #fff; color: #000; }
+
+    /* ─── HEADER ─── */
+    header {
+      position: fixed; top: 0; left: 0; right: 0; min-width: 1100px;
+      height: 69px; background: #fff; z-index: 999;
+      transition: box-shadow 0.3s ease, transform 0.35s cubic-bezier(0.4,0,0.2,1);
+    }
+    header.scrolled { box-shadow: 0 2px 16px rgba(0,0,0,0.07); }
+    header.gnb-hidden { transform: translateY(-100%); }
+    .header-inner {
+      position: relative; width: 100%; max-width: 1440px;
+      height: 100%; margin: 0 auto; display: flex; align-items: center;
+    }
+    .logo { position: absolute; left: 44px; top: 50%; transform: translateY(-50%); width: 110px; height: 26px; transition: opacity 0.2s; }
+    .logo img { width: 100%; height: 100%; object-fit: contain; }
+    .logo:hover { opacity: 0.75; }
+
+    /* ─── GNB ─── */
+    nav { position: absolute; left: 198px; right: 324px; top: 0; display: flex; align-items: stretch; height: 69px; }
+    .nav-item { position: relative; display: flex; align-items: center; transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1); }
+    nav.lnb-open .nav-item { transform: translateX(var(--lnb-tx, 0px)); }
+    .nav-link { font-family: 'Chillax', sans-serif; font-weight: 500; font-size: 15.5px; color: #000; text-decoration: none; letter-spacing: 0.46px; line-height: 1.6; padding: 0 17px; white-space: nowrap; position: relative; display: flex; align-items: center; height: 100%; transition: color 0.2s; }
+    .nav-link::after { content: ''; position: absolute; left: 17px; right: 17px; bottom: 0; height: 2px; background: #000; transform: scaleX(0); transform-origin: left; transition: transform 0.25s ease; }
+    .nav-item:not(.lnb-active) .nav-link:hover::after { transform: scaleX(1); }
+    .nav-item.lnb-active .nav-link { color: #1e8dcd; }
+
+    /* ─── LNB ─── */
+    .lnb { position: fixed; top: 69px; left: 0; right: 0; min-width: 1100px; height: 202px; background: #fff; border-top: 0.3px solid #d9d9d9; border-bottom: 0.3px solid #d9d9d9; opacity: 0; transform: translateY(-6px); pointer-events: none; transition: opacity 0.25s ease, transform 0.28s cubic-bezier(0.4,0,0.2,1); z-index: 102; }
+    .lnb-inner { position: relative; width: 100%; max-width: 1440px; margin: 0 auto; height: 100%; }
+    .lnb.open { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    .lnb-col { position: absolute; top: 0; width: 132px; height: 100%; display: flex; flex-direction: column; align-items: center; padding-top: 29px; gap: 0; transition: background 0.2s ease; }
+    .lnb-col.active { background: #fafcfd; border-top: 2px solid #1e8dcd; padding-top: 27px; }
+    .lnb-col a { font-family: 'Nanum Square', 'NanumSquare', sans-serif; font-weight: 600; font-size: 14px; color: #000; text-decoration: none; letter-spacing: 0.14px; line-height: 21px; text-align: center; display: block; width: 100%; padding: 7px 0; transition: color 0.15s; }
+    .lnb-col a.en { font-family: 'Chillax', sans-serif; font-weight: 450; }
+    .lnb-col a:hover { color: #1e8dcd; }
+    .lnb-col a.ext::after { content: ' ↗'; font-size: 11px; }
+    .lnb-col a.active-page { color: #1e8dcd; }
+
+    /* ─── SEARCH ─── */
+    .search-overlay { position: absolute; top: 0; left: 0; right: 0; height: 69px; background: #fff; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.2s; z-index: 10; }
+    header.search-open .search-overlay { opacity: 1; pointer-events: auto; }
+    .search-content { width: 100%; max-width: 700px; padding: 0 20px; }
+    .search-input-row { display: flex; align-items: center; gap: 12px; }
+    .search-input { flex: 1; border: none; border-bottom: 1.5px solid rgba(0,0,0,0.25); outline: none; font-family: 'Noto Sans KR', sans-serif; font-size: 15px; font-weight: 400; color: #000; padding: 4px 0; background: transparent; }
+    .search-input::placeholder { color: rgba(0,0,0,0.35); }
+    .search-input:focus { border-bottom-color: rgba(0,0,0,0.78); }
+    .search-submit { background: none; border: none; cursor: pointer; padding: 0; display: flex; align-items: center; flex-shrink: 0; opacity: 0.6; transition: opacity 0.2s; }
+    .search-submit:hover { opacity: 1; }
+    .search-submit img { width: 17px; height: 17px; object-fit: contain; }
+    .search-divider { position: absolute; top: 102px; left: 0; right: 0; height: 0.5px; background: rgba(0,0,0,0.08); }
+    .search-tags { display: flex; gap: 8px; margin-top: 12px; }
+    .search-tag { background: none; border: 1px solid rgba(0,0,0,0.2); border-radius: 999px; padding: 4px 12px; font-family: 'Noto Sans KR', sans-serif; font-size: 13px; color: rgba(0,0,0,0.55); cursor: pointer; transition: border-color 0.2s, color 0.2s; }
+    .search-tag:hover { border-color: rgba(0,0,0,0.4); color: rgba(0,0,0,0.85); }
+    .search-icon-wrap { position: relative; width: 22px; height: 22px; }
+    .search-tooltip { position: absolute; top: calc(100% + 10px); left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.78); color: #fff; font-family: 'Noto Sans KR', sans-serif; font-size: 11px; font-weight: 400; letter-spacing: 0.4px; padding: 4px 8px; border-radius: 4px; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity 0.15s; }
+    .search-tooltip::before { content: ''; position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); border: 5px solid transparent; border-bottom-color: rgba(0,0,0,0.78); }
+    .search-icon-wrap:hover .search-tooltip { opacity: 1; }
+    header.search-open .search-tooltip { opacity: 0 !important; pointer-events: none; }
+    .close-btn { background: none; border: none; cursor: pointer; padding: 0; display: flex; align-items: center; opacity: 0; pointer-events: none; position: absolute; right: 0; transition: opacity 0.25s ease, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1); }
+    .close-btn:hover { opacity: 1; }
+    header.search-open .search-btn { opacity: 0; pointer-events: none; transform: rotate(90deg) scale(0.7); }
+    header.search-open .close-btn { opacity: 0.6; pointer-events: auto; transform: rotate(0deg) scale(1); }
+
+    /* ─── HEADER RIGHT ─── */
+    .header-right { position: absolute; right: 44px; display: flex; align-items: center; gap: 25px; }
+    .gnb-sep { color: rgba(0,0,0,0.2); font-size: 16px; line-height: 1; user-select: none; }
+    .search-btn { background: none; border: none; cursor: pointer; padding: 0; display: flex; align-items: center; opacity: 0.7; transition: transform 0.2s ease, opacity 0.2s; }
+    .search-btn:hover { transform: scale(1.15); opacity: 0.7; }
+    .demo-btn { display: inline-flex; align-items: center; justify-content: center; width: 114px; height: 38px; border: 1.5px solid #000; border-radius: 999px; font-family: 'Chillax', sans-serif; font-weight: 500; font-size: 14px; color: #000; text-decoration: none; letter-spacing: 0.32px; position: relative; overflow: hidden; }
+    .demo-btn::before { content: ''; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%) scale(0); width: 80px; height: 80px; background: #000; border-radius: 50%; transition: transform 0.45s ease; }
+    .demo-btn:hover::before { transform: translate(-50%, -50%) scale(10); }
+    .demo-btn:hover { border-color: #000; }
+    .demo-btn:hover .demo-text { color: #fff; }
+    .demo-text { font-family: 'Chillax', sans-serif; font-weight: 500; font-size: 14px; letter-spacing: 0.32px; line-height: 0.8; white-space: nowrap; transition: color 0.25s ease; position: relative; top: 1.5px; }
+
+    @media (min-width: 1441px) {
+      .header-inner { max-width: none; }
+      .lnb-inner    { max-width: none; }
+    }
+
+    /* ─── DATA SECTION ─── */
+    .en-data-section {
+      background: #fff;
+      padding: 100px 0 120px;
+    }
+    .en-data-inner {
+      max-width: 1440px; margin: 0 auto;
+      padding: 0 155px;
+    }
+    .en-data-title {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 700; font-size: 33px;
+      color: #000; line-height: 1.3;
+      word-break: keep-all;
+      margin-bottom: 10px;
+    }
+    .en-data-subtitle {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 400; font-size: 15px;
+      color: rgba(0,0,0,0.45);
+      margin-bottom: 70px;
+    }
+    /* Infographic flow */
+    .en-infographic {
+      display: flex; align-items: flex-start; gap: 0;
+    }
+    .en-info-step {
+      flex: 1; display: flex; flex-direction: column;
+    }
+    .en-info-visual {
+      width: 100%; aspect-ratio: 4/3;
+      border-radius: 10px;
+      margin-bottom: 28px;
+      overflow: hidden;
+    }
+    .en-info-visual svg { display: block; width: 100%; height: 100%; }
+    .en-info-step-num {
+      font-family: 'Chillax', sans-serif;
+      font-weight: 600; font-size: 12px;
+      color: #3694AA; letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .en-info-step-title {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 700; font-size: 18px;
+      color: #000; margin-bottom: 16px;
+      line-height: 1.4;
+    }
+    .en-info-bullets {
+      list-style: none; display: flex; flex-direction: column; gap: 10px;
+    }
+    .en-info-bullets li {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 14px; color: rgba(0,0,0,0.65);
+      line-height: 1.6; word-break: keep-all;
+      padding-left: 14px; position: relative;
+    }
+    .en-info-bullets li::before {
+      content: '';
+      position: absolute; left: 0; top: 9px;
+      width: 5px; height: 5px;
+      border-radius: 50%; background: #3694AA;
+    }
+    .en-info-bullets li strong {
+      font-weight: 700; color: #000;
+      display: block;
+    }
+    /* Separator between steps */
+    .en-info-sep {
+      flex: 0 0 40px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Chillax', sans-serif;
+      font-weight: 300; font-size: 22px;
+      color: rgba(0,0,0,0.25);
+      padding-bottom: 28px; /* align with center of visual */
+      align-self: center;
+    }
+
+    /* ─── CUSTOMERS SECTION ─── */
+    .en-customers-section {
+      background: #F4F4F4;
+      padding: 100px 0 120px;
+    }
+    .en-customers-inner {
+      max-width: 1440px; margin: 0 auto;
+      padding: 0 155px;
+    }
+    .en-customers-sub {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 400; font-size: 17px;
+      color: #000;
+      margin-top: 30px;
+    }
+    .en-case-grid {
+      display: flex; flex-direction: column;
+      gap: 14px; margin-top: 48px;
+    }
+    .en-case-card {
+      background: #fff; border-radius: 14px;
+      padding: 32px 40px;
+      display: grid;
+      grid-template-columns: 160px 1fr 40px 1fr;
+      gap: 32px; align-items: center;
+    }
+    .en-case-label-col {
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .en-case-num {
+      font-family: 'Chillax', sans-serif;
+      font-weight: 600; font-size: 11px;
+      color: #3694AA; letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+    .en-case-title {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 700; font-size: 14px;
+      color: #000; line-height: 1.45; word-break: keep-all;
+    }
+    /* Before: speech bubble */
+    .en-case-before {
+      background: #F7F7F7; border-radius: 12px;
+      padding: 22px 24px; position: relative;
+    }
+    .en-case-before-tag {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 10px; font-weight: 700;
+      color: rgba(0,0,0,0.35); letter-spacing: 0.5px;
+      text-transform: uppercase; margin-bottom: 10px;
+    }
+    .en-case-quote {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 14px; color: rgba(0,0,0,0.75);
+      line-height: 1.8; word-break: keep-all;
+      font-style: italic;
+    }
+    .en-case-quote::before {
+      content: '"'; font-size: 28px; color: rgba(0,0,0,0.1);
+      font-style: normal; line-height: 0;
+      vertical-align: -10px; margin-right: 4px;
+    }
+    .en-case-quote::after {
+      content: '"'; font-size: 28px; color: rgba(0,0,0,0.1);
+      font-style: normal; line-height: 0;
+      vertical-align: -10px; margin-left: 4px;
+    }
+    /* Arrow */
+    .en-case-arrow {
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Chillax', sans-serif;
+      font-size: 20px; font-weight: 300;
+      color: #3694AA; opacity: 0.5;
+    }
+    /* After */
+    .en-case-after {
+      background: #EDF7FB; border-radius: 12px;
+      padding: 22px 24px;
+    }
+    .en-case-after-tag {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 10px; font-weight: 700;
+      color: #3694AA; letter-spacing: 0.5px;
+      text-transform: uppercase; margin-bottom: 10px;
+    }
+    .en-case-result {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 14px; color: rgba(0,0,0,0.75);
+      line-height: 1.8; word-break: keep-all;
+    }
+    .en-case-result strong { color: #3694AA; font-weight: 700; }
+
+    /* ─── FOOTER ─── */
+    footer { position: sticky; bottom: 0; z-index: 0; min-width: 1100px; height: 442px; background: #2a2a2a; }
+    .footer-inner { position: relative; width: 100%; max-width: 1440px; margin: 0 auto; height: 100%; }
+    .ft-company-info { position: absolute; right: 45px; top: 211px; font-family: 'Noto Sans KR', sans-serif; font-weight: 450; font-size: 13px; color: rgba(255,255,255,0.5); line-height: 23px; letter-spacing: -0.28px; white-space: pre-line; text-align: right; }
+    .ft-col-title { position: absolute; font-family: 'Chillax', sans-serif; font-weight: 600; font-size: 16px; color: #fff; white-space: nowrap; margin: 0; top: 41px; letter-spacing: 0.54px; line-height: 28.8px; }
+    .ft-link { position: absolute; font-family: 'Nanum Square', 'NanumSquare', sans-serif; font-weight: 500; font-size: 14px; color: #fff; white-space: nowrap; text-decoration: none; line-height: 22.5px; letter-spacing: 0.15px; opacity: 1; transition: opacity 0.2s; }
+    .ft-link:hover { opacity: 0.55; }
+    .ft-link.ft-en { font-family: 'Chillax', sans-serif; font-weight: 400; line-height: 16.5px; }
+    .ft-sep { position: absolute; height: 0.5px; background: rgba(255,255,255,0.3); }
+    .ft-divider { position: absolute; left: 45px; right: 45px; height: 0.5px; background: rgba(255,255,255,0.2); }
+    .ft-bottom-link { position: absolute; font-family: 'Noto Sans KR', sans-serif; font-weight: 300; font-size: 13px; color: rgba(255,255,255,0.8); text-decoration: none; white-space: nowrap; top: 323px; line-height: 23px; letter-spacing: -0.28px; transition: opacity 0.2s; }
+    .ft-bottom-link:hover { opacity: 0.55; }
+    .ft-bottom-link.fw-bold { font-weight: 500; color: #fff; }
+    .ft-social { position: absolute; line-height: 0; opacity: 1; transition: opacity 0.2s, transform 0.2s; top: 323px; }
+    .ft-social:hover { opacity: 0.7; transform: scale(1.1); }
+    .ft-copyright { position: absolute; left: 45px; top: 357px; font-family: 'Noto Sans KR', sans-serif; font-weight: 300; font-size: 12px; color: rgba(255,255,255,0.8); white-space: pre-line; margin: 0; }
+
+    /* ─── FLOATING ─── */
+    .floating-ecoasset { position: fixed; right: 44px; bottom: 44px; width: 65px; height: 48px; cursor: pointer; z-index: 500; transition: transform 0.2s ease, opacity 0.2s; text-decoration: none; }
+    .floating-ecoasset:hover { transform: scale(1.08); opacity: 0.9; }
+    .floating-ecoasset img { width: 100%; height: 100%; object-fit: contain; }
+
+    /* ─── COMMON ─── */
+    body > *:not(header):not(footer):not(.floating-ecoasset) { position: relative; z-index: 1; background: inherit; }
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s cubic-bezier(0.4,0,0.2,1), transform 0.65s cubic-bezier(0.4,0,0.2,1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ═══ ECONODE PAGE ═══ */
+
+    /* ─── PAGE BAR ─── */
+    .en-page-bar {
+      margin-top: 69px;
+      background: #3694aa;
+      height: 57px;
+      display: flex; align-items: center;
+      position: relative; z-index: 2;
+      overflow: hidden;
+    }
+    .en-page-bar::after {
+      content: '';
+      position: absolute;
+      right: 0; top: 0; bottom: 0;
+      width: calc(462 / 1440 * 100%);
+      background: linear-gradient(to right, #62dcd7 0%, #1b7aa8 200%);
+      clip-path: polygon(22.2% 0%, 100% 0%, 100% 100%, 0% 100%);
+      pointer-events: none;
+    }
+    .en-page-bar-inner {
+      position: relative; z-index: 1;
+      max-width: 1440px; margin: 0 auto; width: 100%;
+      padding: 0 50px;
+      display: flex; align-items: center; justify-content: space-between;
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 600; font-size: 17px; color: #fff;
+    }
+    .en-page-bar-crumb {
+      display: flex; align-items: center; gap: 6px;
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 700; font-size: 13px; color: #fff;
+    }
+    .en-page-bar-crumb a { color: #fff; text-decoration: none; }
+    .en-page-bar-crumb a:hover { opacity: 0.75; }
+
+    /* ─── HERO ─── */
+    .en-hero {
+      position: relative;
+      height: 483px;
+      background: #888;
+      overflow: hidden;
+    }
+    .en-hero-bg {
+      position: absolute; inset: 0;
+      background: url('assets/econode-hero-bg.png') center / cover no-repeat;
+    }
+    .en-hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(61deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 100%);
+    }
+    .en-hero-content {
+      position: relative; z-index: 2;
+      max-width: 1440px; margin: 0 auto;
+      padding: 0 44px 0 155px;
+      height: 100%;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .en-hero-left {
+      display: flex; flex-direction: column;
+      align-items: flex-start;
+    }
+    .en-hero-title {
+      font-family: 'Chillax', sans-serif;
+      font-weight: 700; font-size: 39px;
+      color: #fff; letter-spacing: 0.5px;
+      margin-bottom: 20px;
+    }
+    .en-hero-title span {
+      font-weight: 500;
+      color: #5CD4D3;
+    }
+    .en-hero-subtitle {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 600; font-size: 20px;
+      color: rgba(255,255,255,0.9);
+      line-height: 1.65; letter-spacing: -0.2px;
+      margin-bottom: 14px;
+      word-break: keep-all;
+    }
+    .en-hero-btn {
+      display: inline-flex; align-items: center;
+      border: 1.5px solid rgba(255,255,255,0.7);
+      border-radius: 200px; padding: 11px 26px;
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 900; font-size: 14px; color: #fff;
+      text-decoration: none;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .en-hero-btn:hover { background: rgba(255,255,255,0.15); border-color: #fff; }
+
+    /* Product + Badges */
+    .en-hero-right {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    .en-product-img {
+      position: absolute;
+      left: 834px; top: 45px;
+      width: 646px; height: 554px;
+      object-fit: contain;
+      filter: drop-shadow(0 8px 32px rgba(0,0,0,0.2));
+    }
+    .en-badges {
+      position: absolute;
+      left: 0; top: 0;
+    }
+    .en-badge {
+      position: absolute;
+      display: inline-flex; align-items: center; gap: 8px;
+      background: #fff;
+      border-radius: 999px;
+      padding: 7px 14px 7px 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+      white-space: nowrap;
+      pointer-events: auto;
+    }
+    .en-badge:nth-child(1) { left: 1122px; top: 251px; }
+    .en-badge:nth-child(2) { left: 1014px; top: 299px; }
+    .en-badge-icon {
+      width: 20px; height: 20px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .en-badge span {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 500; font-size: 13px; color: #000;
+      letter-spacing: -0.2px;
+    }
+
+    /* ─── ABOUT ─── */
+    .en-about {
+      background: #fff;
+      padding: 100px 0 110px;
+    }
+    .en-about-inner {
+      width: 100%; max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 103px 0 155px;
+    }
+    .en-about-tag {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 400; font-size: 33px;
+      color: #000; line-height: 1.4;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+      word-break: keep-all;
+    }
+    .en-about-main {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 700; font-size: 31px;
+      color: #000; line-height: 1.4;
+      letter-spacing: -0.5px;
+      margin-bottom: 70px;
+      word-break: keep-all;
+    }
+    .en-about-sub-wrap {
+      display: flex;
+      justify-content: flex-end;
+    }
+    .en-about-sub {
+      width: 670px; max-width: 100%;
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 400; font-size: 18px;
+      color: #000; line-height: 1.7;
+      letter-spacing: -0.3px;
+      word-break: keep-all;
+    }
+
+    /* ─── FEATURES ─── */
+    .en-features {
+      background: #f5f5f5;
+      padding: 87px 0 100px;
+    }
+    .en-features-inner {
+      width: 100%; max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 131px;
+    }
+    .en-features-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 40px;
+    }
+    .en-features-label {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 600; font-size: 17px; color: #000;
+      margin-bottom: 14px; letter-spacing: -0.3px;
+    }
+    .en-features-title {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 700; font-size: 24px; color: #000;
+      letter-spacing: -0.4px; line-height: 1.3;
+      word-break: keep-all;
+    }
+    .en-features-nav {
+      display: flex; align-items: center; gap: 21px; flex-shrink: 0;
+      padding-bottom: 4px;
+    }
+    .en-slide-counter {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .en-counter-cur {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 700; font-size: 14px; color: #000;
+    }
+    .en-counter-line {
+      display: block; width: 44px; height: 1.5px;
+      background: rgba(0,0,0,0.15);
+      position: relative; flex-shrink: 0;
+    }
+    .en-counter-fill {
+      position: absolute; left: 0; top: 0; bottom: 0;
+      background: #000;
+      width: 0%;
+      transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .en-counter-total {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 400; font-size: 14px; color: rgba(0,0,0,0.35);
+    }
+    .en-nav-btn {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .en-nav-btn {
+      border: 1.5px solid #000;
+    }
+    .en-nav-btn:hover { background: rgba(0,0,0,0.06); }
+    .en-nav-btn.is-end {
+      border: 1px solid rgba(0,0,0,0.2);
+      cursor: default;
+      background: none;
+    }
+
+    .en-features-sep {
+      height: 0.5px; background: rgba(0,0,0,0.15);
+      margin-bottom: 36px;
+    }
+
+    /* Card slider */
+    .en-features-track-wrap {
+      overflow: hidden;
+      border-radius: 12px;
+    }
+    .en-features-track {
+      display: flex;
+      gap: 0;
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .en-feature-card {
+      min-width: 100%;
+      display: flex; align-items: flex-start; gap: 48px;
+      padding: 40px 0 0;
+    }
+    .en-feature-card-img {
+      flex: 0 0 55%;
+      background: #e8e8e8;
+      border-radius: 10px;
+      min-height: 320px;
+    }
+    .en-feature-card-content {
+      flex: 1;
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 400; font-size: 15px;
+      color: #000;
+      line-height: 1.8; letter-spacing: -0.2px;
+      word-break: keep-all;
+      padding-top: 8px;
+    }
+    .en-feature-card-placeholder {
+      text-align: center;
+      color: rgba(0,0,0,0.2);
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 14px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ─── HEADER ─── -->
+  <header id="header">
+    <div class="header-inner">
+
+      <a class="logo" href="index.html">
+        <img src="assets/logo.png" alt="ecobell">
+      </a>
+
+      <!-- GNB -->
+      <nav id="main-nav">
+        <div class="nav-item" data-menu="company">
+          <a class="nav-link" href="#">Company</a>
+        </div>
+        <div class="nav-item" data-menu="platform">
+          <a class="nav-link" href="#">Project</a>
+        </div>
+        <div class="nav-item" data-menu="solution">
+          <a class="nav-link" href="#">Solution</a>
+        </div>
+        <div class="nav-item" data-menu="insight">
+          <a class="nav-link" href="insight.html">Insight</a>
+        </div>
+        <div class="nav-item" data-menu="contact">
+          <a class="nav-link" href="notice.html">Contact Us</a>
+        </div>
+      </nav>
+
+      <!-- LNB -->
+      <div class="lnb" id="lnb">
+        <div class="lnb-inner">
+          <div class="lnb-col" data-col="company">
+            <a href="ceo.html">CEO 인사말</a>
+            <a href="company.html">기업소개</a>
+            <a href="press.html">보도자료</a>
+            <a href="archive.html">아카이브</a>
+          </div>
+          <div class="lnb-col" data-col="solution">
+            <a href="ecoval.html" class="en">ecoValue</a>
+            <a href="econode.html" class="en active-page">ecoNODE</a>
+            <a href="#" class="en">E-ASSET</a>
+            <a href="#" class="en">ecoASSET</a>
+          </div>
+          <div class="lnb-col" data-col="platform">
+            <a href="#">태양광 솔루션</a>
+          </div>
+          <div class="lnb-col" data-col="insight">
+            <a href="https://www.netzeronews.kr/" class="en ext" target="_blank" rel="noopener noreferrer">NetZero News</a>
+            <a href="insight.html?page=eco">친환경 기업정보</a>
+            <a href="insight.html?page=green">그린카 계산기</a>
+          </div>
+          <div class="lnb-col" data-col="contact">
+            <a href="notice.html">공지사항</a>
+            <a href="directions.html">오시는 길</a>
+            <a href="contact.html">문의하기</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Search Overlay -->
+      <div class="search-overlay" id="search-overlay">
+        <div class="search-content">
+          <div class="search-input-row">
+            <input class="search-input" type="text" placeholder="검색어를 입력해주세요." id="search-input" autocomplete="off">
+            <button class="search-submit" aria-label="검색">
+              <svg width="17" height="17" viewBox="0 0 17 17" fill="none">
+                <circle cx="7" cy="7" r="5" stroke="#000" stroke-width="1.5"/>
+                <line x1="11" y1="11" x2="16" y2="16" stroke="#000" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </button>
+          </div>
+          <div class="search-divider"></div>
+          <div class="search-tags">
+            <button class="search-tag" data-keyword="에코노드">#에코노드</button>
+            <button class="search-tag" data-keyword="ecoNODE">#ecoNODE</button>
+            <button class="search-tag" data-keyword="MRV">#MRV</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Header Right -->
+      <div class="header-right">
+        <span class="gnb-sep">|</span>
+        <div class="search-icon-wrap">
+          <button class="search-btn" aria-label="검색" id="search-open-btn">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+              <path d="M21.1063 19.1469L15.4344 14.5406C17.7719 11.3438 17.5313 6.7719 14.6094 3.8844C13.0626 2.33752 11 1.47815 8.80005 1.47815C6.60005 1.47815 4.53755 2.33752 2.99067 3.8844C-0.206201 7.08127 -0.206201 12.3063 2.99067 15.5031C4.53755 17.05 6.60005 17.9094 8.80005 17.9094C10.8969 17.9094 12.8563 17.1188 14.4032 15.7094L20.1438 20.35C20.2813 20.4531 20.4532 20.5219 20.6251 20.5219C20.8657 20.5219 21.0719 20.4188 21.2094 20.2469C21.4844 19.9032 21.4501 19.4219 21.1063 19.1469ZM8.80005 16.3625C7.01255 16.3625 5.36255 15.675 4.09067 14.4032C1.47817 11.7907 1.47817 7.56252 4.09067 4.9844C5.36255 3.71252 7.01255 3.02502 8.80005 3.02502C10.5875 3.02502 12.2375 3.71252 13.5094 4.9844C16.1219 7.5969 16.1219 11.825 13.5094 14.4032C12.2719 15.675 10.5875 16.3625 8.80005 16.3625Z" fill="#000"/>
+            </svg>
+          </button>
+          <button class="close-btn" aria-label="닫기" id="search-close-btn">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <line x1="1" y1="1" x2="17" y2="17" stroke="#000" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="17" y1="1" x2="1" y2="17" stroke="#000" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <span class="search-tooltip">검색</span>
+        </div>
+        <a class="demo-btn" href="contact.html">
+          <span class="demo-text">문의하기</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ═══ PAGE BAR ═══ -->
+    <div class="en-page-bar">
+      <div class="en-page-bar-inner">
+        <span>에코노드</span>
+        <div class="en-page-bar-crumb">
+          <a href="index.html" aria-label="홈">
+            <svg width="11" height="12" viewBox="0 0 11 12" fill="none">
+              <path d="M1 5L5.5 1L10 5V11H7V8H4V11H1V5Z" stroke="#fff" stroke-width="1.1" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <svg width="5" height="10" viewBox="0 0 5 10" fill="none">
+            <path d="M1 1L4 5L1 9" stroke="rgba(255,255,255,0.7)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>Solution</span>
+          <svg width="5" height="10" viewBox="0 0 5 10" fill="none">
+            <path d="M1 1L4 5L1 9" stroke="rgba(255,255,255,0.7)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <a href="ecoval.html">에코벨류</a>
+          <svg width="5" height="10" viewBox="0 0 5 10" fill="none">
+            <path d="M1 1L4 5L1 9" stroke="rgba(255,255,255,0.7)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span style="color:#fff;font-weight:500;">에코노드</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ HERO ═══ -->
+    <div class="en-hero">
+      <div class="en-hero-bg"></div>
+      <div class="en-hero-overlay"></div>
+
+      <div class="en-hero-content">
+
+        <!-- Left -->
+        <div class="en-hero-left">
+          <p class="en-hero-subtitle">dMRV 기반의 센서 연동으로<br>발전량 및 탄소배출 값을 실시간 수집하는 현장 RTU 장치</p>
+          <h1 class="en-hero-title">에코노드 <span>ecoNODE</span></h1>
+          <a class="en-hero-btn" href="contact.html">상담 및 문의</a>
+        </div>
+
+        <!-- Right: Product + Badges -->
+        <div class="en-hero-right">
+          <img class="en-product-img" src="assets/econode-product.png" alt="ecoNODE 제품">
+          <div class="en-badges">
+            <div class="en-badge">
+              <span class="en-badge-icon">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <circle cx="10" cy="10" r="10" fill="#3BBD6A"/>
+                  <path d="M5.5 10.5L8.5 13.5L14.5 7" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span>걱정할 필요가 없는 데이터</span>
+            </div>
+            <div class="en-badge">
+              <span class="en-badge-icon">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <circle cx="10" cy="10" r="10" fill="#3BBD6A"/>
+                  <path d="M5.5 10.5L8.5 13.5L14.5 7" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span>탄소 데이터 수집 최적화</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═══ ABOUT ═══ -->
+    <section class="en-about">
+      <div class="en-about-inner">
+        <p class="en-about-tag reveal">에너지의 흐름을 데이터 자산으로<br>기업 탄소 자산화의 시작!</p>
+        <p class="en-about-main reveal">ecoNODE는 에너지 자산의 효율적인 통합 관리를 위해<br>전력 신호를 데이터로 전환하는 <span style="color:#3694AA;">RTU 솔루션</span>입니다.</p>
+        <div class="en-about-sub-wrap reveal">
+          <p class="en-about-sub">실시간 계측과 누적 데이터 보존으로 정보의 연속성을 유지하며,<br>현장 중심의 정확한 수치를 바탕으로 정교한 에너지 관리 환경을 만듭니다.<br>이를 통해 데이터 유실이 없는 정밀한 모니터링 체계를 지원합니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ FEATURES ═══ -->
+    <section class="en-features">
+      <div class="en-features-inner">
+        <div class="en-features-head reveal">
+          <div>
+            <p class="en-features-label">에코노드만의 특장점</p>
+            <p class="en-features-title">온실가스 인벤토리의 모든 것을 한곳에</p>
+          </div>
+          <div class="en-features-nav">
+            <div class="en-slide-counter">
+              <span class="en-counter-cur" id="en-current">01</span>
+              <span class="en-counter-line"><span class="en-counter-fill" id="en-fill"></span></span>
+              <span class="en-counter-total" id="en-total">01</span>
+            </div>
+            <button class="en-nav-btn" id="en-prev" aria-label="이전">
+              <svg width="7" height="11" viewBox="0 0 10 16" fill="none">
+                <path d="M9 1L2 8L9 15" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <button class="en-nav-btn" id="en-next" aria-label="다음">
+              <svg width="7" height="11" viewBox="0 0 10 16" fill="none">
+                <path d="M1 1L8 8L1 15" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="en-features-track-wrap reveal">
+          <div class="en-features-track" id="en-track">
+            <div class="en-feature-card" data-title="온실가스 인벤토리의 모든 것을 한곳에">
+              <div class="en-feature-card-img"></div>
+              <div class="en-feature-card-content">신재생에너지 발전량(자산)과 Scope 1, 2, 3 온실가스 배출량(부채) 데이터를 단일 장치 기반으로 통합 수집합니다. 현장의 이종 데이터들을 단일 규격으로 표준화하여 기업 전체의 GHG 인벤토리를 파편화 없이 일원화합니다.</div>
+            </div>
+            <div class="en-feature-card" data-title="수기 입력 ZERO, 실시간 채록으로 무결성 선점">
+              <div class="en-feature-card-img"></div>
+              <div class="en-feature-card-content">태양광 인버터, 일사량계, 온도 센서 등 현장 설비의 물리적 원천 신호를 가공 없이 실시간 직접 채록합니다. 인적 개입이 없는 직독(Direct Read) 방식을 통해 데이터의 왜곡 및 위·변조 가능성을 물리적으로 차단합니다.</div>
+            </div>
+            <div class="en-feature-card" data-title="어떤 설비든 표준 프로토콜">
+              <div class="en-feature-card-img"></div>
+              <div class="en-feature-card-content">현장 설비별로 상이한 이기종 원시 전력 신호들을 자산화에 최적화된 표준 통신 규격으로 단일화합니다. 포맷이 표준화된 데이터는 추가 가공 없이 외부 관제 시스템 및 플랫폼에 즉각 통합 연동됩니다.</div>
+            </div>
+            <div class="en-feature-card" data-title="LTE 안테나로 전국 실시간 무선 연결">
+              <div class="en-feature-card-img"></div>
+              <div class="en-feature-card-content">인버터와 원격 서버를 연결하는 별도의 장거리 통신선 매설 공사 없이, 장치 자체에 탑재된 전용 무선 LTE망 모듈을 통해 데이터를 전송합니다. 외곽 지역의 분산형 발전 설비에서도 기기에 장착된 안테나를 활용하여 현장 데이터를 유실 없이 실시간으로 무선 송신합니다.</div>
+            </div>
+            <div class="en-feature-card" data-title="실측에 기상을 더해, 엣지 단에서 끝내는 계산">
+              <div class="en-feature-card-img"></div>
+              <div class="en-feature-card-content">현장에서 직접 채록한 무결성 발전 데이터에 외부에서 유입되는 기상 데이터를 매칭하고 보안 봉인(씰링) 기능을 수행합니다. 기기 내부에 계수측정 수식을 내장하여 직접 수집한 에너지 데이터와 외부 환경 데이터를 결합한 실질적인 탄소 배출 측정을 지원합니다.</div>
+            </div>
+            <div class="en-feature-card" data-title="계통 이상 즉시 포착, 엣지 단의 자체 데이터 보존">
+              <div class="en-feature-card-img"></div>
+              <div class="en-feature-card-content">계통 정전, 과전류, 설비 효율 저하 등 주변 전력 계통의 이상 신호를 실시간 엣지 단에서 포착하여 장치 내부에 로그 데이터를 저장합니다. 저장된 데이터를 통해 정보의 연속성을 유지하며, 장치 전면의 LCD 창을 통해 주요 발전 지표를 현장에서 즉각 시각화합니다.</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══ DATA / INFOGRAPHIC SECTION ═══ -->
+    <section class="en-data-section">
+      <div class="en-data-inner">
+        <p class="en-data-title reveal">현장에서 겪던 데이터 누락,<br>에코노드가 바로잡다</p>
+
+        <div class="en-infographic reveal">
+
+          <!-- Step 1: 현장 -->
+          <div class="en-info-step">
+            <div class="en-info-visual">
+              <svg viewBox="0 0 320 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="320" height="240" fill="#F4F9FC"/>
+                <!-- Sun -->
+                <circle cx="72" cy="38" r="12" fill="#FBBF24" opacity="0.85"/>
+                <line x1="72" y1="20" x2="72" y2="14" stroke="#FBBF24" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+                <line x1="86" y1="24" x2="90" y2="19" stroke="#FBBF24" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+                <line x1="92" y1="38" x2="98" y2="38" stroke="#FBBF24" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+                <line x1="58" y1="24" x2="54" y2="19" stroke="#FBBF24" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+                <line x1="52" y1="38" x2="46" y2="38" stroke="#FBBF24" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+                <!-- Solar panel 1 -->
+                <rect x="22" y="66" width="50" height="34" rx="2" fill="#1E5A7A" stroke="#3694AA" stroke-width="1"/>
+                <line x1="39" y1="66" x2="39" y2="100" stroke="#3694AA" stroke-width="0.5" opacity="0.6"/>
+                <line x1="55" y1="66" x2="55" y2="100" stroke="#3694AA" stroke-width="0.5" opacity="0.6"/>
+                <line x1="22" y1="83" x2="72" y2="83" stroke="#3694AA" stroke-width="0.5" opacity="0.6"/>
+                <!-- Solar panel 2 -->
+                <rect x="78" y="66" width="50" height="34" rx="2" fill="#1E5A7A" stroke="#3694AA" stroke-width="1"/>
+                <line x1="95" y1="66" x2="95" y2="100" stroke="#3694AA" stroke-width="0.5" opacity="0.6"/>
+                <line x1="111" y1="66" x2="111" y2="100" stroke="#3694AA" stroke-width="0.5" opacity="0.6"/>
+                <line x1="78" y1="83" x2="128" y2="83" stroke="#3694AA" stroke-width="0.5" opacity="0.6"/>
+                <!-- Solar panel 3 -->
+                <rect x="22" y="106" width="50" height="34" rx="2" fill="#1E5A7A" stroke="#3694AA" stroke-width="1"/>
+                <line x1="39" y1="106" x2="39" y2="140" stroke="#3694AA" stroke-width="0.5" opacity="0.6"/>
+                <line x1="55" y1="106" x2="55" y2="140" stroke="#3694AA" stroke-width="0.5" opacity="0.6"/>
+                <line x1="22" y1="123" x2="72" y2="123" stroke="#3694AA" stroke-width="0.5" opacity="0.6"/>
+                <!-- Solar panel 4 -->
+                <rect x="78" y="106" width="50" height="34" rx="2" fill="#1E5A7A" stroke="#3694AA" stroke-width="1"/>
+                <line x1="95" y1="106" x2="95" y2="140" stroke="#3694AA" stroke-width="0.5" opacity="0.6"/>
+                <line x1="111" y1="106" x2="111" y2="140" stroke="#3694AA" stroke-width="0.5" opacity="0.6"/>
+                <line x1="78" y1="123" x2="128" y2="123" stroke="#3694AA" stroke-width="0.5" opacity="0.6"/>
+                <!-- Wire panel → device -->
+                <line x1="128" y1="103" x2="155" y2="103" stroke="#888" stroke-width="1.2" stroke-dasharray="3,2"/>
+                <polygon points="152,100 158,103 152,106" fill="#888"/>
+                <!-- ecoNODE device -->
+                <rect x="160" y="58" width="86" height="126" rx="7" fill="#fff" stroke="#3694AA" stroke-width="1.5"/>
+                <!-- LCD screen -->
+                <rect x="170" y="68" width="66" height="58" rx="3" fill="#0d1f2f"/>
+                <text x="203" y="89" text-anchor="middle" font-family="monospace" font-size="11" fill="#3CD4D3" font-weight="bold">380V</text>
+                <text x="203" y="107" text-anchor="middle" font-family="monospace" font-size="11" fill="#5CD4D3">45kW</text>
+                <text x="203" y="121" text-anchor="middle" font-family="monospace" font-size="8" fill="#1E8DCD" opacity="0.7">12.3kWh</text>
+                <!-- Status LEDs -->
+                <circle cx="178" cy="142" r="3.5" fill="#3BBD6A"/>
+                <circle cx="190" cy="142" r="3.5" fill="#5CD4D3"/>
+                <circle cx="202" cy="142" r="3.5" fill="#E0E0E0"/>
+                <!-- Label -->
+                <text x="203" y="170" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#3694AA" font-weight="700" letter-spacing="0.5">ecoNODE</text>
+              </svg>
+            </div>
+            <p class="en-info-step-num">01 &nbsp;/&nbsp; Field</p>
+            <p class="en-info-step-title">정밀 데이터 채록</p>
+            <ul class="en-info-bullets">
+              <li><strong>원천 신호 직접 추출</strong>인버터 및 센서의 물리적 신호 실시간 감지</li>
+              <li><strong>인적 오류 제로</strong>가공 없는 직독(Direct Read) 방식으로 데이터 무결성 확보</li>
+            </ul>
+          </div>
+
+          <span class="en-info-sep">&gt;</span>
+
+          <!-- Step 2: 전송 -->
+          <div class="en-info-step">
+            <div class="en-info-visual">
+              <svg viewBox="0 0 320 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="320" height="240" fill="#F4F9FC"/>
+                <!-- ecoNODE device (left) -->
+                <rect x="28" y="72" width="74" height="116" rx="7" fill="#fff" stroke="#3694AA" stroke-width="1.5"/>
+                <!-- LCD -->
+                <rect x="38" y="82" width="54" height="44" rx="3" fill="#0d1f2f"/>
+                <text x="65" y="100" text-anchor="middle" font-family="monospace" font-size="10" fill="#3CD4D3" font-weight="bold">380V</text>
+                <text x="65" y="117" text-anchor="middle" font-family="monospace" font-size="10" fill="#5CD4D3">45kW</text>
+                <!-- LEDs -->
+                <circle cx="44" cy="140" r="3" fill="#3BBD6A"/>
+                <circle cx="55" cy="140" r="3" fill="#5CD4D3"/>
+                <!-- Label -->
+                <text x="65" y="176" text-anchor="middle" font-family="sans-serif" font-size="7.5" fill="#3694AA" font-weight="700" letter-spacing="0.5">ecoNODE</text>
+                <!-- Antenna pole -->
+                <line x1="65" y1="72" x2="65" y2="46" stroke="#555" stroke-width="1.8" stroke-linecap="round"/>
+                <line x1="65" y1="46" x2="55" y2="60" stroke="#555" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="65" y1="46" x2="75" y2="60" stroke="#555" stroke-width="1.5" stroke-linecap="round"/>
+                <!-- LTE signal arcs -->
+                <path d="M88 48 Q108 32 88 16" stroke="#3694AA" stroke-width="1.8" stroke-linecap="round" opacity="0.8"/>
+                <path d="M98 52 Q126 30 98 8" stroke="#3694AA" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+                <path d="M108 56 Q148 26 108 -2" stroke="#3694AA" stroke-width="1.2" stroke-linecap="round" opacity="0.3"/>
+                <!-- LTE badge -->
+                <rect x="138" y="108" width="36" height="20" rx="10" fill="#3694AA"/>
+                <text x="156" y="122" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#fff" font-weight="800">LTE</text>
+                <!-- Dashed transmit line -->
+                <line x1="105" y1="128" x2="212" y2="128" stroke="#3694AA" stroke-width="1.2" stroke-dasharray="5,3" opacity="0.45"/>
+                <polygon points="209,124 217,128 209,132" fill="#3694AA" opacity="0.45"/>
+                <!-- Cloud -->
+                <path d="M234 158 Q228 142 244 139 Q247 125 264 128 Q279 127 277 140 Q290 140 288 153 Q286 166 271 165 L241 165 Q228 166 234 158 Z" fill="#fff" stroke="#3694AA" stroke-width="1.5"/>
+                <!-- Server rack below cloud -->
+                <rect x="244" y="170" width="32" height="24" rx="3" fill="#3694AA" opacity="0.12"/>
+                <rect x="247" y="173" width="26" height="5" rx="1.5" fill="#3694AA" opacity="0.3"/>
+                <rect x="247" y="181" width="26" height="5" rx="1.5" fill="#3694AA" opacity="0.3"/>
+                <circle cx="270" cy="175.5" r="1.5" fill="#3BBD6A"/>
+                <circle cx="270" cy="183.5" r="1.5" fill="#3BBD6A"/>
+                <text x="260" y="205" text-anchor="middle" font-family="sans-serif" font-size="7.5" fill="#3694AA" opacity="0.8" font-weight="600">클라우드 서버</text>
+              </svg>
+            </div>
+            <p class="en-info-step-num">02 &nbsp;/&nbsp; Transfer</p>
+            <p class="en-info-step-title">통합 데이터 무선 전송</p>
+            <ul class="en-info-bullets">
+              <li><strong>통신 매설 공사 제로</strong>장치 자체 탑재된 전용 무선 LTE망 모듈 활용</li>
+              <li><strong>전국 분산 발전소 연결</strong>외곽 지역에서도 데이터 유실 없는 실시간 송신</li>
+            </ul>
+          </div>
+
+          <span class="en-info-sep">&gt;</span>
+
+          <!-- Step 3: 연동 & 알림 -->
+          <div class="en-info-step">
+            <div class="en-info-visual">
+              <svg viewBox="0 0 320 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="320" height="240" fill="#F4F9FC"/>
+                <!-- Monitor (left) -->
+                <rect x="16" y="44" width="152" height="102" rx="6" fill="#2a2a2a"/>
+                <rect x="22" y="50" width="140" height="82" rx="3" fill="#0d1f2f"/>
+                <!-- Graph area fill -->
+                <polygon points="32,124 32,114 52,94 74,106 98,76 120,88 144,58 154,68 162,124" fill="#3CD4D3" opacity="0.1"/>
+                <!-- Graph line -->
+                <polyline points="32,114 52,94 74,106 98,76 120,88 144,58 154,68" stroke="#3CD4D3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <!-- Graph dots -->
+                <circle cx="32" cy="114" r="2.5" fill="#3CD4D3"/>
+                <circle cx="74" cy="106" r="2.5" fill="#3CD4D3"/>
+                <circle cx="98" cy="76" r="2.5" fill="#3CD4D3"/>
+                <circle cx="144" cy="58" r="2.5" fill="#3CD4D3"/>
+                <!-- Y-axis lines -->
+                <line x1="30" y1="60" x2="162" y2="60" stroke="#fff" stroke-width="0.3" opacity="0.1"/>
+                <line x1="30" y1="80" x2="162" y2="80" stroke="#fff" stroke-width="0.3" opacity="0.1"/>
+                <line x1="30" y1="100" x2="162" y2="100" stroke="#fff" stroke-width="0.3" opacity="0.1"/>
+                <line x1="30" y1="120" x2="162" y2="120" stroke="#fff" stroke-width="0.3" opacity="0.1"/>
+                <!-- Monitor stand -->
+                <rect x="88" y="146" width="8" height="18" rx="2" fill="#555"/>
+                <rect x="70" y="162" width="44" height="6" rx="3" fill="#555"/>
+                <!-- E-ASSET label -->
+                <text x="92" y="200" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#3694AA" font-weight="700" letter-spacing="0.5">E-ASSET</text>
+
+                <!-- Smartphone (right) -->
+                <rect x="202" y="34" width="86" height="158" rx="12" fill="#fff" stroke="#3694AA" stroke-width="1.5"/>
+                <!-- Home indicator -->
+                <rect x="232" y="178" width="26" height="4" rx="2" fill="#ddd"/>
+                <!-- Screen area -->
+                <rect x="208" y="48" width="74" height="122" rx="4" fill="#f7f7f7"/>
+                <!-- Status bar -->
+                <rect x="208" y="48" width="74" height="14" fill="#3694AA" opacity="0.9"/>
+                <text x="245" y="58" text-anchor="middle" font-family="sans-serif" font-size="6.5" fill="#fff" font-weight="600">E-ASSET</text>
+                <!-- KakaoTalk notification popup -->
+                <rect x="212" y="72" width="66" height="70" rx="8" fill="#FAE300"/>
+                <!-- Kakao icon circle -->
+                <circle cx="226" cy="87" r="9" fill="#3C1E1E"/>
+                <ellipse cx="226" cy="87" rx="6" ry="5" fill="#FAE300"/>
+                <circle cx="223" cy="86" r="1.2" fill="#3C1E1E"/>
+                <circle cx="229" cy="86" r="1.2" fill="#3C1E1E"/>
+                <path d="M223 89.5 Q226 91.5 229 89.5" stroke="#3C1E1E" stroke-width="1" stroke-linecap="round"/>
+                <!-- Notification text -->
+                <text x="240" y="84" font-family="sans-serif" font-size="6.5" fill="#3C1E1E" font-weight="800">[E-ASSET]</text>
+                <text x="240" y="94" font-family="sans-serif" font-size="6" fill="#3C1E1E">OO발전소 인버터</text>
+                <text x="240" y="103" font-family="sans-serif" font-size="6" fill="#3C1E1E">정상 가동 중</text>
+                <line x1="216" y1="110" x2="274" y2="110" stroke="#3C1E1E" stroke-width="0.5" opacity="0.2"/>
+                <text x="216" y="120" font-family="sans-serif" font-size="5.5" fill="#3C1E1E" opacity="0.7">누적 발전량 가시성 확보</text>
+                <text x="216" y="130" font-family="sans-serif" font-size="5.5" fill="#3C1E1E" opacity="0.7">방금 전</text>
+                <!-- Screen content below popup -->
+                <rect x="212" y="148" width="66" height="16" rx="3" fill="#eee"/>
+                <rect x="212" y="168" width="44" height="6" rx="3" fill="#ddd"/>
+              </svg>
+            </div>
+            <p class="en-info-step-num">03 &nbsp;/&nbsp; Platform &amp; Alert</p>
+            <p class="en-info-step-title">스마트 모니터링</p>
+            <ul class="en-info-bullets">
+              <li><strong>표준 프로토콜 변환</strong>이종 데이터 단일화로 플랫폼 즉각 통합 연동</li>
+              <li><strong>실시간 모니터링</strong>국내외 어디서나 주요 발전 지표 및 알림 확인</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ CUSTOMERS SECTION ═══ -->
+    <section class="en-customers-section">
+      <div class="en-customers-inner">
+        <p class="en-data-title reveal">에너지 자산화를 선도하는<br>기업들의 필수 선택</p>
+        <p class="en-customers-sub reveal">고객 사례</p>
+
+        <div class="en-case-grid reveal">
+
+          <!-- Case 1 -->
+          <div class="en-case-card">
+            <div class="en-case-label-col">
+              <p class="en-case-num">Case 01 &nbsp;/&nbsp; ESG</p>
+              <p class="en-case-title">글로벌 ESG &amp;<br>탄소 배출권 자산화</p>
+            </div>
+            <div class="en-case-before">
+              <p class="en-case-before-tag">Before</p>
+              <p class="en-case-quote">수기 입력하다 보면 담당자마다 숫자가 달라요. 외부 기관에 제출하려니 어떤 데이터를 믿어야 할지 모르겠더라고요.</p>
+            </div>
+            <div class="en-case-arrow">→</div>
+            <div class="en-case-after">
+              <p class="en-case-after-tag">After</p>
+              <p class="en-case-result">가공 없는 자동 수집으로 <strong>디지털 MRV(dMRV)를 구현</strong>했습니다. 인적 개입 없는 데이터 뱅크로 탄소 배출권 자산의 공신력을 확보했습니다.</p>
+            </div>
+          </div>
+
+          <!-- Case 2 -->
+          <div class="en-case-card">
+            <div class="en-case-label-col">
+              <p class="en-case-num">Case 02 &nbsp;/&nbsp; 대규모 발전</p>
+              <p class="en-case-title">상업용 대규모<br>발전 단지</p>
+            </div>
+            <div class="en-case-before">
+              <p class="en-case-before-tag">Before</p>
+              <p class="en-case-quote">발전소 100곳 데이터를 엑셀로 취합하는 데 하루가 걸렸어요. 그때쯤이면 이미 '실시간'이 아닌 거잖아요.</p>
+            </div>
+            <div class="en-case-arrow">→</div>
+            <div class="en-case-after">
+              <p class="en-case-after-tag">After</p>
+              <p class="en-case-result">이종 설비 신호를 단일 표준으로 묶어 <strong>누적 발전량을 실시간 통합 집계</strong>합니다. 오차 없는 정밀 로그로 수익성 분석이 즉시 가능해졌습니다.</p>
+            </div>
+          </div>
+
+          <!-- Case 3 -->
+          <div class="en-case-card">
+            <div class="en-case-label-col">
+              <p class="en-case-num">Case 03 &nbsp;/&nbsp; 분산 관리</p>
+              <p class="en-case-title">전국 단위<br>분산형 에너지 관리</p>
+            </div>
+            <div class="en-case-before">
+              <p class="en-case-before-tag">Before</p>
+              <p class="en-case-quote">외곽 발전소 장애 하나 확인하러 왕복 4시간이요. 통신선 공사비만 몇 천이고요. 사실상 관리가 안 됐어요.</p>
+            </div>
+            <div class="en-case-arrow">→</div>
+            <div class="en-case-after">
+              <p class="en-case-after-tag">After</p>
+              <p class="en-case-result">LTE 무선망으로 <strong>현장 방문 횟수를 최소화</strong>했습니다. 통신선 공사비 없이 전국 분산 발전소를 원격으로 통합 관리합니다.</p>
+            </div>
+          </div>
+
+          <!-- Case 4 -->
+          <div class="en-case-card">
+            <div class="en-case-label-col">
+              <p class="en-case-num">Case 04 &nbsp;/&nbsp; O&amp;M</p>
+              <p class="en-case-title">실시간 이상 진단 및<br>O&amp;M 자동화</p>
+            </div>
+            <div class="en-case-before">
+              <p class="en-case-before-tag">Before</p>
+              <p class="en-case-quote">정전이 언제 났는지, 얼마나 됐는지 알 수가 없어요. 결국 현장에 가봐야 아니까요.</p>
+            </div>
+            <div class="en-case-arrow">→</div>
+            <div class="en-case-after">
+              <p class="en-case-after-tag">After</p>
+              <p class="en-case-result">이상 신호를 엣지 단에서 즉각 포착하고 <strong>카카오톡 알림으로 동기화</strong>합니다. 꼭 필요한 시점에만 출동하는 데이터 기반 O&amp;M 환경을 완성했습니다.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ─── FOOTER ─── -->
+  <footer>
+    <div class="footer-inner">
+      <p class="ft-company-info">㈜에코벨
+사업자 등록번호 : 598-87-02578  |  대표 : 김소연
+호스팅 서비스 : 주식회사 에코벨 | 통신판매업신고번호 : 2023-서울금천-1822</p>
+
+      <p class="ft-col-title" style="left:45px;">회사정보</p>
+      <p class="ft-col-title" style="left:202px;">프로젝트</p>
+      <p class="ft-col-title" style="left:374px;">솔루션</p>
+      <p class="ft-col-title" style="left:554px;">인사이트</p>
+      <p class="ft-col-title" style="left:750px;">문의하기</p>
+
+      <a class="ft-link" href="ceo.html" style="left:45px;top:86px;">CEO 인사말</a>
+      <a class="ft-link" href="company.html" style="left:45px;top:121px;">기업소개</a>
+      <a class="ft-link" href="press.html" style="left:45px;top:156px;">보도자료</a>
+      <a class="ft-link" href="archive.html" style="left:45px;top:191px;">아카이브</a>
+
+      <a class="ft-link" href="#" style="left:202px;top:87px;">태양광 솔루션</a>
+
+      <a class="ft-link ft-en" href="ecoval.html" style="left:374px;top:87px;">ecoValue</a>
+      <a class="ft-link ft-en" href="econode.html" style="left:374px;top:121px;">ecoNODE</a>
+      <a class="ft-link ft-en" href="#" style="left:374px;top:156px;">E-ASSET</a>
+      <a class="ft-link ft-en" href="#" style="left:374px;top:191px;">ecoASSET</a>
+
+      <a class="ft-link ft-en" href="https://www.netzeronews.kr/" target="_blank" rel="noopener noreferrer" style="left:554px;top:86px;">NetZero News
+        <svg width="6" height="6" viewBox="0 0 8 8" fill="none" style="margin-left:2px;vertical-align:middle;"><path d="M1 7L7 1M7 1H3M7 1V5" stroke="#fff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a class="ft-link" href="insight.html?page=eco" style="left:554px;top:121px;">친환경 기업정보</a>
+      <a class="ft-link" href="insight.html?page=green" style="left:554px;top:156px;">그린카 계산기</a>
+
+      <a class="ft-link ft-en" href="notice.html" style="left:750px;top:87px;">공지사항</a>
+      <a class="ft-link ft-en" href="directions.html" style="left:750px;top:121px;">오시는길</a>
+      <a class="ft-link ft-en" href="contact.html" style="left:750px;top:156px;">문의하기</a>
+
+      <div class="ft-divider" style="top:305px;"></div>
+
+      <a class="ft-bottom-link fw-bold" href="#" style="left:45px;">개인정보처리방침</a>
+      <a class="ft-bottom-link" href="#" style="left:173px;">이용약관</a>
+      <a class="ft-bottom-link" href="#" style="left:250px;">이메일무단수집거부</a>
+      <a class="ft-bottom-link" href="faq.html" style="left:383px;">자주 묻는 질문(FAQ)</a>
+
+      <a class="ft-social" href="https://www.youtube.com/@yt_ecobell" target="_blank" rel="noopener noreferrer" aria-label="YouTube" style="right:135px;">
+        <svg width="22" height="23" viewBox="0 0 22 23" fill="none"><rect x="1.5" y="5" width="19" height="13" rx="3" stroke="#fff" stroke-width="1.3"/><polygon points="8.5,8.5 15.5,11.5 8.5,14.5" fill="#fff"/></svg>
+      </a>
+      <a class="ft-social" href="https://www.instagram.com/ecobell.co.kr/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" style="right:90px;">
+        <svg width="22" height="23" viewBox="0 0 22 23" fill="none"><rect x="2" y="2.5" width="18" height="18" rx="5" stroke="#fff" stroke-width="1.3"/><circle cx="11" cy="11.5" r="4" stroke="#fff" stroke-width="1.3"/><circle cx="16" cy="6.5" r="1.1" fill="#fff"/></svg>
+      </a>
+      <a class="ft-social" href="https://www.facebook.com/ecobell.co.kr" target="_blank" rel="noopener noreferrer" aria-label="Facebook" style="right:46px;">
+        <svg width="22" height="23" viewBox="0 0 22 23" fill="none"><path d="M12.5 11.5H14.8L15.5 8.5H12.5V6.8C12.5 5.9 12.9 5.2 14.2 5.2H15.8V2.6C15.8 2.6 14.3 2.3 12.9 2.3C10.1 2.3 8.5 3.9 8.5 6.5V8.5H5.8V11.5H8.5V20.5H12.5V11.5Z" fill="#fff"/></svg>
+      </a>
+
+      <p class="ft-copyright">서울시 금천구 시흥대로 193, 701호(08635)
+ⓒ ecobell Co., Ltd. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ─── 플로팅 버튼 ─── -->
+  <a class="floating-ecoasset" href="#" aria-label="eco Asset 바로가기">
+    <img src="ecoasset_badge.png" alt="eco Asset">
+  </a>
+
+  <script>
+    if (history.scrollRestoration) history.scrollRestoration = 'manual';
+    window.scrollTo(0, 0);
+
+    const header = document.getElementById('header');
+
+    // 헤더 스크롤
+    let _lastScrollY = window.scrollY;
+    window.addEventListener('scroll', () => {
+      const cur = window.scrollY;
+      header.classList.toggle('scrolled', cur > 10);
+      if (cur > _lastScrollY && cur > 80) {
+        header.classList.add('gnb-hidden');
+      } else {
+        header.classList.remove('gnb-hidden');
+      }
+      if (cur > _lastScrollY && header.classList.contains('search-open')) closeSearch();
+      _lastScrollY = cur;
+    }, { passive: true });
+
+    // GNB / LNB
+    const nav      = document.getElementById('main-nav');
+    const lnb      = document.getElementById('lnb');
+    const navItems = document.querySelectorAll('.nav-item');
+    const lnbCols  = document.querySelectorAll('.lnb-col');
+    let closeTimer;
+
+    function setupHeaderLayout() {
+      const lnbInnerEl = lnb.querySelector('.lnb-inner');
+      const lnbRect = lnbInnerEl.getBoundingClientRect();
+      const items = Array.from(navItems);
+      const colWidth = lnbCols[0] ? lnbCols[0].offsetWidth : 132;
+      const firstRect = items[0].getBoundingClientRect();
+      const firstCenterX = firstRect.left + firstRect.width / 2 - lnbRect.left;
+      const startLeft = firstCenterX - colWidth / 2;
+      items.forEach((item, i) => {
+        const menu = item.dataset.menu;
+        const col = lnb.querySelector(`.lnb-col[data-col="${menu}"]`);
+        if (!col) return;
+        const colLeft = startLeft + i * colWidth;
+        col.style.left = colLeft + 'px';
+        if (i === 0) {
+          item.style.setProperty('--lnb-tx', '0px');
+        } else {
+          const colCenterX = colLeft + colWidth / 2;
+          const itemRect = item.getBoundingClientRect();
+          const itemCenterX = itemRect.left + itemRect.width / 2 - lnbRect.left;
+          item.style.setProperty('--lnb-tx', `${colCenterX - itemCenterX}px`);
+        }
+      });
+    }
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(setupHeaderLayout);
+    } else {
+      setupHeaderLayout();
+    }
+    window.addEventListener('resize', setupHeaderLayout);
+
+    function openLnb(menuName) {
+      clearTimeout(closeTimer);
+      nav.classList.add('lnb-open');
+      lnb.classList.add('open');
+      navItems.forEach(item => item.classList.toggle('lnb-active', item.dataset.menu === menuName));
+      lnbCols.forEach(col => col.classList.toggle('active', col.dataset.col === menuName));
+    }
+    function schedulClose() {
+      closeTimer = setTimeout(() => {
+        nav.classList.remove('lnb-open');
+        lnb.classList.remove('open');
+        navItems.forEach(i => i.classList.remove('lnb-active'));
+        lnbCols.forEach(c => c.classList.remove('active'));
+      }, 120);
+    }
+    navItems.forEach(item => {
+      item.addEventListener('mouseenter', () => openLnb(item.dataset.menu));
+      item.addEventListener('mouseleave', schedulClose);
+    });
+    lnb.addEventListener('mouseenter', () => clearTimeout(closeTimer));
+    lnb.addEventListener('mouseleave', schedulClose);
+    lnbCols.forEach(col => {
+      col.addEventListener('mouseenter', () => {
+        const menu = col.dataset.col;
+        navItems.forEach(item => item.classList.toggle('lnb-active', item.dataset.menu === menu));
+        lnbCols.forEach(c => c.classList.toggle('active', c.dataset.col === menu));
+      });
+    });
+
+    // 검색
+    const searchOverlay  = document.getElementById('search-overlay');
+    const searchInput    = document.getElementById('search-input');
+    const searchOpenBtn  = document.getElementById('search-open-btn');
+    const searchCloseBtn = document.getElementById('search-close-btn');
+    function openSearch() {
+      header.classList.add('search-open');
+      searchOverlay.classList.add('open');
+      nav.classList.remove('lnb-open');
+      lnb.classList.remove('open');
+      navItems.forEach(i => i.classList.remove('lnb-active'));
+      lnbCols.forEach(c => c.classList.remove('active'));
+      setTimeout(() => searchInput.focus(), 50);
+    }
+    function closeSearch() {
+      header.classList.remove('search-open');
+      searchOverlay.classList.remove('open');
+    }
+    searchOpenBtn.addEventListener('click', openSearch);
+    searchCloseBtn.addEventListener('click', closeSearch);
+    document.querySelectorAll('.search-tag').forEach(tag => {
+      tag.addEventListener('click', () => {
+        searchInput.value = tag.dataset.keyword;
+        searchInput.focus();
+      });
+    });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSearch(); });
+
+    // Reveal 애니메이션
+    const revealEls = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => revealObserver.observe(el));
+
+    // 특장점 슬라이더
+    const track   = document.getElementById('en-track');
+    const prevBtn = document.getElementById('en-prev');
+    const nextBtn = document.getElementById('en-next');
+    const curEl   = document.getElementById('en-current');
+    const totEl   = document.getElementById('en-total');
+    const fillEl  = document.getElementById('en-fill');
+    const titleEl = document.querySelector('.en-features-title');
+    const cards   = track ? track.querySelectorAll('.en-feature-card') : [];
+    let current = 0;
+
+    function pad(n) { return String(n).padStart(2, '0'); }
+
+    function slideTo(idx) {
+      if (idx >= cards.length) idx = 0;
+      current = Math.max(0, idx);
+      track.style.transform = `translateX(-${current * 100}%)`;
+      prevBtn.classList.toggle('is-end', current === 0);
+      nextBtn.classList.toggle('is-end', current === cards.length - 1);
+      if (curEl) curEl.textContent = pad(current + 1);
+      if (fillEl && cards.length > 1) fillEl.style.width = (current / (cards.length - 1) * 100) + '%';
+      if (titleEl && cards[current]) titleEl.textContent = cards[current].dataset.title || '';
+    }
+    if (track && cards.length > 0) {
+      if (totEl) totEl.textContent = pad(cards.length);
+      slideTo(0);
+      prevBtn.addEventListener('click', () => slideTo(current - 1));
+      nextBtn.addEventListener('click', () => slideTo(current + 1));
+    }
+  </script>
+
+</body>
+</html>
