@@ -829,6 +829,7 @@
       background-position: center;
       display: block;
       border-radius: 20px;
+      position: relative;
     }
     .company-news-body { padding-top: 26px; padding-left: 6px; }
     .company-news-text {
@@ -854,6 +855,13 @@
       letter-spacing: -0.26px;
     }
     .company-news-card:hover .company-news-text { color: #1e8dcd; }
+    .company-news-thumb.no-image { background: #fff; border: 1px solid rgba(0,0,0,0.15); }
+    .company-news-thumb.no-image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('assets/company-logo-white.png') center/100px auto no-repeat;
+    }
 
     /* ─── FOOTER ─── */
     footer {
@@ -1316,6 +1324,7 @@
         </div>
       </div>
     </section>
+
 
     <!-- ── Section 3: 최근 소식 ── -->
     <section class="company-news-section">
@@ -1883,40 +1892,30 @@
       if (prevBtn) prevBtn.addEventListener('click', () => slideTo(currentIndex - 1));
       if (nextBtn) nextBtn.addEventListener('click', () => slideTo(currentIndex + 1));
 
-      // press.html의 모든 press-card를 가져와 날짜 정렬 후 최신 12개 표시
-      fetch('press.html')
-        .then(r => r.text())
-        .then(html => {
-          const doc   = new DOMParser().parseFromString(html, 'text/html');
-          const cards = Array.from(doc.querySelectorAll('.press-card'));
-          const items = cards.map(card => {
-            const thumb   = card.dataset.thumb || '';
-            const titleEl = card.querySelector('.press-card-title');
-            const dateEl  = card.querySelector('.press-card-date');
-            return {
-              thumb,
-              href:  titleEl ? titleEl.getAttribute('href') : 'press.html',
-              title: titleEl ? titleEl.textContent.trim() : '',
-              date:  dateEl  ? dateEl.textContent.trim()  : '',
-            };
-          }).filter(i => i.title);
+      // press.json에서 최신순 최대 12개 표시
+      fetch('data/press.json')
+        .then(r => r.json())
+        .then(data => {
+          const items = (data.items || [])
+            .filter(i => i.published !== false)
+            .sort((a, b) => (b.date || '').localeCompare(a.date || ''))
+            .slice(0, 12);
 
-          // 날짜 내림차순 + 중복 제거 (제목 기준)
-          const seen = new Set();
-          const unique = items
-            .sort((a, b) => b.date.localeCompare(a.date))
-            .filter(i => { if (seen.has(i.title)) return false; seen.add(i.title); return true; });
-
-          unique.slice(0, 12).forEach(item => {
-            const thumbStyle = item.thumb ? `background-image:url('${item.thumb}')` : '';
+          items.forEach(item => {
+            let thumb = (item.images && item.images[0]) ? item.images[0] : '';
+            if (!thumb && item.content) {
+              const m = item.content.match(/<img[^>]+src=["']([^"']+)["']/i);
+              if (m) thumb = m[1];
+            }
+            const thumbStyle = thumb ? `background-image:url('${thumb}')` : '';
             const a = document.createElement('a');
             a.className = 'company-news-card';
-            a.href = item.href || 'press.html';
+            a.href = 'press-article.html?id=' + item.id;
             a.innerHTML = `
-              <div class="company-news-thumb" style="${thumbStyle}"></div>
+              <div class="company-news-thumb${thumb ? '' : ' no-image'}"${thumbStyle ? ` style="${thumbStyle}"` : ''}></div>
               <div class="company-news-body">
-                <p class="company-news-text">${item.title}</p>
-                <p class="company-news-date">${item.date}</p>
+                <p class="company-news-text">${item.title || ''}</p>
+                <p class="company-news-date">${item.date || ''}</p>
               </div>`;
             track.appendChild(a);
           });

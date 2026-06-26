@@ -546,8 +546,19 @@
       background: #c0c0c0;
       transition: opacity 0.2s;
       object-fit: cover;
+      position: relative;
     }
     .press-featured-image:hover { opacity: 0.9; }
+    .press-featured-image.no-image {
+      background: #fff !important;
+      border: 1px solid rgba(0,0,0,0.15);
+    }
+    .press-featured-image.no-image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('assets/company-logo-white.png') center/130px auto no-repeat;
+    }
     .press-featured-body {
       padding: 0 70px 0 50px;
       display: flex; flex-direction: column;
@@ -726,9 +737,17 @@
       display: block;
       border-radius: 20px;
       transition: opacity 0.25s;
+      position: relative;
       cursor: pointer;
     }
     .press-card-thumb:hover { opacity: 0.85; }
+    .press-card-thumb.no-image { background: #fff; border: 1px solid rgba(0,0,0,0.15); }
+    .press-card-thumb.no-image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('assets/company-logo-white.png') center/90px auto no-repeat;
+    }
 
     .press-card-body { padding-top: 26px; padding-left: 6px; padding-right: 7px; }
 
@@ -1631,7 +1650,7 @@
     const ICON_PAUSE = '<svg width="9" height="10" viewBox="0 0 9 10" fill="none"><rect x="1" y="1" width="2.5" height="8" rx="0.5" fill="#000"/><rect x="5.5" y="1" width="2.5" height="8" rx="0.5" fill="#000"/></svg>';
 
     function slideHTML(item) {
-      return `<a class="press-featured-image" href="${item.href}" style="background:${item.bg || '#c0c8cf'};"></a>
+      return `<a class="press-featured-image${item.bg ? '' : ' no-image'}" href="${item.href}"${item.bg ? ` style="background:${item.bg};"` : ''}></a>
               <div class="press-featured-body">
                 <p class="press-featured-date">${item.date}</p>
                 <a class="press-featured-title" href="${item.href}">${item.title}</a>
@@ -1717,9 +1736,6 @@
       dotsEl.appendChild(playBtn);
     }
 
-    buildSlides();
-    buildDots();
-
     let autoTimer = null;
     function startAuto() {
       autoTimer = setInterval(() => {
@@ -1745,18 +1761,26 @@
           .filter(i => i.pinned && i.published !== false)
           .sort((a, b) => (b.date || '').localeCompare(a.date || ''));
         if (!pinned.length) return;
-        FEATURED = pinned.map(i => ({
-          date: i.date || '',
-          title: i.title || '',
-          desc: i.summary || '',
-          href: 'press-article.html?id=' + i.id,
-          bg: (i.images && i.images[0]) ? 'url(' + i.images[0] + ') center/cover' : '#c0c8cf'
-        }));
+        FEATURED = pinned.map(i => {
+          let desc = i.summary || '';
+          if (!desc && i.content) {
+            const tmp = document.createElement('div');
+            tmp.innerHTML = i.content;
+            desc = (tmp.textContent || tmp.innerText || '').trim().replace(/\s+/g, ' ').slice(0, 160);
+          }
+          return {
+            date: i.date || '',
+            title: i.title || '',
+            desc,
+            href: 'press-article.html?id=' + i.id,
+            bg: (i.images && i.images[0]) ? 'url(' + i.images[0] + ') center/cover' : ''
+          };
+        });
         N = FEATURED.length;
         featuredIdx = 0;
         trackIdx = 1;
         buildSlides();
-        updateDots();
+        buildDots();
         goTo(1, 0);
         startAuto();
       })
@@ -1929,10 +1953,14 @@
         const data = await res.json();
         const items = (data.items || []).filter(i => i.published !== false);
         items.forEach(item => {
-          const thumb = item.images && item.images.length ? item.images[0] : '';
+          let thumb = (item.images && item.images[0]) ? item.images[0] : '';
+          if (!thumb && item.content) {
+            const m = item.content.match(/<img[^>]+src=["']([^"']+)["']/i);
+            if (m) thumb = m[1];
+          }
           const el = document.createElement('div');
           el.className = 'press-card';
-          el.innerHTML = `<a class="press-card-thumb" href="press-article.html?id=${item.id}" style="${thumb ? `background:url('${thumb}') center/cover no-repeat;background-size:cover;` : 'background:#e7e7e7;'}"></a>
+          el.innerHTML = `<a class="press-card-thumb${thumb ? '' : ' no-image'}" href="press-article.html?id=${item.id}"${thumb ? ` style="background:url('${thumb}') center/cover no-repeat;"` : ''}></a>
             <div class="press-card-body">
               <a class="press-card-title" href="press-article.html?id=${item.id}">${item.title}</a>
               <p class="press-card-date">${item.date || ''}</p>

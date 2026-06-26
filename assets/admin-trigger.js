@@ -6,7 +6,7 @@
       clicks++;
       clearTimeout(timer);
       timer = setTimeout(function () { clicks = 0; }, 800);
-      if (clicks >= 3) { clicks = 0; window.location.href = 'admin.html'; }
+      if (clicks >= 3) { clicks = 0; window.open('admin.html', '_blank'); }
     }
   });
 })();

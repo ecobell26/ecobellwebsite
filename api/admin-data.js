@@ -27,8 +27,8 @@ function generateId() {
 }
 
 async function getFile(owner, repo, path) {
-  const res = await fetch(`${GITHUB_API}/repos/${owner}/${repo}/contents/${path}?ref=${BRANCH}`, {
-    headers: { Authorization: `Bearer ${process.env.GITHUB_TOKEN}`, Accept: 'application/vnd.github.v3+json' }
+  const res = await fetch(`${GITHUB_API}/repos/${owner}/${repo}/contents/${path}?ref=${BRANCH}&_=${Date.now()}`, {
+    headers: { Authorization: `Bearer ${process.env.GITHUB_TOKEN}`, Accept: 'application/vnd.github.v3+json', 'Cache-Control': 'no-cache' }
   });
   if (res.status === 404) return { content: { items: [] }, sha: null };
   if (!res.ok) throw new Error(`GitHub GET error: ${res.status}`);
@@ -76,6 +76,7 @@ module.exports = async function(req, res) {
   try {
     if (req.method === 'GET') {
       const { content } = await getFile(owner, repo, path);
+      res.setHeader('Cache-Control', 'no-store');
       return res.status(200).json({ ok: true, items: content.items || [] });
     }
 
