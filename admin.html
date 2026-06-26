@@ -417,9 +417,30 @@
   }
 
   /* ── 데이터 로드 ── */
+  function saveFreshCache(type, items) {
+    try { sessionStorage.setItem('admin-fresh-' + type, JSON.stringify({ items, ts: Date.now() })); } catch(_) {}
+  }
+  function loadFreshCache(type) {
+    try {
+      const raw = sessionStorage.getItem('admin-fresh-' + type);
+      if (!raw) return null;
+      const { items, ts } = JSON.parse(raw);
+      if (Date.now() - ts < 60000) return items; // 60초 이내면 유효
+    } catch(_) {}
+    return null;
+  }
+
   async function loadSection(type) {
-    document.getElementById('item-list').innerHTML = '<div class="loading">불러오는 중...</div>';
     document.getElementById('section-count').textContent = '';
+    // 저장 직후 새로고침 시 캐시된 최신 데이터 즉시 표시
+    const fresh = loadFreshCache(type);
+    if (fresh) {
+      currentItems = fresh;
+      document.getElementById('section-count').textContent = '(' + currentItems.length + '건)';
+      renderList();
+    } else {
+      document.getElementById('item-list').innerHTML = '<div class="loading">불러오는 중...</div>';
+    }
     try {
       const res = await fetch('/api/admin-data?type=' + type + '&_=' + Date.now(), {
         headers: { Authorization: 'Basic ' + authHeader },
@@ -431,7 +452,7 @@
       document.getElementById('section-count').textContent = '(' + currentItems.length + '건)';
       renderList();
     } catch (e) {
-      document.getElementById('item-list').innerHTML = '<div class="loading">불러오기 실패</div>';
+      if (!fresh) document.getElementById('item-list').innerHTML = '<div class="loading">불러오기 실패</div>';
     }
   }
 
@@ -558,6 +579,7 @@
       const d = await res.json();
       if (d.ok) {
         currentItems = d.items || currentItems.filter(i => i.id !== id);
+        saveFreshCache(currentSection, currentItems);
         document.getElementById('section-count').textContent = '(' + currentItems.length + '건)';
         renderList();
         showToast('삭제됐습니다.');
@@ -1110,6 +1132,7 @@
         if (!d.ok) throw new Error(d.message);
         if (d.items) currentItems = d.items;
         else { const idx = currentItems.findIndex(i => i.id === editingId); if (idx !== -1) currentItems[idx] = merged; }
+        saveFreshCache(currentSection, currentItems);
         showToast('수정됐습니다.');
       } else {
         // 추가
@@ -1123,6 +1146,7 @@
         if (d.items) currentItems = d.items;
         else currentItems.unshift(d.item);
         document.getElementById('section-count').textContent = '(' + currentItems.length + '건)';
+        saveFreshCache(currentSection, currentItems);
         showToast('추가됐습니다.');
       }
 
