@@ -574,8 +574,8 @@
     thumbnailIdx = 0;
     const item = id ? currentItems.find(i => i.id === id) : null;
     const formEl = document.getElementById('item-form');
-    formEl.style.display = 'block';
     formEl.innerHTML = buildForm(item);
+    formEl.style.display = 'block';
     formEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
     const rteEl = document.getElementById('f-content');
     // 아카이브 유형 초기화 + 상단고정 리스너
