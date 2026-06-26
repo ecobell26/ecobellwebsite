@@ -86,7 +86,7 @@ module.exports = async function(req, res) {
       const newItem = { ...item, id: generateId(), createdAt: new Date().toISOString() };
       content.items = [newItem, ...(content.items || [])];
       await putFile(owner, repo, path, content, sha, `admin: add ${type}`);
-      return res.status(200).json({ ok: true, item: newItem });
+      return res.status(200).json({ ok: true, item: newItem, items: content.items });
     }
 
     if (req.method === 'PUT') {
@@ -96,7 +96,7 @@ module.exports = async function(req, res) {
       if (idx === -1) return res.status(404).json({ ok: false, message: '항목 없음' });
       content.items[idx] = { ...content.items[idx], ...item };
       await putFile(owner, repo, path, content, sha, `admin: update ${type}`);
-      return res.status(200).json({ ok: true });
+      return res.status(200).json({ ok: true, items: content.items });
     }
 
     if (req.method === 'DELETE') {
@@ -104,7 +104,7 @@ module.exports = async function(req, res) {
       const { content, sha } = await getFile(owner, repo, path);
       content.items = (content.items || []).filter(i => i.id !== id);
       await putFile(owner, repo, path, content, sha, `admin: delete ${type}`);
-      return res.status(200).json({ ok: true });
+      return res.status(200).json({ ok: true, items: content.items });
     }
 
     if (req.method === 'PATCH') {
