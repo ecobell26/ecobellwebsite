@@ -588,6 +588,27 @@
     if (currentSection === 'press') {
       pendingImages = (item?.images || []).map(url => ({ url, filename: '', base64: null }));
       renderImageList();
+      // 개요 필드 표시 토글
+      const pinnedChk = document.getElementById('f-pinned');
+      function updatePressSummary() {
+        const sg = document.getElementById('f-summary-group');
+        if (sg) sg.style.display = pinnedChk?.checked ? '' : 'none';
+      }
+      updatePressSummary();
+      if (pinnedChk) pinnedChk.addEventListener('change', updatePressSummary);
+      // RTE에 이미지 추가 시 자동으로 이미지 섹션에 동기화
+      const rteObserver = new MutationObserver(() => {
+        if (!rteEl) return;
+        rteEl.querySelectorAll('img').forEach(img => {
+          const src = img.src;
+          if (!src) return;
+          if (!pendingImages.some(p => p.url === src)) {
+            pendingImages.push({ filename: '', url: src, base64: null });
+            renderImageList();
+          }
+        });
+      });
+      if (rteEl) rteObserver.observe(rteEl, { childList: true, subtree: true });
     }
     // 첨부파일 초기화
     if (currentSection === 'notices') {
@@ -1144,7 +1165,7 @@
         const [thumb] = reordered.splice(thumbnailIdx, 1);
         reordered.unshift(thumb);
       }
-      return { ...base, title: get('f-title'), content: rte('f-content'), date: get('f-date'), images: reordered };
+      return { ...base, title: get('f-title'), content: rte('f-content'), date: get('f-date'), images: reordered, summary: chk('f-pinned') ? get('f-summary') : '' };
     }
     if (currentSection === 'archive') {
       const existing = editingId ? (currentItems.find(i => i.id === editingId) || {}) : {};

@@ -1621,29 +1621,10 @@
 
 
     /* ─── 대표 기사 슬라이더 ─── */
-    const FEATURED = [
-      {
-        date: '2025-02-05',
-        title: '"재생에너지+VPP+탄소자산화" 통합...\'에너지 혁신 드림팀\' 출범 "눈길"',
-        desc: '주식회사 에코벨이 온실가스 감축 데이터를 수집·분석하고 이를 디지털화된 배출권으로 전환하는 \'에코에셋(ecoASSET)\' 플랫폼을 개발했다고 5일 발표했다.',
-        href: 'press-article.html'
-      },
-      {
-        date: '2026-01-13',
-        title: '에코벨, 재생에너지-탄소자산화 실증 추진…현장·데이터·AI 기술 결합',
-        desc: '에코벨이 재생에너지와 탄소자산화를 결합한 실증 프로젝트를 추진하며 현장 데이터와 AI 기술을 통합한 혁신적인 접근 방식으로 주목받고 있다.',
-        href: 'press-article.html'
-      },
-      {
-        date: '2025-04-30',
-        title: '에코벨, 초기창업패키지 및 ESG 그린지원금 선정 "탄소자산화 확장"',
-        desc: '에코벨이 초기창업패키지 및 ESG 그린지원금에 선정되어 탄소자산화 기술 개발과 사업 확장에 더욱 박차를 가할 예정이다.',
-        href: 'press-article.html'
-      }
-    ];
-    const N = FEATURED.length;
-    let featuredIdx = 0; // 논리 인덱스 (0~N-1)
-    let trackIdx = 1;    // 트랙 인덱스 (0=끝클론, 1~N=실제, N+1=시작클론)
+    let FEATURED = [];
+    let N = 0;
+    let featuredIdx = 0;
+    let trackIdx = 1;
     let isTransitioning = false;
 
     const ICON_PLAY  = '<svg width="9" height="10" viewBox="0 0 9 10" fill="none"><polygon points="1,1 8,5 1,9" fill="#000"/></svg>';
@@ -1756,7 +1737,30 @@
       resetAuto();
     });
 
-    startAuto();
+    // 데이터 로드 후 슬라이더 초기화
+    fetch('data/press.json')
+      .then(r => r.json())
+      .then(data => {
+        const pinned = (data.items || [])
+          .filter(i => i.pinned && i.published !== false)
+          .sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+        if (!pinned.length) return;
+        FEATURED = pinned.map(i => ({
+          date: i.date || '',
+          title: i.title || '',
+          desc: i.summary || '',
+          href: 'press-article.html?id=' + i.id,
+          bg: (i.images && i.images[0]) ? 'url(' + i.images[0] + ') center/cover' : '#c0c8cf'
+        }));
+        N = FEATURED.length;
+        featuredIdx = 0;
+        trackIdx = 1;
+        buildSlides();
+        updateDots();
+        goTo(1, 0);
+        startAuto();
+      })
+      .catch(() => {});
 
     /* ─── 카드 필터링 + 페이지네이션 ─── */
     function getItemsPerPage() { return window.innerWidth >= 1350 ? 8 : 9; }
