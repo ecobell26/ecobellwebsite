@@ -1,17 +1,6 @@
 {
   "items": [
     {
-      "pinned": false,
-      "published": true,
-      "title": "테스트 1",
-      "content": "테스트 1",
-      "date": "2026-05-18",
-      "author": "사업부",
-      "attachments": [],
-      "id": "mpajqd988vcrx",
-      "createdAt": "2026-05-18T01:49:33.212Z"
-    },
-    {
       "pinned": true,
       "published": true,
       "title": "(예시) 에코벨 서비스 이용약관 변경 안내",
