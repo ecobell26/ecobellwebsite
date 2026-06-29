@@ -2,6 +2,20 @@
   "items": [
     {
       "pinned": true,
+      "title": "CI 2026",
+      "type": "ci",
+      "year": "2026",
+      "period": "구분없음",
+      "date": "2026",
+      "file": "https://raw.githubusercontent.com/Elowen-yn/ecobellwebsite/main/assets/uploads/archive/1782722543525_________ecobell_CI.zip",
+      "fileEng": "",
+      "thumbnail": "",
+      "summary": "",
+      "createdAt": "2026-06-29T08:42:25.079Z",
+      "id": "mqyyz3cnzlrri"
+    },
+    {
+      "pinned": true,
       "title": "기업소개서 2026",
       "type": "intro",
       "year": "2026",
