@@ -261,6 +261,30 @@
     /* FAQ 분리 박스 */
     .faq-box { background: #fff; border-radius: 10px; box-shadow: 0 1px 6px rgba(0,0,0,0.07); margin-bottom: 10px; overflow: hidden; }
     .dark .faq-box { background: #252528; box-shadow: 0 1px 6px rgba(0,0,0,0.4); }
+    /* FAQ 아코디언 */
+    .faq-expand { border-top: 1px solid #f0f0f0; background: #f9fbfc; animation: faqSlide 0.18s ease; }
+    .dark .faq-expand { background: #1e1e24; border-color: #30303a; }
+    .faq-expand-inner { padding: 14px 18px 16px 48px; }
+    .faq-answer-label { font-size: 11px; font-weight: 600; color: #1E8DCD; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+    .faq-answer-text { font-size: 13px; color: #444; line-height: 1.7; white-space: pre-wrap; }
+    .dark .faq-answer-text { color: #a0aab8; }
+    @keyframes faqSlide { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    /* FAQ 카운트 */
+    .faq-count { font-size: 12px; color: #1E8DCD; font-weight: 600; padding: 2px 0 10px; }
+    /* FAQ 새항목 드롭다운 */
+    .add-btn-wrap { position: relative; display: inline-block; }
+    .faq-add-menu { position: absolute; top: calc(100% + 6px); right: 0; background: #fff; border: 1px solid #e0e5ea; border-radius: 10px; box-shadow: 0 4px 18px rgba(0,0,0,0.13); padding: 6px; min-width: 140px; z-index: 200; display: none; }
+    .faq-add-menu.open { display: block; }
+    .faq-add-menu-btn { display: flex; align-items: center; gap: 8px; width: 100%; padding: 9px 12px; border: none; background: none; font-size: 13px; color: #333; cursor: pointer; border-radius: 6px; font-family: inherit; text-align: left; transition: background 0.12s; }
+    .faq-add-menu-btn:hover { background: #eef6fb; color: #1E8DCD; }
+    .dark .faq-add-menu { background: #252528; border-color: #383848; }
+    .dark .faq-add-menu-btn { color: #d2d6de; }
+    .dark .faq-add-menu-btn:hover { background: #1e2838; color: #4da8d8; }
+    .dark #faq-excel-modal-box { background: #252528; }
+    .dark #faq-excel-modal-box span { color: #d8dce6; }
+    .dark #faq-excel-modal-box button[onclick="closeFaqExcelModal()"] { color: #707580; }
+    .dark #faq-excel-modal-box button:not([onclick="closeFaqExcelModal()"]),
+    .dark #faq-excel-modal-box label { background: #1c1c20; border-color: #383848; color: #d2d6de; }
     /* 더보기 버튼 */
     .load-more-wrap { padding: 14px 16px; border-top: 1px solid #f0f0f0; text-align: center; }
     .load-more-btn { padding: 0 24px; height: 34px; background: #fff; border: 1px solid #dde3ea; border-radius: 7px; font-size: 13px; color: #666; cursor: pointer; transition: all 0.15s; font-family: inherit; }
@@ -402,6 +426,19 @@
     .rte-content.notice-rte { font-family: 'Nanum Square', 'NanumSquare', sans-serif; font-weight: 400; font-size: 16px; color: #000; line-height: 40px; letter-spacing: 0; text-align: left; word-break: keep-all; overflow-wrap: break-word; }
     .rte-content.notice-rte p { margin-bottom: 0; }
     .rte-content.notice-rte p:last-child { margin-bottom: 0; }
+    /* ── 보도자료 본문 타이포 강제 ── */
+    .rte-content.press-rte { font-family: 'Noto Sans KR', -apple-system, sans-serif; font-weight: 400; font-size: 16px; line-height: 33px; letter-spacing: 0.5px; color: #000; background: none; word-break: keep-all; overflow-wrap: break-word; }
+    .dark .rte-content.press-rte { color: #fff; }
+    .rte-content.press-rte * { font-family: 'Noto Sans KR', -apple-system, sans-serif !important; font-weight: 400 !important; font-size: 16px !important; line-height: 33px !important; letter-spacing: 0.5px !important; color: inherit !important; background: none !important; background-color: transparent !important; text-decoration: none !important; }
+    .rte-content.press-rte p { margin: 0; }
+    /* 아카이브 폼 그리드 */
+    .arch-form-row { display: grid; gap: 16px; }
+    .arch-form-row-3 { grid-template-columns: 1fr 1fr 1fr; }
+    .arch-form-row-2 { grid-template-columns: 1fr 1fr; }
+    .arch-thumb-upload { width:100%; display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:20px 12px;border:2px dashed #e0e5ea;border-radius:8px;cursor:pointer;color:#aaa;font-size:13px;background:none;transition:border-color 0.15s; }
+    .arch-thumb-upload:hover { border-color:#1E8DCD;color:#1E8DCD; }
+    .dark .arch-thumb-upload { border-color:#383848;color:#505560; }
+    .dark .arch-thumb-upload:hover { border-color:#4090c0;color:#4090c0; }
 
     /* ── RTE 이미지 블록 ── */
     .rte-img-block { display: block; margin: 15px 0; text-align: center; }
@@ -521,7 +558,14 @@
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
           <input type="text" id="search-input" class="search-input" placeholder="검색" oninput="setSearch(this.value)">
         </div>
-        <button class="add-btn" onclick="showForm()">+ 새 항목 추가</button>
+        <button id="faq-dl-btn" class="faq-excel-btn" style="display:none;" onclick="downloadFaqExcel()"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="8 17 12 21 16 17"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"/></svg> 다운로드</button>
+        <div class="add-btn-wrap">
+          <button class="add-btn" onclick="handleAddBtn()">+ 새 항목 추가</button>
+          <div class="faq-add-menu" id="faq-add-menu">
+            <button class="faq-add-menu-btn" onclick="closeFaqAddMenu();showForm()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> 입력하기</button>
+            <button class="faq-add-menu-btn" onclick="closeFaqAddMenu();showFaqExcelModal()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg> 엑셀 업로드</button>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -607,6 +651,27 @@
 
 </div>
 
+<!-- FAQ 엑셀 모달 -->
+<div id="faq-excel-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:9500;align-items:center;justify-content:center;" onclick="if(event.target===this)closeFaqExcelModal()">
+  <div style="background:#fff;border-radius:14px;padding:28px 28px 24px;width:340px;max-width:90vw;box-shadow:0 8px 40px rgba(0,0,0,0.18);" id="faq-excel-modal-box">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+      <span style="font-size:15px;font-weight:700;color:#1a1f36;">엑셀 업로드</span>
+      <button onclick="closeFaqExcelModal()" style="background:none;border:none;cursor:pointer;color:#aaa;padding:2px;display:flex;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <button onclick="downloadFaqTemplate()" style="display:flex;align-items:center;gap:10px;padding:13px 16px;border:1px solid #e0e5ea;border-radius:10px;background:#f9fbfc;cursor:pointer;font-size:14px;color:#333;font-family:inherit;text-align:left;transition:border-color 0.15s;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1E8DCD" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        <div><div style="font-weight:600;">양식 다운로드</div><div style="font-size:12px;color:#888;margin-top:2px;">빈 엑셀 양식을 내려받습니다</div></div>
+      </button>
+      <label style="display:flex;align-items:center;gap:10px;padding:13px 16px;border:1px solid #e0e5ea;border-radius:10px;background:#f9fbfc;cursor:pointer;font-size:14px;color:#333;font-family:inherit;transition:border-color 0.15s;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1E8DCD" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>
+        <div><div style="font-weight:600;">파일 업로드</div><div style="font-size:12px;color:#888;margin-top:2px;">작성한 엑셀 파일을 가져옵니다</div></div>
+        <input type="file" id="faq-modal-upload-input" accept=".xlsx,.xls" style="display:none" onchange="uploadFaqExcel(this);closeFaqExcelModal()">
+      </label>
+    </div>
+  </div>
+</div>
+
 <!-- 토스트 -->
 <div class="toast" id="toast"></div>
 
@@ -625,6 +690,7 @@
   let _activeRteImg = null; // 현재 선택된 RTE 이미지
   let selectedIds = new Set();
   let faqFilter = 'all';
+  let faqExpandedId = null;
   let previewId = null;
   let listVisibleCount = 20;
   let archiveTab = 'intro';
@@ -764,6 +830,7 @@
     editingId = null;
     selectedIds.clear();
     faqFilter = 'all';
+    faqExpandedId = null;
     archiveTab = 'intro';
     listVisibleCount = 20;
     searchQuery = '';
@@ -828,31 +895,26 @@
 
     if (currentSection === 'faq') {
       const cats = ['전체', 'ecoValue', 'ecoASSET', 'E-ASSET', 'ecoNODE', '태양광 솔루션', '기타'];
-      // 엑셀 버튼 → pressTopArea (필터 위)
-      pressTopArea.style.display = '';
-      pressTopArea.innerHTML = `<div class="faq-excel-btns" style="display:flex;justify-content:flex-end;margin-bottom:8px;">
-        <button class="faq-excel-btn" onclick="downloadFaqTemplate()" title="빈 엑셀 양식 다운로드"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> 양식 다운로드</button>
-        <label class="faq-excel-btn" title="엑셀 파일로 FAQ 일괄 업로드"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg> 엑셀 업로드
-          <input type="file" id="faq-upload-input" accept=".xlsx,.xls" style="display:none" onchange="uploadFaqExcel(this)">
-        </label>
-        <button class="faq-excel-btn" onclick="downloadFaqExcel()" title="현재 FAQ 목록 엑셀 다운로드"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="8 17 12 21 16 17"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"/></svg> 엑셀 다운로드</button>
-      </div>`;
-      // 카테고리 필터만 faqTopArea
-      faqTopArea.style.display = '';
-      faqTopArea.innerHTML = `<div class="filter-bar" style="padding:4px 0 10px;">
-        <div class="filter-pills">${cats.map(c => {
-          const val = c === '전체' ? 'all' : c;
-          return `<button class="filter-pill ${faqFilter === val ? 'active' : ''}" onclick="setFaqFilter('${val}')">${c}</button>`;
-        }).join('')}</div>
-      </div>`;
+      pressTopArea.style.display = 'none';
       faqExcelArea.style.display = 'none';
+      document.getElementById('faq-dl-btn').style.display = '';
 
       displayItems = faqFilter === 'all' ? [...currentItems] : currentItems.filter(i =>
         String(i.category || '').split(',').map(s => s.trim()).includes(faqFilter)
       );
+
+      faqTopArea.style.display = '';
+      faqTopArea.innerHTML = `<div class="filter-bar" style="padding:4px 0 6px;">
+        <div class="filter-pills">${cats.map(c => {
+          const val = c === '전체' ? 'all' : c;
+          return `<button class="filter-pill ${faqFilter === val ? 'active' : ''}" onclick="setFaqFilter('${val}')">${c}</button>`;
+        }).join('')}</div>
+      </div>
+      <div class="faq-count">${displayItems.length}건</div>`;
     } else {
       faqTopArea.style.display = 'none';
       faqExcelArea.style.display = 'none';
+      document.getElementById('faq-dl-btn').style.display = 'none';
 
       if (currentSection === 'press') {
         pressTopArea.style.display = '';
@@ -936,7 +998,20 @@
       && !(currentSection === 'faq' && faqFilter !== 'all')
       && currentSection !== 'archive';
 
-    return `<div class="item-row" ${canDrag ? 'draggable="true"' : ''} data-id="${item.id}" data-idx="${idx}" onclick="openPreview('${item.id}')">
+    const isFaqExpanded = currentSection === 'faq' && faqExpandedId === item.id;
+    const rowClick = currentSection === 'faq' ? `toggleFaqRow('${item.id}')` : `openPreview('${item.id}')`;
+    const faqExpandHtml = currentSection === 'faq' ? `
+      <div class="faq-expand" id="faq-exp-${item.id}" style="${isFaqExpanded ? '' : 'display:none'}">
+        <div class="faq-expand-inner">
+          <div class="faq-answer-label">답변</div>
+          <div class="faq-answer-text">${escHtml(item.answer || '')}</div>
+          <div style="display:flex;gap:8px;margin-top:12px;">
+            <button class="faq-excel-btn" onclick="showForm('${item.id}')" style="font-size:12px;">수정</button>
+            <button class="faq-excel-btn" onclick="deleteItem('${item.id}')" style="font-size:12px;color:#e63946;border-color:#e0a0a8;">삭제</button>
+          </div>
+        </div>
+      </div>` : '';
+    return `<div class="item-row" ${canDrag ? 'draggable="true"' : ''} data-id="${item.id}" data-idx="${idx}" onclick="${rowClick}" style="${isFaqExpanded ? 'background:#f0f7fb;' : ''}">
       <input type="checkbox" class="item-check" ${selectedIds.has(item.id) ? 'checked' : ''} onclick="event.stopPropagation();toggleSelect('${item.id}')">
       ${currentSection !== 'faq' ? `<span class="item-pin ${isPinned ? 'pinned' : ''}" title="${isPinned ? '고정 해제' : '고정'}" onclick="event.stopPropagation();togglePin('${item.id}')"><svg width="14" height="14" viewBox="0 0 24 24" fill="${isPinned ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"/><path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z"/></svg></span>` : ''}
       <div class="item-info">
@@ -947,7 +1022,7 @@
       ${currentSection === 'faq' ? `<div class="item-cats">${(item.category || '기타').split(',').map(c => c.trim()).filter(Boolean).map(c => `<span class="item-cat">${escHtml(c)}</span>`).join('')}</div>` : ''}
       <button class="action-btn pub-eye ${isPublished ? 'on' : 'off'}" onclick="event.stopPropagation();togglePublish('${item.id}')" title="${isPublished ? '게시 중 (클릭하여 숨기기)' : '숨김 (클릭하여 게시)'}">${isPublished ? SVG_EYE : SVG_EYE_OFF}</button>
       ${canDrag ? '<span class="drag-handle" title="순서 변경" onclick="event.stopPropagation()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="5" r="1" fill="currentColor"/><circle cx="9" cy="12" r="1" fill="currentColor"/><circle cx="9" cy="19" r="1" fill="currentColor"/><circle cx="15" cy="5" r="1" fill="currentColor"/><circle cx="15" cy="12" r="1" fill="currentColor"/><circle cx="15" cy="19" r="1" fill="currentColor"/></svg></span>' : ''}
-    </div>`;
+    </div>${faqExpandHtml}`;
   }
 
   /* ── 드래그 앤 드롭 ── */
@@ -1040,9 +1115,50 @@
   /* ── 필터/탭 ── */
   function setFaqFilter(cat) {
     faqFilter = cat;
+    faqExpandedId = null;
     selectedIds.clear();
     listVisibleCount = 20;
     renderList();
+  }
+
+  function toggleFaqRow(id) {
+    faqExpandedId = faqExpandedId === id ? null : id;
+    renderList();
+  }
+
+  function handleAddBtn() {
+    if (currentSection === 'faq') {
+      const menu = document.getElementById('faq-add-menu');
+      const isOpen = menu.classList.contains('open');
+      menu.classList.toggle('open', !isOpen);
+      if (!isOpen) {
+        setTimeout(() => {
+          const close = e => {
+            if (!e.target.closest('.add-btn-wrap')) {
+              menu.classList.remove('open');
+              document.removeEventListener('mousedown', close);
+            }
+          };
+          document.addEventListener('mousedown', close);
+        }, 0);
+      }
+    } else {
+      showForm();
+    }
+  }
+
+  function closeFaqAddMenu() {
+    document.getElementById('faq-add-menu')?.classList.remove('open');
+  }
+
+  function showFaqExcelModal() {
+    document.getElementById('faq-excel-modal').style.display = 'flex';
+  }
+
+  function closeFaqExcelModal() {
+    document.getElementById('faq-excel-modal').style.display = 'none';
+    const inp = document.getElementById('faq-modal-upload-input');
+    if (inp) inp.value = '';
   }
 
   function setArchiveTab(tab) {
@@ -1231,6 +1347,32 @@
       }
       updatePressSummary();
       if (pinnedChk) pinnedChk.addEventListener('change', updatePressSummary);
+      // 보도자료 스타일 강제: 붙여넣기 시 순수 텍스트로 정규화
+      const PRESS_LOCKED = ['font-size','line-height','letter-spacing','font-family','font-weight','color','background','background-color','text-decoration'];
+      function stripPressStyles() {
+        if (!rteEl) return;
+        rteEl.querySelectorAll('*').forEach(el => {
+          if (el.classList?.contains('rte-img') || el.classList?.contains('rte-img-block')) return;
+          PRESS_LOCKED.forEach(p => el.style.removeProperty(p));
+          // b/strong/em/i/u → span으로 교체
+          if (['B','STRONG','EM','I','U','MARK'].includes(el.tagName)) {
+            const span = document.createElement('span');
+            span.innerHTML = el.innerHTML;
+            el.replaceWith(span);
+          }
+        });
+      }
+      if (rteEl) {
+        rteEl.addEventListener('paste', e => {
+          e.preventDefault();
+          const text = (e.clipboardData || window.clipboardData).getData('text/plain');
+          if (!text) return;
+          const lines = text.split(/\r?\n/);
+          const html = lines.map(l => `<p>${escHtml(l) || '<br>'}</p>`).join('');
+          document.execCommand('insertHTML', false, html);
+        });
+        rteEl.addEventListener('input', stripPressStyles);
+      }
       // RTE에 이미지 추가 시 자동으로 이미지 섹션에 동기화
       const rteObserver = new MutationObserver(() => {
         if (!rteEl) return;
@@ -1340,8 +1482,8 @@
         <div class="form-group full"><label class="form-label">제목 *</label><input class="form-input" id="f-title" value="${escAttr(v('title',''))}" placeholder="보도자료 제목"></div>
         <div class="form-group"><label class="form-label">날짜</label><input class="form-input" type="date" id="f-date" value="${escAttr(v('date',''))}"></div>
         <div class="form-group full">
-          <label class="form-label">내용 *</label>
-          <div class="rte-wrap">${RTE_TOOLBAR}<div class="rte-content" id="f-content" contenteditable="true" data-placeholder="내용을 입력하세요">${v('content','')}</div></div>
+          <label class="form-label">내용 * <span style="font-weight:400;color:#aaa;font-size:12px;">Noto Sans KR · 16px · 행간 33px · 자간 0.5px · 항상 고정</span></label>
+          <div class="rte-wrap">${RTE_TOOLBAR}<div class="rte-content press-rte" id="f-content" contenteditable="true" data-placeholder="내용을 입력하세요">${v('content','')}</div></div>
         </div>
         <div class="form-group full">
           <label class="form-label">이미지 <span style="font-weight:400;color:#aaa;font-size:12px;">★ 클릭으로 썸네일 지정</span></label>
@@ -1371,31 +1513,52 @@
             <div id="f-file-hint-icon">📎 클릭하거나 파일을 드롭하세요</div>
             <div class="upload-hint">PDF, ZIP 등 지원</div>
           </div>`;
+      const existingThumb = v('thumbnail', '');
+      const thumbBlock = existingThumb
+        ? `<div class="archive-file-item" id="f-thumb-area">
+            <span class="archive-file-name" title="${escAttr(existingThumb)}">${escHtml(existingThumb.split('/').pop())}</span>
+            <button type="button" class="arch-thumb-btn" onclick="previewArchiveThumb()" style="flex-shrink:0;">미리보기</button>
+            <button type="button" class="archive-file-del" onclick="clearArchiveThumb()" title="삭제"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+          </div>`
+        : `<label class="arch-thumb-upload" id="f-thumb-area"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>클릭하거나 파일을 드롭하세요</span><span style="font-size:11px;">이미지 파일 지원</span><input type="file" accept="image/*" style="display:none" onchange="archiveThumbSelected(this)"></label>`;
       fields = `
-        <div class="form-group">
-          <label class="form-label">유형 *</label>
-          <select class="form-select" id="f-type" onchange="onArchiveTypeChange(this.value)">
-            ${['intro','catalog','ir','ci'].map(t => `<option value="${t}" ${archType===t?'selected':''}>${{intro:'기업소개서',catalog:'카탈로그/지명원',ir:'IR',ci:'CI'}[t]}</option>`).join('')}
-          </select>
+        <div class="arch-form-row arch-form-row-3">
+          <div class="form-group">
+            <label class="form-label">유형 *</label>
+            <select class="form-select" id="f-type" onchange="onArchiveTypeChange(this.value)">
+              ${['intro','catalog','ir','ci'].map(t => `<option value="${t}" ${archType===t?'selected':''}>${{intro:'기업소개서',catalog:'카탈로그/지명원',ir:'IR',ci:'CI'}[t]}</option>`).join('')}
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">연도 *</label>
+            <input class="form-input" type="number" id="f-year" value="${escAttr(String(yearVal))}" min="2000" max="2100" placeholder="${new Date().getFullYear()}">
+          </div>
+          <div class="form-group">
+            <label class="form-label">구분</label>
+            <select class="form-select" id="f-period">
+              ${PERIODS.map(p => `<option value="${p}" ${periodVal===p?'selected':''}>${p}</option>`).join('')}
+            </select>
+          </div>
         </div>
-        <div class="form-group">
-          <label class="form-label">연도 *</label>
-          <input class="form-input" type="number" id="f-year" value="${escAttr(String(yearVal))}" min="2000" max="2100" placeholder="${new Date().getFullYear()}">
+        <div class="arch-form-row arch-form-row-2" style="margin-top:16px;">
+          <div class="form-group" id="f-file-group">
+            <label class="form-label">PDF 파일 *</label>
+            ${pdfBlock}
+          </div>
+          <div class="form-group" id="f-thumb-group"
+            ondragover="event.preventDefault();document.getElementById('f-thumb-area').style.borderColor='#1E8DCD'"
+            ondragleave="document.getElementById('f-thumb-area').style.borderColor=''"
+            ondrop="event.preventDefault();document.getElementById('f-thumb-area').style.borderColor='';archiveThumbDropped(event)">
+            <label class="form-label">썸네일 이미지 *</label>
+            ${thumbBlock}
+          </div>
         </div>
-        <div class="form-group">
-          <label class="form-label">구분</label>
-          <select class="form-select" id="f-period">
-            ${PERIODS.map(p => `<option value="${p}" ${periodVal===p?'selected':''}>${p}</option>`).join('')}
-          </select>
-        </div>
-        <div class="form-group" id="f-file-group">
-          <label class="form-label">PDF 파일 *</label>
-          ${pdfBlock}
-        </div>
-        <div class="form-group full" id="f-summary-group" style="display:${needSummary?'':'none'}">
-          <label class="form-label">파일 정보 요약 * <span style="font-weight:400;color:#aaa;font-size:12px;">60~100자</span></label>
-          <textarea class="form-textarea" id="f-summary" rows="3" maxlength="100" placeholder="파일에 대한 요약 정보를 60~100자로 입력하세요" oninput="updateSummaryCount(this)">${escHtml(summaryVal)}</textarea>
-          <div id="f-summary-count" style="text-align:right;font-size:11px;color:#aaa;margin-top:3px;">${summaryVal.length}/100</div>
+        <div style="margin-top:16px;">
+          <div class="form-group" style="display:${needSummary?'flex':'none'};flex-direction:column;gap:6px;" id="f-summary-inner">
+            <label class="form-label">파일 정보 요약 * <span style="font-weight:400;color:#aaa;font-size:12px;">60~100자</span></label>
+            <textarea class="form-textarea" id="f-summary" rows="3" maxlength="100" placeholder="파일에 대한 요약 정보를 60~100자로 입력하세요" oninput="updateSummaryCount(this)">${escHtml(summaryVal)}</textarea>
+            <div id="f-summary-count" style="text-align:right;font-size:11px;color:#aaa;margin-top:3px;">${summaryVal.length}/100</div>
+          </div>
         </div>
         <input type="checkbox" id="f-pinned" style="display:none" ${v('pinned',false)?'checked':''}>`;
 
@@ -1416,15 +1579,9 @@
     return `
       <div class="form-title" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
         <span>${isEdit ? '항목 수정' : '새 항목 추가'}</span>
-        ${currentSection === 'archive' ? `<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-          <button type="button" class="arch-pin-btn ${v('pinned',false)?'pinned':''}" id="f-pinned-btn" onclick="toggleArchiveFormPin()" title="상단 고정">${pinSvg}</button>
-          <div class="arch-thumb-area" id="f-thumb-area">${v('thumbnail','') ?
-            `<span class="arch-thumb-name" title="${escAttr(v('thumbnail',''))}">${escHtml(v('thumbnail','').split('/').pop())}</span><span class="arch-thumb-sep">|</span><button type="button" class="arch-thumb-btn" onclick="previewArchiveThumb()">미리보기</button><button type="button" class="archive-file-del" onclick="clearArchiveThumb()" title="삭제" style="margin-left:2px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>`
-            : `<label class="arch-thumb-btn" id="f-thumb-label" style="cursor:pointer;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg> 이미지 업로드 *<input type="file" accept="image/*" style="display:none" onchange="archiveThumbSelected(this)"></label>`
-          }</div>
-        </div>` : ''}
+        ${currentSection === 'archive' ? `<button type="button" class="arch-pin-btn ${v('pinned',false)?'pinned':''}" id="f-pinned-btn" onclick="toggleArchiveFormPin()" title="상단 고정">${pinSvg}</button>` : ''}
       </div>
-      <div class="form-grid">${fields}</div>
+      ${currentSection === 'archive' ? fields : `<div class="form-grid">${fields}</div>`}
       ${currentSection !== 'faq' && currentSection !== 'archive' ? `
       <div class="form-grid" style="margin-top:14px;">
         <div class="form-group">
@@ -1456,13 +1613,15 @@
       const dataUrl = e.target.result;
       const base64 = dataUrl.split(',')[1];
       pendingFiles['thumbnail'] = { base64, filename: file.name, folder: 'archive', dataUrl };
-      const area = document.getElementById('f-thumb-area');
-      if (!area) return;
-      area.innerHTML = `
-        <span class="arch-thumb-name" title="${escAttr(file.name)}">${escHtml(file.name)}</span>
-        <span class="arch-thumb-sep">|</span>
-        <button type="button" class="arch-thumb-btn" onclick="previewArchiveThumb()">미리보기</button>
-        <button type="button" class="archive-file-del" onclick="clearArchiveThumb()" title="삭제" style="margin-left:2px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>`;
+      const group = document.getElementById('f-thumb-group');
+      if (!group) return;
+      const label = group.querySelector('label.form-label');
+      const labelHtml = label ? label.outerHTML : '<label class="form-label">썸네일 이미지 *</label>';
+      group.innerHTML = labelHtml + `<div class="archive-file-item" id="f-thumb-area">
+        <span class="archive-file-name" title="${escAttr(file.name)}">${escHtml(file.name)}</span>
+        <button type="button" class="arch-thumb-btn" onclick="previewArchiveThumb()" style="flex-shrink:0;">미리보기</button>
+        <button type="button" class="archive-file-del" onclick="clearArchiveThumb()" title="삭제"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      </div>`;
     };
     reader.readAsDataURL(file);
   }
@@ -1484,8 +1643,17 @@
   function clearArchiveThumb() {
     delete pendingFiles['thumbnail'];
     _archiveClearedFiles.thumbnail = true;
-    const area = document.getElementById('f-thumb-area');
-    if (area) area.innerHTML = `<label class="arch-thumb-btn" id="f-thumb-label" style="cursor:pointer;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg> 이미지 업로드 *<input type="file" accept="image/*" style="display:none" onchange="archiveThumbSelected(this)"></label>`;
+    const group = document.getElementById('f-thumb-group');
+    if (!group) return;
+    const label = group.querySelector('label.form-label');
+    const labelHtml = label ? label.outerHTML : '<label class="form-label">썸네일 이미지 *</label>';
+    group.innerHTML = labelHtml + `<label class="arch-thumb-upload" id="f-thumb-area"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>클릭하거나 파일을 드롭하세요</span><span style="font-size:11px;">이미지 파일 지원</span><input type="file" accept="image/*" style="display:none" onchange="archiveThumbSelected(this)"></label>`;
+  }
+
+  function archiveThumbDropped(e) {
+    const file = e.dataTransfer?.files?.[0];
+    if (!file) return;
+    archiveThumbSelected({ files: [file] });
   }
 
   function handleArchiveFile(input) {
@@ -1528,8 +1696,8 @@
   }
 
   function onArchiveTypeChange(val) {
-    const sg = document.getElementById('f-summary-group');
-    if (sg) sg.style.display = ['intro','catalog'].includes(val) ? '' : 'none';
+    const si = document.getElementById('f-summary-inner');
+    if (si) si.style.display = ['intro','catalog'].includes(val) ? 'flex' : 'none';
   }
 
   function updateSummaryCount(el) {
@@ -1793,8 +1961,7 @@
       }
       if (!hasThumb) {
         const area = document.getElementById('f-thumb-area');
-        const lbl = area?.querySelector('label.arch-thumb-btn');
-        if (lbl) { lbl.style.borderColor = '#e63946'; lbl.style.color = '#e63946'; }
+        if (area) { area.style.borderColor = '#e63946'; area.style.color = '#e63946'; }
         showToast('썸네일 이미지를 업로드하세요.'); btn.disabled = false; btn.textContent = '저장'; return;
       }
       if (['intro','catalog'].includes(archType)) {
