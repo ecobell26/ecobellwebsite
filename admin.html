@@ -121,50 +121,40 @@
 
     /* ── 아카이브 중앙 모달 ── */
     .arch-modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.48); z-index: 8500; display: flex; align-items: center; justify-content: center; }
-    .arch-modal-box { background: #fff; border-radius: 16px; width: 540px; max-width: 92vw; max-height: 86vh; overflow-y: auto; box-shadow: 0 12px 50px rgba(0,0,0,0.22); display: flex; flex-direction: column; animation: archModalIn 0.2s cubic-bezier(0.4,0,0.2,1); }
-    @keyframes archModalIn { from { opacity:0; transform: scale(0.95); } to { opacity:1; transform: scale(1); } }
-    .arch-modal-head { display: flex; align-items: center; justify-content: space-between; padding: 20px 24px 16px; border-bottom: 1px solid #f0f0f0; gap: 12px; flex-shrink: 0; }
-    .arch-modal-title { font-size: 16px; font-weight: 700; color: #1a1f36; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .arch-modal-close { width: 30px; height: 30px; border: none; background: none; cursor: pointer; color: #aaa; display: flex; align-items: center; justify-content: center; border-radius: 6px; flex-shrink: 0; }
-    .arch-modal-close:hover { background: #f5f5f5; color: #555; }
-    .arch-modal-body { padding: 20px 24px 24px; flex: 1; }
-    .arch-modal-thumb { width: 100%; max-height: 220px; object-fit: cover; border-radius: 10px; margin-bottom: 18px; }
-    .arch-modal-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
-    .arch-modal-summary { font-size: 14px; color: #555; line-height: 1.7; margin: 14px 0; padding: 14px 16px; background: #f9fbfc; border-radius: 8px; border-left: 3px solid #1E8DCD; }
-    .arch-modal-file-btn { display: inline-flex; align-items: center; gap: 6px; padding: 0 16px; height: 36px; background: #1E8DCD; color: #fff; border: none; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; text-decoration: none; transition: background 0.15s; }
-    .arch-modal-file-btn:hover { background: #1679b3; }
-    .arch-modal-actions { display: flex; gap: 8px; margin-top: 20px; padding-top: 18px; border-top: 1px solid #f0f0f0; flex-wrap: wrap; }
-    .arch-modal-created { font-size: 11px; color: #aaa; margin-top: 12px; }
+    .arch-modal-box { background: #fff; border-radius: 14px; width: 820px; max-width: 94vw; max-height: 88vh; overflow-y: auto; box-shadow: 0 16px 60px rgba(0,0,0,0.24); display: flex; flex-direction: column; animation: archModalIn 0.18s cubic-bezier(0.4,0,0.2,1); }
+    @keyframes archModalIn { from { opacity:0; transform: scale(0.96); } to { opacity:1; transform: scale(1); } }
+    .arch-modal-head { display: flex; align-items: center; justify-content: space-between; padding: 12px 18px; gap: 10px; flex-shrink: 0; }
+    .arch-modal-created { font-size: 12px; color: #aaa; white-space: nowrap; }
+    .arch-modal-head-actions { display: flex; align-items: center; gap: 3px; }
+    .arch-modal-divider { height: 1px; background: #f0f2f4; flex-shrink: 0; }
+    .arch-modal-body { padding: 22px 26px 26px; flex: 1; }
+    .arch-modal-title { font-size: 18px; font-weight: 700; color: #1a1f36; margin-bottom: 10px; line-height: 1.4; }
+    .arch-modal-meta { display: flex; align-items: center; gap: 7px; margin-bottom: 20px; flex-wrap: wrap; }
     .arch-modal-badge { display: inline-block; padding: 2px 10px; background: #e8f4fc; color: #1E8DCD; border-radius: 20px; font-size: 12px; font-weight: 600; }
-    .arch-modal-meta-item { font-size: 13px; color: #666; }
-    .arch-modal-pub { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 600; }
-    .arch-modal-pub-live { background: #e6f9ec; color: #2e8b55; }
-    .arch-modal-pub-hidden { background: #f5f5f5; color: #999; }
-    .arch-modal-act-btn { flex: 1; min-width: 70px; height: 36px; border-radius: 8px; border: 1px solid #ddd; background: #f9f9f9; font-size: 13px; font-weight: 600; cursor: pointer; transition: background 0.13s, color 0.13s; }
-    .arch-modal-act-edit { background: #1E8DCD; color: #fff; border-color: #1E8DCD; }
-    .arch-modal-act-edit:hover { background: #1679b3; }
-    .arch-modal-act-pub { color: #555; }
-    .arch-modal-act-pub:hover { background: #eee; }
-    .arch-modal-act-pin { color: #555; }
-    .arch-modal-act-pin:hover { background: #eee; }
-    .arch-modal-act-del { color: #e55; border-color: #f5d5d5; background: #fff5f5; }
-    .arch-modal-act-del:hover { background: #ffe0e0; }
+    .arch-modal-meta-item { font-size: 13px; color: #777; }
+    .arch-modal-meta-sep { color: #ddd; font-size: 13px; }
+    .arch-modal-content { display: flex; gap: 22px; align-items: flex-start; margin-bottom: 20px; }
+    .arch-modal-thumb-wrap { flex-shrink: 0; width: 200px; }
+    .arch-modal-thumb { width: 100%; border-radius: 10px; object-fit: cover; display: block; }
+    .arch-modal-thumb-placeholder { width: 200px; height: 140px; background: #f0f4f8; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #bbb; font-size: 12px; }
+    .arch-modal-summary-wrap { flex: 1; min-width: 0; }
+    .arch-modal-summary-label { font-size: 11px; font-weight: 600; color: #1E8DCD; letter-spacing: 0.5px; margin-bottom: 8px; }
+    .arch-modal-summary-text { font-size: 14px; color: #444; line-height: 1.75; white-space: pre-wrap; }
+    .arch-modal-pdf-row { display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: #f7f9fb; border-radius: 10px; border: 1px solid #e8edf2; }
+    .arch-modal-pdf-name { flex: 1; font-size: 13px; color: #555; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .arch-modal-pdf-open { display: inline-flex; align-items: center; gap: 5px; padding: 0 14px; height: 30px; background: #1E8DCD; color: #fff; border: none; border-radius: 7px; font-size: 12px; font-weight: 600; cursor: pointer; text-decoration: none; white-space: nowrap; transition: background 0.15s; flex-shrink: 0; }
+    .arch-modal-pdf-open:hover { background: #1679b3; }
     .dark .arch-modal-box { background: #252528; }
-    .dark .arch-modal-head { border-color: #30303a; }
+    .dark .arch-modal-divider { background: #30303a; }
+    .dark .arch-modal-created { color: #5a6070; }
     .dark .arch-modal-title { color: #d8dce6; }
-    .dark .arch-modal-close { color: #606570; }
-    .dark .arch-modal-close:hover { background: #2a2a30; color: #aaa; }
-    .dark .arch-modal-body { color: #d2d6de; }
-    .dark .arch-modal-summary { background: #1c1c20; border-color: #4090c0; color: #a0aab8; }
-    .dark .arch-modal-actions { border-color: #30303a; }
-    .dark .arch-modal-badge { background: #1a2c3a; color: #4da8d8; }
     .dark .arch-modal-meta-item { color: #8898aa; }
-    .dark .arch-modal-pub-live { background: #1a2e22; color: #5cb87a; }
-    .dark .arch-modal-pub-hidden { background: #28282e; color: #666; }
-    .dark .arch-modal-act-btn { background: #2e2e38; border-color: #404050; color: #b0bece; }
-    .dark .arch-modal-act-edit { background: #1E8DCD; color: #fff; border-color: #1E8DCD; }
-    .dark .arch-modal-act-del { background: #2e1a1a; border-color: #5a2828; color: #f08080; }
-    .dark .arch-modal-created { color: #60687a; }
+    .dark .arch-modal-meta-sep { color: #404050; }
+    .dark .arch-modal-badge { background: #1a2c3a; color: #4da8d8; }
+    .dark .arch-modal-thumb-placeholder { background: #2a2a32; color: #505868; }
+    .dark .arch-modal-summary-text { color: #a8b8c8; }
+    .dark .arch-modal-pdf-row { background: #1e1e24; border-color: #30303a; }
+    .dark .arch-modal-pdf-name { color: #8898aa; }
     /* ── 미리보기 패널 ── */
     .preview-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.32); z-index: 8000; display: flex; align-items: stretch; justify-content: flex-end; }
     .preview-panel { background: #fff; width: 728px; max-width: 90vw; display: flex; flex-direction: column; box-shadow: -6px 0 40px rgba(0,0,0,0.13); animation: slideInR 0.22s cubic-bezier(0.4,0,0.2,1); }
@@ -1128,48 +1118,74 @@ function showDashboard() {
 
 
   /* ── 아카이브 미리보기 모달 ── */
+  const _SVG_EDIT_SM  = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>`;
+  const _SVG_PIN_SM   = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"/><path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24z"/></svg>`;
+  const _SVG_EYE_SM   = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>`;
+  const _SVG_EYEOF_SM = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>`;
+  const _SVG_DEL_SM   = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>`;
+  const _SVG_CLOSE_SM = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`;
+
   function openArchiveModal(id) {
     const item = currentItems.find(i => i.id === id);
     if (!item) return;
 
     const typeLabels = { intro: '기업소개서', catalog: '카탈로그/지명원', ir: 'IR', ci: 'CI' };
     const typeLabel = typeLabels[item.type] || item.type || '';
-    const pubLabel = item.published === false ? '숨김' : '게시중';
-    const pinLabel = item.pinned ? '고정됨' : '고정';
-    const thumbSrc = item.thumb || item.thumbnail || '';
-    const pdfUrl = item.file || item.pdf || '';
-    const summary = item.summary || '';
-    const year = item.year || '';
-    const period = item.period || item.gubun || '';
+    const thumbSrc  = item.thumb || item.thumbnail || '';
+    const pdfUrl    = item.file || item.pdf || '';
+    const pdfName   = item.fileName || item.title || 'PDF 파일';
+    const summary   = item.summary || '';
+    const year      = item.year || '';
+    const period    = item.period || item.gubun || '';
+    const isPinned  = !!item.pinned;
+    const isPub     = item.published !== false;
+    const createdStr = item.createdAt ? new Date(item.createdAt).toLocaleString('ko-KR', {year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'}) : '';
+
+    const _close = `document.getElementById('arch-modal-overlay').remove()`;
 
     const overlay = document.createElement('div');
     overlay.className = 'arch-modal-overlay';
+    overlay.id = 'arch-modal-overlay';
     overlay.innerHTML = `
       <div class="arch-modal-box" id="arch-modal-inner">
+        <!-- 헤더 -->
         <div class="arch-modal-head">
-          <span class="arch-modal-title">${escHtml(item.title || '')}</span>
-          <button class="arch-modal-close" onclick="document.getElementById('arch-modal-overlay').remove()">✕</button>
+          <span class="arch-modal-created">${createdStr ? '등록일시: ' + escHtml(createdStr) : ''}</span>
+          <div class="arch-modal-head-actions">
+            <button class="preview-btn" onclick="${_close};showForm('${id}')" title="편집">${_SVG_EDIT_SM}편집</button>
+            <button class="preview-btn ${isPinned ? 'pin-on' : ''}" id="ampin-${id}" onclick="togglePin('${id}');${_close}" title="${isPinned ? '고정 해제' : '고정'}">${_SVG_PIN_SM}${isPinned ? '고정됨' : '고정'}</button>
+            <button class="preview-btn ${isPub ? '' : 'eye-off'}" id="ampub-${id}" onclick="togglePublish('${id}');${_close}" title="${isPub ? '숨기기' : '게시'}">${isPub ? _SVG_EYE_SM : _SVG_EYEOF_SM}${isPub ? '숨기기' : '게시'}</button>
+            <button class="preview-btn del" onclick="${_close};deleteItem('${id}')" title="삭제">${_SVG_DEL_SM}삭제</button>
+            <button class="preview-btn close-x" onclick="${_close}" title="닫기">${_SVG_CLOSE_SM}</button>
+          </div>
         </div>
+        <div class="arch-modal-divider"></div>
+        <!-- 바디 -->
         <div class="arch-modal-body">
-          ${thumbSrc ? `<img class="arch-modal-thumb" src="${escHtml(thumbSrc)}" alt="썸네일">` : ''}
+          <div class="arch-modal-title">${escHtml(item.title || '')}</div>
           <div class="arch-modal-meta">
-            <span class="arch-modal-badge">${escHtml(typeLabel)}</span>
-            ${year ? `<span class="arch-modal-meta-item">📅 ${escHtml(year)}</span>` : ''}
-            ${period ? `<span class="arch-modal-meta-item">· ${escHtml(period)}</span>` : ''}
-            <span class="arch-modal-pub ${item.published === false ? 'arch-modal-pub-hidden' : 'arch-modal-pub-live'}">${pubLabel}</span>
+            ${typeLabel ? `<span class="arch-modal-badge">${escHtml(typeLabel)}</span>` : ''}
+            ${year ? `<span class="arch-modal-meta-sep">·</span><span class="arch-modal-meta-item">${escHtml(year)}</span>` : ''}
+            ${period ? `<span class="arch-modal-meta-sep">·</span><span class="arch-modal-meta-item">${escHtml(period)}</span>` : ''}
           </div>
-          ${summary ? `<div class="arch-modal-summary">${escHtml(summary)}</div>` : ''}
-          ${pdfUrl ? `<a class="arch-modal-file-btn" href="${escHtml(pdfUrl)}" target="_blank" rel="noopener">PDF 열기</a>` : ''}
-          <div class="arch-modal-actions">
-            <button class="arch-modal-act-btn arch-modal-act-edit" onclick="document.getElementById('arch-modal-overlay').remove();showForm('${id}')">편집</button>
-            <button class="arch-modal-act-btn arch-modal-act-pub" onclick="togglePublish('${id}');document.getElementById('arch-modal-overlay').remove()">${item.published === false ? '게시' : '숨김'}</button>
-            <button class="arch-modal-act-btn arch-modal-act-pin" onclick="togglePin('${id}');document.getElementById('arch-modal-overlay').remove()">${pinLabel}</button>
-            <button class="arch-modal-act-btn arch-modal-act-del" onclick="document.getElementById('arch-modal-overlay').remove();deleteItem('${id}')">삭제</button>
+          <div class="arch-modal-content">
+            <div class="arch-modal-thumb-wrap">
+              ${thumbSrc
+                ? `<img class="arch-modal-thumb" src="${escHtml(thumbSrc)}" alt="썸네일">`
+                : `<div class="arch-modal-thumb-placeholder">썸네일 없음</div>`}
+            </div>
+            <div class="arch-modal-summary-wrap">
+              <div class="arch-modal-summary-label">파일 정보 요약</div>
+              <div class="arch-modal-summary-text">${escHtml(summary) || '<span style="color:#bbb;font-size:13px;">요약 없음</span>'}</div>
+            </div>
           </div>
-          ${item.createdAt ? `<div class="arch-modal-created">등록일: ${new Date(item.createdAt).toLocaleDateString('ko-KR')}</div>` : ''}
+          ${pdfUrl ? `
+          <div class="arch-modal-pdf-row">
+            <span class="arch-modal-pdf-name">${escHtml(pdfName)}</span>
+            <a class="arch-modal-pdf-open" href="${escHtml(pdfUrl)}" target="_blank" rel="noopener">열기</a>
+          </div>` : ''}
         </div>
       </div>`;
-    overlay.id = 'arch-modal-overlay';
     overlay.addEventListener('click', e => {
       if (!document.getElementById('arch-modal-inner').contains(e.target)) overlay.remove();
     });
@@ -1610,6 +1626,7 @@ function showDashboard() {
       const periodVal = v('period', '구분없음');
       const summaryVal = v('summary', '');
       const existingFile = v('file', '');
+      const existingFileEng = v('fileEng', '');
       const PERIODS = ['구분없음','상반기','하반기','1분기','2분기','3분기','4분기','연간'];
       const needSummary = ['intro','catalog'].includes(archType);
       const pdfBlock = existingFile
@@ -1619,12 +1636,27 @@ function showDashboard() {
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
             </button>
           </div>`
-        : `<div class="upload-area" id="f-pdf-upload" onclick="document.getElementById('f-file-input').click()"
+        : `<div class="upload-area" id="f-pdf-upload" onclick="document.getElementById('f-file-kor-input').click()"
             ondragover="event.preventDefault();this.style.borderColor='#1E8DCD'"
             ondragleave="this.style.borderColor=''"
             ondrop="event.preventDefault();this.style.borderColor='';handleArchiveFile({files:event.dataTransfer.files})">
-            <input type="file" id="f-file-input" accept=".pdf,.zip" style="display:none" onchange="handleArchiveFile(this)">
+            <input type="file" id="f-file-kor-input" accept=".pdf,.zip" style="display:none" onchange="handleArchiveFile(this)">
             <div id="f-file-hint-icon">📎 클릭하거나 파일을 드롭하세요</div>
+            <div class="upload-hint">PDF, ZIP 등 지원</div>
+          </div>`;
+      const pdfEngBlock = existingFileEng
+        ? `<div class="archive-file-item" id="f-pdf-eng-item">
+            <span class="archive-file-name" title="${escAttr(existingFileEng)}">${escHtml(existingFileEng.split('/').pop())}</span>
+            <button type="button" class="archive-file-del" onclick="clearArchiveFileEng()" title="삭제">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+          </div>`
+        : `<div class="upload-area" id="f-pdf-eng-upload" onclick="document.getElementById('f-file-eng-input').click()"
+            ondragover="event.preventDefault();this.style.borderColor='#1E8DCD'"
+            ondragleave="this.style.borderColor=''"
+            ondrop="event.preventDefault();this.style.borderColor='';handleArchiveFileEng({files:event.dataTransfer.files})">
+            <input type="file" id="f-file-eng-input" accept=".pdf,.zip" style="display:none" onchange="handleArchiveFileEng(this)">
+            <div>📎 클릭하거나 파일을 드롭하세요</div>
             <div class="upload-hint">PDF, ZIP 등 지원</div>
           </div>`;
       const existingThumb = v('thumbnail', '');
@@ -1654,10 +1686,14 @@ function showDashboard() {
             </select>
           </div>
         </div>
-        <div class="arch-form-row arch-form-row-2" style="margin-top:16px;">
+        <div class="arch-form-row arch-form-row-3" style="margin-top:16px;">
           <div class="form-group" id="f-file-group">
-            <label class="form-label">PDF 파일 *</label>
+            <label class="form-label">국문 PDF *</label>
             ${pdfBlock}
+          </div>
+          <div class="form-group" id="f-file-eng-group">
+            <label class="form-label">영문 PDF <span style="font-weight:400;color:#aaa;font-size:11px;">선택</span></label>
+            ${pdfEngBlock}
           </div>
           <div class="form-group" id="f-thumb-group"
             ondragover="event.preventDefault();document.getElementById('f-thumb-area').style.borderColor='#1E8DCD'"
@@ -1781,7 +1817,7 @@ function showDashboard() {
       const group = document.getElementById('f-file-group');
       if (!group) return;
       const label = group.querySelector('label.form-label');
-      group.innerHTML = (label ? label.outerHTML : '<label class="form-label">PDF 파일 *</label>') + `
+      group.innerHTML = (label ? label.outerHTML : '<label class="form-label">국문 PDF *</label>') + `
         <div class="archive-file-item" id="f-pdf-item">
           <span class="archive-file-name" title="${escAttr(file.name)}">${escHtml(file.name)}</span>
           <button type="button" class="archive-file-del" onclick="clearArchiveFile()" title="삭제">
@@ -1798,13 +1834,52 @@ function showDashboard() {
     const group = document.getElementById('f-file-group');
     if (!group) return;
     const label = group.querySelector('label.form-label');
-    group.innerHTML = (label ? label.outerHTML : '<label class="form-label">PDF 파일 *</label>') + `
-      <div class="upload-area" id="f-pdf-upload" onclick="document.getElementById('f-file-input').click()"
+    group.innerHTML = (label ? label.outerHTML : '<label class="form-label">국문 PDF *</label>') + `
+      <div class="upload-area" id="f-pdf-upload" onclick="document.getElementById('f-file-kor-input').click()"
         ondragover="event.preventDefault();this.style.borderColor='#1E8DCD'"
         ondragleave="this.style.borderColor=''"
         ondrop="event.preventDefault();this.style.borderColor='';handleArchiveFile({files:event.dataTransfer.files})">
-        <input type="file" id="f-file-input" accept=".pdf,.zip" style="display:none" onchange="handleArchiveFile(this)">
+        <input type="file" id="f-file-kor-input" accept=".pdf,.zip" style="display:none" onchange="handleArchiveFile(this)">
         <div id="f-file-hint-icon">📎 클릭하거나 파일을 드롭하세요</div>
+        <div class="upload-hint">PDF, ZIP 등 지원</div>
+      </div>`;
+  }
+
+  function handleArchiveFileEng(input) {
+    const file = (input.files || input)[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = ev => {
+      const base64 = ev.target.result.split(',')[1];
+      pendingFiles['fileEng'] = { base64, filename: file.name, folder: 'archive' };
+      delete _archiveClearedFiles.fileEng;
+      const group = document.getElementById('f-file-eng-group');
+      if (!group) return;
+      const label = group.querySelector('label.form-label');
+      group.innerHTML = (label ? label.outerHTML : '') + `
+        <div class="archive-file-item" id="f-pdf-eng-item">
+          <span class="archive-file-name" title="${escAttr(file.name)}">${escHtml(file.name)}</span>
+          <button type="button" class="archive-file-del" onclick="clearArchiveFileEng()" title="삭제">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>`;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function clearArchiveFileEng() {
+    delete pendingFiles['fileEng'];
+    _archiveClearedFiles.fileEng = true;
+    const group = document.getElementById('f-file-eng-group');
+    if (!group) return;
+    const label = group.querySelector('label.form-label');
+    group.innerHTML = (label ? label.outerHTML : '') + `
+      <div class="upload-area" id="f-pdf-eng-upload" onclick="document.getElementById('f-file-eng-input').click()"
+        ondragover="event.preventDefault();this.style.borderColor='#1E8DCD'"
+        ondragleave="this.style.borderColor=''"
+        ondrop="event.preventDefault();this.style.borderColor='';handleArchiveFileEng({files:event.dataTransfer.files})">
+        <input type="file" id="f-file-eng-input" accept=".pdf,.zip" style="display:none" onchange="handleArchiveFileEng(this)">
+        <div>📎 클릭하거나 파일을 드롭하세요</div>
         <div class="upload-hint">PDF, ZIP 등 지원</div>
       </div>`;
   }
@@ -2254,6 +2329,7 @@ function showDashboard() {
         period,
         date: year,
         file: uploadedUrls.file || (_archiveClearedFiles.file ? '' : existing.file) || '',
+        fileEng: uploadedUrls.fileEng || (_archiveClearedFiles.fileEng ? '' : existing.fileEng) || '',
         thumbnail: uploadedUrls.thumbnail || (_archiveClearedFiles.thumbnail ? '' : existing.thumbnail) || '',
         pinned: isPinned,
         summary
