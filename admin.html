@@ -99,11 +99,76 @@
     .dark .form-check { color: #8899aa; }
     .dark .summary-counter { color: #506070; }
 
+    /* ── 라이트모드 사이드바 ── */
+    body:not(.dark) .sidebar { background: #fff; box-shadow: 1px 0 8px rgba(0,0,0,0.07); }
+    body:not(.dark) .sidebar-logo { border-bottom-color: #f0f2f4; }
+    body:not(.dark) .nav-btn { color: #888; }
+    body:not(.dark) .nav-btn:hover { color: #333; background: #f5f8fb; }
+    body:not(.dark) .nav-btn.active { color: #1E8DCD; background: rgba(30,141,205,0.08); border-left-color: #1E8DCD; }
+    body:not(.dark) .sidebar-footer { border-top-color: #f0f2f4; }
+    body:not(.dark) .logout-btn { background: #f5f8fb; color: #888; }
+    body:not(.dark) .logout-btn:hover { background: #eef6fb; color: #1E8DCD; }
+    body:not(.dark) .dark-mode-toggle svg { stroke: #ccc; }
+    body:not(.dark) .dark-mode-track { background: #e0e0e0; }
+
+    /* ── 미리보기 패널 ── */
+    .preview-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.32); z-index: 8000; display: flex; align-items: stretch; justify-content: flex-end; }
+    .preview-panel { background: #fff; width: 560px; max-width: 90vw; display: flex; flex-direction: column; box-shadow: -6px 0 40px rgba(0,0,0,0.13); animation: slideInR 0.22s cubic-bezier(0.4,0,0.2,1); }
+    @keyframes slideInR { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+    .preview-head { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; border-bottom: 1px solid #f0f2f4; flex-shrink: 0; gap: 12px; }
+    .preview-created { font-size: 11px; color: #c0c8d0; white-space: nowrap; }
+    .preview-btns { display: flex; gap: 5px; align-items: center; flex-wrap: wrap; justify-content: flex-end; }
+    .preview-btn { display: inline-flex; align-items: center; gap: 4px; padding: 0 11px; height: 28px; border: 1px solid #e5e8eb; border-radius: 6px; background: #fff; font-size: 12px; color: #666; cursor: pointer; transition: all 0.15s; white-space: nowrap; font-family: inherit; }
+    .preview-btn:hover { border-color: #1E8DCD; color: #1E8DCD; background: #f0f7fd; }
+    .preview-btn.pin-on { color: #c08020; border-color: #f0a830; }
+    .preview-btn.eye-off { color: #bbb; }
+    .preview-btn.del:hover { border-color: #e63946; color: #e63946; background: #fff0f0; }
+    .preview-btn.close-x { border-color: transparent; background: #f5f7f9; color: #999; }
+    .preview-body { padding: 26px 28px; overflow-y: auto; flex: 1; }
+    .preview-cat-tag { display: inline-block; font-size: 11px; font-weight: 600; color: #1E8DCD; background: #eef6fb; padding: 2px 9px; border-radius: 4px; margin-bottom: 12px; }
+    .preview-date-above { font-size: 12px; color: #aaa; margin-bottom: 5px; }
+    .preview-title { font-size: 19px; font-weight: 700; color: #1a1f36; margin-bottom: 6px; line-height: 1.45; }
+    .preview-meta-line { font-size: 12px; color: #bbb; margin-bottom: 20px; }
+    .preview-imgs { display: flex; gap: 8px; flex-wrap: wrap; margin: 14px 0; }
+    .preview-imgs img { width: 110px; height: 74px; object-fit: cover; border-radius: 6px; border: 1px solid #f0f0f0; }
+    .preview-html { font-size: 14px; line-height: 1.85; color: #444; margin-top: 16px; }
+    .preview-html img { max-width: 100%; border-radius: 6px; }
+    .preview-answer-label { font-size: 11px; font-weight: 700; color: #aaa; letter-spacing: 0.5px; margin-bottom: 8px; }
+    .preview-answer-text { font-size: 14px; line-height: 1.8; color: #444; white-space: pre-wrap; }
+    .dark .preview-panel { background: #131e30; }
+    .dark .preview-head { border-color: #1e2d42; }
+    .dark .preview-created { color: #3a5068; }
+    .dark .preview-btn { background: #1a2838; border-color: #2d3f55; color: #7a9ab0; }
+    .dark .preview-btn:hover { border-color: #5aaedf; color: #5aaedf; background: #0f1e30; }
+    .dark .preview-btn.close-x { background: #0f1929; border-color: transparent; }
+    .dark .preview-title { color: #c8d8e8; }
+    .dark .preview-meta-line { color: #3a5068; }
+    .dark .preview-html { color: #b0c4d8; }
+    .dark .preview-answer-text { color: #b0c4d8; }
+
+    /* ── 보도자료 업로드 모달 ── */
+    .press-upload-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 9000; display: flex; align-items: center; justify-content: center; }
+    .press-upload-box { background: #fff; border-radius: 12px; padding: 32px; width: 480px; max-width: 95vw; box-shadow: 0 8px 40px rgba(0,0,0,0.18); }
+    .press-upload-box h3 { font-size: 17px; font-weight: 700; color: #1a3040; margin-bottom: 6px; }
+    .press-upload-box .upload-desc { font-size: 13px; color: #888; margin-bottom: 24px; }
+    .press-upload-field { margin-bottom: 18px; }
+    .press-upload-field label { display: block; font-size: 13px; font-weight: 600; color: #555; margin-bottom: 7px; }
+    .press-upload-field .field-input-area { border: 1.5px dashed #dde3ea; border-radius: 8px; padding: 14px 16px; cursor: pointer; transition: border-color 0.15s; background: #f9fbfc; display: flex; align-items: center; gap: 10px; }
+    .press-upload-field .field-input-area:hover { border-color: #1E8DCD; }
+    .press-upload-field .field-input-area input[type="file"] { display: none; }
+    .press-upload-field .field-file-name { font-size: 13px; color: #999; flex: 1; }
+    .press-upload-field .field-file-name.selected { color: #333; }
+    .press-upload-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 26px; }
+    .dark .press-upload-box { background: #131e30; }
+    .dark .press-upload-box h3 { color: #c8d8e8; }
+    .dark .press-upload-field label { color: #7a8ea0; }
+    .dark .press-upload-field .field-input-area { background: #1a2838; border-color: #2d3f55; }
+
     /* ── 레이아웃 ── */
     .admin-layout { display: flex; min-height: 100vh; }
 
     /* ── 사이드바 ── */
-    .sidebar { width: 187px; background: #1a3040; color: #fff; display: flex; flex-direction: column; flex-shrink: 0; position: fixed; top: 0; left: 0; height: 100vh; z-index: 100; }
+    .sidebar { width: 170px; background: #1a3040; color: #fff; display: flex; flex-direction: column; flex-shrink: 0; position: fixed; top: 0; left: 0; height: 100vh; z-index: 100; }
     .sidebar-logo { padding: 24px 20px 20px; border-bottom: 1px solid rgba(255,255,255,0.08); }
     .sidebar-logo img { height: 28px; width: auto; display: block; margin-left: 7px; }
     .sidebar-nav { flex: 1; padding: 16px 0; }
@@ -124,7 +189,7 @@
     .site-preview-frame { width: 100%; max-width: 1300px; flex: 1; border: none; border-radius: 10px; background: #fff; min-height: 0; }
 
     /* ── 메인 ── */
-    .main-content { margin-left: 187px; flex: 1; padding: 32px; }
+    .main-content { margin-left: 170px; flex: 1; padding: 32px; }
     .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
     .section-title { font-size: 22px; font-weight: 700; color: #1a3040; }
     .section-count { font-size: 14px; color: #999; margin-left: 8px; font-weight: 400; }
@@ -134,7 +199,8 @@
     /* ── 카드/테이블 ── */
     .card { background: #fff; border-radius: 10px; box-shadow: 0 1px 6px rgba(0,0,0,0.07); overflow: hidden; }
     .item-list { display: flex; flex-direction: column; }
-    .item-row { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-bottom: 1px solid #f0f0f0; transition: background 0.12s; }
+    .item-row { display: flex; align-items: center; gap: 16px; padding: 14px 16px; border-bottom: 1px solid #f0f0f0; transition: background 0.12s; cursor: pointer; }
+    .item-date-press { font-size: 11px; color: #bbb; margin-bottom: 2px; }
     .item-row:last-child { border-bottom: none; }
     .item-row:hover { background: #fafbfc; }
     .item-row.dragging { opacity: 0.4; }
@@ -162,19 +228,32 @@
     /* ── 선택/필터/탭 ── */
     .item-check { width: 16px; height: 16px; accent-color: #1E8DCD; cursor: pointer; flex-shrink: 0; }
     .header-actions { display: flex; align-items: center; gap: 10px; }
-    .bulk-action-bar { display: none; align-items: center; gap: 8px; padding: 10px 16px; background: #f0f7fd; border: 1px solid #c5dff0; border-radius: 8px; margin-bottom: 10px; }
-    .bulk-action-bar .sel-info { font-size: 13px; color: #1a3040; font-weight: 600; flex: 1; }
+    .bulk-action-bar { display: none; align-items: center; gap: 8px; padding: 8px 14px; background: #f0f7fd; border: 1px solid #c5dff0; border-radius: 8px; margin-bottom: 10px; }
+    .bulk-action-bar .sel-info { font-size: 13px; color: #1a3040; font-weight: 600; margin-left: auto; }
+    .bulk-select-chk { width: 28px; height: 28px; border: 1.5px solid #bcd4e8; border-radius: 5px; background: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.15s; }
+    .bulk-select-chk:hover { border-color: #1E8DCD; }
+    .bulk-select-chk.all-sel { border-color: #1E8DCD; background: #1E8DCD; }
+    .bulk-select-chk svg { color: #bcd4e8; }
+    .bulk-select-chk.all-sel svg { color: #fff; }
     .bulk-action-btn { display: inline-flex; align-items: center; gap: 5px; padding: 0 14px; height: 32px; border-radius: 6px; border: 1px solid; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.15s; background: #fff; }
-    .bulk-action-btn.select-all { border-color: #c8d8e8; color: #556; }
-    .bulk-action-btn.select-all:hover { border-color: #1E8DCD; color: #1E8DCD; }
     .bulk-action-btn.pin { border-color: #f0a830; color: #c08020; }
     .bulk-action-btn.pin:hover { background: #fff8ee; }
     .bulk-action-btn.del { border-color: #e63946; color: #e63946; }
     .bulk-action-btn.del:hover { background: #fff0f0; }
     .dark .bulk-action-bar { background: #0f1e30; border-color: #1e3a55; }
     .dark .bulk-action-bar .sel-info { color: #8abbe0; }
+    .dark .bulk-select-chk { background: #1a2838; border-color: #2d3f55; }
+    .dark .bulk-select-chk.all-sel { background: #1E8DCD; border-color: #1E8DCD; }
     .dark .bulk-action-btn { background: #1a2838; }
-    .dark .bulk-action-btn.select-all { border-color: #2d3f55; color: #8899aa; }
+    /* FAQ 분리 박스 */
+    .faq-box { background: #fff; border-radius: 10px; box-shadow: 0 1px 6px rgba(0,0,0,0.07); margin-bottom: 10px; overflow: hidden; }
+    .dark .faq-box { background: #131e30; box-shadow: 0 1px 6px rgba(0,0,0,0.4); }
+    /* 더보기 버튼 */
+    .load-more-wrap { padding: 14px 16px; border-top: 1px solid #f0f0f0; text-align: center; }
+    .load-more-btn { padding: 0 24px; height: 34px; background: #fff; border: 1px solid #dde3ea; border-radius: 7px; font-size: 13px; color: #666; cursor: pointer; transition: all 0.15s; font-family: inherit; }
+    .load-more-btn:hover { border-color: #1E8DCD; color: #1E8DCD; }
+    .dark .load-more-wrap { border-color: #1e2d42; }
+    .dark .load-more-btn { background: #1a2838; border-color: #2d3f55; color: #8899aa; }
     .item-cat { font-size: 11px; color: #666; background: #f0f4f7; padding: 3px 9px; border-radius: 10px; white-space: nowrap; flex-shrink: 0; font-weight: 500; }
     .dark .item-cat { background: #1a2838; color: #7a9ab0; }
     .filter-bar { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding: 14px 16px 6px; }
@@ -403,19 +482,78 @@
     <!-- 추가/수정 폼 -->
     <div class="form-card" id="item-form" style="display:none;"></div>
 
+    <!-- FAQ 필터 박스 (FAQ 섹션에서만 표시) -->
+    <div id="faq-top-area" style="display:none;"></div>
+
     <!-- 일괄 작업 바 -->
     <div class="bulk-action-bar" id="bulk-action-bar">
-      <span class="sel-info"><span id="sel-count">0</span>개 선택됨</span>
-      <button class="bulk-action-btn select-all" onclick="selectAll()">전체선택</button>
+      <button class="bulk-select-chk" id="bulk-select-chk" onclick="selectAll()" title="전체선택">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </button>
       <button class="bulk-action-btn pin" onclick="bulkPin()"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"/><path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z"/></svg>고정</button>
       <button class="bulk-action-btn del" onclick="bulkDelete()"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>삭제</button>
+      <span class="sel-info"><span id="sel-count">0</span>개 선택됨</span>
     </div>
+
+    <!-- FAQ 엑셀 박스 (FAQ 섹션에서만 표시) -->
+    <div id="faq-excel-area" style="display:none;"></div>
 
     <!-- 리스트 -->
     <div class="card">
       <div class="item-list" id="item-list"><div class="loading">불러오는 중...</div></div>
     </div>
   </main>
+</div>
+
+<!-- 미리보기 패널 -->
+<div class="preview-overlay" id="preview-overlay" style="display:none;" onclick="if(event.target===this)closePreview()">
+  <div class="preview-panel">
+    <div class="preview-head">
+      <span class="preview-created" id="preview-created">입력 일시: -</span>
+      <div class="preview-btns">
+        <button class="preview-btn" id="preview-edit-btn" onclick="previewEdit()">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>편집
+        </button>
+        <button class="preview-btn" id="preview-pin-btn" onclick="previewPin()"></button>
+        <button class="preview-btn" id="preview-eye-btn" onclick="previewPublish()"></button>
+        <button class="preview-btn del" onclick="previewDelete()">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>삭제
+        </button>
+        <button class="preview-btn close-x" onclick="closePreview()">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="preview-body" id="preview-body"></div>
+  </div>
+</div>
+
+<!-- 보도자료 업로드 모달 -->
+<div class="press-upload-overlay" id="press-upload-overlay" style="display:none;" onclick="if(event.target===this)closePressUploadModal()">
+  <div class="press-upload-box">
+    <h3>보도자료 업로드</h3>
+    <p class="upload-desc">엑셀 양식에 맞게 작성한 파일(필수)과 이미지 파일(선택)을 업로드하세요.</p>
+    <div class="press-upload-field">
+      <label>엑셀 파일 <span style="color:#e63946;">*</span></label>
+      <div class="field-input-area" onclick="document.getElementById('press-excel-file').click()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E8DCD" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        <span class="field-file-name" id="press-excel-name">클릭하여 엑셀 파일 선택 (.xlsx, .xls)</span>
+        <input type="file" id="press-excel-file" accept=".xlsx,.xls" onchange="pressUploadFileChange(this,'press-excel-name')">
+      </div>
+    </div>
+    <div class="press-upload-field">
+      <label>이미지 파일 <span style="color:#aaa;font-weight:400;">(선택, 복수 가능)</span></label>
+      <div class="field-input-area" onclick="document.getElementById('press-image-files').click()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E8DCD" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        <span class="field-file-name" id="press-image-name">클릭하여 이미지 파일 선택</span>
+        <input type="file" id="press-image-files" accept="image/*" multiple onchange="pressUploadFileChange(this,'press-image-name')">
+      </div>
+    </div>
+    <div class="press-upload-actions">
+      <button class="btn-cancel" onclick="closePressUploadModal()">취소</button>
+      <button class="btn-save" id="press-upload-submit-btn" onclick="submitPressUpload()">업로드</button>
+    </div>
+  </div>
 </div>
 
 <!-- 토스트 -->
@@ -435,6 +573,8 @@
   let _activeRteImg = null; // 현재 선택된 RTE 이미지
   let selectedIds = new Set();
   let faqFilter = 'all';
+  let previewId = null;
+  let listVisibleCount = 20;
   let archiveTab = 'intro';
   let displayItems = [];
 
@@ -559,6 +699,9 @@
     document.getElementById('login-overlay').style.display = 'none';
     document.getElementById('login-dark-toggle').style.display = 'none';
     document.getElementById('admin-panel').style.display = 'flex';
+    const isDark = document.body.classList.contains('dark');
+    const chk = document.getElementById('dark-mode-chk');
+    if (chk) chk.checked = isDark;
     loadSection(currentSection);
   }
 
@@ -569,6 +712,7 @@
     selectedIds.clear();
     faqFilter = 'all';
     archiveTab = 'intro';
+    listVisibleCount = 20;
     document.getElementById('item-form').style.display = 'none';
     document.querySelectorAll('.nav-btn').forEach(b => b.classList.toggle('active', b.dataset.section === type));
     document.getElementById('section-title').textContent = SECTION_LABELS[type];
@@ -621,15 +765,22 @@
     selectedIds.clear();
     updateBulkBtn();
 
+    const faqTopArea = document.getElementById('faq-top-area');
+    const faqExcelArea = document.getElementById('faq-excel-area');
     let prefix = '';
 
     if (currentSection === 'faq') {
+      // Box 1: 카테고리 필터
       const cats = ['전체', 'ecoValue', 'ecoASSET', 'E-ASSET', 'ecoNODE', '태양광 솔루션', '기타'];
-      prefix = `<div class="filter-bar">
-        <div class="filter-pills">${cats.map(c => {
-          const val = c === '전체' ? 'all' : c;
-          return `<button class="filter-pill ${faqFilter === val ? 'active' : ''}" onclick="setFaqFilter('${val}')">${c}</button>`;
-        }).join('')}</div>
+      faqTopArea.style.display = '';
+      faqTopArea.innerHTML = `<div class="faq-box"><div class="filter-bar" style="padding:12px 16px;">${cats.map(c => {
+        const val = c === '전체' ? 'all' : c;
+        return `<button class="filter-pill ${faqFilter === val ? 'active' : ''}" onclick="setFaqFilter('${val}')">${c}</button>`;
+      }).join('')}</div></div>`;
+
+      // Box 2: 엑셀 버튼
+      faqExcelArea.style.display = '';
+      faqExcelArea.innerHTML = `<div class="faq-box"><div class="filter-bar" style="padding:10px 16px;justify-content:flex-end;">
         <div class="faq-excel-btns">
           <button class="faq-excel-btn" onclick="downloadFaqTemplate()" title="빈 엑셀 양식 다운로드"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> 양식 다운로드</button>
           <label class="faq-excel-btn" title="엑셀 파일로 FAQ 일괄 업로드"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg> 엑셀 업로드
@@ -637,18 +788,32 @@
           </label>
           <button class="faq-excel-btn" onclick="downloadFaqExcel()" title="현재 FAQ 목록 엑셀 다운로드"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="8 17 12 21 16 17"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"/></svg> 엑셀 다운로드</button>
         </div>
-      </div>`;
+      </div></div>`;
+
       displayItems = faqFilter === 'all' ? [...currentItems] : currentItems.filter(i =>
         String(i.category || '').split(',').map(s => s.trim()).includes(faqFilter)
       );
-    } else if (currentSection === 'archive') {
-      const tabs = [{id:'intro',label:'기업소개서'},{id:'catalog',label:'카탈로그/지명원'},{id:'ir',label:'IR'},{id:'ci',label:'CI'}];
-      prefix = `<div class="archive-tabs">${tabs.map(t =>
-        `<button class="archive-tab ${archiveTab === t.id ? 'active' : ''}" onclick="setArchiveTab('${t.id}')">${t.label}</button>`
-      ).join('')}</div>`;
-      displayItems = currentItems.filter(i => (i.type || 'intro') === archiveTab);
     } else {
-      displayItems = [...currentItems];
+      faqTopArea.style.display = 'none';
+      faqExcelArea.style.display = 'none';
+
+      if (currentSection === 'archive') {
+        const tabs = [{id:'intro',label:'기업소개서'},{id:'catalog',label:'카탈로그/지명원'},{id:'ir',label:'IR'},{id:'ci',label:'CI'}];
+        prefix = `<div class="archive-tabs">${tabs.map(t =>
+          `<button class="archive-tab ${archiveTab === t.id ? 'active' : ''}" onclick="setArchiveTab('${t.id}')">${t.label}</button>`
+        ).join('')}</div>`;
+        displayItems = currentItems.filter(i => (i.type || 'intro') === archiveTab);
+      } else if (currentSection === 'press') {
+        prefix = `<div class="filter-bar" style="justify-content:flex-end;">
+          <div class="faq-excel-btns">
+            <button class="faq-excel-btn" onclick="downloadPressTemplate()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> 양식 다운로드</button>
+            <button class="faq-excel-btn" onclick="showPressUploadModal()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg> 파일로 업로드</button>
+          </div>
+        </div>`;
+        displayItems = [...currentItems];
+      } else {
+        displayItems = [...currentItems];
+      }
     }
 
     // 공지사항·보도자료: 날짜 내림차순 고정 정렬
@@ -661,7 +826,12 @@
       return;
     }
 
-    el.innerHTML = prefix + displayItems.map((item, idx) => renderRow(item, idx)).join('');
+    // 최대 listVisibleCount개만 표시
+    const visibleItems = displayItems.slice(0, listVisibleCount);
+    const hasMore = displayItems.length > listVisibleCount;
+    const moreBtn = hasMore ? `<div class="load-more-wrap"><button class="load-more-btn" onclick="loadMore()">목록 더보기 (${displayItems.length - listVisibleCount}개 남음)</button></div>` : '';
+
+    el.innerHTML = prefix + visibleItems.map((item, idx) => renderRow(item, idx)).join('') + moreBtn;
 
     const canDragDrop = currentSection !== 'notices' && currentSection !== 'press' &&
       !(currentSection === 'faq' && faqFilter !== 'all') &&
@@ -669,12 +839,17 @@
     if (canDragDrop) initDragDrop();
   }
 
+  function loadMore() {
+    listVisibleCount += 20;
+    renderList();
+  }
+
   function renderRow(item, idx) {
     const isPublished = item.published !== false;
     const isPinned = !!item.pinned;
     let meta = '';
     if (currentSection === 'faq') meta = '';
-    else if (currentSection === 'press') meta = item.date || '';
+    else if (currentSection === 'press') meta = '';
     else if (currentSection === 'archive') meta = '<span class="item-tag">' + (item.type || '') + '</span>' + (item.date ? ' ' + item.date : '');
     else meta = (item.author ? `<span class="item-tag">${item.author}</span>` : '') + (item.date || '');
 
@@ -684,17 +859,17 @@
       && !(currentSection === 'faq' && faqFilter !== 'all')
       && currentSection !== 'archive';
 
-    return `<div class="item-row" ${canDrag ? 'draggable="true"' : ''} data-id="${item.id}" data-idx="${idx}">
-      <input type="checkbox" class="item-check" ${selectedIds.has(item.id) ? 'checked' : ''} onclick="toggleSelect('${item.id}')">
-      <span class="item-pin ${isPinned ? 'pinned' : ''}" title="${isPinned ? '고정 해제' : '고정'}" onclick="togglePin('${item.id}')"><svg width="14" height="14" viewBox="0 0 24 24" fill="${isPinned ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"/><path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z"/></svg></span>
+    return `<div class="item-row" ${canDrag ? 'draggable="true"' : ''} data-id="${item.id}" data-idx="${idx}" onclick="openPreview('${item.id}')">
+      <input type="checkbox" class="item-check" ${selectedIds.has(item.id) ? 'checked' : ''} onclick="event.stopPropagation();toggleSelect('${item.id}')">
+      <span class="item-pin ${isPinned ? 'pinned' : ''}" title="${isPinned ? '고정 해제' : '고정'}" onclick="event.stopPropagation();togglePin('${item.id}')"><svg width="14" height="14" viewBox="0 0 24 24" fill="${isPinned ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"/><path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z"/></svg></span>
       <div class="item-info">
+        ${currentSection === 'press' && item.date ? `<div class="item-date-press">${escHtml(item.date)}</div>` : ''}
         <div class="item-title">${escHtml(title)}</div>
-        <div class="item-meta">${meta}</div>
+        ${meta ? `<div class="item-meta">${meta}</div>` : ''}
       </div>
       ${currentSection === 'faq' ? `<span class="item-cat">${escHtml(item.category || '기타')}</span>` : ''}
-      <button class="action-btn pub-eye ${isPublished ? 'on' : 'off'}" onclick="togglePublish('${item.id}')" title="${isPublished ? '게시 중 (클릭하여 숨기기)' : '숨김 (클릭하여 게시)'}">${isPublished ? SVG_EYE : SVG_EYE_OFF}</button>
-      <button class="action-btn edit" onclick="showForm('${item.id}')" title="수정"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
-      ${canDrag ? '<span class="drag-handle" title="순서 변경"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="5" r="1" fill="currentColor"/><circle cx="9" cy="12" r="1" fill="currentColor"/><circle cx="9" cy="19" r="1" fill="currentColor"/><circle cx="15" cy="5" r="1" fill="currentColor"/><circle cx="15" cy="12" r="1" fill="currentColor"/><circle cx="15" cy="19" r="1" fill="currentColor"/></svg></span>' : ''}
+      <button class="action-btn pub-eye ${isPublished ? 'on' : 'off'}" onclick="event.stopPropagation();togglePublish('${item.id}')" title="${isPublished ? '게시 중 (클릭하여 숨기기)' : '숨김 (클릭하여 게시)'}">${isPublished ? SVG_EYE : SVG_EYE_OFF}</button>
+      ${canDrag ? '<span class="drag-handle" title="순서 변경" onclick="event.stopPropagation()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="5" r="1" fill="currentColor"/><circle cx="9" cy="12" r="1" fill="currentColor"/><circle cx="9" cy="19" r="1" fill="currentColor"/><circle cx="15" cy="5" r="1" fill="currentColor"/><circle cx="15" cy="12" r="1" fill="currentColor"/><circle cx="15" cy="19" r="1" fill="currentColor"/></svg></span>' : ''}
     </div>`;
   }
 
@@ -764,12 +939,14 @@
   function setFaqFilter(cat) {
     faqFilter = cat;
     selectedIds.clear();
+    listVisibleCount = 20;
     renderList();
   }
 
   function setArchiveTab(tab) {
     archiveTab = tab;
     selectedIds.clear();
+    listVisibleCount = 20;
     renderList();
   }
 
@@ -787,11 +964,18 @@
     bar.style.display = n > 0 ? 'flex' : 'none';
     const cnt = document.getElementById('sel-count');
     if (cnt) cnt.textContent = n;
+    // 전체선택 체크박스 상태
+    const chkBtn = document.getElementById('bulk-select-chk');
+    if (chkBtn) {
+      const allSelected = displayItems.length > 0 && displayItems.every(i => selectedIds.has(i.id));
+      chkBtn.classList.toggle('all-sel', allSelected);
+    }
   }
 
   function selectAll() {
     const allIds = displayItems.map(i => i.id);
-    if (allIds.every(id => selectedIds.has(id))) {
+    const allSelected = allIds.every(id => selectedIds.has(id));
+    if (allSelected) {
       selectedIds.clear();
     } else {
       allIds.forEach(id => selectedIds.add(id));
@@ -1416,6 +1600,7 @@
         showToast('수정됐습니다.');
       } else {
         // 추가
+        item.createdAt = new Date().toISOString();
         const res = await fetch('/api/admin-data', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', Authorization: 'Basic ' + authHeader },
@@ -1630,6 +1815,95 @@
     document.body.appendChild(overlay);
   }
 
+  /* ── 미리보기 패널 ── */
+  const PIN_SVG = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"/><path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z"/></svg>`;
+
+  function openPreview(id) {
+    const item = currentItems.find(i => i.id === id);
+    if (!item) return;
+    previewId = id;
+    const createdAt = item.createdAt ? item.createdAt.replace('T',' ').slice(0,16) : '-';
+    document.getElementById('preview-created').textContent = '입력 일시: ' + createdAt;
+    _updatePreviewBtns(item);
+
+    let body = '';
+    if (currentSection === 'faq') {
+      const cats = String(item.category || '기타').split(',').map(s => `<span class="preview-cat-tag">${escHtml(s.trim())}</span>`).join(' ');
+      body = `${cats}
+        <div class="preview-title" style="margin-top:12px;">${escHtml(item.question || '')}</div>
+        <div style="border-top:1px solid #f0f0f0;margin:16px 0;"></div>
+        <div class="preview-answer-label">답변</div>
+        <div class="preview-answer-text">${escHtml(item.answer || '')}</div>`;
+    } else if (currentSection === 'press') {
+      const imgs = (item.images && item.images.length) ? `<div class="preview-imgs">${item.images.map(u=>`<img src="${escAttr(u)}" alt="">`).join('')}</div>` : '';
+      body = `${item.date ? `<div class="preview-date-above">${escHtml(item.date)}</div>` : ''}
+        <div class="preview-title">${escHtml(item.title || '')}</div>
+        ${imgs}
+        <div class="preview-html">${item.content || ''}</div>`;
+    } else if (currentSection === 'archive') {
+      const typeLabel = {intro:'기업소개서',catalog:'카탈로그/지명원',ir:'IR',ci:'CI'}[item.type] || item.type || '';
+      body = `<span class="preview-cat-tag">${escHtml(typeLabel)}</span>
+        <div class="preview-title" style="margin-top:12px;">${escHtml(item.title || '')}</div>
+        ${item.date ? `<div class="preview-meta-line">${escHtml(item.date)}</div>` : ''}
+        ${item.file ? `<a href="${escAttr(item.file)}" target="_blank" style="color:#1E8DCD;font-size:14px;text-decoration:none;">파일 열기 →</a>` : ''}`;
+    } else { // notices
+      const metaLine = [item.date, item.author].filter(Boolean).join(' · ');
+      const atts = (item.attachments || []).map(a=>`<a href="${escAttr(a.url)}" target="_blank" style="display:block;color:#1E8DCD;font-size:13px;margin-top:4px;text-decoration:none;">${escHtml(a.name)}</a>`).join('');
+      body = `${metaLine ? `<div class="preview-meta-line">${escHtml(metaLine)}</div>` : ''}
+        <div class="preview-title">${escHtml(item.title || '')}</div>
+        ${atts ? `<div style="margin:12px 0;">${atts}</div>` : ''}
+        <div class="preview-html">${item.content || ''}</div>`;
+    }
+    document.getElementById('preview-body').innerHTML = body;
+    document.getElementById('preview-overlay').style.display = 'flex';
+  }
+
+  function _updatePreviewBtns(item) {
+    const isPinned = !!item.pinned;
+    const isPublished = item.published !== false;
+    const pinBtn = document.getElementById('preview-pin-btn');
+    const eyeBtn = document.getElementById('preview-eye-btn');
+    if (pinBtn) {
+      pinBtn.className = 'preview-btn' + (isPinned ? ' pin-on' : '');
+      pinBtn.innerHTML = PIN_SVG + (isPinned ? ' 고정 해제' : ' 고정');
+    }
+    if (eyeBtn) {
+      eyeBtn.className = 'preview-btn' + (isPublished ? '' : ' eye-off');
+      eyeBtn.innerHTML = (isPublished ? SVG_EYE : SVG_EYE_OFF) + (isPublished ? ' 숨기기' : ' 게시');
+    }
+  }
+
+  function closePreview() {
+    previewId = null;
+    document.getElementById('preview-overlay').style.display = 'none';
+  }
+
+  function previewEdit() {
+    const id = previewId;
+    closePreview();
+    showForm(id);
+  }
+
+  async function previewPin() {
+    if (!previewId) return;
+    await togglePin(previewId);
+    const item = currentItems.find(i => i.id === previewId);
+    if (item) _updatePreviewBtns(item);
+  }
+
+  async function previewPublish() {
+    if (!previewId) return;
+    await togglePublish(previewId);
+    const item = currentItems.find(i => i.id === previewId);
+    if (item) _updatePreviewBtns(item);
+  }
+
+  async function previewDelete() {
+    const id = previewId;
+    closePreview();
+    deleteItem(id);
+  }
+
   /* ── 다크모드 ── */
   function toggleDarkMode(isDark) {
     document.body.classList.toggle('dark', isDark);
@@ -1671,6 +1945,118 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
   <script>
     const FAQ_CATS = ['ecoValue', 'ecoASSET', 'E-ASSET', 'ecoNODE', '태양광 솔루션', '기타'];
+
+    /* ── 보도자료 양식 다운로드 ── */
+    function downloadPressTemplate() {
+      if (!window.XLSX) { showToast('Excel 라이브러리 로딩 중입니다. 잠시 후 다시 시도해주세요.', true); return; }
+      const wb = window.XLSX.utils.book_new();
+      const wsData = [
+        ['날짜', 2025, '년', 1, '월', 1, '일'],
+        ['기사 제목을 입력하세요'],
+        ['기사 본문을 입력하세요']
+      ];
+      const ws = window.XLSX.utils.aoa_to_sheet(wsData);
+      ws['!cols'] = [{ wch: 8 }, { wch: 10 }, { wch: 4 }, { wch: 6 }, { wch: 4 }, { wch: 6 }, { wch: 4 }];
+      // A1, C1, E1, G1 (라벨 셀) 보호 힌트용 주석
+      ws['A2'] = { t: 's', v: '기사 제목을 입력하세요' };
+      ws['A3'] = { t: 's', v: '기사 본문을 입력하세요' };
+      window.XLSX.utils.book_append_sheet(wb, ws, '보도자료');
+      window.XLSX.writeFile(wb, '보도자료_양식.xlsx');
+    }
+
+    /* ── 보도자료 업로드 모달 ── */
+    function showPressUploadModal() {
+      document.getElementById('press-excel-file').value = '';
+      document.getElementById('press-image-files').value = '';
+      document.getElementById('press-excel-name').textContent = '클릭하여 엑셀 파일 선택 (.xlsx, .xls)';
+      document.getElementById('press-excel-name').classList.remove('selected');
+      document.getElementById('press-image-name').textContent = '클릭하여 이미지 파일 선택';
+      document.getElementById('press-image-name').classList.remove('selected');
+      document.getElementById('press-upload-overlay').style.display = 'flex';
+    }
+
+    function closePressUploadModal() {
+      document.getElementById('press-upload-overlay').style.display = 'none';
+    }
+
+    function pressUploadFileChange(input, nameId) {
+      const span = document.getElementById(nameId);
+      if (!input.files.length) { span.textContent = '클릭하여 파일 선택'; span.classList.remove('selected'); return; }
+      if (input.files.length === 1) {
+        span.textContent = input.files[0].name;
+      } else {
+        span.textContent = input.files[0].name + ' 외 ' + (input.files.length - 1) + '개';
+      }
+      span.classList.add('selected');
+    }
+
+    async function submitPressUpload() {
+      if (!window.XLSX) { showToast('Excel 라이브러리 로딩 중입니다.', true); return; }
+      const excelInput = document.getElementById('press-excel-file');
+      const imageInput = document.getElementById('press-image-files');
+      if (!excelInput.files.length) { showToast('엑셀 파일을 선택해주세요.', true); return; }
+
+      const btn = document.getElementById('press-upload-submit-btn');
+      btn.disabled = true; btn.textContent = '처리 중...';
+
+      try {
+        // 1. 엑셀 파싱
+        const excelBuf = await excelInput.files[0].arrayBuffer();
+        const wb = window.XLSX.read(new Uint8Array(excelBuf), { type: 'array' });
+        const ws = wb.Sheets[wb.SheetNames[0]];
+        const rows = window.XLSX.utils.sheet_to_json(ws, { header: 1, defval: '' });
+
+        const year  = String(rows[0]?.[1] || '').trim();
+        const month = String(rows[0]?.[3] || '').trim().padStart(2, '0');
+        const day   = String(rows[0]?.[5] || '').trim().padStart(2, '0');
+        const date  = year && month && day ? `${year}-${month}-${day}` : '';
+        const title   = String(rows[1]?.[0] || '').trim();
+        const content = String(rows[2]?.[0] || '').trim();
+
+        if (!title) { showToast('엑셀 2행에 기사 제목이 없습니다.', true); btn.disabled = false; btn.textContent = '업로드'; return; }
+
+        // 2. 이미지 업로드
+        const uploadedImages = [];
+        const imageFiles = Array.from(imageInput.files || []);
+        for (let i = 0; i < imageFiles.length; i++) {
+          btn.textContent = `이미지 업로드 중... (${i + 1}/${imageFiles.length})`;
+          const base64 = await new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = e => resolve(e.target.result.split(',')[1]);
+            reader.onerror = reject;
+            reader.readAsDataURL(imageFiles[i]);
+          });
+          const res = await fetch('/api/admin-upload', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', Authorization: 'Basic ' + authHeader },
+            body: JSON.stringify({ filename: imageFiles[i].name, content: base64, folder: 'press' })
+          });
+          const d = await res.json();
+          if (d.ok) uploadedImages.push(d.url);
+        }
+
+        // 3. 항목 저장
+        btn.textContent = '저장 중...';
+        const item = { title, date, content, images: uploadedImages, pinned: false, published: true, createdAt: new Date().toISOString() };
+        const res = await fetch('/api/admin-data', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Authorization: 'Basic ' + authHeader },
+          body: JSON.stringify({ type: 'press', item })
+        });
+        const d = await res.json();
+        if (!d.ok) throw new Error(d.message);
+        if (d.items) currentItems = d.items;
+        else currentItems.unshift(d.item);
+        document.getElementById('section-count').textContent = '(' + currentItems.length + '건)';
+        saveFreshCache('press', currentItems);
+        renderList();
+        closePressUploadModal();
+        showToast('보도자료가 추가됐습니다.');
+      } catch (err) {
+        showToast('업로드 실패: ' + (err.message || err), true);
+      }
+      btn.disabled = false; btn.textContent = '업로드';
+    }
 
     /* ── FAQ 엑셀 양식 다운로드 ── */
     function downloadFaqTemplate() {
