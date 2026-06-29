@@ -119,6 +119,52 @@
     body:not(.dark) .dark-mode-toggle svg { stroke: #ccc; }
     body:not(.dark) .dark-mode-track { background: #e0e0e0; }
 
+    /* ── 아카이브 중앙 모달 ── */
+    .arch-modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.48); z-index: 8500; display: flex; align-items: center; justify-content: center; }
+    .arch-modal-box { background: #fff; border-radius: 16px; width: 540px; max-width: 92vw; max-height: 86vh; overflow-y: auto; box-shadow: 0 12px 50px rgba(0,0,0,0.22); display: flex; flex-direction: column; animation: archModalIn 0.2s cubic-bezier(0.4,0,0.2,1); }
+    @keyframes archModalIn { from { opacity:0; transform: scale(0.95); } to { opacity:1; transform: scale(1); } }
+    .arch-modal-head { display: flex; align-items: center; justify-content: space-between; padding: 20px 24px 16px; border-bottom: 1px solid #f0f0f0; gap: 12px; flex-shrink: 0; }
+    .arch-modal-title { font-size: 16px; font-weight: 700; color: #1a1f36; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .arch-modal-close { width: 30px; height: 30px; border: none; background: none; cursor: pointer; color: #aaa; display: flex; align-items: center; justify-content: center; border-radius: 6px; flex-shrink: 0; }
+    .arch-modal-close:hover { background: #f5f5f5; color: #555; }
+    .arch-modal-body { padding: 20px 24px 24px; flex: 1; }
+    .arch-modal-thumb { width: 100%; max-height: 220px; object-fit: cover; border-radius: 10px; margin-bottom: 18px; }
+    .arch-modal-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+    .arch-modal-summary { font-size: 14px; color: #555; line-height: 1.7; margin: 14px 0; padding: 14px 16px; background: #f9fbfc; border-radius: 8px; border-left: 3px solid #1E8DCD; }
+    .arch-modal-file-btn { display: inline-flex; align-items: center; gap: 6px; padding: 0 16px; height: 36px; background: #1E8DCD; color: #fff; border: none; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; text-decoration: none; transition: background 0.15s; }
+    .arch-modal-file-btn:hover { background: #1679b3; }
+    .arch-modal-actions { display: flex; gap: 8px; margin-top: 20px; padding-top: 18px; border-top: 1px solid #f0f0f0; flex-wrap: wrap; }
+    .arch-modal-created { font-size: 11px; color: #aaa; margin-top: 12px; }
+    .arch-modal-badge { display: inline-block; padding: 2px 10px; background: #e8f4fc; color: #1E8DCD; border-radius: 20px; font-size: 12px; font-weight: 600; }
+    .arch-modal-meta-item { font-size: 13px; color: #666; }
+    .arch-modal-pub { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+    .arch-modal-pub-live { background: #e6f9ec; color: #2e8b55; }
+    .arch-modal-pub-hidden { background: #f5f5f5; color: #999; }
+    .arch-modal-act-btn { flex: 1; min-width: 70px; height: 36px; border-radius: 8px; border: 1px solid #ddd; background: #f9f9f9; font-size: 13px; font-weight: 600; cursor: pointer; transition: background 0.13s, color 0.13s; }
+    .arch-modal-act-edit { background: #1E8DCD; color: #fff; border-color: #1E8DCD; }
+    .arch-modal-act-edit:hover { background: #1679b3; }
+    .arch-modal-act-pub { color: #555; }
+    .arch-modal-act-pub:hover { background: #eee; }
+    .arch-modal-act-pin { color: #555; }
+    .arch-modal-act-pin:hover { background: #eee; }
+    .arch-modal-act-del { color: #e55; border-color: #f5d5d5; background: #fff5f5; }
+    .arch-modal-act-del:hover { background: #ffe0e0; }
+    .dark .arch-modal-box { background: #252528; }
+    .dark .arch-modal-head { border-color: #30303a; }
+    .dark .arch-modal-title { color: #d8dce6; }
+    .dark .arch-modal-close { color: #606570; }
+    .dark .arch-modal-close:hover { background: #2a2a30; color: #aaa; }
+    .dark .arch-modal-body { color: #d2d6de; }
+    .dark .arch-modal-summary { background: #1c1c20; border-color: #4090c0; color: #a0aab8; }
+    .dark .arch-modal-actions { border-color: #30303a; }
+    .dark .arch-modal-badge { background: #1a2c3a; color: #4da8d8; }
+    .dark .arch-modal-meta-item { color: #8898aa; }
+    .dark .arch-modal-pub-live { background: #1a2e22; color: #5cb87a; }
+    .dark .arch-modal-pub-hidden { background: #28282e; color: #666; }
+    .dark .arch-modal-act-btn { background: #2e2e38; border-color: #404050; color: #b0bece; }
+    .dark .arch-modal-act-edit { background: #1E8DCD; color: #fff; border-color: #1E8DCD; }
+    .dark .arch-modal-act-del { background: #2e1a1a; border-color: #5a2828; color: #f08080; }
+    .dark .arch-modal-created { color: #60687a; }
     /* ── 미리보기 패널 ── */
     .preview-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.32); z-index: 8000; display: flex; align-items: stretch; justify-content: flex-end; }
     .preview-panel { background: #fff; width: 728px; max-width: 90vw; display: flex; flex-direction: column; box-shadow: -6px 0 40px rgba(0,0,0,0.13); animation: slideInR 0.22s cubic-bezier(0.4,0,0.2,1); }
@@ -831,7 +877,7 @@
     realPass = '';
   }
 
-  function showDashboard() {
+function showDashboard() {
     document.getElementById('login-overlay').style.display = 'none';
     document.getElementById('login-dark-toggle').style.display = 'none';
     document.getElementById('admin-panel').style.display = 'flex';
@@ -979,9 +1025,9 @@
       return;
     }
 
-    // 최대 listVisibleCount개만 표시
-    const visibleItems = displayItems.slice(0, listVisibleCount);
-    const hasMore = displayItems.length > listVisibleCount;
+    // 아카이브는 전체 표시, 나머지는 listVisibleCount 제한
+    const visibleItems = currentSection === 'archive' ? displayItems : displayItems.slice(0, listVisibleCount);
+    const hasMore = currentSection !== 'archive' && displayItems.length > listVisibleCount;
     const moreBtn = hasMore ? `<div class="load-more-wrap"><button class="load-more-btn" onclick="loadMore()">목록 더보기 (${displayItems.length - listVisibleCount}개 남음)</button></div>` : '';
 
     el.innerHTML = prefix + visibleItems.map((item, idx) => renderRow(item, idx)).join('') + moreBtn;
@@ -1016,7 +1062,9 @@
       && currentSection !== 'archive';
 
     const isFaqExpanded = currentSection === 'faq' && faqExpandedId === item.id;
-    const rowClick = currentSection === 'faq' ? `toggleFaqRow('${item.id}')` : `openPreview('${item.id}')`;
+    const rowClick = currentSection === 'faq' ? `toggleFaqRow('${item.id}')`
+      : currentSection === 'archive' ? `openArchiveModal('${item.id}')`
+      : `openPreview('${item.id}')`;
     const faqExpandHtml = currentSection === 'faq' ? `
       <div class="faq-expand" id="faq-exp-${item.id}" style="${isFaqExpanded ? '' : 'display:none'}">
         <div class="faq-expand-inner">
@@ -1078,6 +1126,55 @@
     } catch { showToast('순서 저장 실패', true); }
   }
 
+
+  /* ── 아카이브 미리보기 모달 ── */
+  function openArchiveModal(id) {
+    const item = currentItems.find(i => i.id === id);
+    if (!item) return;
+
+    const typeLabels = { intro: '기업소개서', catalog: '카탈로그/지명원', ir: 'IR', ci: 'CI' };
+    const typeLabel = typeLabels[item.type] || item.type || '';
+    const pubLabel = item.published === false ? '숨김' : '게시중';
+    const pinLabel = item.pinned ? '고정됨' : '고정';
+    const thumbSrc = item.thumb || item.thumbnail || '';
+    const pdfUrl = item.file || item.pdf || '';
+    const summary = item.summary || '';
+    const year = item.year || '';
+    const period = item.period || item.gubun || '';
+
+    const overlay = document.createElement('div');
+    overlay.className = 'arch-modal-overlay';
+    overlay.innerHTML = `
+      <div class="arch-modal-box" id="arch-modal-inner">
+        <div class="arch-modal-head">
+          <span class="arch-modal-title">${escHtml(item.title || '')}</span>
+          <button class="arch-modal-close" onclick="document.getElementById('arch-modal-overlay').remove()">✕</button>
+        </div>
+        <div class="arch-modal-body">
+          ${thumbSrc ? `<img class="arch-modal-thumb" src="${escHtml(thumbSrc)}" alt="썸네일">` : ''}
+          <div class="arch-modal-meta">
+            <span class="arch-modal-badge">${escHtml(typeLabel)}</span>
+            ${year ? `<span class="arch-modal-meta-item">📅 ${escHtml(year)}</span>` : ''}
+            ${period ? `<span class="arch-modal-meta-item">· ${escHtml(period)}</span>` : ''}
+            <span class="arch-modal-pub ${item.published === false ? 'arch-modal-pub-hidden' : 'arch-modal-pub-live'}">${pubLabel}</span>
+          </div>
+          ${summary ? `<div class="arch-modal-summary">${escHtml(summary)}</div>` : ''}
+          ${pdfUrl ? `<a class="arch-modal-file-btn" href="${escHtml(pdfUrl)}" target="_blank" rel="noopener">PDF 열기</a>` : ''}
+          <div class="arch-modal-actions">
+            <button class="arch-modal-act-btn arch-modal-act-edit" onclick="document.getElementById('arch-modal-overlay').remove();showForm('${id}')">편집</button>
+            <button class="arch-modal-act-btn arch-modal-act-pub" onclick="togglePublish('${id}');document.getElementById('arch-modal-overlay').remove()">${item.published === false ? '게시' : '숨김'}</button>
+            <button class="arch-modal-act-btn arch-modal-act-pin" onclick="togglePin('${id}');document.getElementById('arch-modal-overlay').remove()">${pinLabel}</button>
+            <button class="arch-modal-act-btn arch-modal-act-del" onclick="document.getElementById('arch-modal-overlay').remove();deleteItem('${id}')">삭제</button>
+          </div>
+          ${item.createdAt ? `<div class="arch-modal-created">등록일: ${new Date(item.createdAt).toLocaleDateString('ko-KR')}</div>` : ''}
+        </div>
+      </div>`;
+    overlay.id = 'arch-modal-overlay';
+    overlay.addEventListener('click', e => {
+      if (!document.getElementById('arch-modal-inner').contains(e.target)) overlay.remove();
+    });
+    document.body.appendChild(overlay);
+  }
 
   /* ── 고정/게시 토글 ── */
   async function togglePin(id) {
