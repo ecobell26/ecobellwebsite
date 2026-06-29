@@ -1,7 +1,7 @@
 {
   "items": [
     {
-      "pinned": false,
+      "pinned": true,
       "title": "CI 2026",
       "type": "ci",
       "year": "2026",
