@@ -484,6 +484,11 @@
     .dark .rte-content.press-rte { color: #fff; }
     .rte-content.press-rte * { font-family: 'Noto Sans KR', -apple-system, sans-serif !important; font-weight: 400 !important; font-size: 16px !important; line-height: 33px !important; letter-spacing: 0.5px !important; color: inherit !important; background: none !important; background-color: transparent !important; text-decoration: none !important; }
     .rte-content.press-rte p { margin: 0; }
+    /* ── 보도자료 미리보기 본문 타이포 강제 ── */
+    .press-preview-html { font-family: 'Noto Sans KR', -apple-system, sans-serif; font-weight: 400; font-size: 16px; line-height: 33px; letter-spacing: 0.5px; color: #000; background: none; word-break: keep-all; overflow-wrap: break-word; }
+    .dark .press-preview-html { color: #fff; }
+    .press-preview-html * { font-family: 'Noto Sans KR', -apple-system, sans-serif !important; font-weight: 400 !important; font-size: 16px !important; line-height: 33px !important; letter-spacing: 0.5px !important; color: inherit !important; background: none !important; background-color: transparent !important; text-decoration: none !important; }
+    .press-preview-html p { margin: 0; }
     /* 아카이브 폼 그리드 */
     .arch-form-row { display: grid; gap: 16px; }
     .arch-form-row-3 { grid-template-columns: 1fr 1fr 1fr; }
@@ -2340,6 +2345,23 @@ function showDashboard() {
     btn.disabled = false; btn.textContent = '저장';
   }
 
+  /* 보도자료 본문: 모든 인라인 타이포 스타일 제거 (CSS로 일괄 적용) */
+  function stripPressHtml(html) {
+    const div = document.createElement('div');
+    div.innerHTML = html;
+    const LOCKED = ['font-size','line-height','letter-spacing','font-family','font-weight','color','background','background-color','text-decoration','font-style'];
+    div.querySelectorAll('*').forEach(el => {
+      if (el.classList?.contains('rte-img') || el.classList?.contains('rte-img-block')) return;
+      LOCKED.forEach(p => el.style.removeProperty(p));
+      if (['B','STRONG','EM','I','U','MARK'].includes(el.tagName)) {
+        const span = document.createElement('span');
+        span.innerHTML = el.innerHTML;
+        el.replaceWith(span);
+      }
+    });
+    return div.innerHTML;
+  }
+
   /* 공지사항 본문: 크기·자간·행간·정렬만 제거, 굵기·색상 등은 유지 */
   function sanitizeNoticeContent(html) {
     const div = document.createElement('div');
@@ -2372,7 +2394,7 @@ function showDashboard() {
         const [thumb] = reordered.splice(thumbnailIdx, 1);
         reordered.unshift(thumb);
       }
-      return { ...base, title: get('f-title'), content: rte('f-content'), date: get('f-date'), images: reordered, summary: chk('f-pinned') ? get('f-summary') : '' };
+      return { ...base, title: get('f-title'), content: stripPressHtml(rte('f-content')), date: get('f-date'), images: reordered, summary: chk('f-pinned') ? get('f-summary') : '' };
     }
     if (currentSection === 'archive') {
       const existing = editingId ? (currentItems.find(i => i.id === editingId) || {}) : {};
@@ -2563,7 +2585,7 @@ function showDashboard() {
       body = `${item.date ? `<div class="preview-date-above">${escHtml(item.date)}</div>` : ''}
         <div class="preview-title">${escHtml(item.title || '')}</div>
         ${imgs}
-        <div class="preview-html">${item.content || ''}</div>`;
+        <div class="preview-html press-preview-html">${item.content || ''}</div>`;
     } else if (currentSection === 'archive') {
       const typeLabel = {intro:'기업소개서',catalog:'카탈로그/지명원',ir:'IR',ci:'CI'}[item.type] || item.type || '';
       const archMeta = [item.year, item.period && item.period !== '구분없음' ? item.period : ''].filter(Boolean).join(' ');
