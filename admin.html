@@ -12,10 +12,10 @@
     @font-face { font-family: 'Kakao OTF'; src: url('assets/fonts/KakaoOTFRegular.otf') format('opentype'); font-weight: 300 400; }
 
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Noto Sans KR', -apple-system, sans-serif; background: #e8f1f6; color: #333; min-height: 100vh; }
+    body { font-family: 'Noto Sans KR', -apple-system, sans-serif; background: #f5f8fb; color: #333; min-height: 100vh; }
 
     /* ── 로그인 ── */
-    .login-overlay { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; z-index: 9999; background: #edf6fb; }
+    .login-overlay { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; z-index: 9999; background: #f5f8fb; }
     .login-box { width: 360px; display: flex; flex-direction: column; align-items: center; padding: 50px 0 32px; }
     .login-logo { margin-bottom: 6px; }
     .login-logo img { height: 34px; width: auto; display: block; }
@@ -37,6 +37,9 @@
     .login-error { color: #e63946; font-size: 13px; margin-top: 10px; min-height: 18px; text-align: center; width: 100%; }
     .dark-mode-toggle { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 9px 0; margin-bottom: 8px; }
     .dark-mode-toggle svg { width: 14px; height: 14px; stroke: rgba(255,255,255,0.35); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; transition: stroke 0.2s; }
+    .login-dark-toggle { position: fixed; top: 18px; right: 20px; z-index: 10000; display: flex; align-items: center; gap: 8px; }
+    .login-dark-toggle svg { width: 16px; height: 16px; stroke: #aaa; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; transition: stroke 0.2s; }
+    .dark .login-dark-toggle svg { stroke: #666; }
     .dark-mode-switch { position: relative; width: 40px; height: 22px; cursor: pointer; }
     .dark-mode-switch input { opacity: 0; width: 0; height: 0; position: absolute; }
     .dark-mode-track { position: absolute; inset: 0; background: #ddd; border-radius: 11px; transition: background 0.25s; }
@@ -100,7 +103,7 @@
     .admin-layout { display: flex; min-height: 100vh; }
 
     /* ── 사이드바 ── */
-    .sidebar { width: 220px; background: #1a3040; color: #fff; display: flex; flex-direction: column; flex-shrink: 0; position: fixed; top: 0; left: 0; height: 100vh; z-index: 100; }
+    .sidebar { width: 187px; background: #1a3040; color: #fff; display: flex; flex-direction: column; flex-shrink: 0; position: fixed; top: 0; left: 0; height: 100vh; z-index: 100; }
     .sidebar-logo { padding: 24px 20px 20px; border-bottom: 1px solid rgba(255,255,255,0.08); }
     .sidebar-logo img { height: 28px; width: auto; display: block; margin-left: 7px; }
     .sidebar-nav { flex: 1; padding: 16px 0; }
@@ -121,7 +124,7 @@
     .site-preview-frame { width: 100%; max-width: 1300px; flex: 1; border: none; border-radius: 10px; background: #fff; min-height: 0; }
 
     /* ── 메인 ── */
-    .main-content { margin-left: 220px; flex: 1; padding: 32px; }
+    .main-content { margin-left: 187px; flex: 1; padding: 32px; }
     .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
     .section-title { font-size: 22px; font-weight: 700; color: #1a3040; }
     .section-count { font-size: 14px; color: #999; margin-left: 8px; font-weight: 400; }
@@ -316,6 +319,17 @@
 </head>
 <body>
 
+<!-- 로그인 다크모드 토글 -->
+<div class="login-dark-toggle" id="login-dark-toggle">
+  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+  <label class="dark-mode-switch">
+    <input type="checkbox" id="login-dark-chk" onchange="toggleDarkMode(this.checked)">
+    <div class="dark-mode-track"></div>
+    <div class="dark-mode-thumb"></div>
+  </label>
+  <svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+</div>
+
 <!-- 로그인 -->
 <div class="login-overlay" id="login-overlay">
   <div class="login-box">
@@ -346,7 +360,7 @@
 <!-- 관리자 패널 -->
 <div class="admin-layout" id="admin-panel" style="display:none;">
   <aside class="sidebar">
-    <div class="sidebar-logo"><img src="assets/logo-white.png" alt="ecobell"></div>
+    <div class="sidebar-logo"><img id="sidebar-logo-img" src="assets/logo.png" alt="ecobell"></div>
     <nav class="sidebar-nav">
       <button class="nav-btn active" onclick="switchSection('notices')" data-section="notices">
         <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="4" rx="1"/><path d="M7 4H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-2"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg></span>공지사항
@@ -535,6 +549,7 @@
     authHeader = '';
     document.getElementById('admin-panel').style.display = 'none';
     document.getElementById('login-overlay').style.display = 'flex';
+    document.getElementById('login-dark-toggle').style.display = '';
     document.getElementById('login-user').value = '';
     document.getElementById('login-pass').value = '';
     realPass = '';
@@ -542,6 +557,7 @@
 
   function showDashboard() {
     document.getElementById('login-overlay').style.display = 'none';
+    document.getElementById('login-dark-toggle').style.display = 'none';
     document.getElementById('admin-panel').style.display = 'flex';
     loadSection(currentSection);
   }
@@ -722,11 +738,6 @@
   async function togglePin(id) {
     const item = currentItems.find(i => i.id === id);
     if (!item) return;
-    if (currentSection === 'press') {
-      const pinnedCount = currentItems.filter(i => i.pinned).length;
-      if (!item.pinned && pinnedCount >= 3) { showToast('고정 기사는 정확히 3개여야 합니다. 먼저 다른 기사의 고정을 해제해주세요.', true); return; }
-      if (item.pinned && pinnedCount <= 3) { showToast('고정 기사는 정확히 3개여야 합니다. 먼저 다른 기사를 고정한 후 해제해주세요.', true); return; }
-    }
     item.pinned = !item.pinned;
     await updateItem(item);
     renderList();
@@ -1622,8 +1633,11 @@
   /* ── 다크모드 ── */
   function toggleDarkMode(isDark) {
     document.body.classList.toggle('dark', isDark);
+    document.querySelectorAll('#dark-mode-chk, #login-dark-chk').forEach(c => c.checked = isDark);
     const logo = document.getElementById('login-logo-img');
     if (logo) logo.src = isDark ? 'assets/logo-white.png' : 'assets/logo.png';
+    const sidebarLogo = document.getElementById('sidebar-logo-img');
+    if (sidebarLogo) sidebarLogo.src = isDark ? 'assets/logo-white.png' : 'assets/logo.png';
     const heroImg = document.querySelector('.login-hero-img');
     if (heroImg) heroImg.src = isDark ? 'assets/hero-dark.png' : 'assets/company-hero-bg2.png';
     localStorage.setItem('adminDarkMode', isDark ? '1' : '');
@@ -1631,10 +1645,11 @@
   (function() {
     if (localStorage.getItem('adminDarkMode')) {
       document.body.classList.add('dark');
-      const chk = document.getElementById('dark-mode-chk');
-      if (chk) chk.checked = true;
+      document.querySelectorAll('#dark-mode-chk, #login-dark-chk').forEach(c => c.checked = true);
       const logo = document.getElementById('login-logo-img');
       if (logo) logo.src = 'assets/logo-white.png';
+      const sidebarLogo = document.getElementById('sidebar-logo-img');
+      if (sidebarLogo) sidebarLogo.src = 'assets/logo-white.png';
       const heroImg = document.querySelector('.login-hero-img');
       if (heroImg) heroImg.src = 'assets/hero-dark.png';
     }
