@@ -12,10 +12,10 @@
     @font-face { font-family: 'Kakao OTF'; src: url('assets/fonts/KakaoOTFRegular.otf') format('opentype'); font-weight: 300 400; }
 
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Noto Sans KR', -apple-system, sans-serif; background: #f0f2f5; color: #333; min-height: 100vh; }
+    body { font-family: 'Noto Sans KR', -apple-system, sans-serif; background: #e8f1f6; color: #333; min-height: 100vh; }
 
     /* ── 로그인 ── */
-    .login-overlay { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; z-index: 9999; background: #fff; }
+    .login-overlay { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; z-index: 9999; background: #edf6fb; }
     .login-box { width: 360px; display: flex; flex-direction: column; align-items: center; padding: 50px 0 32px; }
     .login-logo { margin-bottom: 6px; }
     .login-logo img { height: 34px; width: auto; display: block; }
@@ -35,15 +35,15 @@
     .login-btn { background: none; color: #1E8DCD; border: none; font-size: 15px; font-weight: 600; cursor: pointer; letter-spacing: 0.5px; transition: opacity 0.2s; padding: 0; }
     .login-btn:hover { opacity: 0.7; }
     .login-error { color: #e63946; font-size: 13px; margin-top: 10px; min-height: 18px; text-align: center; width: 100%; }
-    .dark-mode-toggle { position: fixed; top: 18px; right: 20px; z-index: 10000; display: flex; align-items: center; gap: 8px; }
-    .dark-mode-toggle svg { width: 16px; height: 16px; stroke: #aaa; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; transition: stroke 0.2s; }
+    .dark-mode-toggle { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 9px 0; margin-bottom: 8px; }
+    .dark-mode-toggle svg { width: 14px; height: 14px; stroke: rgba(255,255,255,0.35); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; transition: stroke 0.2s; }
     .dark-mode-switch { position: relative; width: 40px; height: 22px; cursor: pointer; }
     .dark-mode-switch input { opacity: 0; width: 0; height: 0; position: absolute; }
     .dark-mode-track { position: absolute; inset: 0; background: #ddd; border-radius: 11px; transition: background 0.25s; }
     .dark-mode-thumb { position: absolute; top: 3px; left: 3px; width: 16px; height: 16px; background: #fff; border-radius: 50%; box-shadow: 0 1px 3px rgba(0,0,0,0.2); transition: transform 0.25s; }
     .dark-mode-switch input:checked ~ .dark-mode-track { background: #1E8DCD; }
     .dark-mode-switch input:checked ~ .dark-mode-thumb { transform: translateX(18px); }
-    .dark .dark-mode-toggle svg { stroke: #666; }
+    .dark .dark-mode-toggle svg { stroke: rgba(255,255,255,0.25); }
     .dark .dark-mode-track { background: #333; }
 
     /* ── 다크모드 ── */
@@ -57,22 +57,59 @@
     .dark .pass-toggle-btn { color: #7a7f8e; }
     .dark .login-btn { color: #5aaedf; }
 
+    /* ── 다크모드 어드민 ── */
+    .dark body { background: #0c1525; color: #c8d8e8; }
+    .dark .sidebar { background: #080d18; }
+    .dark .main-content { color: #c8d8e8; }
+    .dark .section-title { color: #c8d8e8; }
+    .dark .section-count { color: #506070; }
+    .dark .card { background: #131e30; box-shadow: 0 1px 6px rgba(0,0,0,0.4); }
+    .dark .item-row { border-color: #1e2d42; }
+    .dark .item-row:hover { background: #1a2838; }
+    .dark .item-title { color: #c8d8e8; }
+    .dark .item-meta { color: #506070; }
+    .dark .item-tag { background: #1a3048; color: #5aaedf; }
+    .dark .drag-handle { color: #506070; }
+    .dark .form-card { background: #131e30; box-shadow: 0 1px 6px rgba(0,0,0,0.4); }
+    .dark .form-title { color: #c8d8e8; border-color: #1e2d42; }
+    .dark .form-label { color: #7a8ea0; }
+    .dark .form-input, .dark .form-select, .dark .form-textarea { background: #1a2838; border-color: #2d3f55; color: #c8d8e8; }
+    .dark .form-input:focus, .dark .form-select:focus, .dark .form-textarea:focus { border-color: #5aaedf; }
+    .dark .rte-wrap { border-color: #2d3f55; }
+    .dark .rte-toolbar { background: #1a2838; border-color: #2d3f55; }
+    .dark .rte-toolbar button { background: #1e2d42; border-color: #2d3f55; color: #8899aa; }
+    .dark .rte-content { color: #c8d8e8; }
+    .dark .tag-wrap { border-color: #2d3f55; background: #1a2838; }
+    .dark .upload-area { border-color: #2d3f55; color: #7a8ea0; }
+    .dark .attach-item { background: #1a2838; }
+    .dark .attach-name { color: #8899aa; }
+    .dark .divider { background: #1e2d42; }
+    .dark .btn-cancel { background: #1e2d42; color: #8899aa; }
+    .dark .btn-cancel:hover { background: #263848; }
+    .dark .empty-state { color: #3a4f62; }
+    .dark .loading { color: #3a4f62; }
+    .dark .archive-tabs { border-color: #1e2d42; }
+    .dark .archive-tab { color: #506070; }
+    .dark .archive-tab:hover:not(.active) { background: #1a2838; color: #8899aa; }
+    .dark .filter-pill { background: #131e30; border-color: #2d3f55; color: #7a8ea0; }
+    .dark .filter-pill:hover:not(.active) { border-color: #5aaedf; color: #5aaedf; }
+    .dark .form-check { color: #8899aa; }
+    .dark .summary-counter { color: #506070; }
+
     /* ── 레이아웃 ── */
     .admin-layout { display: flex; min-height: 100vh; }
 
     /* ── 사이드바 ── */
-    .sidebar { width: 220px; background: #1a1f36; color: #fff; display: flex; flex-direction: column; flex-shrink: 0; position: fixed; top: 0; left: 0; height: 100vh; z-index: 100; }
+    .sidebar { width: 220px; background: #1a3040; color: #fff; display: flex; flex-direction: column; flex-shrink: 0; position: fixed; top: 0; left: 0; height: 100vh; z-index: 100; }
     .sidebar-logo { padding: 24px 20px 20px; border-bottom: 1px solid rgba(255,255,255,0.08); }
     .sidebar-logo img { height: 28px; width: auto; display: block; margin-left: 7px; }
     .sidebar-nav { flex: 1; padding: 16px 0; }
     .nav-btn { display: flex; align-items: center; gap: 10px; width: 100%; padding: 11px 20px; background: none; border: none; color: rgba(255,255,255,0.6); font-size: 14px; cursor: pointer; transition: all 0.15s; text-align: left; border-left: 3px solid transparent; }
     .nav-btn:hover { color: #fff; background: rgba(255,255,255,0.06); }
-    .nav-btn.active { color: #fff; background: rgba(30,141,205,0.18); border-left-color: #1E8DCD; }
-    .nav-btn .nav-icon { font-size: 16px; width: 20px; text-align: center; }
+    .nav-btn.active { color: #fff; background: rgba(91,184,212,0.2); border-left-color: #5BB8D4; }
+    .nav-btn .nav-icon { width: 20px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
     .sidebar-footer { padding: 16px 20px; border-top: 1px solid rgba(255,255,255,0.08); }
-    .preview-site-btn { width: 100%; padding: 9px; background: rgba(30,141,205,0.18); border: 1px solid rgba(30,141,205,0.4); border-radius: 6px; color: #6ec6f5; font-size: 13px; cursor: pointer; transition: all 0.15s; margin-bottom: 8px; }
-    .preview-site-btn:hover { background: rgba(30,141,205,0.3); color: #fff; }
-    .logout-btn { width: 100%; padding: 9px; background: rgba(255,255,255,0.07); border: none; border-radius: 6px; color: rgba(255,255,255,0.6); font-size: 13px; cursor: pointer; transition: all 0.15s; }
+    .logout-btn { width: 100%; padding: 9px; background: rgba(255,255,255,0.07); border: none; border-radius: 6px; color: rgba(255,255,255,0.6); font-size: 13px; cursor: pointer; transition: all 0.15s; display: flex; align-items: center; justify-content: center; gap: 7px; }
     .logout-btn:hover { background: rgba(255,255,255,0.12); color: #fff; }
     /* ── 웹사이트 미리보기 오버레이 ── */
     .site-preview-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.82); z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding: 28px 24px 24px; }
@@ -86,7 +123,7 @@
     /* ── 메인 ── */
     .main-content { margin-left: 220px; flex: 1; padding: 32px; }
     .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
-    .section-title { font-size: 22px; font-weight: 700; color: #1a1f36; }
+    .section-title { font-size: 22px; font-weight: 700; color: #1a3040; }
     .section-count { font-size: 14px; color: #999; margin-left: 8px; font-weight: 400; }
     .add-btn { display: inline-flex; align-items: center; gap: 6px; padding: 0 18px; height: 38px; background: #1E8DCD; color: #fff; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: background 0.2s; }
     .add-btn:hover { background: #1679b3; }
@@ -121,9 +158,22 @@
 
     /* ── 선택/필터/탭 ── */
     .item-check { width: 16px; height: 16px; accent-color: #1E8DCD; cursor: pointer; flex-shrink: 0; }
-    .bulk-del-btn { display: none; padding: 0 16px; height: 38px; background: #fff0f0; border: 1px solid #e63946; border-radius: 8px; font-size: 14px; font-weight: 600; color: #e63946; cursor: pointer; transition: background 0.2s; }
-    .bulk-del-btn:hover { background: #ffd6d9; }
     .header-actions { display: flex; align-items: center; gap: 10px; }
+    .bulk-action-bar { display: none; align-items: center; gap: 8px; padding: 10px 16px; background: #f0f7fd; border: 1px solid #c5dff0; border-radius: 8px; margin-bottom: 10px; }
+    .bulk-action-bar .sel-info { font-size: 13px; color: #1a3040; font-weight: 600; flex: 1; }
+    .bulk-action-btn { display: inline-flex; align-items: center; gap: 5px; padding: 0 14px; height: 32px; border-radius: 6px; border: 1px solid; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.15s; background: #fff; }
+    .bulk-action-btn.select-all { border-color: #c8d8e8; color: #556; }
+    .bulk-action-btn.select-all:hover { border-color: #1E8DCD; color: #1E8DCD; }
+    .bulk-action-btn.pin { border-color: #f0a830; color: #c08020; }
+    .bulk-action-btn.pin:hover { background: #fff8ee; }
+    .bulk-action-btn.del { border-color: #e63946; color: #e63946; }
+    .bulk-action-btn.del:hover { background: #fff0f0; }
+    .dark .bulk-action-bar { background: #0f1e30; border-color: #1e3a55; }
+    .dark .bulk-action-bar .sel-info { color: #8abbe0; }
+    .dark .bulk-action-btn { background: #1a2838; }
+    .dark .bulk-action-btn.select-all { border-color: #2d3f55; color: #8899aa; }
+    .item-cat { font-size: 11px; color: #666; background: #f0f4f7; padding: 3px 9px; border-radius: 10px; white-space: nowrap; flex-shrink: 0; font-weight: 500; }
+    .dark .item-cat { background: #1a2838; color: #7a9ab0; }
     .filter-bar { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding: 14px 16px 6px; }
     .filter-pills { display: flex; gap: 8px; flex-wrap: wrap; flex: 1; }
     .faq-excel-btns { display: flex; gap: 6px; align-items: center; flex-shrink: 0; }
@@ -266,17 +316,6 @@
 </head>
 <body>
 
-<!-- 다크모드 토글 -->
-<div class="dark-mode-toggle">
-  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-  <label class="dark-mode-switch">
-    <input type="checkbox" id="dark-mode-chk" onchange="toggleDarkMode(this.checked)">
-    <div class="dark-mode-track"></div>
-    <div class="dark-mode-thumb"></div>
-  </label>
-  <svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-</div>
-
 <!-- 로그인 -->
 <div class="login-overlay" id="login-overlay">
   <div class="login-box">
@@ -310,21 +349,29 @@
     <div class="sidebar-logo"><img src="assets/logo-white.png" alt="ecobell"></div>
     <nav class="sidebar-nav">
       <button class="nav-btn active" onclick="switchSection('notices')" data-section="notices">
-        <span class="nav-icon">📋</span>공지사항
+        <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="4" rx="1"/><path d="M7 4H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-2"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg></span>공지사항
       </button>
       <button class="nav-btn" onclick="switchSection('press')" data-section="press">
-        <span class="nav-icon">📰</span>보도자료
+        <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg></span>보도자료
       </button>
       <button class="nav-btn" onclick="switchSection('archive')" data-section="archive">
-        <span class="nav-icon">📁</span>아카이브
+        <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></span>아카이브
       </button>
       <button class="nav-btn" onclick="switchSection('faq')" data-section="faq">
-        <span class="nav-icon">❓</span>FAQ
+        <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>FAQ
       </button>
     </nav>
     <div class="sidebar-footer">
-      <button class="preview-site-btn" onclick="showSitePreview()">🌐 웹사이트 미리보기</button>
-      <button class="logout-btn" onclick="doLogout()">로그아웃</button>
+      <div class="dark-mode-toggle">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <label class="dark-mode-switch">
+          <input type="checkbox" id="dark-mode-chk" onchange="toggleDarkMode(this.checked)">
+          <div class="dark-mode-track"></div>
+          <div class="dark-mode-thumb"></div>
+        </label>
+        <svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </div>
+      <button class="logout-btn" onclick="doLogout()"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>로그아웃</button>
     </div>
   </aside>
 
@@ -335,13 +382,20 @@
         <span class="section-count" id="section-count"></span>
       </div>
       <div class="header-actions">
-        <button class="bulk-del-btn" id="bulk-del-btn" onclick="bulkDelete()">선택 삭제 (<span id="sel-count">0</span>건)</button>
         <button class="add-btn" onclick="showForm()">+ 새 항목 추가</button>
       </div>
     </div>
 
     <!-- 추가/수정 폼 -->
     <div class="form-card" id="item-form" style="display:none;"></div>
+
+    <!-- 일괄 작업 바 -->
+    <div class="bulk-action-bar" id="bulk-action-bar">
+      <span class="sel-info"><span id="sel-count">0</span>개 선택됨</span>
+      <button class="bulk-action-btn select-all" onclick="selectAll()">전체선택</button>
+      <button class="bulk-action-btn pin" onclick="bulkPin()"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"/><path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z"/></svg>고정</button>
+      <button class="bulk-action-btn del" onclick="bulkDelete()"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>삭제</button>
+    </div>
 
     <!-- 리스트 -->
     <div class="card">
@@ -554,19 +608,18 @@
     let prefix = '';
 
     if (currentSection === 'faq') {
-      const cats = ['전체', 'ecoASSET', 'E-ASSET', 'ecoNODE', '신재생에너지', '기타'];
+      const cats = ['전체', 'ecoValue', 'ecoASSET', 'E-ASSET', 'ecoNODE', '태양광 솔루션', '기타'];
       prefix = `<div class="filter-bar">
         <div class="filter-pills">${cats.map(c => {
           const val = c === '전체' ? 'all' : c;
           return `<button class="filter-pill ${faqFilter === val ? 'active' : ''}" onclick="setFaqFilter('${val}')">${c}</button>`;
         }).join('')}</div>
         <div class="faq-excel-btns">
-          <button class="faq-excel-btn" onclick="downloadFaqTemplate()" title="빈 엑셀 양식 다운로드">📋 양식 다운로드</button>
-          <label class="faq-excel-btn" title="엑셀 파일로 FAQ 일괄 업로드">
-            📤 엑셀 업로드
+          <button class="faq-excel-btn" onclick="downloadFaqTemplate()" title="빈 엑셀 양식 다운로드"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> 양식 다운로드</button>
+          <label class="faq-excel-btn" title="엑셀 파일로 FAQ 일괄 업로드"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg> 엑셀 업로드
             <input type="file" id="faq-upload-input" accept=".xlsx,.xls" style="display:none" onchange="uploadFaqExcel(this)">
           </label>
-          <button class="faq-excel-btn" onclick="downloadFaqExcel()" title="현재 FAQ 목록 엑셀 다운로드">📥 엑셀 다운로드</button>
+          <button class="faq-excel-btn" onclick="downloadFaqExcel()" title="현재 FAQ 목록 엑셀 다운로드"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="8 17 12 21 16 17"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"/></svg> 엑셀 다운로드</button>
         </div>
       </div>`;
       displayItems = faqFilter === 'all' ? [...currentItems] : currentItems.filter(i =>
@@ -588,7 +641,7 @@
     }
 
     if (!displayItems.length) {
-      el.innerHTML = prefix + '<div class="empty-state"><div style="font-size:36px;">📭</div><p>등록된 항목이 없습니다.</p></div>';
+      el.innerHTML = prefix + '<div class="empty-state"><div style="color:#aab8c4;margin-bottom:8px;"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg></div><p>등록된 항목이 없습니다.</p></div>';
       return;
     }
 
@@ -604,7 +657,7 @@
     const isPublished = item.published !== false;
     const isPinned = !!item.pinned;
     let meta = '';
-    if (currentSection === 'faq') meta = '<span class="item-tag">' + (item.category || '기타') + '</span>';
+    if (currentSection === 'faq') meta = '';
     else if (currentSection === 'press') meta = item.date || '';
     else if (currentSection === 'archive') meta = '<span class="item-tag">' + (item.type || '') + '</span>' + (item.date ? ' ' + item.date : '');
     else meta = (item.author ? `<span class="item-tag">${item.author}</span>` : '') + (item.date || '');
@@ -617,15 +670,15 @@
 
     return `<div class="item-row" ${canDrag ? 'draggable="true"' : ''} data-id="${item.id}" data-idx="${idx}">
       <input type="checkbox" class="item-check" ${selectedIds.has(item.id) ? 'checked' : ''} onclick="toggleSelect('${item.id}')">
-      <span class="item-pin ${isPinned ? 'pinned' : ''}" title="${isPinned ? '고정 해제' : '고정'}" onclick="togglePin('${item.id}')">📌</span>
+      <span class="item-pin ${isPinned ? 'pinned' : ''}" title="${isPinned ? '고정 해제' : '고정'}" onclick="togglePin('${item.id}')"><svg width="14" height="14" viewBox="0 0 24 24" fill="${isPinned ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"/><path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z"/></svg></span>
       <div class="item-info">
         <div class="item-title">${escHtml(title)}</div>
         <div class="item-meta">${meta}</div>
       </div>
+      ${currentSection === 'faq' ? `<span class="item-cat">${escHtml(item.category || '기타')}</span>` : ''}
       <button class="action-btn pub-eye ${isPublished ? 'on' : 'off'}" onclick="togglePublish('${item.id}')" title="${isPublished ? '게시 중 (클릭하여 숨기기)' : '숨김 (클릭하여 게시)'}">${isPublished ? SVG_EYE : SVG_EYE_OFF}</button>
-      <button class="action-btn edit" onclick="showForm('${item.id}')" title="수정">✏️</button>
-      <button class="action-btn del" onclick="deleteItem('${item.id}')" title="삭제">🗑️</button>
-      ${canDrag ? '<span class="drag-handle" title="순서 변경">⠿</span>' : ''}
+      <button class="action-btn edit" onclick="showForm('${item.id}')" title="수정"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+      ${canDrag ? '<span class="drag-handle" title="순서 변경"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="5" r="1" fill="currentColor"/><circle cx="9" cy="12" r="1" fill="currentColor"/><circle cx="9" cy="19" r="1" fill="currentColor"/><circle cx="15" cy="5" r="1" fill="currentColor"/><circle cx="15" cy="12" r="1" fill="currentColor"/><circle cx="15" cy="19" r="1" fill="currentColor"/></svg></span>' : ''}
     </div>`;
   }
 
@@ -717,12 +770,48 @@
   }
 
   function updateBulkBtn() {
-    const btn = document.getElementById('bulk-del-btn');
-    if (!btn) return;
+    const bar = document.getElementById('bulk-action-bar');
+    if (!bar) return;
     const n = selectedIds.size;
-    btn.style.display = n > 0 ? '' : 'none';
+    bar.style.display = n > 0 ? 'flex' : 'none';
     const cnt = document.getElementById('sel-count');
     if (cnt) cnt.textContent = n;
+  }
+
+  function selectAll() {
+    const allIds = displayItems.map(i => i.id);
+    if (allIds.every(id => selectedIds.has(id))) {
+      selectedIds.clear();
+    } else {
+      allIds.forEach(id => selectedIds.add(id));
+    }
+    document.querySelectorAll('.item-check').forEach((chk, i) => {
+      chk.checked = selectedIds.has(displayItems[i]?.id);
+    });
+    updateBulkBtn();
+  }
+
+  async function bulkPin() {
+    if (!selectedIds.size) return;
+    const ids = [...selectedIds];
+    const anyUnpinned = ids.some(id => {
+      const item = currentItems.find(i => i.id === id);
+      return item && !item.pinned;
+    });
+    for (const id of ids) {
+      const item = currentItems.find(i => i.id === id);
+      if (!item) continue;
+      item.pinned = anyUnpinned;
+      try {
+        await fetch('/api/admin-data', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json', Authorization: 'Basic ' + authHeader },
+          body: JSON.stringify({ type: currentSection, item })
+        });
+      } catch(e) {}
+    }
+    showToast(anyUnpinned ? '선택 항목을 고정했습니다.' : '고정을 해제했습니다.');
+    loadSection(currentSection);
   }
 
   async function bulkDelete() {
@@ -950,7 +1039,7 @@
         </div>`;
 
     } else if (currentSection === 'faq') {
-      const _faqCats = ['ecoASSET','E-ASSET','ecoNODE','신재생에너지','기타'];
+      const _faqCats = ['ecoValue','ecoASSET','E-ASSET','ecoNODE','태양광 솔루션','기타'];
       const _selCats = String(v('category','')).split(',').map(s => s.trim()).filter(Boolean);
       fields = `
         <div class="form-group full"><label class="form-label">카테고리 * <span style="font-weight:400;color:#aaa;font-size:12px;">복수 선택 가능</span></label>
@@ -1566,41 +1655,46 @@
   <script src="assets/header-scroll.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
   <script>
-    const FAQ_CATS = ['ecoASSET', 'E-ASSET', 'ecoNODE', '신재생에너지', '기타'];
+    const FAQ_CATS = ['ecoValue', 'ecoASSET', 'E-ASSET', 'ecoNODE', '태양광 솔루션', '기타'];
 
     /* ── FAQ 엑셀 양식 다운로드 ── */
     function downloadFaqTemplate() {
       if (!window.XLSX) { showToast('Excel 라이브러리 로딩 중입니다. 잠시 후 다시 시도해주세요.', true); return; }
       const wb = window.XLSX.utils.book_new();
 
-      // FAQ 양식 시트
-      const wsData = [
-        ['구분', '질문', '답변'],
-        ['ecoASSET', '질문 예시를 입력하세요', '답변 예시를 입력하세요'],
-      ];
-      const ws = window.XLSX.utils.aoa_to_sheet(wsData);
-      ws['!cols'] = [{ wch: 18 }, { wch: 45 }, { wch: 70 }];
+      const header = ['질문', '답변', ...FAQ_CATS];
+      const exampleRow = ['질문 예시를 입력하세요', '답변 예시를 입력하세요', 'O', '', '', '', '', ''];
+      const ws = window.XLSX.utils.aoa_to_sheet([header, exampleRow]);
+
+      ws['!cols'] = [{ wch: 45 }, { wch: 70 }, ...FAQ_CATS.map(() => ({ wch: 16 }))];
+
+      // 카테고리 열 드롭다운 (O 또는 공백)
+      const lastCatCol = window.XLSX.utils.encode_col(1 + FAQ_CATS.length);
+      ws['!dataValidations'] = [{
+        sqref: `C2:${lastCatCol}10000`,
+        type: 'list',
+        formula1: '"O"',
+        allowBlank: true,
+        showDropDown: false,
+        showErrorMessage: false
+      }];
+
       window.XLSX.utils.book_append_sheet(wb, ws, 'FAQ');
-
-      // 구분 유효값 참조 시트
-      const refData = [['구분 유효값 (1열에 아래 값 중 하나를 입력하세요)'], ...FAQ_CATS.map(c => [c])];
-      const refWs = window.XLSX.utils.aoa_to_sheet(refData);
-      refWs['!cols'] = [{ wch: 45 }];
-      window.XLSX.utils.book_append_sheet(wb, refWs, '구분_목록');
-
       window.XLSX.writeFile(wb, 'FAQ_양식.xlsx');
     }
 
     /* ── FAQ 엑셀 다운로드 ── */
     function downloadFaqExcel() {
       if (!window.XLSX) { showToast('Excel 라이브러리 로딩 중입니다. 잠시 후 다시 시도해주세요.', true); return; }
-      const data = [['구분', '질문', '답변']];
+      const header = ['질문', '답변', ...FAQ_CATS];
+      const data = [header];
       currentItems.forEach(item => {
-        data.push([item.category || '', item.question || '', item.answer || '']);
+        const itemCats = String(item.category || '').split(',').map(s => s.trim());
+        data.push([item.question || '', item.answer || '', ...FAQ_CATS.map(c => itemCats.includes(c) ? 'O' : '')]);
       });
       const wb = window.XLSX.utils.book_new();
       const ws = window.XLSX.utils.aoa_to_sheet(data);
-      ws['!cols'] = [{ wch: 18 }, { wch: 45 }, { wch: 70 }];
+      ws['!cols'] = [{ wch: 45 }, { wch: 70 }, ...FAQ_CATS.map(() => ({ wch: 16 }))];
       window.XLSX.utils.book_append_sheet(wb, ws, 'FAQ');
       window.XLSX.writeFile(wb, 'FAQ_목록.xlsx');
     }
@@ -1625,20 +1719,17 @@
           const errors = [];
 
           for (let i = 1; i < rows.length; i++) {
-            const [rawCat, rawQ, rawA] = rows[i];
+            const [rawQ, rawA, ...catCells] = rows[i];
             const question = String(rawQ || '').trim();
             const answer = String(rawA || '').trim();
             if (!question && !answer) continue; // 빈 행 건너뜀
 
-            const catStr = String(rawCat || '').trim();
-            const cats = catStr.split(',').map(s => s.trim()).filter(Boolean);
-            const invalid = cats.filter(c => !FAQ_CATS.includes(c));
-            if (invalid.length) {
-              errors.push(`${i + 1}행: 알 수 없는 구분 '${invalid.join(', ')}'`);
-              continue;
-            }
+            const cats = FAQ_CATS.filter((_, idx) => {
+              const v = String(catCells[idx] || '').trim().toUpperCase();
+              return v === 'O' || v === 'Y' || v === '1';
+            });
             if (!cats.length) {
-              errors.push(`${i + 1}행: 구분이 비어 있습니다.`);
+              errors.push(`${i + 1}행: 카테고리가 선택되지 않았습니다.`);
               continue;
             }
 
