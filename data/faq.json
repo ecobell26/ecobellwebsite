@@ -47,7 +47,7 @@
     },
     {
       "pinned": false,
-      "published": true,
+      "published": false,
       "category": "ecoNODE",
       "question": "ecoNODE란 무엇인가요?",
       "answer": "1",
