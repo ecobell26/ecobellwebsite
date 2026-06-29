@@ -1,7 +1,7 @@
 {
   "items": [
     {
-      "pinned": false,
+      "pinned": true,
       "published": true,
       "category": "ecoNODE",
       "question": "기존 데이터 수집 방식도 있는데, 왜 꼭 '에코노드'를 추가로 설치해야 하나요?",
