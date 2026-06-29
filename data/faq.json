@@ -39,20 +39,20 @@
     {
       "pinned": false,
       "published": true,
-      "category": "ecoNODE",
-      "question": "ecoNODE란 무엇인가요?",
-      "answer": "1",
-      "id": "mpahzp5v94uks",
-      "createdAt": "2026-05-18T01:00:49.315Z"
-    },
-    {
-      "pinned": false,
-      "published": true,
       "category": "E-ASSET",
       "question": "E-ASSET(에너지에셋)은 어떤 플랫폼인가요?",
       "answer": "w",
       "id": "mpahzvno5baf2",
       "createdAt": "2026-05-18T01:00:57.732Z"
+    },
+    {
+      "pinned": false,
+      "published": true,
+      "category": "ecoNODE",
+      "question": "ecoNODE란 무엇인가요?",
+      "answer": "1",
+      "id": "mpahzp5v94uks",
+      "createdAt": "2026-05-18T01:00:49.315Z"
     }
   ]
 }
