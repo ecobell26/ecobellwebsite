@@ -8,25 +8,54 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;600;700&family=Nanum+Square:wght@400;700;800&display=swap" rel="stylesheet">
   <style>
+    @font-face { font-family: 'Kakao OTF'; src: url('assets/fonts/KakaoOTFBold.otf') format('opentype'); font-weight: 600 800; }
+    @font-face { font-family: 'Kakao OTF'; src: url('assets/fonts/KakaoOTFRegular.otf') format('opentype'); font-weight: 300 400; }
+
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Noto Sans KR', -apple-system, sans-serif; background: #f0f2f5; color: #333; min-height: 100vh; }
 
     /* ── 로그인 ── */
-    .login-overlay { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; z-index: 9999; background: url('assets/admin-bg.jpg') center/cover no-repeat; overflow: hidden; }
-    .login-deco { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; pointer-events: none; z-index: 0; }
-    .login-overlay::before { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.3); z-index: 1; pointer-events: none; }
-    .login-box { background: #fff; border-radius: 12px; padding: 48px 40px 25px; width: 360px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); position: relative; z-index: 2; }
-    .login-logo { margin-bottom: 8px; }
-    .login-logo img { height: 36px; width: auto; display: block; }
-    .login-sub { font-size: 13px; color: #999; margin-bottom: 32px; }
-    .login-box input { width: 100%; height: 44px; border: 1px solid #e0e0e0; border-radius: 8px; padding: 0 14px; font-size: 14px; margin-bottom: 12px; outline: none; transition: border-color 0.2s; }
-    .login-box input:focus { border-color: #1E8DCD; }
+    .login-overlay { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; z-index: 9999; background: #fff; }
+    .login-box { width: 360px; display: flex; flex-direction: column; align-items: center; padding: 50px 0 32px; }
+    .login-logo { margin-bottom: 6px; }
+    .login-logo img { height: 34px; width: auto; display: block; }
+    .login-sub { font-size: 13px; color: #999; margin-bottom: 22px; }
+    .login-hero-img { width: 500px; height: 351px; object-fit: cover; display: block; margin-bottom: 25px; border-radius: 10px; }
+    .login-tagline { font-family: 'Kakao OTF', 'Noto Sans KR', sans-serif; font-weight: 600; font-size: 23px; color: #000; margin-bottom: 40px; text-align: center; letter-spacing: 1px; }
+    .login-form { width: 100%; padding-bottom: 0; }
+    .login-form input { width: 100%; height: 44px; border: 1px solid #e0e0e0; border-radius: 8px; padding: 0 14px; font-size: 14px; margin-bottom: 12px; outline: none; transition: border-color 0.2s; font-family: inherit; }
+    .login-form input:focus { border-color: #1E8DCD; }
+    .pass-wrapper { position: relative; width: 100%; margin-bottom: 12px; }
+    .pass-wrapper input { margin-bottom: 0; padding-right: 42px; }
+    .pass-toggle-btn { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; padding: 4px; color: #bbb; display: flex; align-items: center; line-height: 1; }
+    .pass-toggle-btn:hover { color: #1E8DCD; }
     .login-save-id { display: flex; align-items: center; gap: 6px; margin-bottom: 12px; }
     .login-save-id input[type="checkbox"] { width: 15px; height: 15px; accent-color: #1E8DCD; cursor: pointer; margin: 0; }
     .login-save-id label { font-size: 13px; color: #666; cursor: pointer; user-select: none; }
-    .login-btn { width: 100%; height: 44px; background: #1E8DCD; color: #fff; border: none; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; transition: background 0.2s; margin-top: 4px; }
-    .login-btn:hover { background: #1679b3; }
-    .login-error { color: #e63946; font-size: 13px; margin-top: 10px; min-height: 18px; text-align: center; }
+    .login-btn { background: none; color: #1E8DCD; border: none; font-size: 15px; font-weight: 600; cursor: pointer; letter-spacing: 0.5px; transition: opacity 0.2s; padding: 0; }
+    .login-btn:hover { opacity: 0.7; }
+    .login-error { color: #e63946; font-size: 13px; margin-top: 10px; min-height: 18px; text-align: center; width: 100%; }
+    .dark-mode-toggle { position: fixed; top: 18px; right: 20px; z-index: 10000; display: flex; align-items: center; gap: 8px; }
+    .dark-mode-toggle svg { width: 16px; height: 16px; stroke: #aaa; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; transition: stroke 0.2s; }
+    .dark-mode-switch { position: relative; width: 40px; height: 22px; cursor: pointer; }
+    .dark-mode-switch input { opacity: 0; width: 0; height: 0; position: absolute; }
+    .dark-mode-track { position: absolute; inset: 0; background: #ddd; border-radius: 11px; transition: background 0.25s; }
+    .dark-mode-thumb { position: absolute; top: 3px; left: 3px; width: 16px; height: 16px; background: #fff; border-radius: 50%; box-shadow: 0 1px 3px rgba(0,0,0,0.2); transition: transform 0.25s; }
+    .dark-mode-switch input:checked ~ .dark-mode-track { background: #1E8DCD; }
+    .dark-mode-switch input:checked ~ .dark-mode-thumb { transform: translateX(18px); }
+    .dark .dark-mode-toggle svg { stroke: #666; }
+    .dark .dark-mode-track { background: #333; }
+
+    /* ── 다크모드 ── */
+    .dark .login-overlay { background: #111318; }
+    .dark .login-tagline { color: #f0f0f0; }
+    .dark .login-sub { color: #666; }
+    .dark .login-form input { background: #23262f; border-color: #4a4f5e; color: #e8e8e8; }
+    .dark .login-form input::placeholder { color: #7a7f8e; }
+    .dark .login-form input:focus { border-color: #5aaedf; }
+    .dark .login-save-id label { color: #9aa0b0; }
+    .dark .pass-toggle-btn { color: #7a7f8e; }
+    .dark .login-btn { color: #5aaedf; }
 
     /* ── 레이아웃 ── */
     .admin-layout { display: flex; min-height: 100vh; }
@@ -34,7 +63,7 @@
     /* ── 사이드바 ── */
     .sidebar { width: 220px; background: #1a1f36; color: #fff; display: flex; flex-direction: column; flex-shrink: 0; position: fixed; top: 0; left: 0; height: 100vh; z-index: 100; }
     .sidebar-logo { padding: 24px 20px 20px; border-bottom: 1px solid rgba(255,255,255,0.08); }
-    .sidebar-logo img { height: 28px; width: auto; display: block; filter: brightness(0) invert(1); margin-left: 7px; }
+    .sidebar-logo img { height: 28px; width: auto; display: block; margin-left: 7px; }
     .sidebar-nav { flex: 1; padding: 16px 0; }
     .nav-btn { display: flex; align-items: center; gap: 10px; width: 100%; padding: 11px 20px; background: none; border: none; color: rgba(255,255,255,0.6); font-size: 14px; cursor: pointer; transition: all 0.15s; text-align: left; border-left: 3px solid transparent; }
     .nav-btn:hover { color: #fff; background: rgba(255,255,255,0.06); }
@@ -80,16 +109,33 @@
     .item-meta { font-size: 12px; color: #aaa; margin-top: 2px; }
     .item-tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; background: #eef6fb; color: #1E8DCD; margin-right: 6px; }
     .item-tag.unpub { background: #f5f5f5; color: #bbb; }
-    .pub-toggle { display: flex; align-items: center; gap: 6px; cursor: pointer; flex-shrink: 0; }
-    .toggle-switch { width: 36px; height: 20px; background: #ddd; border-radius: 10px; position: relative; transition: background 0.2s; }
-    .toggle-switch.on { background: #1E8DCD; }
-    .toggle-switch::after { content: ''; position: absolute; width: 16px; height: 16px; background: #fff; border-radius: 50%; top: 2px; left: 2px; transition: left 0.2s; }
-    .toggle-switch.on::after { left: 18px; }
+    .action-btn.pub-eye.on { color: #1E8DCD; }
+    .action-btn.pub-eye.on:hover { background: #eef6fb; }
+    .action-btn.pub-eye.off { color: #ccc; }
+    .action-btn.pub-eye.off:hover { background: #f5f5f5; color: #aaa; }
     .action-btn { width: 30px; height: 30px; border: none; border-radius: 6px; cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background 0.15s; background: transparent; }
     .action-btn.edit { color: #555; }
     .action-btn.edit:hover { background: #eef; color: #1E8DCD; }
     .action-btn.del { color: #ccc; }
     .action-btn.del:hover { background: #fff0f0; color: #e63946; }
+
+    /* ── 선택/필터/탭 ── */
+    .item-check { width: 16px; height: 16px; accent-color: #1E8DCD; cursor: pointer; flex-shrink: 0; }
+    .bulk-del-btn { display: none; padding: 0 16px; height: 38px; background: #fff0f0; border: 1px solid #e63946; border-radius: 8px; font-size: 14px; font-weight: 600; color: #e63946; cursor: pointer; transition: background 0.2s; }
+    .bulk-del-btn:hover { background: #ffd6d9; }
+    .header-actions { display: flex; align-items: center; gap: 10px; }
+    .filter-bar { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding: 14px 16px 6px; }
+    .filter-pills { display: flex; gap: 8px; flex-wrap: wrap; flex: 1; }
+    .faq-excel-btns { display: flex; gap: 6px; align-items: center; flex-shrink: 0; }
+    .faq-excel-btn { padding: 0 12px; height: 30px; border: 1px solid #e0e0e0; border-radius: 6px; background: #fff; font-size: 12px; cursor: pointer; color: #555; white-space: nowrap; transition: all 0.15s; display: inline-flex; align-items: center; gap: 4px; }
+    .faq-excel-btn:hover { border-color: #1E8DCD; color: #1E8DCD; background: #eef6fb; }
+    .filter-pill { padding: 5px 14px; border-radius: 20px; border: 1px solid #e0e0e0; background: #fff; font-size: 13px; cursor: pointer; transition: all 0.15s; color: #666; }
+    .filter-pill.active { background: #1E8DCD; border-color: #1E8DCD; color: #fff; }
+    .filter-pill:hover:not(.active) { border-color: #1E8DCD; color: #1E8DCD; }
+    .archive-tabs { display: flex; border-bottom: 1px solid #f0f0f0; }
+    .archive-tab { flex: 1; padding: 13px 8px; border: none; background: none; font-size: 14px; cursor: pointer; color: #888; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: all 0.15s; font-family: inherit; }
+    .archive-tab.active { color: #1E8DCD; border-bottom-color: #1E8DCD; font-weight: 600; }
+    .archive-tab:hover:not(.active) { color: #555; background: #fafbfc; }
 
     /* ── 폼 ── */
     .form-card { background: #fff; border-radius: 10px; box-shadow: 0 1px 6px rgba(0,0,0,0.07); padding: 28px; margin-bottom: 24px; }
@@ -220,27 +266,48 @@
 </head>
 <body>
 
+<!-- 다크모드 토글 -->
+<div class="dark-mode-toggle">
+  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+  <label class="dark-mode-switch">
+    <input type="checkbox" id="dark-mode-chk" onchange="toggleDarkMode(this.checked)">
+    <div class="dark-mode-track"></div>
+    <div class="dark-mode-thumb"></div>
+  </label>
+  <svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+</div>
+
 <!-- 로그인 -->
 <div class="login-overlay" id="login-overlay">
-  <img class="login-deco" src="assets/admin-deco.svg" alt="">
-  <div class="login-box" style="position:relative; z-index:1;">
-    <div class="login-logo"><img src="assets/logo.png" alt="ecobell"></div>
-    <p class="login-sub">관리자 페이지</p>
-    <input id="login-user" type="text" placeholder="아이디" autocomplete="off">
-    <input id="login-pass" type="password" placeholder="비밀번호" autocomplete="off">
-    <div class="login-save-id">
-      <input type="checkbox" id="save-id-chk">
-      <label for="save-id-chk">ID 저장</label>
+  <div class="login-box">
+    <div class="login-logo"><img id="login-logo-img" src="assets/logo.png" alt="ecobell"></div>
+    <p class="login-sub">관리자페이지</p>
+    <img class="login-hero-img" src="assets/company-hero-bg2.png" alt="">
+    <p class="login-tagline">에너지를 가치로 잇다</p>
+    <div class="login-form">
+      <input id="login-user" type="text" placeholder="아이디" autocomplete="off">
+      <div class="pass-wrapper">
+        <input id="login-pass" type="text" placeholder="비밀번호" autocomplete="off">
+        <button type="button" class="pass-toggle-btn" id="pass-toggle-btn" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+        </button>
+      </div>
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;">
+        <div class="login-save-id" style="margin-bottom:0;">
+          <input type="checkbox" id="save-id-chk">
+          <label for="save-id-chk">ID 저장</label>
+        </div>
+        <button class="login-btn" id="login-btn" onclick="doLogin()">로그인</button>
+      </div>
+      <p class="login-error" id="login-error"></p>
     </div>
-    <button class="login-btn" id="login-btn" onclick="doLogin()">로그인</button>
-    <p class="login-error" id="login-error"></p>
   </div>
 </div>
 
 <!-- 관리자 패널 -->
 <div class="admin-layout" id="admin-panel" style="display:none;">
   <aside class="sidebar">
-    <div class="sidebar-logo"><img src="assets/logo.png" alt="ecobell"></div>
+    <div class="sidebar-logo"><img src="assets/logo-white.png" alt="ecobell"></div>
     <nav class="sidebar-nav">
       <button class="nav-btn active" onclick="switchSection('notices')" data-section="notices">
         <span class="nav-icon">📋</span>공지사항
@@ -267,7 +334,10 @@
         <span class="section-title" id="section-title">공지사항</span>
         <span class="section-count" id="section-count"></span>
       </div>
-      <button class="add-btn" onclick="showForm()">+ 새 항목 추가</button>
+      <div class="header-actions">
+        <button class="bulk-del-btn" id="bulk-del-btn" onclick="bulkDelete()">선택 삭제 (<span id="sel-count">0</span>건)</button>
+        <button class="add-btn" onclick="showForm()">+ 새 항목 추가</button>
+      </div>
     </div>
 
     <!-- 추가/수정 폼 -->
@@ -295,8 +365,14 @@
   let realPass = '';
   let thumbnailIdx = 0; // press 썸네일 인덱스
   let _activeRteImg = null; // 현재 선택된 RTE 이미지
+  let selectedIds = new Set();
+  let faqFilter = 'all';
+  let archiveTab = 'intro';
+  let displayItems = [];
 
   const SECTION_LABELS = { notices: '공지사항', press: '보도자료', archive: '아카이브', faq: 'FAQ' };
+  const SVG_EYE = `<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>`;
+  const SVG_EYE_OFF = `<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>`;
 
   /* ── 초기화 ── */
   window.addEventListener('DOMContentLoaded', () => {
@@ -305,7 +381,6 @@
       authHeader = saved;
       showDashboard();
     }
-    // ID 저장 복원
     const savedId = localStorage.getItem('adminSavedId');
     if (savedId) {
       document.getElementById('login-user').value = savedId;
@@ -324,15 +399,19 @@
       }
     });
 
-    // 비밀번호 마지막 글자 보이기
+    // 비밀번호 마지막 글자 보이기 + 눈 버튼 토글
     (function() {
       const passEl = document.getElementById('login-pass');
-      passEl.type = 'text';
+      const toggleBtn = document.getElementById('pass-toggle-btn');
       const BULLET = '●';
+      const EYE_ON  = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>';
+      const EYE_OFF = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>';
       let maskTimer = null;
+      let showPass = false;
       function render(showLast) {
         const pos = passEl.selectionStart;
         if (realPass.length === 0) { passEl.value = ''; return; }
+        if (showPass) { passEl.value = realPass; return; }
         passEl.value = showLast
           ? BULLET.repeat(realPass.length - 1) + realPass.slice(-1)
           : BULLET.repeat(realPass.length);
@@ -347,11 +426,18 @@
         realPass = newReal;
         clearTimeout(maskTimer);
         render(true);
-        maskTimer = setTimeout(() => render(false), 800);
+        if (!showPass) maskTimer = setTimeout(() => render(false), 800);
       });
       passEl.addEventListener('blur', function() {
         clearTimeout(maskTimer);
+        if (!showPass) render(false);
+      });
+      toggleBtn.addEventListener('click', function() {
+        showPass = !showPass;
+        clearTimeout(maskTimer);
         render(false);
+        this.innerHTML = showPass ? EYE_ON : EYE_OFF;
+        passEl.focus();
       });
     })();
   });
@@ -410,6 +496,9 @@
   function switchSection(type) {
     currentSection = type;
     editingId = null;
+    selectedIds.clear();
+    faqFilter = 'all';
+    archiveTab = 'intro';
     document.getElementById('item-form').style.display = 'none';
     document.querySelectorAll('.nav-btn').forEach(b => b.classList.toggle('active', b.dataset.section === type));
     document.getElementById('section-title').textContent = SECTION_LABELS[type];
@@ -459,18 +548,56 @@
   /* ── 리스트 렌더 ── */
   function renderList() {
     const el = document.getElementById('item-list');
-    if (!currentItems.length) {
-      el.innerHTML = '<div class="empty-state"><div style="font-size:36px;">📭</div><p>등록된 항목이 없습니다.</p></div>';
+    selectedIds.clear();
+    updateBulkBtn();
+
+    let prefix = '';
+
+    if (currentSection === 'faq') {
+      const cats = ['전체', 'ecoASSET', 'E-ASSET', 'ecoNODE', '신재생에너지', '기타'];
+      prefix = `<div class="filter-bar">
+        <div class="filter-pills">${cats.map(c => {
+          const val = c === '전체' ? 'all' : c;
+          return `<button class="filter-pill ${faqFilter === val ? 'active' : ''}" onclick="setFaqFilter('${val}')">${c}</button>`;
+        }).join('')}</div>
+        <div class="faq-excel-btns">
+          <button class="faq-excel-btn" onclick="downloadFaqTemplate()" title="빈 엑셀 양식 다운로드">📋 양식 다운로드</button>
+          <label class="faq-excel-btn" title="엑셀 파일로 FAQ 일괄 업로드">
+            📤 엑셀 업로드
+            <input type="file" id="faq-upload-input" accept=".xlsx,.xls" style="display:none" onchange="uploadFaqExcel(this)">
+          </label>
+          <button class="faq-excel-btn" onclick="downloadFaqExcel()" title="현재 FAQ 목록 엑셀 다운로드">📥 엑셀 다운로드</button>
+        </div>
+      </div>`;
+      displayItems = faqFilter === 'all' ? [...currentItems] : currentItems.filter(i =>
+        String(i.category || '').split(',').map(s => s.trim()).includes(faqFilter)
+      );
+    } else if (currentSection === 'archive') {
+      const tabs = [{id:'intro',label:'기업소개서'},{id:'catalog',label:'카탈로그/지명원'},{id:'ir',label:'IR'},{id:'ci',label:'CI'}];
+      prefix = `<div class="archive-tabs">${tabs.map(t =>
+        `<button class="archive-tab ${archiveTab === t.id ? 'active' : ''}" onclick="setArchiveTab('${t.id}')">${t.label}</button>`
+      ).join('')}</div>`;
+      displayItems = currentItems.filter(i => (i.type || 'intro') === archiveTab);
+    } else {
+      displayItems = [...currentItems];
+    }
+
+    // 공지사항·보도자료: 날짜 내림차순 고정 정렬
+    if (currentSection === 'notices' || currentSection === 'press') {
+      displayItems.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+    }
+
+    if (!displayItems.length) {
+      el.innerHTML = prefix + '<div class="empty-state"><div style="font-size:36px;">📭</div><p>등록된 항목이 없습니다.</p></div>';
       return;
     }
-    // 공지사항·보도자료: 날짜 내림차순 고정 정렬, 드래그 없음
-    if (currentSection === 'notices' || currentSection === 'press') {
-      currentItems.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
-    }
-    el.innerHTML = currentItems.map((item, idx) => renderRow(item, idx)).join('');
-    if (currentSection !== 'notices' && currentSection !== 'press') {
-      initDragDrop();
-    }
+
+    el.innerHTML = prefix + displayItems.map((item, idx) => renderRow(item, idx)).join('');
+
+    const canDragDrop = currentSection !== 'notices' && currentSection !== 'press' &&
+      !(currentSection === 'faq' && faqFilter !== 'all') &&
+      currentSection !== 'archive';
+    if (canDragDrop) initDragDrop();
   }
 
   function renderRow(item, idx) {
@@ -484,20 +611,21 @@
 
     const title = currentSection === 'faq' ? (item.question || '') : (item.title || '');
 
-    const canDrag = currentSection !== 'notices' && currentSection !== 'press';
+    const canDrag = currentSection !== 'notices' && currentSection !== 'press'
+      && !(currentSection === 'faq' && faqFilter !== 'all')
+      && currentSection !== 'archive';
+
     return `<div class="item-row" ${canDrag ? 'draggable="true"' : ''} data-id="${item.id}" data-idx="${idx}">
-      ${canDrag ? '<span class="drag-handle" title="순서 변경">⠿</span>' : '<span style="width:22px;flex-shrink:0;"></span>'}
+      <input type="checkbox" class="item-check" ${selectedIds.has(item.id) ? 'checked' : ''} onclick="toggleSelect('${item.id}')">
       <span class="item-pin ${isPinned ? 'pinned' : ''}" title="${isPinned ? '고정 해제' : '고정'}" onclick="togglePin('${item.id}')">📌</span>
       <div class="item-info">
         <div class="item-title">${escHtml(title)}</div>
         <div class="item-meta">${meta}</div>
       </div>
-      <div class="pub-toggle" onclick="togglePublish('${item.id}')" title="${isPublished ? '게시 중' : '비게시'}">
-        <div class="toggle-switch ${isPublished ? 'on' : ''}"></div>
-        <span style="font-size:12px;color:#aaa;width:36px;">${isPublished ? '게시' : '숨김'}</span>
-      </div>
+      <button class="action-btn pub-eye ${isPublished ? 'on' : 'off'}" onclick="togglePublish('${item.id}')" title="${isPublished ? '게시 중 (클릭하여 숨기기)' : '숨김 (클릭하여 게시)'}">${isPublished ? SVG_EYE : SVG_EYE_OFF}</button>
       <button class="action-btn edit" onclick="showForm('${item.id}')" title="수정">✏️</button>
       <button class="action-btn del" onclick="deleteItem('${item.id}')" title="삭제">🗑️</button>
+      ${canDrag ? '<span class="drag-handle" title="순서 변경">⠿</span>' : ''}
     </div>`;
   }
 
@@ -513,9 +641,10 @@
         e.preventDefault(); row.classList.remove('drag-over');
         const toIdx = +row.dataset.idx;
         if (dragSrcIdx === null || dragSrcIdx === toIdx) return;
-        const items = [...currentItems];
+        const items = [...displayItems];
         const [moved] = items.splice(dragSrcIdx, 1);
         items.splice(toIdx, 0, moved);
+        displayItems = items;
         currentItems = items;
         renderList();
         await saveReorder();
@@ -565,6 +694,57 @@
     const d = await res.json();
     if (d.ok) showToast('저장됐습니다.');
     else showToast('저장 실패: ' + d.message, true);
+  }
+
+  /* ── 필터/탭 ── */
+  function setFaqFilter(cat) {
+    faqFilter = cat;
+    selectedIds.clear();
+    renderList();
+  }
+
+  function setArchiveTab(tab) {
+    archiveTab = tab;
+    selectedIds.clear();
+    renderList();
+  }
+
+  /* ── 선택/일괄 삭제 ── */
+  function toggleSelect(id) {
+    if (selectedIds.has(id)) selectedIds.delete(id);
+    else selectedIds.add(id);
+    updateBulkBtn();
+  }
+
+  function updateBulkBtn() {
+    const btn = document.getElementById('bulk-del-btn');
+    if (!btn) return;
+    const n = selectedIds.size;
+    btn.style.display = n > 0 ? '' : 'none';
+    const cnt = document.getElementById('sel-count');
+    if (cnt) cnt.textContent = n;
+  }
+
+  async function bulkDelete() {
+    if (!selectedIds.size) return;
+    if (!confirm(`선택한 ${selectedIds.size}개 항목을 삭제하시겠습니까?`)) return;
+    const ids = [...selectedIds];
+    for (const id of ids) {
+      try {
+        const res = await fetch('/api/admin-data', {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json', Authorization: 'Basic ' + authHeader },
+          body: JSON.stringify({ type: currentSection, id })
+        });
+        const d = await res.json();
+        if (d.ok) currentItems = d.items || currentItems.filter(i => i.id !== id);
+      } catch {}
+    }
+    saveFreshCache(currentSection, currentItems);
+    selectedIds.clear();
+    document.getElementById('section-count').textContent = '(' + currentItems.length + '건)';
+    renderList();
+    showToast('삭제됐습니다.');
   }
 
   /* ── 삭제 ── */
@@ -735,7 +915,7 @@
         </div>`;
 
     } else if (currentSection === 'archive') {
-      const archType = v('type','intro');
+      const archType = v('type', archiveTab);
       fields = `
         <div class="form-group full" id="f-title-group"><label class="form-label">제목 *</label><input class="form-input" id="f-title" value="${escAttr(v('title',''))}" placeholder="자료 제목"></div>
         <div class="form-group"><label class="form-label">유형 *</label>
@@ -785,15 +965,15 @@
     return `
       <div class="form-title">${isEdit ? '항목 수정' : '새 항목 추가'}</div>
       <div class="form-grid">${fields}</div>
+      ${currentSection !== 'faq' ? `
       <div class="form-grid" style="margin-top:14px;">
         <div class="form-group">
           <label class="form-label">옵션</label>
           <div class="form-check-row">
-            ${currentSection !== 'faq' ? `<label class="form-check"><input type="checkbox" id="f-pinned" ${v('pinned',false)?'checked':''}> 상단 고정</label>` : ''}
-            <label class="form-check"><input type="checkbox" id="f-published" ${v('published',true)!==false?'checked':''}> 게시</label>
+            <label class="form-check"><input type="checkbox" id="f-pinned" ${v('pinned',false)?'checked':''}> 상단 고정</label>
           </div>
         </div>
-      </div>
+      </div>` : ''}
       <div class="form-actions">
         <button class="btn-cancel" onclick="hideForm()">취소</button>
         <button class="btn-save" id="save-btn" onclick="saveItem()">저장</button>
@@ -1178,7 +1358,7 @@
     const get = id => { const el = document.getElementById(id); return el ? el.value.trim() : ''; };
     const chk = id => { const el = document.getElementById(id); return el ? el.checked : false; };
     const rte = id => { const el = document.getElementById(id); return el ? el.innerHTML : ''; };
-    const base = { pinned: chk('f-pinned'), published: chk('f-published') };
+    const base = { pinned: chk('f-pinned') };
 
     if (currentSection === 'notices') {
       return { ...base, title: get('f-title'), content: sanitizeNoticeContent(rte('f-content')), date: get('f-date'), author: get('f-author'), attachments: uploadedAttachments };
@@ -1350,6 +1530,27 @@
     document.body.appendChild(overlay);
   }
 
+  /* ── 다크모드 ── */
+  function toggleDarkMode(isDark) {
+    document.body.classList.toggle('dark', isDark);
+    const logo = document.getElementById('login-logo-img');
+    if (logo) logo.src = isDark ? 'assets/logo-white.png' : 'assets/logo.png';
+    const heroImg = document.querySelector('.login-hero-img');
+    if (heroImg) heroImg.src = isDark ? 'assets/hero-dark.png' : 'assets/company-hero-bg2.png';
+    localStorage.setItem('adminDarkMode', isDark ? '1' : '');
+  }
+  (function() {
+    if (localStorage.getItem('adminDarkMode')) {
+      document.body.classList.add('dark');
+      const chk = document.getElementById('dark-mode-chk');
+      if (chk) chk.checked = true;
+      const logo = document.getElementById('login-logo-img');
+      if (logo) logo.src = 'assets/logo-white.png';
+      const heroImg = document.querySelector('.login-hero-img');
+      if (heroImg) heroImg.src = 'assets/hero-dark.png';
+    }
+  })();
+
   /* ── 유틸 ── */
   function escHtml(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
   function escAttr(s) { return String(s).replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
@@ -1363,5 +1564,118 @@
   }
 </script>
   <script src="assets/header-scroll.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script>
+    const FAQ_CATS = ['ecoASSET', 'E-ASSET', 'ecoNODE', '신재생에너지', '기타'];
+
+    /* ── FAQ 엑셀 양식 다운로드 ── */
+    function downloadFaqTemplate() {
+      if (!window.XLSX) { showToast('Excel 라이브러리 로딩 중입니다. 잠시 후 다시 시도해주세요.', true); return; }
+      const wb = window.XLSX.utils.book_new();
+
+      // FAQ 양식 시트
+      const wsData = [
+        ['구분', '질문', '답변'],
+        ['ecoASSET', '질문 예시를 입력하세요', '답변 예시를 입력하세요'],
+      ];
+      const ws = window.XLSX.utils.aoa_to_sheet(wsData);
+      ws['!cols'] = [{ wch: 18 }, { wch: 45 }, { wch: 70 }];
+      window.XLSX.utils.book_append_sheet(wb, ws, 'FAQ');
+
+      // 구분 유효값 참조 시트
+      const refData = [['구분 유효값 (1열에 아래 값 중 하나를 입력하세요)'], ...FAQ_CATS.map(c => [c])];
+      const refWs = window.XLSX.utils.aoa_to_sheet(refData);
+      refWs['!cols'] = [{ wch: 45 }];
+      window.XLSX.utils.book_append_sheet(wb, refWs, '구분_목록');
+
+      window.XLSX.writeFile(wb, 'FAQ_양식.xlsx');
+    }
+
+    /* ── FAQ 엑셀 다운로드 ── */
+    function downloadFaqExcel() {
+      if (!window.XLSX) { showToast('Excel 라이브러리 로딩 중입니다. 잠시 후 다시 시도해주세요.', true); return; }
+      const data = [['구분', '질문', '답변']];
+      currentItems.forEach(item => {
+        data.push([item.category || '', item.question || '', item.answer || '']);
+      });
+      const wb = window.XLSX.utils.book_new();
+      const ws = window.XLSX.utils.aoa_to_sheet(data);
+      ws['!cols'] = [{ wch: 18 }, { wch: 45 }, { wch: 70 }];
+      window.XLSX.utils.book_append_sheet(wb, ws, 'FAQ');
+      window.XLSX.writeFile(wb, 'FAQ_목록.xlsx');
+    }
+
+    /* ── FAQ 엑셀 업로드 ── */
+    async function uploadFaqExcel(input) {
+      if (!window.XLSX) { showToast('Excel 라이브러리 로딩 중입니다.', true); return; }
+      const file = input.files[0];
+      if (!file) return;
+      input.value = '';
+
+      const reader = new FileReader();
+      reader.onload = async (e) => {
+        try {
+          const wb = window.XLSX.read(new Uint8Array(e.target.result), { type: 'array' });
+          const ws = wb.Sheets[wb.SheetNames[0]];
+          const rows = window.XLSX.utils.sheet_to_json(ws, { header: 1, defval: '' });
+
+          if (rows.length < 2) { showToast('데이터가 없습니다.', true); return; }
+
+          const items = [];
+          const errors = [];
+
+          for (let i = 1; i < rows.length; i++) {
+            const [rawCat, rawQ, rawA] = rows[i];
+            const question = String(rawQ || '').trim();
+            const answer = String(rawA || '').trim();
+            if (!question && !answer) continue; // 빈 행 건너뜀
+
+            const catStr = String(rawCat || '').trim();
+            const cats = catStr.split(',').map(s => s.trim()).filter(Boolean);
+            const invalid = cats.filter(c => !FAQ_CATS.includes(c));
+            if (invalid.length) {
+              errors.push(`${i + 1}행: 알 수 없는 구분 '${invalid.join(', ')}'`);
+              continue;
+            }
+            if (!cats.length) {
+              errors.push(`${i + 1}행: 구분이 비어 있습니다.`);
+              continue;
+            }
+
+            items.push({ category: cats.join(','), question, answer, pinned: false });
+          }
+
+          if (errors.length) showToast('건너뜀: ' + errors.slice(0, 3).join(' / ') + (errors.length > 3 ? ` 외 ${errors.length - 3}건` : ''), true);
+          if (!items.length) { showToast('업로드할 유효한 데이터가 없습니다.', true); return; }
+          if (!confirm(`${items.length}개 항목을 FAQ에 추가하시겠습니까?`)) return;
+
+          showToast(`업로드 중... (0/${items.length})`);
+          let done = 0;
+          for (const item of items) {
+            try {
+              const res = await fetch('/api/admin-data', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', Authorization: 'Basic ' + authHeader },
+                body: JSON.stringify({ type: 'faq', item })
+              });
+              const d = await res.json();
+              if (d.ok) {
+                currentItems = d.items || [d.item, ...currentItems];
+                done++;
+              }
+            } catch {}
+          }
+
+          saveFreshCache('faq', currentItems);
+          document.getElementById('section-count').textContent = '(' + currentItems.length + '건)';
+          renderList();
+          showToast(`${done}개 항목이 추가됐습니다.`);
+        } catch (err) {
+          showToast('파일 읽기 실패: ' + err.message, true);
+        }
+      };
+      reader.readAsArrayBuffer(file);
+    }
+  </script>
 </body>
 </html>
