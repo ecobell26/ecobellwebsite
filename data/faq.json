@@ -2,15 +2,6 @@
   "items": [
     {
       "pinned": false,
-      "published": false,
-      "category": "ecoNODE",
-      "question": "기존 데이터 수집 방식도 있는데, 왜 꼭 '에코노드'를 추가로 설치해야 하나요?",
-      "answer": "규제 기관이나 외부 감사에 탄소 데이터를 제출할 때 가장 중요한 것은 데이터의 신뢰성입니다. 에코노드는 현장에서 데이터를 최초 수집하는 단계부터 위·변조를 원천 차단하는 실측 RTU(Remote Terminal Unit, 원격소단말장치) 장치이므로, 완벽한 증빙 가치를 보장받기 위해 필수적입니다.",
-      "id": "mqyhagkn2h404",
-      "createdAt": "2026-06-29T00:27:22.343Z"
-    },
-    {
-      "pinned": false,
       "published": true,
       "category": "ecoASSET",
       "question": "탄소자산화가 무엇인가요?",
