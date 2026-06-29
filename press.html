@@ -1780,9 +1780,19 @@
         featuredIdx = 0;
         trackIdx = 1;
         buildSlides();
-        buildDots();
-        goTo(1, 0);
-        startAuto();
+        if (N === 1) {
+          // 단일 항목: 슬라이드 고정, 내비게이션 전체 숨김
+          document.getElementById('featured-prev').style.display = 'none';
+          document.getElementById('featured-next').style.display = 'none';
+          const track = document.getElementById('press-featured-track');
+          track.style.transition = 'none';
+          track.style.transform = 'translateX(-' + (100 / (N + 2)) + '%)';
+          document.getElementById('featured-dots').style.display = 'none';
+        } else {
+          buildDots();
+          goTo(1, 0);
+          startAuto();
+        }
       })
       .catch(() => {});
 

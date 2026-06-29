@@ -157,7 +157,7 @@
     .dark .arch-modal-pdf-name { color: #8898aa; }
     /* ── 미리보기 패널 ── */
     .preview-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.32); z-index: 8000; display: flex; align-items: stretch; justify-content: flex-end; }
-    .preview-panel { background: #fff; width: 728px; max-width: 90vw; display: flex; flex-direction: column; box-shadow: -6px 0 40px rgba(0,0,0,0.13); animation: slideInR 0.22s cubic-bezier(0.4,0,0.2,1); }
+    .preview-panel { background: #fff; width: 900px; max-width: 90vw; display: flex; flex-direction: column; box-shadow: -6px 0 40px rgba(0,0,0,0.13); animation: slideInR 0.22s cubic-bezier(0.4,0,0.2,1); }
     @keyframes slideInR { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
     .preview-head { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; border-bottom: 1px solid #f0f2f4; flex-shrink: 0; gap: 12px; }
     .preview-created { font-size: 11px; color: #c0c8d0; white-space: nowrap; }
@@ -991,10 +991,12 @@ function showDashboard() {
               title="파일을 여기에 드롭하여 업로드"
             >${t.label}</button>`
           ).join('')}</div>
-          <div style="display:flex;justify-content:flex-end;padding:12px 0 4px;">
-            <button class="add-btn" onclick="showForm()">+ 새 항목 추가</button>
-          </div>`;
+          ${(() => {
+            const ciHasItem = archiveTab === 'ci' && currentItems.some(i => (i.type || 'intro') === 'ci');
+            return ciHasItem ? '' : `<div style="display:flex;justify-content:flex-end;padding:12px 0 4px;"><button id="archive-tab-add-btn" class="add-btn" onclick="showForm()">+ 새 항목 추가</button></div>`;
+          })()}`;
           displayItems = currentItems.filter(i => (i.type || 'intro') === archiveTab);
+          if (archiveTab === 'ci' && displayItems.length > 1) displayItems = displayItems.slice(0, 1);
         } else {
           displayItems = [...currentItems];
         }
@@ -1463,6 +1465,7 @@ function showDashboard() {
     formEl.innerHTML = buildForm(item);
     formEl.style.display = 'block';
     formEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.getElementById('archive-tab-add-btn')?.style.setProperty('display', 'none');
     const rteEl = document.getElementById('f-content');
     // 아카이브 유형 초기화 + 상단고정 리스너
     if (currentSection === 'archive') {
@@ -1507,6 +1510,8 @@ function showDashboard() {
           document.execCommand('insertHTML', false, html);
         });
         rteEl.addEventListener('input', stripPressStyles);
+        // 기존 저장된 내용의 인라인 스타일도 초기화
+        setTimeout(stripPressStyles, 0);
       }
       // RTE에 이미지 추가 시 자동으로 이미지 섹션에 동기화
       const rteObserver = new MutationObserver(() => {
@@ -1549,6 +1554,7 @@ function showDashboard() {
     thumbnailIdx = 0;
     hideRteImgToolbar();
     document.getElementById('item-form').style.display = 'none';
+    document.getElementById('archive-tab-add-btn')?.style.removeProperty('display');
   }
 
   const RTE_TOOLBAR = `
@@ -1672,8 +1678,25 @@ function showDashboard() {
             <button type="button" class="archive-file-del" onclick="clearArchiveThumb()" title="삭제"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
           </div>`
         : `<label class="arch-thumb-upload" id="f-thumb-area"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>클릭하거나 파일을 드롭하세요</span><span style="font-size:11px;">이미지 파일 지원</span><input type="file" accept="image/*" style="display:none" onchange="archiveThumbSelected(this)"></label>`;
+      const isCi = archType === 'ci';
+      // CI용 ZIP 업로드 블록 (accept=".zip" only)
+      const zipBlock = existingFile
+        ? `<div class="archive-file-item" id="f-pdf-item">
+            <span class="archive-file-name" title="${escAttr(existingFile)}">${escHtml(existingFile.split('/').pop())}</span>
+            <button type="button" class="archive-file-del" onclick="clearArchiveFile()" title="삭제">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+          </div>`
+        : `<div class="upload-area" id="f-pdf-upload" onclick="document.getElementById('f-file-kor-input').click()"
+            ondragover="event.preventDefault();this.style.borderColor='#1E8DCD'"
+            ondragleave="this.style.borderColor=''"
+            ondrop="event.preventDefault();this.style.borderColor='';handleArchiveFile({files:event.dataTransfer.files})">
+            <input type="file" id="f-file-kor-input" accept=".zip" style="display:none" onchange="handleArchiveFile(this)">
+            <div>📎 클릭하거나 파일을 드롭하세요</div>
+            <div class="upload-hint">ZIP 파일만 지원</div>
+          </div>`;
       fields = `
-        <div class="arch-form-row arch-form-row-3">
+        <div class="arch-form-row ${isCi ? 'arch-form-row-2' : 'arch-form-row-3'}">
           <div class="form-group">
             <label class="form-label">유형 *</label>
             <select class="form-select" id="f-type" onchange="onArchiveTypeChange(this.value)">
@@ -1684,19 +1707,26 @@ function showDashboard() {
             <label class="form-label">연도 *</label>
             <input class="form-input" type="number" id="f-year" value="${escAttr(String(yearVal))}" min="2000" max="2100" placeholder="${new Date().getFullYear()}">
           </div>
-          <div class="form-group">
+          ${isCi ? '' : `<div class="form-group">
             <label class="form-label">구분</label>
             <select class="form-select" id="f-period">
               ${PERIODS.map(p => `<option value="${p}" ${periodVal===p?'selected':''}>${p}</option>`).join('')}
             </select>
-          </div>
+          </div>`}
         </div>
+        ${isCi ? `
+        <div style="margin-top:16px;">
+          <div class="form-group" id="f-file-group">
+            <label class="form-label">ZIP 파일 *</label>
+            ${zipBlock}
+          </div>
+        </div>` : `
         <div class="arch-form-row arch-form-row-3" style="margin-top:16px;">
           <div class="form-group" id="f-file-group">
             <label class="form-label">국문 PDF *</label>
             ${pdfBlock}
           </div>
-          <div class="form-group" id="f-file-eng-group" style="display:${archType === 'ci' ? 'none' : ''};">
+          <div class="form-group" id="f-file-eng-group">
             <label class="form-label">영문 PDF <span style="font-weight:400;color:#aaa;font-size:11px;">선택</span></label>
             ${pdfEngBlock}
           </div>
@@ -1707,7 +1737,7 @@ function showDashboard() {
             <label class="form-label">썸네일 이미지 *</label>
             ${thumbBlock}
           </div>
-        </div>
+        </div>`}
         <div style="margin-top:16px;">
           <div class="form-group" style="display:${needSummary?'flex':'none'};flex-direction:column;gap:6px;" id="f-summary-inner">
             <label class="form-label">파일 정보 요약 * <span style="font-weight:400;color:#aaa;font-size:12px;">60~110자</span></label>
@@ -1890,6 +1920,31 @@ function showDashboard() {
   }
 
   function onArchiveTypeChange(val) {
+    const prevIsCi = archiveTab === 'ci';
+    const newIsCi = val === 'ci';
+    // If switching between CI and non-CI, rebuild the form (layout changes significantly)
+    if (prevIsCi !== newIsCi) {
+      const yearVal = document.getElementById('f-year')?.value || '';
+      const periodVal = document.getElementById('f-period')?.value || '';
+      const summaryVal = document.getElementById('f-summary')?.value || '';
+      archiveTab = val;
+      const formEl = document.getElementById('item-form');
+      const item = editingId ? currentItems.find(i => i.id === editingId) : null;
+      formEl.innerHTML = buildForm(item);
+      const yearEl = document.getElementById('f-year');
+      if (yearEl && yearVal) yearEl.value = yearVal;
+      const typeEl = document.getElementById('f-type');
+      if (typeEl) typeEl.value = val;
+      const periodEl = document.getElementById('f-period');
+      if (periodEl && periodVal) periodEl.value = periodVal;
+      const summaryEl = document.getElementById('f-summary');
+      if (summaryEl && summaryVal) { summaryEl.value = summaryVal; updateSummaryCount(summaryEl); }
+      updateArchiveFields();
+      const pinnedChk = document.getElementById('f-pinned');
+      if (pinnedChk) pinnedChk.addEventListener('change', updateArchiveFields);
+      return;
+    }
+    // Same CI/non-CI category: just toggle visibility
     const si = document.getElementById('f-summary-inner');
     if (si) si.style.display = ['intro','catalog'].includes(val) ? 'flex' : 'none';
     const eg = document.getElementById('f-file-eng-group');
@@ -2155,7 +2210,7 @@ function showDashboard() {
       if (!hasPdf) {
         showToast('PDF 파일을 업로드하세요.'); btn.disabled = false; btn.textContent = '저장'; return;
       }
-      if (!hasThumb) {
+      if (archType !== 'ci' && !hasThumb) {
         const area = document.getElementById('f-thumb-area');
         if (area) { area.style.borderColor = '#e63946'; area.style.color = '#e63946'; }
         showToast('썸네일 이미지를 업로드하세요.'); btn.disabled = false; btn.textContent = '저장'; return;
