@@ -968,6 +968,7 @@ function showDashboard() {
       faqTopArea.style.display = 'none';
       faqExcelArea.style.display = 'none';
       document.getElementById('faq-dl-btn').style.display = 'none';
+      document.querySelector('.add-btn-wrap').style.display = '';
 
       if (currentSection === 'press') {
         pressTopArea.style.display = '';
@@ -979,6 +980,7 @@ function showDashboard() {
       } else {
         pressTopArea.style.display = 'none';
         if (currentSection === 'archive') {
+          document.querySelector('.add-btn-wrap').style.display = 'none';
           const tabs = [{id:'intro',label:'기업소개서'},{id:'catalog',label:'카탈로그/지명원'},{id:'ir',label:'IR'},{id:'ci',label:'CI'}];
           prefix = `<div class="archive-tabs">${tabs.map(t =>
             `<button class="archive-tab ${archiveTab === t.id ? 'active' : ''}"
@@ -988,7 +990,10 @@ function showDashboard() {
               ondrop="archiveTabDrop(event,'${t.id}');this.classList.remove('drag-over')"
               title="파일을 여기에 드롭하여 업로드"
             >${t.label}</button>`
-          ).join('')}</div>`;
+          ).join('')}</div>
+          <div style="display:flex;justify-content:flex-end;padding:12px 0 4px;">
+            <button class="add-btn" onclick="showForm()">+ 새 항목 추가</button>
+          </div>`;
           displayItems = currentItems.filter(i => (i.type || 'intro') === archiveTab);
         } else {
           displayItems = [...currentItems];
@@ -1627,7 +1632,7 @@ function showDashboard() {
       const summaryVal = v('summary', '');
       const existingFile = v('file', '');
       const existingFileEng = v('fileEng', '');
-      const PERIODS = ['구분없음','상반기','하반기','1분기','2분기','3분기','4분기','연간'];
+      const PERIODS = ['연간','상반기','하반기','1분기','2분기','3분기','4분기'];
       const needSummary = ['intro','catalog'].includes(archType);
       const pdfBlock = existingFile
         ? `<div class="archive-file-item" id="f-pdf-item">
@@ -1691,7 +1696,7 @@ function showDashboard() {
             <label class="form-label">국문 PDF *</label>
             ${pdfBlock}
           </div>
-          <div class="form-group" id="f-file-eng-group">
+          <div class="form-group" id="f-file-eng-group" style="display:${archType === 'ci' ? 'none' : ''};">
             <label class="form-label">영문 PDF <span style="font-weight:400;color:#aaa;font-size:11px;">선택</span></label>
             ${pdfEngBlock}
           </div>
@@ -1705,9 +1710,9 @@ function showDashboard() {
         </div>
         <div style="margin-top:16px;">
           <div class="form-group" style="display:${needSummary?'flex':'none'};flex-direction:column;gap:6px;" id="f-summary-inner">
-            <label class="form-label">파일 정보 요약 * <span style="font-weight:400;color:#aaa;font-size:12px;">60~100자</span></label>
-            <textarea class="form-textarea" id="f-summary" rows="3" maxlength="100" placeholder="파일에 대한 요약 정보를 60~100자로 입력하세요" oninput="updateSummaryCount(this)">${escHtml(summaryVal)}</textarea>
-            <div id="f-summary-count" style="text-align:right;font-size:11px;color:#aaa;margin-top:3px;">${summaryVal.length}/100</div>
+            <label class="form-label">파일 정보 요약 * <span style="font-weight:400;color:#aaa;font-size:12px;">60~110자</span></label>
+            <textarea class="form-textarea" id="f-summary" rows="3" maxlength="110" placeholder="파일에 대한 요약 정보를 60~110자로 입력하세요" oninput="updateSummaryCount(this)">${escHtml(summaryVal)}</textarea>
+            <div id="f-summary-count" style="text-align:right;font-size:11px;color:#aaa;margin-top:3px;">${summaryVal.length}/110</div>
           </div>
         </div>
         <input type="checkbox" id="f-pinned" style="display:none" ${v('pinned',false)?'checked':''}>`;
@@ -1887,14 +1892,16 @@ function showDashboard() {
   function onArchiveTypeChange(val) {
     const si = document.getElementById('f-summary-inner');
     if (si) si.style.display = ['intro','catalog'].includes(val) ? 'flex' : 'none';
+    const eg = document.getElementById('f-file-eng-group');
+    if (eg) eg.style.display = val === 'ci' ? 'none' : '';
   }
 
   function updateSummaryCount(el) {
     const cnt = document.getElementById('f-summary-count');
     if (cnt) {
       const len = el.value.length;
-      cnt.textContent = len + '/100';
-      cnt.style.color = (len >= 60 && len <= 100) ? '#1E8DCD' : (len > 100 ? '#e63946' : '#aaa');
+      cnt.textContent = len + '/110';
+      cnt.style.color = (len >= 60 && len <= 110) ? '#1E8DCD' : (len > 110 ? '#e63946' : '#aaa');
     }
   }
 
@@ -2155,9 +2162,9 @@ function showDashboard() {
       }
       if (['intro','catalog'].includes(archType)) {
         const summary = document.getElementById('f-summary')?.value?.trim() || '';
-        if (summary.length < 60 || summary.length > 100) {
+        if (summary.length < 60 || summary.length > 110) {
           document.getElementById('f-summary')?.focus();
-          showToast('파일 정보 요약은 60~100자로 입력하세요.'); btn.disabled = false; btn.textContent = '저장'; return;
+          showToast('파일 정보 요약은 60~110자로 입력하세요.'); btn.disabled = false; btn.textContent = '저장'; return;
         }
       }
     }
