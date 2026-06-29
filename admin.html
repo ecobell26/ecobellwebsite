@@ -61,7 +61,7 @@
     .dark .login-btn { color: #5aaedf; }
 
     /* ── 다크모드 어드민 ── */
-    .dark body { background: #1e1e22; color: #d2d6de; }
+    body.dark { background: #1e1e22; color: #d2d6de; }
     .dark .sidebar { background: #161618; }
     .dark .main-content { color: #d2d6de; }
     .dark .section-title { color: #e0e2e8; }
@@ -1266,6 +1266,7 @@
   function hideForm() {
     editingId = null;
     pendingFiles = {};
+    _archiveClearedFiles = {};
     pendingImages = [];
     pendingAttachments = [];
     thumbnailIdx = 0;
@@ -1416,11 +1417,10 @@
       <div class="form-title" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
         <span>${isEdit ? '항목 수정' : '새 항목 추가'}</span>
         ${currentSection === 'archive' ? `<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-          <span id="f-thumb-msg" style="display:none;font-size:12px;color:#e63946;"></span>
           <button type="button" class="arch-pin-btn ${v('pinned',false)?'pinned':''}" id="f-pinned-btn" onclick="toggleArchiveFormPin()" title="상단 고정">${pinSvg}</button>
           <div class="arch-thumb-area" id="f-thumb-area">${v('thumbnail','') ?
-            `<span class="arch-thumb-name" title="${escAttr(v('thumbnail',''))}">${escHtml(v('thumbnail','').split('/').pop())}</span><span class="arch-thumb-sep">|</span><button type="button" class="arch-thumb-btn" onclick="previewArchiveThumb()">미리보기</button><span class="arch-thumb-sep">|</span><label class="arch-thumb-btn" style="cursor:pointer;">변경<input type="file" accept="image/*" style="display:none" onchange="archiveThumbSelected(this)"></label>`
-            : `<label class="arch-thumb-btn" style="cursor:pointer;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg> 이미지 업로드<input type="file" accept="image/*" style="display:none" onchange="archiveThumbSelected(this)"></label>`
+            `<span class="arch-thumb-name" title="${escAttr(v('thumbnail',''))}">${escHtml(v('thumbnail','').split('/').pop())}</span><span class="arch-thumb-sep">|</span><button type="button" class="arch-thumb-btn" onclick="previewArchiveThumb()">미리보기</button><button type="button" class="archive-file-del" onclick="clearArchiveThumb()" title="삭제" style="margin-left:2px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>`
+            : `<label class="arch-thumb-btn" id="f-thumb-label" style="cursor:pointer;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg> 이미지 업로드 *<input type="file" accept="image/*" style="display:none" onchange="archiveThumbSelected(this)"></label>`
           }</div>
         </div>` : ''}
       </div>
@@ -1456,17 +1456,13 @@
       const dataUrl = e.target.result;
       const base64 = dataUrl.split(',')[1];
       pendingFiles['thumbnail'] = { base64, filename: file.name, folder: 'archive', dataUrl };
-      // 에러 상태 초기화
-      const msg = document.getElementById('f-thumb-msg');
-      if (msg) { msg.textContent = ''; msg.style.display = 'none'; }
       const area = document.getElementById('f-thumb-area');
       if (!area) return;
       area.innerHTML = `
         <span class="arch-thumb-name" title="${escAttr(file.name)}">${escHtml(file.name)}</span>
         <span class="arch-thumb-sep">|</span>
         <button type="button" class="arch-thumb-btn" onclick="previewArchiveThumb()">미리보기</button>
-        <span class="arch-thumb-sep">|</span>
-        <label class="arch-thumb-btn" style="cursor:pointer;">변경<input type="file" accept="image/*" style="display:none" onchange="archiveThumbSelected(this)"></label>`;
+        <button type="button" class="archive-file-del" onclick="clearArchiveThumb()" title="삭제" style="margin-left:2px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>`;
     };
     reader.readAsDataURL(file);
   }
@@ -1485,6 +1481,66 @@
     document.body.appendChild(overlay);
   }
 
+  function clearArchiveThumb() {
+    delete pendingFiles['thumbnail'];
+    _archiveClearedFiles.thumbnail = true;
+    const area = document.getElementById('f-thumb-area');
+    if (area) area.innerHTML = `<label class="arch-thumb-btn" id="f-thumb-label" style="cursor:pointer;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg> 이미지 업로드 *<input type="file" accept="image/*" style="display:none" onchange="archiveThumbSelected(this)"></label>`;
+  }
+
+  function handleArchiveFile(input) {
+    const file = (input.files || input)[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = ev => {
+      const base64 = ev.target.result.split(',')[1];
+      pendingFiles['file'] = { base64, filename: file.name, folder: 'archive' };
+      delete _archiveClearedFiles.file;
+      const group = document.getElementById('f-file-group');
+      if (!group) return;
+      const label = group.querySelector('label.form-label');
+      group.innerHTML = (label ? label.outerHTML : '<label class="form-label">PDF 파일 *</label>') + `
+        <div class="archive-file-item" id="f-pdf-item">
+          <span class="archive-file-name" title="${escAttr(file.name)}">${escHtml(file.name)}</span>
+          <button type="button" class="archive-file-del" onclick="clearArchiveFile()" title="삭제">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>`;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function clearArchiveFile() {
+    delete pendingFiles['file'];
+    _archiveClearedFiles.file = true;
+    const group = document.getElementById('f-file-group');
+    if (!group) return;
+    const label = group.querySelector('label.form-label');
+    group.innerHTML = (label ? label.outerHTML : '<label class="form-label">PDF 파일 *</label>') + `
+      <div class="upload-area" id="f-pdf-upload" onclick="document.getElementById('f-file-input').click()"
+        ondragover="event.preventDefault();this.style.borderColor='#1E8DCD'"
+        ondragleave="this.style.borderColor=''"
+        ondrop="event.preventDefault();this.style.borderColor='';handleArchiveFile({files:event.dataTransfer.files})">
+        <input type="file" id="f-file-input" accept=".pdf,.zip" style="display:none" onchange="handleArchiveFile(this)">
+        <div id="f-file-hint-icon">📎 클릭하거나 파일을 드롭하세요</div>
+        <div class="upload-hint">PDF, ZIP 등 지원</div>
+      </div>`;
+  }
+
+  function onArchiveTypeChange(val) {
+    const sg = document.getElementById('f-summary-group');
+    if (sg) sg.style.display = ['intro','catalog'].includes(val) ? '' : 'none';
+  }
+
+  function updateSummaryCount(el) {
+    const cnt = document.getElementById('f-summary-count');
+    if (cnt) {
+      const len = el.value.length;
+      cnt.textContent = len + '/100';
+      cnt.style.color = (len >= 60 && len <= 100) ? '#1E8DCD' : (len > 100 ? '#e63946' : '#aaa');
+    }
+  }
+
   /* ── 아카이브 탭 드롭 ── */
   function archiveTabDrop(e, type) {
     e.preventDefault();
@@ -1493,17 +1549,8 @@
     archiveTab = type;
     renderList();
     showForm();
-    // FileReader로 읽어 pendingFiles에 주입 (showForm이 pendingFiles 초기화 후라 OK)
-    const reader = new FileReader();
-    reader.onload = ev => {
-      const base64 = ev.target.result.split(',')[1];
-      pendingFiles['file'] = { base64, filename: file.name, folder: 'archive' };
-      const hintIcon = document.getElementById('f-file-hint-icon');
-      const nameEl = document.getElementById('f-file-name');
-      if (hintIcon) hintIcon.textContent = '📎 ' + file.name;
-      if (nameEl) nameEl.textContent = '';
-    };
-    reader.readAsDataURL(file);
+    // showForm이 pendingFiles 초기화 후라 setTimeout으로 DOM 준비 후 주입
+    setTimeout(() => handleArchiveFile({ files: [file] }), 50);
   }
 
   /* ── 아카이브 폼 핀 토글 ── */
@@ -1917,6 +1964,7 @@
       const typeLabel = {intro:'기업소개서',catalog:'카탈로그/지명원',ir:'IR',ci:'CI'}[archType] || archType;
       const titleParts = [typeLabel, year, period !== '구분없음' ? period : ''].filter(Boolean);
       const isPinned = document.getElementById('f-pinned')?.checked;
+      const summary = ['intro','catalog'].includes(archType) ? (get('f-summary') || '') : '';
       return {
         ...base,
         title: titleParts.join(' '),
@@ -1924,9 +1972,10 @@
         year,
         period,
         date: year,
-        file: uploadedUrls.file || existing.file || '',
-        thumbnail: uploadedUrls.thumbnail || existing.thumbnail || '',
-        pinned: isPinned
+        file: uploadedUrls.file || (_archiveClearedFiles.file ? '' : existing.file) || '',
+        thumbnail: uploadedUrls.thumbnail || (_archiveClearedFiles.thumbnail ? '' : existing.thumbnail) || '',
+        pinned: isPinned,
+        summary
       };
     }
     if (currentSection === 'faq') {
