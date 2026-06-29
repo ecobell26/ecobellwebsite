@@ -72,7 +72,14 @@
     .dark .item-title { color: #d8dce6; }
     .dark .item-meta { color: #707580; }
     .dark .item-tag { background: #1e3050; color: #60a8d8; }
-    .dark .drag-handle { color: #707580; }
+    .dark .drag-handle { color: #9098a8; }
+    .dark .action-btn.pub-eye.on { color: #4da8d8; }
+    .dark .action-btn.pub-eye.on:hover { background: #1e2838; }
+    .dark .action-btn.pub-eye.off { color: #505868; }
+    .dark .action-btn.pub-eye.off:hover { background: #2a2a34; color: #8098a8; }
+    .dark .item-pin { color: #6878a0; }
+    .dark .item-pin:hover { color: #8898b8; }
+    .dark .item-pin.pinned { color: #d4a030; }
     .dark .form-card { background: #252528; box-shadow: 0 1px 6px rgba(0,0,0,0.4); }
     .dark .form-title { color: #d8dce6; border-color: #30303a; }
     .dark .form-label { color: #8898a8; }
@@ -80,15 +87,16 @@
     .dark .form-input:focus, .dark .form-select:focus, .dark .form-textarea:focus { border-color: #4090c0; }
     .dark .rte-wrap { border-color: #383848; }
     .dark .rte-toolbar { background: #1c1c20; border-color: #383848; }
-    .dark .rte-toolbar button { background: #222228; border-color: #383848; color: #8898a8; }
+    .dark .rte-toolbar button { background: #222228; border-color: #404050; color: #a8b8c8; }
+    .dark .rte-toolbar button:hover { background: #2a3a4a; border-color: #4090c0; color: #6bbde0; }
     .dark .rte-content { color: #d2d6de; }
     .dark .tag-wrap { border-color: #383848; background: #1c1c20; }
     .dark .upload-area { border-color: #383848; color: #8898a8; }
     .dark .attach-item { background: #1c1c20; }
     .dark .attach-name { color: #8898a8; }
     .dark .divider { background: #30303a; }
-    .dark .btn-cancel { background: #30303a; color: #8898a8; }
-    .dark .btn-cancel:hover { background: #383848; }
+    .dark .btn-cancel { background: #30303a; color: #b0bece; border: 1px solid #484858; }
+    .dark .btn-cancel:hover { background: #3a3a4a; color: #d0dce8; }
     .dark .empty-state { color: #505560; }
     .dark .loading { color: #505560; }
     .dark .archive-tabs { border-color: #30303a; }
@@ -138,9 +146,9 @@
     .dark .preview-panel { background: #252528; }
     .dark .preview-head { border-color: #30303a; }
     .dark .preview-created { color: #707580; }
-    .dark .preview-btn { background: #2a2a30; border-color: #383848; color: #8898a8; }
-    .dark .preview-btn:hover { border-color: #4090c0; color: #4090c0; background: #1e2838; }
-    .dark .preview-btn.close-x { background: #1c1c20; border-color: transparent; }
+    .dark .preview-btn { background: #2e2e38; border-color: #505060; color: #b8c4d0; }
+    .dark .preview-btn:hover { border-color: #4da8d8; color: #6bc8f0; background: #1e2838; }
+    .dark .preview-btn.close-x { background: #1c1c20; border-color: transparent; color: #9098a8; }
     .dark .preview-title { color: #d8dce6; }
     .dark .preview-meta-line { color: #707580; }
     .dark .preview-html { color: #bcc4d0; }
@@ -250,24 +258,30 @@
     .bulk-action-btn.del:hover { background: #fff0f0; }
     .dark .bulk-action-bar { background: #202024; border-color: #30303a; }
     .dark .bulk-action-bar .sel-info { color: #8898a8; }
-    .dark .bulk-select-chk { background: #2a2a30; border-color: #383848; }
-    .dark .bulk-select-chk svg { color: #707580; }
+    .dark .bulk-select-chk { background: #2a2a34; border-color: #505060; }
+    .dark .bulk-select-chk svg { color: #9098a8; }
     .dark .bulk-select-chk.all-sel { background: #1E8DCD; border-color: #1E8DCD; }
     .dark .bulk-select-chk.all-sel svg { color: #fff; }
-    .dark .bulk-action-btn { background: #2a2a30; border-color: #383848; }
-    .dark .bulk-action-btn.del { border-color: #c03040; color: #e05060; }
-    .dark .faq-excel-btn { background: #252528; border-color: #383848; color: #8898a8; }
-    .dark .faq-excel-btn:hover { border-color: #4090c0; color: #4090c0; background: #1e2838; }
+    .dark .bulk-action-btn { background: #2e2e38; border-color: #505060; color: #b8c4d0; }
+    .dark .bulk-action-btn:hover { background: #383848; color: #d0dce8; }
+    .dark .bulk-action-btn.del { border-color: #d04050; color: #f07080; }
+    .dark .bulk-action-btn.del:hover { background: #3a1820; color: #ff8090; }
+    .dark .faq-excel-btn { background: #2a2a34; border-color: #505060; color: #b0bece; }
+    .dark .faq-excel-btn:hover { border-color: #4da8d8; color: #6bc8f0; background: #1e2838; }
     /* FAQ 분리 박스 */
     .faq-box { background: #fff; border-radius: 10px; box-shadow: 0 1px 6px rgba(0,0,0,0.07); margin-bottom: 10px; overflow: hidden; }
     .dark .faq-box { background: #252528; box-shadow: 0 1px 6px rgba(0,0,0,0.4); }
     /* FAQ 아코디언 */
-    .faq-expand { border-top: 1px solid #f0f0f0; background: #f9fbfc; animation: faqSlide 0.18s ease; }
-    .dark .faq-expand { background: #1e1e24; border-color: #30303a; }
-    .faq-expand-inner { padding: 14px 18px 16px 48px; }
-    .faq-answer-label { font-size: 11px; font-weight: 600; color: #1E8DCD; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
-    .faq-answer-text { font-size: 13px; color: #444; line-height: 1.7; white-space: pre-wrap; }
-    .dark .faq-answer-text { color: #a0aab8; }
+    .faq-expand { border-top: 1px solid #e0e8f0; background: #eef4fa; animation: faqSlide 0.18s ease; }
+    .dark .faq-expand { background: #18222e; border-color: #283848; }
+    .faq-expand-inner { padding: 16px 20px 18px 48px; }
+    .faq-answer-label { font-size: 11px; font-weight: 700; color: #1E8DCD; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; }
+    .faq-answer-text { font-size: 15px; color: #1a2030; line-height: 1.75; white-space: pre-wrap; }
+    .dark .faq-answer-text { color: #fff; }
+    .item-row.faq-row-expanded { background: #e8f2fa; }
+    .item-row.faq-row-expanded .item-title { font-weight: 700; }
+    .dark .item-row.faq-row-expanded { background: #1a2a3a; }
+    .dark .item-row.faq-row-expanded .item-title { color: #fff; font-weight: 700; }
     @keyframes faqSlide { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
     /* FAQ 카운트 */
     .faq-count { font-size: 12px; color: #1E8DCD; font-weight: 600; padding: 2px 0 10px; }
@@ -280,11 +294,13 @@
     .dark .faq-add-menu { background: #252528; border-color: #383848; }
     .dark .faq-add-menu-btn { color: #d2d6de; }
     .dark .faq-add-menu-btn:hover { background: #1e2838; color: #4da8d8; }
-    .dark #faq-excel-modal-box { background: #252528; }
-    .dark #faq-excel-modal-box span { color: #d8dce6; }
-    .dark #faq-excel-modal-box button[onclick="closeFaqExcelModal()"] { color: #707580; }
-    .dark #faq-excel-modal-box button:not([onclick="closeFaqExcelModal()"]),
-    .dark #faq-excel-modal-box label { background: #1c1c20; border-color: #383848; color: #d2d6de; }
+    .dark #faq-excel-modal-box { background: #252528; box-shadow: 0 8px 40px rgba(0,0,0,0.55); }
+    .dark #faq-excel-modal-box > div:first-child span { color: #d8dce6; }
+    .dark #faq-excel-modal-box button[onclick="closeFaqExcelModal()"] { color: #606570; }
+    .dark #faq-excel-modal-box button:not([onclick="closeFaqExcelModal()"]) { background: #1c1c22; border-color: #383848; color: #d2d6de; }
+    .dark #faq-excel-modal-box label { background: #1c1c22; border-color: #383848; color: #d2d6de; }
+    .dark #faq-excel-modal-box div div:first-child { color: #e0e4ec; }
+    .dark #faq-excel-modal-box div div:last-child { color: #606878; }
     /* 더보기 버튼 */
     .load-more-wrap { padding: 14px 16px; border-top: 1px solid #f0f0f0; text-align: center; }
     .load-more-btn { padding: 0 24px; height: 34px; background: #fff; border: 1px solid #dde3ea; border-radius: 7px; font-size: 13px; color: #666; cursor: pointer; transition: all 0.15s; font-family: inherit; }
@@ -318,7 +334,8 @@
     .dark .archive-file-name { color: #8898a8; }
     .dark .archive-file-del { color: #505560; }
     .dark .archive-file-del:hover { background: rgba(230,57,70,0.12); color: #e05060; }
-    .dark .arch-pin-btn { border-color: #3a5068; color: #6a8499; }
+    .dark .arch-pin-btn { border-color: #505868; color: #9aaabb; }
+    .dark .arch-pin-btn:hover { border-color: #6098b8; color: #b8d0e0; }
     .dark .arch-pin-btn.pinned { color: #d4a030; border-color: #c08020; background: rgba(180,120,0,0.12); }
     .arch-thumb-area { display: flex; align-items: center; gap: 6px; }
     .arch-thumb-btn { display: inline-flex; align-items: center; gap: 5px; padding: 0 10px; height: 32px; border: 1px solid #e0e5ea; border-radius: 7px; background: none; cursor: pointer; font-size: 12px; color: #555; transition: all 0.15s; white-space: nowrap; font-family: inherit; }
@@ -331,8 +348,8 @@
     .dark .arch-thumb-sep { color: #3a5068; }
     .bulk-cancel-btn { width: 26px; height: 26px; border: none; border-radius: 5px; background: none; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #aaa; transition: all 0.15s; flex-shrink: 0; }
     .bulk-cancel-btn:hover { background: rgba(230,57,70,0.08); color: #e63946; }
-    .dark .bulk-cancel-btn { color: #6a8499; }
-    .dark .bulk-cancel-btn:hover { color: #e63946; }
+    .dark .bulk-cancel-btn { color: #9098a8; }
+    .dark .bulk-cancel-btn:hover { color: #ff7080; }
     .item-cats { display: flex; gap: 4px; flex-wrap: wrap; flex-shrink: 0; }
 
     /* ── 폼 ── */
@@ -894,7 +911,7 @@
     let prefix = '';
 
     if (currentSection === 'faq') {
-      const cats = ['전체', 'ecoValue', 'ecoASSET', 'E-ASSET', 'ecoNODE', '태양광 솔루션', '기타'];
+      const cats = ['전체', 'ecoValue', 'ecoASSET', 'E-ASSET', '태양광 솔루션', '기타'];
       pressTopArea.style.display = 'none';
       faqExcelArea.style.display = 'none';
       document.getElementById('faq-dl-btn').style.display = '';
@@ -1011,7 +1028,7 @@
           </div>
         </div>
       </div>` : '';
-    return `<div class="item-row" ${canDrag ? 'draggable="true"' : ''} data-id="${item.id}" data-idx="${idx}" onclick="${rowClick}" style="${isFaqExpanded ? 'background:#f0f7fb;' : ''}">
+    return `<div class="item-row ${isFaqExpanded ? 'faq-row-expanded' : ''}" ${canDrag ? 'draggable="true"' : ''} data-id="${item.id}" data-idx="${idx}" onclick="${rowClick}">
       <input type="checkbox" class="item-check" ${selectedIds.has(item.id) ? 'checked' : ''} onclick="event.stopPropagation();toggleSelect('${item.id}')">
       ${currentSection !== 'faq' ? `<span class="item-pin ${isPinned ? 'pinned' : ''}" title="${isPinned ? '고정 해제' : '고정'}" onclick="event.stopPropagation();togglePin('${item.id}')"><svg width="14" height="14" viewBox="0 0 24 24" fill="${isPinned ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"/><path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z"/></svg></span>` : ''}
       <div class="item-info">
@@ -1563,7 +1580,7 @@
         <input type="checkbox" id="f-pinned" style="display:none" ${v('pinned',false)?'checked':''}>`;
 
     } else if (currentSection === 'faq') {
-      const _faqCats = ['ecoValue','ecoASSET','E-ASSET','ecoNODE','태양광 솔루션','기타'];
+      const _faqCats = ['ecoValue','ecoASSET','E-ASSET','태양광 솔루션','기타'];
       const _selCats = String(v('category','')).split(',').map(s => s.trim()).filter(Boolean);
       fields = `
         <div class="form-group full"><label class="form-label">카테고리 * <span style="font-weight:400;color:#aaa;font-size:12px;">복수 선택 가능</span></label>
@@ -2422,7 +2439,7 @@
   <script src="assets/header-scroll.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
   <script>
-    const FAQ_CATS = ['ecoValue', 'ecoASSET', 'E-ASSET', 'ecoNODE', '태양광 솔루션', '기타'];
+    const FAQ_CATS = ['ecoValue', 'ecoASSET', 'E-ASSET', '태양광 솔루션', '기타'];
 
     /* ── 보도자료 양식 다운로드 ── */
     function downloadPressTemplate() {

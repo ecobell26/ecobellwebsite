@@ -1646,31 +1646,30 @@
       });
     });
 
-    // FAQ: faq.html의 에코벨류 카테고리 항목 동적 로드
+    // FAQ: faq.json에서 ecoValue 카테고리 항목 동적 로드
     (function() {
       const container = document.getElementById('ev-faq-container');
       if (!container) return;
-      fetch('faq.html')
-        .then(r => r.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const doc = parser.parseFromString(html, 'text/html');
-          const items = doc.querySelectorAll('.faq-item[data-category="에코벨류"]');
-          const chevronSVG = `<svg width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M1 1L8 8L15 1" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-          items.forEach(src => {
-            const q = src.querySelector('.faq-question-text')?.textContent.trim() || '';
-            const a = src.querySelector('.faq-answer')?.innerHTML.trim() || '';
+      const chevronSVG = `<svg width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M1 1L8 8L15 1" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+      fetch('https://raw.githubusercontent.com/Elowen-yn/ecobellwebsite/main/data/faq.json')
+        .then(r => r.json())
+        .then(data => {
+          const items = (data.items || []).filter(i =>
+            i.published !== false &&
+            String(i.category || '').split(',').map(s => s.trim()).includes('ecoValue')
+          );
+          if (!items.length) { container.innerHTML = '<p style="color:#aaa;text-align:center;padding:40px 0;">등록된 FAQ가 없습니다.</p>'; return; }
+          items.forEach(item => {
             const el = document.createElement('div');
             el.className = 'ev-faq-item';
             el.innerHTML = `
               <div class="ev-faq-q">
-                <span>${q}</span>
+                <span>${item.question || ''}</span>
                 <span class="ev-faq-chevron">${chevronSVG}</span>
               </div>
-              <div class="ev-faq-a">${a}</div>`;
+              <div class="ev-faq-a">${item.answer || ''}</div>`;
             container.appendChild(el);
           });
-          // 아코디언 이벤트 연결
           container.querySelectorAll('.ev-faq-q').forEach(q => {
             q.addEventListener('click', () => {
               const item = q.closest('.ev-faq-item');
@@ -1679,7 +1678,8 @@
               if (!isOpen) item.classList.add('open');
             });
           });
-        });
+        })
+        .catch(() => { container.innerHTML = '<p style="color:#aaa;text-align:center;padding:40px 0;">FAQ를 불러오지 못했습니다.</p>'; });
     })();
   </script>
 
