@@ -18,7 +18,7 @@ function verifyAuth(req) {
 }
 
 function typeToPath(type) {
-  const map = { notices: 'data/notices.json', press: 'data/press.json', archive: 'data/archive.json', faq: 'data/faq.json' };
+  const map = { notices: 'data/notices.json', press: 'data/press.json', archive: 'data/archive.json', faq: 'data/faq.json', privacy: 'data/privacy.json', terms: 'data/terms.json', 'email-policy': 'data/email-policy.json' };
   return map[type] || null;
 }
 

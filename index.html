@@ -486,8 +486,21 @@
     .hero-bg {
       position: absolute;
       inset: 0;
-      background: url('assets/main-hero-bg.jpg') center center / cover no-repeat;
+      background: url('assets/main-hero-photo.jpg') center center / cover no-repeat;
       filter: brightness(1.18);
+    }
+    .hero-bg.alt { background-image: url('assets/main-hero-photo-alt.jpg'); }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: url('assets/main-hero-overlay.png') center center / cover no-repeat;
+      pointer-events: none;
+    }
+    .hero-radial {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, rgba(0,0,0,0.40) 0%, rgba(0,0,0,0) 100%);
+      pointer-events: none;
     }
     .hero-inner {
       position: relative;
@@ -1194,7 +1207,7 @@
         </div>
         <!-- Platform -->
         <div class="lnb-col" data-col="platform">
-          <a href="#">태양광 솔루션</a>
+          <a href="solar.html">태양광 솔루션</a>
         </div>
         <!-- Insight -->
         <div class="lnb-col" data-col="insight">
@@ -1269,6 +1282,8 @@
     <div class="hero-scroll-track">
       <section class="hero" id="hero">
         <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-radial"></div>
         <div class="hero-inner">
           <div class="hero-text-wrap">
             <h1 class="hero-title hero-title-1">
@@ -1390,7 +1405,7 @@
       <a class="ft-link" href="archive.html" style="left:45px;top:191px;">아카이브</a>
 
       <!-- Project 링크 -->
-      <a class="ft-link" href="#" style="left:202px;top:87px;">태양광 솔루션</a>
+      <a class="ft-link" href="solar.html" style="left:202px;top:87px;">태양광 솔루션</a>
 
       <!-- 솔루션 링크 -->
       <a class="ft-link ft-en" href="ecoval.html" style="left:374px;top:87px;">ecoValue</a>
@@ -1414,9 +1429,9 @@
       <div class="ft-divider" style="top:305px;"></div>
 
       <!-- 하단 링크 -->
-      <a class="ft-bottom-link fw-bold" href="#" style="left:45px;">개인정보처리방침</a>
-      <a class="ft-bottom-link" href="#" style="left:173px;">이용약관</a>
-      <a class="ft-bottom-link" href="#" style="left:250px;">이메일무단수집거부</a>
+      <a class="ft-bottom-link fw-bold" href="privacy.html" style="left:45px;">개인정보처리방침</a>
+      <a class="ft-bottom-link" href="terms.html" style="left:173px;">이용약관</a>
+      <a class="ft-bottom-link" href="email-policy.html" style="left:250px;">이메일무단수집거부</a>
       <a class="ft-bottom-link" href="faq.html" style="left:383px;">자주 묻는 질문(FAQ)</a>
 
       <!-- 소셜 아이콘 (y=323) -->
@@ -1691,6 +1706,23 @@
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape') closeIframeModal();
     });
+
+    // 'E' 키 → 히어로 이미지 전환
+    (function() {
+      const heroBg = document.querySelector('.hero-bg');
+      let isAlt = false;
+      // 이미지 미리 로드
+      new Image().src = 'assets/main-hero-photo-alt.jpg';
+      document.addEventListener('keydown', function(e) {
+        if (e.key !== 'e' && e.key !== 'E') return;
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable) return;
+        isAlt = !isAlt;
+        heroBg.classList.toggle('alt', isAlt);
+        document.querySelector('.hero-radial').style.background = isAlt
+          ? 'radial-gradient(ellipse at center, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0) 100%)'
+          : 'radial-gradient(ellipse at center, rgba(0,0,0,0.40) 0%, rgba(0,0,0,0) 100%)';
+      });
+    })();
   </script>
   <script src="assets/admin-trigger.js"></script>
 

@@ -604,6 +604,35 @@
     }
     .notice-search-btn:hover { opacity: 1; }
 
+    /* 카테고리 필터 바 */
+    .notice-filter-bar {
+      display: flex; align-items: center; gap: 24px;
+      margin: 20px 0 0; flex-wrap: wrap;
+    }
+    .notice-filter-btn {
+      background: none; border: none; padding: 0;
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 600; font-size: 14px; color: rgba(0,0,0,0.4);
+      cursor: pointer; letter-spacing: 0.2px; line-height: 1.4;
+      transition: color 0.15s;
+      white-space: nowrap;
+    }
+    .notice-filter-btn:hover { color: rgba(0,0,0,0.75); }
+    .notice-filter-btn.active { color: #1e8dcd; font-weight: 700; }
+
+    /* 카테고리 뱃지 */
+    .notice-cat-badge {
+      display: inline-block;
+      border: 1px solid rgba(30,141,205,0.4);
+      border-radius: 4px;
+      padding: 1px 7px;
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 11px; font-weight: 600; color: #1e8dcd;
+      letter-spacing: 0.2px; line-height: 1.6;
+      margin-right: 8px; vertical-align: middle;
+      white-space: nowrap;
+    }
+
     /* 공지 테이블 */
     .notice-table {
       width: 100%;
@@ -1023,7 +1052,7 @@
         </div>
         <!-- Platform -->
         <div class="lnb-col" data-col="platform">
-          <a href="#">태양광 솔루션</a>
+          <a href="solar.html">태양광 솔루션</a>
         </div>
         <!-- Insight -->
         <div class="lnb-col" data-col="insight">
@@ -1142,6 +1171,15 @@
             </button>
           </div>
         </div>
+      </div>
+
+      <!-- 카테고리 필터 바 -->
+      <div class="notice-filter-bar" id="notice-filter-bar">
+        <button class="notice-filter-btn active" data-cat="">전체</button>
+        <button class="notice-filter-btn" data-cat="에코벨">에코벨</button>
+        <button class="notice-filter-btn" data-cat="에코에셋">에코에셋</button>
+        <button class="notice-filter-btn" data-cat="에너지에셋">에너지에셋</button>
+        <button class="notice-filter-btn" data-cat="태양광 솔루션">태양광 솔루션</button>
       </div>
 
       <!-- 공지 테이블 -->
@@ -1380,7 +1418,7 @@
       <a class="ft-link" href="archive.html" style="left:45px;top:191px;">아카이브</a>
 
       <!-- Project 링크 -->
-      <a class="ft-link" href="#" style="left:202px;top:87px;">태양광 솔루션</a>
+      <a class="ft-link" href="solar.html" style="left:202px;top:87px;">태양광 솔루션</a>
 
       <!-- 솔루션 링크 -->
       <a class="ft-link ft-en" href="ecoval.html" style="left:374px;top:87px;">ecoValue</a>
@@ -1402,9 +1440,9 @@
 
       <div class="ft-divider" style="top:305px;"></div>
 
-      <a class="ft-bottom-link fw-bold" href="#" style="left:45px;">개인정보처리방침</a>
-      <a class="ft-bottom-link" href="#" style="left:173px;">이용약관</a>
-      <a class="ft-bottom-link" href="#" style="left:250px;">이메일무단수집거부</a>
+      <a class="ft-bottom-link fw-bold" href="privacy.html" style="left:45px;">개인정보처리방침</a>
+      <a class="ft-bottom-link" href="terms.html" style="left:173px;">이용약관</a>
+      <a class="ft-bottom-link" href="email-policy.html" style="left:250px;">이메일무단수집거부</a>
       <a class="ft-bottom-link" href="faq.html" style="left:383px;">자주 묻는 질문(FAQ)</a>
 
       <a class="ft-social" href="https://www.youtube.com/@yt_ecobell" target="_blank" rel="noopener noreferrer" aria-label="YouTube" style="right:135px;">
@@ -1655,6 +1693,25 @@
     const ITEMS_PER_PAGE = 10;
     let currentPage = 1;
     let filteredRows = [];
+    let currentCategoryFilter = '';
+
+    // 카테고리 필터 버튼
+    document.querySelectorAll('.notice-filter-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.notice-filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentCategoryFilter = btn.dataset.cat;
+        runSearch();
+      });
+    });
+
+    // URL ?cat= 파라미터로 필터 초기값 설정
+    (function() {
+      const _cat = new URLSearchParams(location.search).get('cat');
+      if (!_cat) return;
+      const _btn = Array.from(document.querySelectorAll('.notice-filter-btn')).find(b => b.dataset.cat === _cat);
+      if (_btn) { _btn.click(); }
+    })();
 
     const noticeSearchInput = document.querySelector('.notice-search-input');
     const noticeSearchBtn   = document.querySelector('.notice-search-btn');
@@ -1734,11 +1791,16 @@
       const countWrap = document.querySelector('.notice-count');
       const minScore = normalize(kw).length === 1 ? 1 : 200;
 
+      // 카테고리 필터 먼저 적용
+      const catRows = currentCategoryFilter
+        ? rows.filter(r => (r.dataset.category || '') === currentCategoryFilter)
+        : rows;
+
       if (!kw) {
-        filteredRows = rows;
-        countWrap.innerHTML = '<span class="notice-count-num">' + rows.length + '</span>건';
+        filteredRows = catRows;
+        countWrap.innerHTML = '<span class="notice-count-num">' + filteredRows.length + '</span>건';
       } else {
-        const scored = rows.map(row => {
+        const scored = catRows.map(row => {
           const title = row.querySelector('.td-title')?.textContent || '';
           const score = scoreMatch(title, kw);
           return { row, score };
@@ -1780,12 +1842,13 @@
         const fmtDate = d => d ? d.replace(/-/g, '.') : '';
         const attachCell = item => item.attachments && item.attachments.length
           ? `<button class="attach-btn" onclick="showAttachPopup(event,'${item.id}')">${_ATTACH_SVG}</button>` : '';
+        const catBadge = item => item.category ? `<span class="notice-cat-badge">${item.category}</span>` : '';
         let html = '';
         pinned.forEach(item => {
-          html += `<tr><td class="td-no pinned">${_PIN_SVG}</td><td><a class="td-title" href="notice-article.html?id=${item.id}">${item.title}</a></td><td class="td-author">${item.author || ''}</td><td class="td-date">${fmtDate(item.date)}</td><td class="td-views">0</td><td class="td-attach">${attachCell(item)}</td></tr>`;
+          html += `<tr data-category="${item.category||''}"><td class="td-no pinned">${_PIN_SVG}</td><td><a class="td-title" href="notice-article.html?id=${item.id}">${catBadge(item)}${item.title}</a></td><td class="td-author">${item.author || ''}</td><td class="td-date">${fmtDate(item.date)}</td><td class="td-views">0</td><td class="td-attach">${attachCell(item)}</td></tr>`;
         });
         normal.forEach((item, idx) => {
-          html += `<tr><td class="td-no">${normal.length - idx}</td><td><a class="td-title" href="notice-article.html?id=${item.id}">${item.title}</a></td><td class="td-author">${item.author || ''}</td><td class="td-date">${fmtDate(item.date)}</td><td class="td-views">0</td><td class="td-attach">${attachCell(item)}</td></tr>`;
+          html += `<tr data-category="${item.category||''}"><td class="td-no">${normal.length - idx}</td><td><a class="td-title" href="notice-article.html?id=${item.id}">${catBadge(item)}${item.title}</a></td><td class="td-author">${item.author || ''}</td><td class="td-date">${fmtDate(item.date)}</td><td class="td-views">0</td><td class="td-attach">${attachCell(item)}</td></tr>`;
         });
         _noticeTbody.innerHTML = html;
       } catch(e) { console.error('notices fetch failed', e); }

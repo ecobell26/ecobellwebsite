@@ -565,42 +565,31 @@
       background: #F7FAFA;
       position: relative;
       overflow: hidden;
-      transition: box-shadow 0.3s ease, transform 0.2s ease;
+      transition: box-shadow 0.15s ease, transform 0.12s cubic-bezier(0.4,0,0.2,1), border-color 0.15s;
       text-decoration: none;
     }
-    .inquiry-card::before {
-      content: '';
-      position: absolute;
-      left: 0; top: 50%;
-      transform: translate(-50%, -50%) scale(0);
-      width: 220px; height: 220px;
-      background: #1e8dcd;
-      border-radius: 50%;
-      transition: transform 0.55s ease;
-      z-index: 0;
-    }
-    .inquiry-card:hover::before { transform: translate(-50%, -50%) scale(5); }
     .inquiry-card:hover {
-      box-shadow: 0 4px 16px rgba(30,141,205,0.18);
+      transform: scale(0.97) translateY(2px);
+      box-shadow: 0 1px 4px rgba(30,141,205,0.12);
+      border-color: rgba(30,141,205,0.85);
+    }
+    .inquiry-card:active {
+      transform: scale(0.95) translateY(3px);
+      box-shadow: none;
     }
     .inquiry-card-icon {
       width: 44px; height: 44px; flex-shrink: 0;
       display: flex; align-items: center; justify-content: center;
       color: #1e8dcd;
       position: relative; z-index: 1;
-      transition: color 0.3s ease;
     }
-    .inquiry-card:hover .inquiry-card-icon { color: #fff; }
     .inquiry-card-icon svg { width: 30px; height: 30px; }
-    .inquiry-card-icon img { width: 30px; height: 30px; object-fit: contain; position: relative; z-index: 1; transition: filter 0.3s ease; }
-    .inquiry-card:hover .inquiry-card-icon img { filter: brightness(0) invert(1); }
+    .inquiry-card-icon img { width: 30px; height: 30px; object-fit: contain; position: relative; z-index: 1; }
     .inquiry-card-label {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
       font-weight: 700; font-size: 18px; color: #000; letter-spacing: 0.17px;
       position: relative; z-index: 1;
-      transition: color 0.3s ease;
     }
-    .inquiry-card:hover .inquiry-card-label { color: #fff; }
 
     /* ─── 회원 섹션 ─── */
     .member-section { margin-bottom: 60px; }
@@ -1102,7 +1091,7 @@
         </div>
         <!-- Platform -->
         <div class="lnb-col" data-col="platform">
-          <a href="#">태양광 솔루션</a>
+          <a href="solar.html">태양광 솔루션</a>
         </div>
         <!-- Insight -->
         <div class="lnb-col" data-col="insight">
@@ -1273,7 +1262,7 @@
             <span class="platform-card-arrow">
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 12L12 2M12 2H6M12 2V8" stroke="#1e8dcd" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </span>
-            <p class="platform-card-name">Solution / ecoNODE</p>
+            <p class="platform-card-name">ecoNODE/태양광</p>
             <p class="platform-card-desc">솔루션에 대한 문의를 남겨주시면<br>담당자가 맞춤 상담을 제공해드립니다.</p>
           </a>
         </div>
@@ -1590,7 +1579,7 @@
       <a class="ft-link" href="archive.html" style="left:45px;top:191px;">아카이브</a>
 
       <!-- Project 링크 -->
-      <a class="ft-link" href="#" style="left:202px;top:87px;">태양광 솔루션</a>
+      <a class="ft-link" href="solar.html" style="left:202px;top:87px;">태양광 솔루션</a>
 
       <!-- 솔루션 링크 -->
       <a class="ft-link ft-en" href="ecoval.html" style="left:374px;top:87px;">ecoValue</a>
@@ -1614,9 +1603,9 @@
       <div class="ft-divider" style="top:305px;"></div>
 
       <!-- 하단 링크 -->
-      <a class="ft-bottom-link fw-bold" href="#" style="left:45px;">개인정보처리방침</a>
-      <a class="ft-bottom-link" href="#" style="left:173px;">이용약관</a>
-      <a class="ft-bottom-link" href="#" style="left:250px;">이메일무단수집거부</a>
+      <a class="ft-bottom-link fw-bold" href="privacy.html" style="left:45px;">개인정보처리방침</a>
+      <a class="ft-bottom-link" href="terms.html" style="left:173px;">이용약관</a>
+      <a class="ft-bottom-link" href="email-policy.html" style="left:250px;">이메일무단수집거부</a>
       <a class="ft-bottom-link" href="faq.html" style="left:383px;">자주 묻는 질문(FAQ)</a>
 
       <!-- 소셜 아이콘 (y=323) -->

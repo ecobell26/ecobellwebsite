@@ -633,6 +633,15 @@
       <button class="nav-btn" onclick="switchSection('faq')" data-section="faq">
         <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>FAQ
       </button>
+      <button class="nav-btn" onclick="switchSection('privacy')" data-section="privacy">
+        <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>개인정보처리방침
+      </button>
+      <button class="nav-btn" onclick="switchSection('terms')" data-section="terms">
+        <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span>이용약관
+      </button>
+      <button class="nav-btn" onclick="switchSection('email-policy')" data-section="email-policy">
+        <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>이메일무단수집거부
+      </button>
     </nav>
     <div class="sidebar-footer">
       <div class="dark-mode-toggle">
@@ -782,6 +791,7 @@
   let currentSection = 'notices';
   let currentItems = [];
   let editingId = null;
+  let viewsData = {}; /* 공지사항 조회수 캐시 */
   let pendingFiles = {}; // { fieldName: { base64, filename, folder } }
   let _archiveClearedFiles = {}; // { file: true, thumbnail: true } — 기존 파일 삭제 표시
   let pendingImages = []; // press 이미지 배열 [{filename, base64, url}]
@@ -798,7 +808,7 @@
   let displayItems = [];
   let searchQuery = '';
 
-  const SECTION_LABELS = { notices: '공지사항', press: '보도자료', archive: '아카이브', faq: 'FAQ' };
+  const SECTION_LABELS = { notices: '공지사항', press: '보도자료', archive: '아카이브', faq: 'FAQ', privacy: '개인정보처리방침', terms: '이용약관', 'email-policy': '이메일무단수집거부' };
   const SVG_EYE = `<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>`;
   const SVG_EYE_OFF = `<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>`;
 
@@ -989,6 +999,11 @@ function showDashboard() {
       const data = await res.json();
       currentItems = data.items || [];
       document.getElementById('section-count').textContent = '(' + currentItems.length + '건)';
+      // 공지사항: 조회수 데이터 로드
+      if (type === 'notices') {
+        fetch('https://raw.githubusercontent.com/Elowen-yn/ecobellwebsite/main/data/views.json?_=' + Date.now())
+          .then(r => r.json()).then(v => { viewsData = v; renderList(); }).catch(() => {});
+      }
       renderList();
     } catch (e) {
       if (!fresh) document.getElementById('item-list').innerHTML = '<div class="loading">불러오기 실패</div>';
@@ -1109,7 +1124,10 @@ function showDashboard() {
     else if (currentSection === 'archive') {
       meta = item.createdAt ? item.createdAt.replace('T', ' ').slice(0, 16) : '';
     }
-    else meta = (item.author ? `<span class="item-tag">${item.author}</span>` : '') + (item.date || '');
+    else {
+      const views = currentSection === 'notices' && viewsData[item.id] ? ` · 조회 ${viewsData[item.id]}` : '';
+      meta = (item.author ? `<span class="item-tag">${item.author}</span>` : '') + (item.date || '') + views;
+    }
 
     const title = currentSection === 'faq' ? (item.question || '') : (item.title || '');
 
@@ -1157,6 +1175,7 @@ function showDashboard() {
         ${meta ? `<div class="item-meta">${meta}</div>` : ''}
       </div>
       ${currentSection === 'faq' ? `<div class="item-cats">${(item.category || '기타').split(',').map(c => c.trim()).filter(Boolean).map(c => `<span class="item-cat">${escHtml(c)}</span>`).join('')}</div>` : ''}
+      ${currentSection === 'notices' && item.category ? `<div class="item-cats"><span class="item-cat">${escHtml(item.category)}</span></div>` : ''}
       <button class="action-btn pub-eye ${isPublished ? 'on' : 'off'}" onclick="event.stopPropagation();togglePublish('${item.id}')" title="${isPublished ? '게시 중 (클릭하여 숨기기)' : '숨김 (클릭하여 게시)'}">${isPublished ? SVG_EYE : SVG_EYE_OFF}</button>
       ${canDrag ? '<span class="drag-handle" title="순서 변경" onclick="event.stopPropagation()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="5" r="1" fill="currentColor"/><circle cx="9" cy="12" r="1" fill="currentColor"/><circle cx="9" cy="19" r="1" fill="currentColor"/><circle cx="15" cy="5" r="1" fill="currentColor"/><circle cx="15" cy="12" r="1" fill="currentColor"/><circle cx="15" cy="19" r="1" fill="currentColor"/></svg></span>' : ''}
     </div>${faqExpandHtml}`;
@@ -1284,6 +1303,21 @@ function showDashboard() {
       const sameType = (item.type || 'intro');
       for (const other of currentItems) {
         if (other.id !== id && !!other.pinned && (other.type || 'intro') === sameType) {
+          other.pinned = false;
+          try {
+            await fetch('/api/admin-data', {
+              method: 'PUT',
+              headers: { 'Content-Type': 'application/json', Authorization: 'Basic ' + authHeader },
+              body: JSON.stringify({ type: currentSection, item: other })
+            });
+          } catch(e) {}
+        }
+      }
+    }
+    // 개인정보/이용약관/이메일수집거부: 최대 1개만 핀 (= 공개)
+    if (['privacy','terms','email-policy'].includes(currentSection) && item.pinned) {
+      for (const other of currentItems) {
+        if (other.id !== id && !!other.pinned) {
           other.pinned = false;
           try {
             await fetch('/api/admin-data', {
@@ -1608,6 +1642,22 @@ function showDashboard() {
       });
       if (rteEl) rteObserver.observe(rteEl, { childList: true, subtree: true });
     }
+    // 개인정보/이용약관/이메일수집거부: 공지사항과 동일한 스타일 차단
+    if (['privacy','terms','email-policy'].includes(currentSection)) {
+      pendingAttachments = [];
+      const LOCKED = ['font-size','line-height','letter-spacing','font-family','text-align'];
+      function stripPolicyStyles() {
+        if (!rteEl) return;
+        rteEl.querySelectorAll('*').forEach(el => {
+          if (el.classList.contains('rte-img') || el.classList.contains('rte-img-block')) return;
+          LOCKED.forEach(p => el.style.removeProperty(p));
+        });
+      }
+      if (rteEl) {
+        rteEl.addEventListener('input', stripPolicyStyles);
+        rteEl.addEventListener('paste', () => setTimeout(stripPolicyStyles, 0));
+      }
+    }
     // 첨부파일 초기화
     if (currentSection === 'notices') {
       pendingAttachments = (item?.attachments || []).map(a => ({ name: a.name, url: a.url, base64: null }));
@@ -1679,6 +1729,13 @@ function showDashboard() {
       const _depts = ['사업부', '기술운영부', '경영지원부'];
       fields = `
         <div class="form-group full"><label class="form-label">제목 *</label><input class="form-input" id="f-title" value="${escAttr(v('title',''))}" placeholder="공지사항 제목"></div>
+        <div class="form-group">
+          <label class="form-label">구분 <span style="font-weight:400;color:#aaa;font-size:11px;">선택</span></label>
+          <select class="form-select" id="f-notice-category">
+            <option value="" ${!v('category','') ? 'selected' : ''}>없음</option>
+            ${['에코벨','에코에셋','에너지에셋','태양광 솔루션'].map(c => `<option value="${c}" ${v('category','')===c?'selected':''}>${c}</option>`).join('')}
+          </select>
+        </div>
         <div class="form-group">
           <label class="form-label">작성자</label>
           <select class="form-select" id="f-author">
@@ -1840,8 +1897,19 @@ function showDashboard() {
         </div>
         <div class="form-group full"><label class="form-label">질문 *</label><input class="form-input" id="f-question" value="${escAttr(v('question',''))}" placeholder="자주 묻는 질문"></div>
         <div class="form-group full"><label class="form-label">답변 *</label><textarea class="form-textarea" id="f-answer" rows="6" placeholder="답변 내용">${escHtml(v('answer',''))}</textarea></div>`;
+
+    } else if (['privacy','terms','email-policy'].includes(currentSection)) {
+      const _today = new Date().toISOString().slice(0, 10);
+      fields = `
+        <div class="form-group full"><label class="form-label">제목 *</label><input class="form-input" id="f-title" value="${escAttr(v('title',''))}" placeholder="${SECTION_LABELS[currentSection]} 제목 (예: v1.0)"></div>
+        <div class="form-group"><label class="form-label">날짜</label><input class="form-input" type="date" id="f-date" value="${escAttr(v('date', _today))}"></div>
+        <div class="form-group full">
+          <label class="form-label">내용 *</label>
+          <div class="rte-wrap">${RTE_TOOLBAR_NOTICES}<div class="rte-content notice-rte" id="f-content" contenteditable="true" data-placeholder="내용을 입력하세요">${v('content','')}</div></div>
+        </div>`;
     }
 
+    const IS_POLICY_SECTION = ['privacy','terms','email-policy'].includes(currentSection);
     const pinSvg = `<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"/><path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z"/></svg>`;
     return `
       <div class="form-title" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
@@ -1854,7 +1922,7 @@ function showDashboard() {
         <div class="form-group">
           <label class="form-label">옵션</label>
           <div class="form-check-row">
-            <label class="form-check"><input type="checkbox" id="f-pinned" ${v('pinned',false)?'checked':''}> 상단 고정</label>
+            <label class="form-check"><input type="checkbox" id="f-pinned" ${v('pinned',false)?'checked':''}> ${IS_POLICY_SECTION ? '공개 (핀됨 = 웹사이트에 표시)' : '상단 고정'}</label>
           </div>
         </div>
       </div>` : ''}
@@ -2368,8 +2436,8 @@ function showDashboard() {
         uploadedAttachments.push({ name: att.name, url: d.url });
       }
 
-      // RTE 내 잔여 base64 이미지 → GitHub URL 교체 (notices/press 공통)
-      if (currentSection === 'notices' || currentSection === 'press') {
+      // RTE 내 잔여 base64 이미지 → GitHub URL 교체 (notices/press/policy 공통)
+      if (currentSection === 'notices' || currentSection === 'press' || ['privacy','terms','email-policy'].includes(currentSection)) {
         const rteEl = document.getElementById('f-content');
         if (rteEl) {
           const imgs = rteEl.querySelectorAll('img[src^="data:"]');
@@ -2486,7 +2554,8 @@ function showDashboard() {
     const base = { pinned: chk('f-pinned') };
 
     if (currentSection === 'notices') {
-      return { ...base, title: get('f-title'), content: sanitizeNoticeContent(rte('f-content')), date: get('f-date'), author: get('f-author'), attachments: uploadedAttachments };
+      const _cat = get('f-notice-category');
+      return { ...base, title: get('f-title'), content: sanitizeNoticeContent(rte('f-content')), date: get('f-date'), author: get('f-author'), attachments: uploadedAttachments, ...(_cat ? { category: _cat } : {}) };
     }
     if (currentSection === 'press') {
       // 선택된 썸네일을 첫 번째로 이동
@@ -2524,6 +2593,9 @@ function showDashboard() {
       const catChecks = document.querySelectorAll('.f-cat-check:checked');
       const category = Array.from(catChecks).map(c => c.value).join(',');
       return { ...base, category, question: get('f-question'), answer: get('f-answer') };
+    }
+    if (['privacy','terms','email-policy'].includes(currentSection)) {
+      return { ...base, title: get('f-title'), content: sanitizeNoticeContent(rte('f-content')), date: get('f-date') };
     }
     return base;
   }
@@ -2876,14 +2948,15 @@ function showDashboard() {
         const ws = wb.Sheets[wb.SheetNames[0]];
         const rows = window.XLSX.utils.sheet_to_json(ws, { header: 1, defval: '' });
 
-        const year  = String(rows[0]?.[1] || '').trim();
-        const month = String(rows[0]?.[3] || '').trim().padStart(2, '0');
-        const day   = String(rows[0]?.[5] || '').trim().padStart(2, '0');
+        /* 양식: B2=년, D2=월, F2=일 / B3=기사 제목 / B4=기사 내용 */
+        const year  = String(rows[1]?.[1] || '').trim();
+        const month = String(rows[1]?.[3] || '').trim().padStart(2, '0');
+        const day   = String(rows[1]?.[5] || '').trim().padStart(2, '0');
         const date  = year && month && day ? `${year}-${month}-${day}` : '';
-        const title   = String(rows[1]?.[1] || '').trim();
-        const content = String(rows[2]?.[1] || '').trim();
+        const title   = String(rows[2]?.[1] || '').trim();
+        const content = String(rows[3]?.[1] || '').trim();
 
-        if (!title) { showToast('엑셀 B2셀에 기사 제목이 없습니다.', true); btn.disabled = false; btn.textContent = '업로드'; return; }
+        if (!title) { showToast('엑셀 B3셀에 기사 제목이 없습니다.', true); btn.disabled = false; btn.textContent = '업로드'; return; }
 
         // 2. 이미지 업로드
         const uploadedImages = [];
@@ -2935,18 +3008,19 @@ function showDashboard() {
       if (!window.XLSX) { showToast('Excel 라이브러리 로딩 중입니다. 잠시 후 다시 시도해주세요.', true); return; }
       const wb = window.XLSX.utils.book_new();
 
-      const header = ['질문', '답변', ...FAQ_CATS];
-      const exampleRow = ['질문 예시를 입력하세요', '답변 예시를 입력하세요', 'O', '', '', '', '', ''];
-      const ws = window.XLSX.utils.aoa_to_sheet([header, exampleRow]);
+      /* 양식: 1행=안내, 2행=헤더(C=구분, D=질문, E=답변), 3행~=데이터 */
+      const infoRow  = ['', '', '구분', '질문', '답변'];
+      const labelRow = ['', '', '(카테고리)', '(질문 내용)', '(답변 내용)'];
+      const exampleRow = ['', '', FAQ_CATS[0], '질문 예시를 입력하세요', '답변 예시를 입력하세요'];
+      const ws = window.XLSX.utils.aoa_to_sheet([infoRow, labelRow, exampleRow]);
 
-      ws['!cols'] = [{ wch: 45 }, { wch: 70 }, ...FAQ_CATS.map(() => ({ wch: 16 }))];
+      ws['!cols'] = [{ wch: 6 }, { wch: 6 }, { wch: 20 }, { wch: 45 }, { wch: 70 }];
 
-      // 카테고리 열 드롭다운 (O 또는 공백)
-      const lastCatCol = window.XLSX.utils.encode_col(1 + FAQ_CATS.length);
+      // 구분 열 드롭다운
       ws['!dataValidations'] = [{
-        sqref: `C2:${lastCatCol}10000`,
+        sqref: 'C3:C10000',
         type: 'list',
-        formula1: '"O"',
+        formula1: '"' + FAQ_CATS.join(',') + '"',
         allowBlank: true,
         showDropDown: false,
         showErrorMessage: false
@@ -2959,15 +3033,17 @@ function showDashboard() {
     /* ── FAQ 엑셀 다운로드 ── */
     function downloadFaqExcel() {
       if (!window.XLSX) { showToast('Excel 라이브러리 로딩 중입니다. 잠시 후 다시 시도해주세요.', true); return; }
-      const header = ['질문', '답변', ...FAQ_CATS];
-      const data = [header];
+      /* 양식: 1행=헤더, 2행=설명, 3행~=데이터 (C=구분, D=질문, E=답변) */
+      const data = [
+        ['', '', '구분', '질문', '답변'],
+        ['', '', '(카테고리)', '(질문 내용)', '(답변 내용)']
+      ];
       currentItems.forEach(item => {
-        const itemCats = String(item.category || '').split(',').map(s => s.trim());
-        data.push([item.question || '', item.answer || '', ...FAQ_CATS.map(c => itemCats.includes(c) ? 'O' : '')]);
+        data.push(['', '', item.category || '', item.question || '', item.answer || '']);
       });
       const wb = window.XLSX.utils.book_new();
       const ws = window.XLSX.utils.aoa_to_sheet(data);
-      ws['!cols'] = [{ wch: 45 }, { wch: 70 }, ...FAQ_CATS.map(() => ({ wch: 16 }))];
+      ws['!cols'] = [{ wch: 6 }, { wch: 6 }, { wch: 20 }, { wch: 45 }, { wch: 70 }];
       window.XLSX.utils.book_append_sheet(wb, ws, 'FAQ');
       window.XLSX.writeFile(wb, 'FAQ_목록.xlsx');
     }
@@ -2986,27 +3062,28 @@ function showDashboard() {
           const ws = wb.Sheets[wb.SheetNames[0]];
           const rows = window.XLSX.utils.sheet_to_json(ws, { header: 1, defval: '' });
 
-          if (rows.length < 2) { showToast('데이터가 없습니다.', true); return; }
+          /* 양식: 1~2행=헤더/설명, 3행~=데이터 (C=구분, D=질문, E=답변) */
+          if (rows.length < 3) { showToast('데이터가 없습니다.', true); return; }
 
           const items = [];
           const errors = [];
 
-          for (let i = 1; i < rows.length; i++) {
-            const [rawQ, rawA, ...catCells] = rows[i];
-            const question = String(rawQ || '').trim();
-            const answer = String(rawA || '').trim();
-            if (!question && !answer) continue; // 빈 행 건너뜀
+          for (let i = 2; i < rows.length; i++) {
+            const category = String(rows[i][2] || '').trim();
+            const question = String(rows[i][3] || '').trim();
+            const answer   = String(rows[i][4] || '').trim();
+            if (!question && !answer) break; // 빈 행이면 종료
 
-            const cats = FAQ_CATS.filter((_, idx) => {
-              const v = String(catCells[idx] || '').trim().toUpperCase();
-              return v === 'O' || v === 'Y' || v === '1';
-            });
-            if (!cats.length) {
-              errors.push(`${i + 1}행: 카테고리가 선택되지 않았습니다.`);
+            if (!category) {
+              errors.push(`${i + 1}행: 구분(C열)이 없습니다.`);
+              continue;
+            }
+            if (!question) {
+              errors.push(`${i + 1}행: 질문(D열)이 없습니다.`);
               continue;
             }
 
-            items.push({ category: cats.join(','), question, answer, pinned: false });
+            items.push({ category, question, answer, pinned: false });
           }
 
           if (errors.length) showToast('건너뜀: ' + errors.slice(0, 3).join(' / ') + (errors.length > 3 ? ` 외 ${errors.length - 3}건` : ''), true);

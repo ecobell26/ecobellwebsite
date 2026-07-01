@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>태양광 솔루션 - Ecobell</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&family=Nanum+Square:wght@400;700;800&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=chillax@400,500,600,700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; overscroll-behavior: none; }
+    body { font-family: 'Noto Sans KR', sans-serif; min-width: 1100px; background: #fff; color: #000; }
+
+    /* ─── HEADER ─── */
+    header {
+      position: fixed; top: 0; left: 0; right: 0; min-width: 1100px;
+      height: 69px; background: #fff; z-index: 999;
+      transition: box-shadow 0.3s ease, transform 0.35s cubic-bezier(0.4,0,0.2,1);
+    }
+    header.scrolled { box-shadow: 0 2px 16px rgba(0,0,0,0.07); }
+    header.gnb-hidden { transform: translateY(-100%); }
+    .header-inner {
+      position: relative; width: 100%; max-width: 1440px;
+      height: 100%; margin: 0 auto; display: flex; align-items: center;
+    }
+    .logo { position: absolute; left: 44px; top: 50%; transform: translateY(-50%); width: 110px; height: 26px; transition: opacity 0.2s; }
+    .logo img { width: 100%; height: 100%; object-fit: contain; }
+    .logo:hover { opacity: 0.75; }
+
+    /* ─── GNB ─── */
+    nav { position: absolute; left: 198px; right: 324px; top: 0; display: flex; align-items: stretch; height: 69px; }
+    .nav-item { position: relative; display: flex; align-items: center; transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1); }
+    nav.lnb-open .nav-item { transform: translateX(var(--lnb-tx, 0px)); }
+    .nav-link { font-family: 'Chillax', sans-serif; font-weight: 500; font-size: 15.5px; color: #000; text-decoration: none; letter-spacing: 0.46px; line-height: 1.6; padding: 0 17px; white-space: nowrap; position: relative; display: flex; align-items: center; height: 100%; transition: color 0.2s; }
+    .nav-link::after { content: ''; position: absolute; left: 17px; right: 17px; bottom: 0; height: 2px; background: #000; transform: scaleX(0); transform-origin: left; transition: transform 0.25s ease; }
+    .nav-item:not(.lnb-active) .nav-link:hover::after { transform: scaleX(1); }
+    .nav-item.lnb-active .nav-link { color: #1e8dcd; }
+
+    /* ─── LNB ─── */
+    .lnb { position: fixed; top: 69px; left: 0; right: 0; min-width: 1100px; height: 202px; background: #fff; border-top: 0.3px solid #d9d9d9; border-bottom: 0.3px solid #d9d9d9; opacity: 0; transform: translateY(-6px); pointer-events: none; transition: opacity 0.25s ease, transform 0.28s cubic-bezier(0.4,0,0.2,1); z-index: 102; }
+    .lnb-inner { position: relative; width: 100%; max-width: 1440px; margin: 0 auto; height: 100%; }
+    .lnb.open { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    .lnb-col { position: absolute; top: 0; width: 132px; height: 100%; display: flex; flex-direction: column; align-items: center; padding-top: 29px; gap: 0; transition: background 0.2s ease; }
+    .lnb-col.active { background: #fafcfd; border-top: 2px solid #1e8dcd; padding-top: 27px; }
+    .lnb-col a { font-family: 'Nanum Square', 'NanumSquare', sans-serif; font-weight: 600; font-size: 14px; color: #000; text-decoration: none; letter-spacing: 0.14px; line-height: 21px; text-align: center; display: block; width: 100%; padding: 7px 0; transition: color 0.15s; }
+    .lnb-col a.en { font-family: 'Chillax', sans-serif; font-weight: 450; }
+    .lnb-col a:hover { color: #1e8dcd; }
+    .lnb-col a.ext::after { content: ' ↗'; font-size: 11px; }
+    .lnb-col a.active-page { color: #1e8dcd; }
+
+    /* ─── SEARCH ─── */
+    .search-overlay { position: absolute; top: 0; left: 0; right: 0; height: 69px; background: #fff; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.2s; z-index: 10; }
+    header.search-open .search-overlay { opacity: 1; pointer-events: auto; }
+    .search-content { width: 100%; max-width: 700px; padding: 0 20px; }
+    .search-input-row { display: flex; align-items: center; gap: 12px; }
+    .search-input { flex: 1; border: none; border-bottom: 1.5px solid rgba(0,0,0,0.25); outline: none; font-family: 'Noto Sans KR', sans-serif; font-size: 15px; font-weight: 400; color: #000; padding: 4px 0; background: transparent; }
+    .search-input::placeholder { color: rgba(0,0,0,0.35); }
+    .search-input:focus { border-bottom-color: rgba(0,0,0,0.78); }
+    .search-submit { background: none; border: none; cursor: pointer; padding: 0; display: flex; align-items: center; flex-shrink: 0; opacity: 0.6; transition: opacity 0.2s; }
+    .search-submit:hover { opacity: 1; }
+    .search-tags { display: flex; gap: 8px; margin-top: 12px; }
+    .search-tag { background: none; border: 1px solid rgba(0,0,0,0.2); border-radius: 999px; padding: 4px 12px; font-family: 'Noto Sans KR', sans-serif; font-size: 13px; color: rgba(0,0,0,0.55); cursor: pointer; transition: border-color 0.2s, color 0.2s; }
+    .search-tag:hover { border-color: rgba(0,0,0,0.4); color: rgba(0,0,0,0.85); }
+    .search-icon-wrap { position: relative; width: 22px; height: 22px; }
+    .search-tooltip { position: absolute; top: calc(100% + 10px); left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.78); color: #fff; font-family: 'Noto Sans KR', sans-serif; font-size: 11px; font-weight: 400; letter-spacing: 0.4px; padding: 4px 8px; border-radius: 4px; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity 0.15s; }
+    .search-tooltip::before { content: ''; position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); border: 5px solid transparent; border-bottom-color: rgba(0,0,0,0.78); }
+    .search-icon-wrap:hover .search-tooltip { opacity: 1; }
+    header.search-open .search-tooltip { opacity: 0 !important; pointer-events: none; }
+    .close-btn { background: none; border: none; cursor: pointer; padding: 0; display: flex; align-items: center; opacity: 0; pointer-events: none; position: absolute; right: 0; transition: opacity 0.25s ease, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1); }
+    .close-btn:hover { opacity: 1; }
+    header.search-open .search-btn { opacity: 0; pointer-events: none; transform: rotate(90deg) scale(0.7); }
+    header.search-open .close-btn { opacity: 0.6; pointer-events: auto; transform: rotate(0deg) scale(1); }
+
+    /* ─── HEADER RIGHT ─── */
+    .header-right { position: absolute; right: 44px; display: flex; align-items: center; gap: 25px; }
+    .gnb-sep { color: rgba(0,0,0,0.2); font-size: 16px; line-height: 1; user-select: none; }
+    .search-btn { background: none; border: none; cursor: pointer; padding: 0; display: flex; align-items: center; opacity: 0.7; transition: transform 0.2s ease, opacity 0.2s; }
+    .search-btn:hover { transform: scale(1.15); opacity: 0.7; }
+    .demo-btn { display: inline-flex; align-items: center; justify-content: center; width: 114px; height: 38px; border: 1.5px solid #000; border-radius: 999px; font-family: 'Chillax', sans-serif; font-weight: 500; font-size: 14px; color: #000; text-decoration: none; letter-spacing: 0.32px; position: relative; overflow: hidden; }
+    .demo-btn::before { content: ''; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%) scale(0); width: 80px; height: 80px; background: #000; border-radius: 50%; transition: transform 0.45s ease; }
+    .demo-btn:hover::before { transform: translate(-50%, -50%) scale(10); }
+    .demo-btn:hover .demo-text { color: #fff; }
+    .demo-text { font-family: 'Chillax', sans-serif; font-weight: 500; font-size: 14px; letter-spacing: 0.32px; line-height: 0.8; white-space: nowrap; transition: color 0.25s ease; position: relative; top: 1.5px; }
+
+    @media (min-width: 1441px) {
+      .header-inner { max-width: none; }
+      .lnb-inner    { max-width: none; }
+    }
+
+    /* ─── PAGE BAR ─── */
+    .sl-page-bar {
+      margin-top: 69px;
+      background: #2DB47C;
+      height: 57px;
+      display: flex; align-items: center;
+      position: relative; z-index: 2;
+      overflow: hidden;
+    }
+    .sl-page-bar::after {
+      content: '';
+      position: absolute;
+      right: 0; top: 0; bottom: 0;
+      width: calc(462 / 1440 * 100%);
+      background: linear-gradient(to right, #4DC990 0%, #1A8A5E 200%);
+      clip-path: polygon(22.2% 0%, 100% 0%, 100% 100%, 0% 100%);
+      pointer-events: none;
+    }
+    .sl-page-bar-inner {
+      position: relative; z-index: 1;
+      max-width: 1440px; margin: 0 auto; width: 100%;
+      padding: 0 50px;
+      display: flex; align-items: center; justify-content: space-between;
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 600; font-size: 17px; color: #fff;
+    }
+    .sl-page-bar-crumb {
+      display: flex; align-items: center; gap: 6px;
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 700; font-size: 13px; color: #fff;
+    }
+    .sl-page-bar-crumb a { color: #fff; text-decoration: none; }
+    .sl-page-bar-crumb a:hover { opacity: 0.75; }
+
+    /* ─── HERO ─── */
+    .sl-hero {
+      position: relative;
+      height: 570px;
+      background: #1a3040;
+      overflow: hidden;
+    }
+    .sl-hero-bg {
+      position: absolute; inset: 0;
+      background: url('assets/solar-hero-bg.jpg') center / cover no-repeat;
+    }
+    .sl-hero-overlay {
+      position: absolute; inset: 0;
+      background: rgba(0,0,0,0.35);
+    }
+    .sl-hero-content {
+      position: relative; z-index: 2;
+      max-width: 1440px; margin: 0 auto;
+      padding: 0 155px;
+      height: calc(100% - 70px);
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .sl-hero-label {
+      font-family: 'Chillax', sans-serif;
+      font-weight: 700; font-size: 39px;
+      color: #fff; margin-bottom: 20px;
+      letter-spacing: 0.5px;
+    }
+    .sl-hero-label span { font-weight: 500; color: #7DEBBA; }
+    .sl-hero-sub {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 600; font-size: 20px;
+      color: rgba(255,255,255,0.9);
+      line-height: 1.65; letter-spacing: -0.2px;
+      margin-bottom: 14px; word-break: keep-all;
+    }
+    .sl-hero-desc {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 400; font-size: 14px;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.7; max-width: 700px;
+      margin-bottom: 36px; word-break: keep-all;
+    }
+    .sl-hero-btn {
+      display: inline-flex; align-items: center;
+      align-self: flex-start;
+      border: 1.5px solid rgba(255,255,255,0.7);
+      border-radius: 200px; padding: 11px 26px;
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 900; font-size: 14px; color: #fff;
+      text-decoration: none;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .sl-hero-btn:hover { background: rgba(255,255,255,0.15); border-color: #fff; }
+    .sl-hero-btn-filled {
+      display: inline-flex; align-items: center;
+      align-self: flex-start;
+      background: #2DB47C; border: 1.5px solid #2DB47C;
+      border-radius: 200px; padding: 11px 26px;
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 900; font-size: 14px; color: #fff;
+      text-decoration: none;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .sl-hero-btn-filled:hover { background: #24a06e; border-color: #24a06e; }
+    .sl-hero-btns { display: flex; align-items: center; gap: 12px; }
+
+    /* ─── TABS ─── */
+    .sl-tabs {
+      display: flex;
+      position: sticky;
+      top: 69px;
+      z-index: 100;
+      background: rgba(0,0,0,0.45);
+      margin-top: -70px;
+      transition: top 0.35s cubic-bezier(0.4,0,0.2,1);
+    }
+    .sl-tab {
+      flex: 1;
+      height: 70px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 700; font-size: 18px;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none; cursor: pointer;
+      background: transparent;
+      transition: color 0.2s;
+      border: none;
+    }
+    .sl-tab:hover { color: #7DEBBA; }
+    .sl-tab.active { background: #2DB47C; color: #fff; }
+
+    /* ─── ABOUT ─── */
+    .sl-about {
+      background: #fff;
+      padding: 100px 0 110px;
+    }
+    .sl-about-inner {
+      width: 100%; max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 103px 0 155px;
+    }
+    .sl-about-tag {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 400; font-size: 33px;
+      color: #000; line-height: 1.4;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+      word-break: keep-all;
+    }
+    .sl-about-main {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 700; font-size: 31px;
+      color: #000; line-height: 1.4;
+      letter-spacing: -0.5px;
+      margin-bottom: 70px;
+      word-break: keep-all;
+    }
+    .sl-about-sub-wrap {
+      display: flex;
+      justify-content: flex-end;
+    }
+    .sl-about-sub {
+      width: 670px; max-width: 100%;
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 400; font-size: 18px;
+      color: #000; line-height: 1.7;
+      letter-spacing: -0.3px;
+      word-break: keep-all;
+    }
+
+    /* ─── SERVICES ─── */
+    .sl-services {
+      background: #f5f5f5;
+      padding: 90px 0 100px;
+    }
+    .sl-services-inner {
+      width: 100%; max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 155px;
+    }
+    .sl-services-label {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 600; font-size: 17px; color: #000;
+      margin-bottom: 14px; letter-spacing: -0.3px;
+    }
+    .sl-services-title {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 700; font-size: 24px; color: #000;
+      letter-spacing: -0.4px; line-height: 1.3;
+      margin-bottom: 50px;
+      word-break: keep-all;
+    }
+    .sl-services-sep {
+      height: 0.5px; background: rgba(0,0,0,0.15);
+      margin-bottom: 50px;
+    }
+    .sl-card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .sl-card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 36px 32px;
+      display: flex; flex-direction: column; gap: 16px;
+    }
+    .sl-card-icon {
+      width: 44px; height: 44px;
+      background: #E8F8F1;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .sl-card-num {
+      font-family: 'Chillax', sans-serif;
+      font-weight: 600; font-size: 11px;
+      color: #2DB47C; letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+    .sl-card-title {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 700; font-size: 18px;
+      color: #000; line-height: 1.4;
+      word-break: keep-all;
+    }
+    .sl-card-desc {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 14px; color: rgba(0,0,0,0.65);
+      line-height: 1.8; word-break: keep-all;
+    }
+
+    /* ─── FLOW ─── */
+    .sl-flow {
+      background: #fff;
+      padding: 100px 0 120px;
+    }
+    .sl-flow-inner {
+      max-width: 1440px; margin: 0 auto;
+      padding: 0 155px;
+    }
+    .sl-flow-title {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 700; font-size: 33px;
+      color: #000; line-height: 1.3;
+      word-break: keep-all;
+      margin-bottom: 10px;
+    }
+    .sl-flow-sub {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 400; font-size: 15px;
+      color: rgba(0,0,0,0.45);
+      margin-bottom: 70px;
+    }
+    .sl-flow-steps {
+      display: flex; align-items: flex-start; gap: 0;
+    }
+    .sl-flow-step {
+      flex: 1; display: flex; flex-direction: column;
+    }
+    .sl-flow-visual {
+      width: 100%; aspect-ratio: 4/3;
+      border-radius: 10px;
+      background: #F7F4ED;
+      margin-bottom: 28px;
+      overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .sl-flow-step-num {
+      font-family: 'Chillax', sans-serif;
+      font-weight: 600; font-size: 12px;
+      color: #2DB47C; letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .sl-flow-step-title {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 700; font-size: 18px;
+      color: #000; margin-bottom: 16px;
+      line-height: 1.4;
+    }
+    .sl-flow-bullets {
+      list-style: none; display: flex; flex-direction: column; gap: 10px;
+    }
+    .sl-flow-bullets li {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 14px; color: rgba(0,0,0,0.65);
+      line-height: 1.6; word-break: keep-all;
+      padding-left: 14px; position: relative;
+    }
+    .sl-flow-bullets li::before {
+      content: '';
+      position: absolute; left: 0; top: 9px;
+      width: 5px; height: 5px;
+      border-radius: 50%; background: #2DB47C;
+    }
+    .sl-flow-sep {
+      flex: 0 0 40px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Chillax', sans-serif;
+      font-weight: 300; font-size: 22px;
+      color: rgba(0,0,0,0.25);
+      padding-bottom: 28px;
+      align-self: center;
+    }
+
+    /* ─── FOOTER ─── */
+    footer { position: sticky; bottom: 0; z-index: 0; min-width: 1100px; height: 442px; background: #2a2a2a; }
+    .footer-inner { position: relative; width: 100%; max-width: 1440px; margin: 0 auto; height: 100%; }
+    .ft-company-info { position: absolute; right: 45px; top: 211px; font-family: 'Noto Sans KR', sans-serif; font-weight: 450; font-size: 13px; color: rgba(255,255,255,0.5); line-height: 23px; letter-spacing: -0.28px; white-space: pre-line; text-align: right; }
+    .ft-col-title { position: absolute; font-family: 'Chillax', sans-serif; font-weight: 600; font-size: 16px; color: #fff; white-space: nowrap; margin: 0; top: 41px; letter-spacing: 0.54px; line-height: 28.8px; }
+    .ft-link { position: absolute; font-family: 'Nanum Square', 'NanumSquare', sans-serif; font-weight: 500; font-size: 14px; color: #fff; white-space: nowrap; text-decoration: none; line-height: 22.5px; letter-spacing: 0.15px; opacity: 1; transition: opacity 0.2s; }
+    .ft-link:hover { opacity: 0.55; }
+    .ft-link.ft-en { font-family: 'Chillax', sans-serif; font-weight: 400; line-height: 16.5px; }
+    .ft-divider { position: absolute; left: 45px; right: 45px; height: 0.5px; background: rgba(255,255,255,0.2); }
+    .ft-bottom-link { position: absolute; font-family: 'Noto Sans KR', sans-serif; font-weight: 300; font-size: 13px; color: rgba(255,255,255,0.8); text-decoration: none; white-space: nowrap; top: 323px; line-height: 23px; letter-spacing: -0.28px; transition: opacity 0.2s; }
+    .ft-bottom-link:hover { opacity: 0.55; }
+    .ft-bottom-link.fw-bold { font-weight: 500; color: #fff; }
+    .ft-social { position: absolute; line-height: 0; opacity: 1; transition: opacity 0.2s, transform 0.2s; top: 323px; }
+    .ft-social:hover { opacity: 0.7; transform: scale(1.1); }
+    .ft-copyright { position: absolute; left: 45px; top: 357px; font-family: 'Noto Sans KR', sans-serif; font-weight: 300; font-size: 12px; color: rgba(255,255,255,0.8); white-space: pre-line; margin: 0; }
+
+    /* ─── FAB ─── */
+    .floating-fab { position: fixed; right: 44px; bottom: 44px; display: flex; align-items: center; z-index: 500; }
+    .floating-fab-menu { display: flex; align-items: center; gap: 8px; overflow: hidden; max-width: 0; opacity: 0; margin-right: 0; transition: max-width 0.35s ease, opacity 0.25s ease, margin-right 0.35s ease; }
+    .floating-fab:hover .floating-fab-menu { max-width: 450px; opacity: 1; margin-right: 10px; }
+    .floating-fab-item { display: flex; align-items: center; height: 36px; padding: 0 14px; background: #fff; border-radius: 18px; font-family: 'Nanum Square', 'NanumSquare', sans-serif; font-weight: 700; font-size: 13px; color: #234B63; text-decoration: none; white-space: nowrap; box-shadow: 0 2px 12px rgba(0,0,0,0.15); transition: background 0.15s, color 0.15s; flex-shrink: 0; }
+    .floating-fab-item:hover { background: #1E8DCD; color: #fff; }
+    .floating-fab-icon { width: 65px; height: 48px; cursor: pointer; flex-shrink: 0; transition: transform 0.2s ease, opacity 0.2s; text-decoration: none; display: block; }
+    .floating-fab-icon img { width: 100%; height: 100%; object-fit: contain; }
+    .floating-fab:hover .floating-fab-icon { transform: scale(1.08); opacity: 0.9; }
+
+    /* ─── COMMON ─── */
+    body > *:not(header):not(footer):not(.floating-fab) { position: relative; z-index: 1; background: inherit; }
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s cubic-bezier(0.4,0,0.2,1), transform 0.65s cubic-bezier(0.4,0,0.2,1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ─── 공지사항 섹션 ─── */
+    .sl-notices-section { background: #fff; padding: 80px 0 90px; }
+    .sl-notices-inner { width: 100%; max-width: 1440px; margin: 0 auto; padding: 0 155px; }
+    .sl-notices-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 0; }
+    .sl-notices-label {
+      font-family: 'Chillax', sans-serif; font-weight: 700; font-size: 33px;
+      color: #000; letter-spacing: 0.3px; padding-bottom: 10px;
+    }
+    .sl-notices-more {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif; font-weight: 700;
+      font-size: 13px; color: rgba(0,0,0,0.45); text-decoration: none;
+      letter-spacing: 0.2px; transition: color 0.15s;
+    }
+    .sl-notices-more:hover { color: #2DB47C; }
+
+    /* 테이블 (notice.html 동일 디자인, 그린 컬러) */
+    .sl-notice-table { width: 100%; border-collapse: collapse; margin-top: 18px; }
+    .sl-notice-table thead tr { border-top: 2px solid #2DB47C; border-bottom: 0.3px solid rgba(45,180,124,0.6); }
+    .sl-notice-table th { font-family: 'Chillax', sans-serif; font-weight: 400; font-size: 14px; color: #5d5d5d; text-align: center; height: 53px; padding: 0; letter-spacing: 0.5px; line-height: 19.5px; }
+    .sl-notice-table th.ko { font-family: 'Nanum Square', 'NanumSquare', sans-serif; }
+    .sl-notice-table td { height: 70px; text-align: center; border-bottom: 0.3px solid rgba(45,180,124,0.6); vertical-align: middle; }
+    .sl-notice-table td:nth-child(2) { text-align: left; padding-left: 20px; }
+    .sl-col-no { width: 109px; } .sl-col-title { } .sl-col-author { width: 140px; } .sl-col-date { width: 139px; } .sl-col-views { width: 139px; } .sl-col-attach { width: 112px; }
+    .sl-td-no { font-family: 'Chillax', sans-serif; font-weight: 400; font-size: 16px; color: #000; letter-spacing: 0.16px; }
+    .sl-td-no.pinned { color: transparent; }
+    .sl-td-title { font-family: 'Nanum Square', 'NanumSquare', sans-serif; font-weight: 400; font-size: 17px; color: #000; letter-spacing: 0.17px; line-height: 22.1px; cursor: pointer; transition: color 0.15s; text-decoration: none; display: block; }
+    .sl-td-title:hover { color: #2DB47C; }
+    .sl-td-author { font-family: 'Nanum Square', 'NanumSquare', sans-serif; font-weight: 400; font-size: 16px; color: #000; }
+    .sl-td-date { font-family: 'Chillax', sans-serif; font-weight: 400; font-size: 16px; color: #000; }
+    .sl-td-views { font-family: 'Chillax', sans-serif; font-weight: 400; font-size: 16px; color: #000; }
+    .sl-td-attach { color: #000; }
+    .sl-td-attach svg { opacity: 0.6; }
+    .sl-attach-btn { background: none; border: none; cursor: pointer; padding: 2px; display: inline-flex; align-items: center; }
+    .sl-attach-btn:hover svg { opacity: 1; }
+
+    /* 페이지네이션 */
+    .sl-notice-pagination { display: flex; align-items: center; justify-content: center; gap: 30px; padding-top: 70px; border-top: 2px solid #2DB47C; }
+    .sl-page-arrow-group { display: flex; align-items: center; gap: 9px; }
+    .sl-page-arrow { width: 23px; height: 22px; display: flex; align-items: center; justify-content: center; cursor: pointer; border: 0.5px solid rgba(0,0,0,0.3); border-radius: 3px; background: #fff; transition: background 0.2s; }
+    .sl-page-arrow:hover { background: #f5f5f5; }
+    .sl-page-num { font-family: 'Chillax', sans-serif; font-size: 17px; color: #000; text-align: center; cursor: pointer; font-weight: 500; letter-spacing: 0.17px; line-height: 22.1px; transition: color 0.15s; }
+    .sl-page-num:hover { color: #2DB47C; }
+    .sl-page-num.active { color: #2DB47C; font-weight: 600; }
+
+    /* 빈 상태 */
+    .sl-notice-empty { display: none; flex-direction: column; align-items: center; justify-content: center; padding: 80px 0 40px; }
+    .sl-notice-empty.visible { display: flex; }
+    .sl-notice-empty-text { font-family: 'Nanum Square', 'NanumSquare', sans-serif; font-weight: 700; font-size: 18px; color: rgba(0,0,0,0.4); }
+  </style>
+  <script src="assets/page-loader.js"></script>
+</head>
+<body>
+
+  <!-- ─── HEADER ─── -->
+  <header id="header">
+    <div class="header-inner">
+      <a class="logo" href="index.html">
+        <img src="assets/logo.png" alt="ecobell">
+      </a>
+
+      <nav id="main-nav">
+        <div class="nav-item" data-menu="company"><a class="nav-link" href="#">Company</a></div>
+        <div class="nav-item" data-menu="platform"><a class="nav-link" href="#">Project</a></div>
+        <div class="nav-item" data-menu="solution"><a class="nav-link" href="#">Solution</a></div>
+        <div class="nav-item" data-menu="insight"><a class="nav-link" href="insight.html">Insight</a></div>
+        <div class="nav-item" data-menu="contact"><a class="nav-link" href="notice.html">Contact Us</a></div>
+      </nav>
+
+      <div class="lnb" id="lnb">
+        <div class="lnb-inner">
+          <div class="lnb-col" data-col="company">
+            <a href="ceo.html">CEO 인사말</a>
+            <a href="company.html">기업소개</a>
+            <a href="press.html">보도자료</a>
+            <a href="archive.html">아카이브</a>
+          </div>
+          <div class="lnb-col" data-col="solution">
+            <a href="ecoval.html" class="en">ecoValue</a>
+            <a href="econode.html" class="en">ecoNODE</a>
+            <a href="easset.html" class="en">E-ASSET</a>
+            <a href="ecoasset.html" class="en">ecoASSET</a>
+          </div>
+          <div class="lnb-col" data-col="platform">
+            <a href="solar.html" class="active-page">태양광 솔루션</a>
+          </div>
+          <div class="lnb-col" data-col="insight">
+            <a href="https://www.netzeronews.kr/" class="en ext" target="_blank" rel="noopener noreferrer">NetZero News</a>
+            <a href="insight.html?page=eco">친환경 기업정보</a>
+            <a href="insight.html?page=green">그린카 계산기</a>
+          </div>
+          <div class="lnb-col" data-col="contact">
+            <a href="notice.html">공지사항</a>
+            <a href="directions.html">오시는 길</a>
+            <a href="contact.html">문의하기</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="search-overlay" id="search-overlay">
+        <div class="search-content">
+          <div class="search-input-row">
+            <input class="search-input" type="text" placeholder="검색어를 입력해주세요." id="search-input" autocomplete="off">
+            <button class="search-submit" aria-label="검색">
+              <svg width="17" height="17" viewBox="0 0 17 17" fill="none">
+                <circle cx="7" cy="7" r="5" stroke="#000" stroke-width="1.5"/>
+                <line x1="11" y1="11" x2="16" y2="16" stroke="#000" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </button>
+          </div>
+          <div class="search-tags">
+            <button class="search-tag" data-keyword="태양광">#태양광</button>
+            <button class="search-tag" data-keyword="태양광 솔루션">#태양광 솔루션</button>
+            <button class="search-tag" data-keyword="신재생에너지">#신재생에너지</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <span class="gnb-sep">|</span>
+        <div class="search-icon-wrap">
+          <button class="search-btn" aria-label="검색" id="search-open-btn">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+              <path d="M21.1063 19.1469L15.4344 14.5406C17.7719 11.3438 17.5313 6.7719 14.6094 3.8844C13.0626 2.33752 11 1.47815 8.80005 1.47815C6.60005 1.47815 4.53755 2.33752 2.99067 3.8844C-0.206201 7.08127 -0.206201 12.3063 2.99067 15.5031C4.53755 17.05 6.60005 17.9094 8.80005 17.9094C10.8969 17.9094 12.8563 17.1188 14.4032 15.7094L20.1438 20.35C20.2813 20.4531 20.4532 20.5219 20.6251 20.5219C20.8657 20.5219 21.0719 20.4188 21.2094 20.2469C21.4844 19.9032 21.4501 19.4219 21.1063 19.1469ZM8.80005 16.3625C7.01255 16.3625 5.36255 15.675 4.09067 14.4032C1.47817 11.7907 1.47817 7.56252 4.09067 4.9844C5.36255 3.71252 7.01255 3.02502 8.80005 3.02502C10.5875 3.02502 12.2375 3.71252 13.5094 4.9844C16.1219 7.5969 16.1219 11.825 13.5094 14.4032C12.2719 15.675 10.5875 16.3625 8.80005 16.3625Z" fill="#000"/>
+            </svg>
+          </button>
+          <button class="close-btn" aria-label="닫기" id="search-close-btn">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <line x1="1" y1="1" x2="17" y2="17" stroke="#000" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="17" y1="1" x2="1" y2="17" stroke="#000" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <span class="search-tooltip">검색</span>
+        </div>
+        <a class="demo-btn" href="contact.html">
+          <span class="demo-text">문의하기</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ═══ PAGE BAR ═══ -->
+    <div class="sl-page-bar">
+      <div class="sl-page-bar-inner">
+        <span>태양광 솔루션</span>
+        <div class="sl-page-bar-crumb">
+          <a href="index.html" aria-label="홈">
+            <svg width="11" height="12" viewBox="0 0 11 12" fill="none">
+              <path d="M1 5L5.5 1L10 5V11H7V8H4V11H1V5Z" stroke="#fff" stroke-width="1.1" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <svg width="5" height="10" viewBox="0 0 5 10" fill="none">
+            <path d="M1 1L4 5L1 9" stroke="rgba(255,255,255,0.7)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>Project</span>
+          <svg width="5" height="10" viewBox="0 0 5 10" fill="none">
+            <path d="M1 1L4 5L1 9" stroke="rgba(255,255,255,0.7)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span style="color:#fff;font-weight:500;">태양광 솔루션</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ HERO ═══ -->
+    <div class="sl-hero">
+      <div class="sl-hero-bg"></div>
+      <div class="sl-hero-overlay"></div>
+      <div class="sl-hero-content">
+        <p class="sl-hero-sub">발전소 개발부터 운영·유지보수까지<br>에코벨과 함께하는 신재생에너지 전주기 솔루션</p>
+        <p class="sl-hero-label">태양광 솔루션 <span>Solar Solution</span></p>
+        <div class="sl-hero-btns">
+          <a class="sl-hero-btn" href="contact.html">상담 및 문의</a>
+          <a class="sl-hero-btn-filled" href="notice.html">공지사항</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ TAB NAV ═══ -->
+    <div class="sl-tabs" id="sl-tabs">
+      <a class="sl-tab active" href="#sl-about" data-section="sl-about">태양광 솔루션이란?</a>
+      <a class="sl-tab" href="#sl-services" data-section="sl-services">특장점</a>
+      <a class="sl-tab" href="#sl-flow" data-section="sl-flow">솔루션 맵</a>
+      <a class="sl-tab" href="#sl-notices" data-section="sl-notices">공지사항</a>
+    </div>
+
+    <!-- ═══ ABOUT ═══ -->
+    <section class="sl-about" id="sl-about">
+      <div class="sl-about-inner">
+        <p class="sl-about-tag reveal">태양에너지를 데이터 자산으로,<br>지속가능한 미래로!</p>
+        <p class="sl-about-main reveal">에코벨 태양광 솔루션은 발전소 개발·설계부터<br>O&M·탄소 자산화까지 <span style="color:#2DB47C;">원스톱으로 지원</span>합니다.</p>
+        <div class="sl-about-sub-wrap reveal">
+          <p class="sl-about-sub">태양광 발전소의 기획·인허가·EPC부터 상업 운전 이후 정밀 발전량 모니터링과 예방 정비까지, 에코벨의 전문 역량이 하나의 체계로 연결됩니다. 실시간 데이터 수집과 탄소 자산화 지원으로 RE100·ESG 목표 달성을 체계적으로 뒷받침합니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ SERVICES ═══ -->
+    <section class="sl-services" id="sl-services">
+      <div class="sl-services-inner">
+        <p class="sl-services-label reveal">에코벨 태양광 솔루션의 핵심 서비스</p>
+        <p class="sl-services-title reveal">태양광 발전의 모든 단계를 하나로</p>
+        <div class="sl-services-sep"></div>
+        <div class="sl-card-grid reveal">
+
+          <div class="sl-card">
+            <div class="sl-card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="5" stroke="#2DB47C" stroke-width="1.8"/>
+                <line x1="12" y1="2" x2="12" y2="4" stroke="#2DB47C" stroke-width="1.8" stroke-linecap="round"/>
+                <line x1="12" y1="20" x2="12" y2="22" stroke="#2DB47C" stroke-width="1.8" stroke-linecap="round"/>
+                <line x1="2" y1="12" x2="4" y2="12" stroke="#2DB47C" stroke-width="1.8" stroke-linecap="round"/>
+                <line x1="20" y1="12" x2="22" y2="12" stroke="#2DB47C" stroke-width="1.8" stroke-linecap="round"/>
+                <line x1="4.93" y1="4.93" x2="6.34" y2="6.34" stroke="#2DB47C" stroke-width="1.8" stroke-linecap="round"/>
+                <line x1="17.66" y1="17.66" x2="19.07" y2="19.07" stroke="#2DB47C" stroke-width="1.8" stroke-linecap="round"/>
+                <line x1="19.07" y1="4.93" x2="17.66" y2="6.34" stroke="#2DB47C" stroke-width="1.8" stroke-linecap="round"/>
+                <line x1="6.34" y1="17.66" x2="4.93" y2="19.07" stroke="#2DB47C" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <p class="sl-card-num">Service 01</p>
+            <p class="sl-card-title">발전소 개발 &amp; 설계</p>
+            <p class="sl-card-desc">부지 발굴·타당성 분석, 인허가 대행, 계통 연계 검토, 최적 설계까지 발전소 구축 전 과정을 지원합니다.</p>
+          </div>
+
+          <div class="sl-card">
+            <div class="sl-card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <rect x="3" y="11" width="18" height="11" rx="2" stroke="#2DB47C" stroke-width="1.8"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4" stroke="#2DB47C" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <p class="sl-card-num">Service 02</p>
+            <p class="sl-card-title">EPC 시공 관리</p>
+            <p class="sl-card-desc">검증된 시공 파트너 네트워크를 통한 품질·일정·비용 최적화 EPC 관리로 안정적인 준공을 보장합니다.</p>
+          </div>
+
+          <div class="sl-card">
+            <div class="sl-card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" stroke="#2DB47C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <p class="sl-card-num">Service 03</p>
+            <p class="sl-card-title">실시간 모니터링</p>
+            <p class="sl-card-desc">ecoNODE RTU 기반 실시간 발전량 수집과 E-ASSET 플랫폼 연동으로 데이터 유실 없는 정밀 모니터링을 제공합니다.</p>
+          </div>
+
+          <div class="sl-card">
+            <div class="sl-card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="3" stroke="#2DB47C" stroke-width="1.8"/>
+                <path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14" stroke="#2DB47C" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M16.24 7.76a6 6 0 0 1 0 8.49M7.76 7.76a6 6 0 0 0 0 8.49" stroke="#2DB47C" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <p class="sl-card-num">Service 04</p>
+            <p class="sl-card-title">O&amp;M 유지보수</p>
+            <p class="sl-card-desc">이상 신호 즉각 감지, 예방 정비 스케줄 관리, 원격 진단으로 발전 손실을 최소화하고 수익성을 극대화합니다.</p>
+          </div>
+
+          <div class="sl-card">
+            <div class="sl-card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2L2 7l10 5 10-5-10-5z" stroke="#2DB47C" stroke-width="1.8" stroke-linejoin="round"/>
+                <path d="M2 17l10 5 10-5" stroke="#2DB47C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M2 12l10 5 10-5" stroke="#2DB47C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <p class="sl-card-num">Service 05</p>
+            <p class="sl-card-title">탄소 자산화 지원</p>
+            <p class="sl-card-desc">REC 발급·거래, 탄소배출권(K-ETS) 연동, dMRV 기반 검증 데이터 제공으로 신재생에너지의 자산 가치를 높입니다.</p>
+          </div>
+
+          <div class="sl-card">
+            <div class="sl-card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="#2DB47C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="9" cy="7" r="4" stroke="#2DB47C" stroke-width="1.8"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87" stroke="#2DB47C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" stroke="#2DB47C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <p class="sl-card-num">Service 06</p>
+            <p class="sl-card-title">RE100 컨설팅</p>
+            <p class="sl-card-desc">기업 RE100·ESG 목표에 맞춘 전력 조달 전략 수립부터 이행 보고서 작성까지 맞춤형 컨설팅을 지원합니다.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ FLOW ═══ -->
+    <section class="sl-flow" id="sl-flow">
+      <div class="sl-flow-inner">
+        <p class="sl-flow-title reveal">태양광 발전의 흐름,<br>에코벨이 처음부터 끝까지</p>
+        <p class="sl-flow-sub reveal">개발 → 시공 → 운영 → 자산화의 전 단계를 에코벨 하나로</p>
+
+        <div class="sl-flow-steps reveal">
+          <div class="sl-flow-step">
+            <div class="sl-flow-visual">
+              <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                <circle cx="40" cy="40" r="20" fill="#E8F8F1" stroke="#2DB47C" stroke-width="2"/>
+                <circle cx="40" cy="40" r="8" fill="#2DB47C"/>
+                <line x1="40" y1="10" x2="40" y2="18" stroke="#2DB47C" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="40" y1="62" x2="40" y2="70" stroke="#2DB47C" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="10" y1="40" x2="18" y2="40" stroke="#2DB47C" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="62" y1="40" x2="70" y2="40" stroke="#2DB47C" stroke-width="2.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <p class="sl-flow-step-num">01 &nbsp;/&nbsp; Development</p>
+            <p class="sl-flow-step-title">부지 발굴 &amp; 개발</p>
+            <ul class="sl-flow-bullets">
+              <li>최적 입지 분석 및 타당성 검토</li>
+              <li>인허가 대행 및 계통 연계 신청</li>
+            </ul>
+          </div>
+
+          <div class="sl-flow-sep">→</div>
+
+          <div class="sl-flow-step">
+            <div class="sl-flow-visual">
+              <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                <rect x="20" y="45" width="40" height="15" rx="3" fill="#E8F8F1" stroke="#2DB47C" stroke-width="2"/>
+                <rect x="28" y="30" width="24" height="16" rx="2" fill="#E8F8F1" stroke="#2DB47C" stroke-width="1.5"/>
+                <line x1="30" y1="34" x2="50" y2="34" stroke="#2DB47C" stroke-width="1" stroke-dasharray="3 2"/>
+                <line x1="30" y1="38" x2="50" y2="38" stroke="#2DB47C" stroke-width="1" stroke-dasharray="3 2"/>
+                <line x1="30" y1="42" x2="44" y2="42" stroke="#2DB47C" stroke-width="1" stroke-dasharray="3 2"/>
+                <line x1="40" y1="20" x2="40" y2="30" stroke="#2DB47C" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="40" cy="18" r="4" fill="#2DB47C"/>
+              </svg>
+            </div>
+            <p class="sl-flow-step-num">02 &nbsp;/&nbsp; EPC</p>
+            <p class="sl-flow-step-title">설계 &amp; 시공</p>
+            <ul class="sl-flow-bullets">
+              <li>최적 설계 및 BOM 최소화</li>
+              <li>검증된 시공사 연계 품질 관리</li>
+            </ul>
+          </div>
+
+          <div class="sl-flow-sep">→</div>
+
+          <div class="sl-flow-step">
+            <div class="sl-flow-visual">
+              <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                <rect x="15" y="28" width="50" height="30" rx="4" fill="#E8F8F1" stroke="#2DB47C" stroke-width="2"/>
+                <polyline points="22,48 30,36 38,44 46,32 58,40" stroke="#2DB47C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="46" cy="32" r="3" fill="#2DB47C"/>
+              </svg>
+            </div>
+            <p class="sl-flow-step-num">03 &nbsp;/&nbsp; O&amp;M</p>
+            <p class="sl-flow-step-title">운영 &amp; 유지보수</p>
+            <ul class="sl-flow-bullets">
+              <li>ecoNODE 기반 실시간 발전량 수집</li>
+              <li>이상 감지 및 예방 정비 자동화</li>
+            </ul>
+          </div>
+
+          <div class="sl-flow-sep">→</div>
+
+          <div class="sl-flow-step">
+            <div class="sl-flow-visual">
+              <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                <circle cx="40" cy="40" r="22" fill="#E8F8F1" stroke="#2DB47C" stroke-width="2"/>
+                <path d="M40 28v6l4 4" stroke="#2DB47C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M28 52l4-6h16l4 6" stroke="#2DB47C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M32 46h16" stroke="#2DB47C" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <p class="sl-flow-step-num">04 &nbsp;/&nbsp; Asset</p>
+            <p class="sl-flow-step-title">탄소 자산화</p>
+            <ul class="sl-flow-bullets">
+              <li>REC 발급·거래 및 K-ETS 연동</li>
+              <li>dMRV 검증 데이터로 공신력 확보</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══ 공지사항 ═══ -->
+    <section class="sl-notices-section" id="sl-notices">
+      <div class="sl-notices-inner">
+        <div class="sl-notices-head">
+          <p class="sl-notices-label">공지사항</p>
+          <a class="sl-notices-more" href="notice.html">전체보기 &rsaquo;</a>
+        </div>
+        <table class="sl-notice-table">
+          <colgroup>
+            <col class="sl-col-no">
+            <col class="sl-col-title">
+            <col class="sl-col-author">
+            <col class="sl-col-date">
+            <col class="sl-col-views">
+            <col class="sl-col-attach">
+          </colgroup>
+          <thead>
+            <tr>
+              <th>no</th>
+              <th class="ko">공지제목</th>
+              <th class="ko">작성자</th>
+              <th class="ko">작성일</th>
+              <th class="ko">조회수</th>
+              <th class="ko">첨부파일</th>
+            </tr>
+          </thead>
+          <tbody id="sl-notice-tbody"></tbody>
+        </table>
+        <div class="sl-notice-empty" id="sl-notice-empty">
+          <p class="sl-notice-empty-text">등록된 공지사항이 없습니다.</p>
+        </div>
+        <div class="sl-notice-pagination" id="sl-notice-pagination" style="display:none;">
+          <div class="sl-page-arrow-group">
+            <span class="sl-page-arrow" id="sl-pg-first"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6 1L1 6.5L6 12" stroke="#000" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 1L7 6.5L12 12" stroke="#000" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="sl-page-arrow" id="sl-pg-prev"><svg width="8" height="13" viewBox="0 0 8 13" fill="none"><path d="M7 1L1 6.5L7 12" stroke="#000" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </div>
+          <div id="sl-pg-nums" style="display:flex;align-items:center;gap:18px;"></div>
+          <div class="sl-page-arrow-group">
+            <span class="sl-page-arrow" id="sl-pg-next"><svg width="8" height="13" viewBox="0 0 8 13" fill="none"><path d="M1 1L7 6.5L1 12" stroke="#000" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="sl-page-arrow" id="sl-pg-last"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M7 1L12 6.5L7 12" stroke="#000" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M1 1L6 6.5L1 12" stroke="#000" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ─── FOOTER ─── -->
+  <footer>
+    <div class="footer-inner">
+      <p class="ft-company-info">㈜에코벨
+사업자 등록번호 : 598-87-02578  |  대표 : 김소연
+호스팅 서비스 : 주식회사 에코벨 | 통신판매업신고번호 : 2023-서울금천-1822</p>
+      <p class="ft-col-title" style="left:45px;">회사정보</p>
+      <p class="ft-col-title" style="left:202px;">프로젝트</p>
+      <p class="ft-col-title" style="left:374px;">솔루션</p>
+      <p class="ft-col-title" style="left:554px;">인사이트</p>
+      <p class="ft-col-title" style="left:750px;">문의하기</p>
+      <a class="ft-link" href="ceo.html" style="left:45px;top:86px;">CEO 인사말</a>
+      <a class="ft-link" href="company.html" style="left:45px;top:121px;">기업소개</a>
+      <a class="ft-link" href="press.html" style="left:45px;top:156px;">보도자료</a>
+      <a class="ft-link" href="archive.html" style="left:45px;top:191px;">아카이브</a>
+      <a class="ft-link" href="solar.html" style="left:202px;top:87px;">태양광 솔루션</a>
+      <a class="ft-link ft-en" href="ecoval.html" style="left:374px;top:87px;">ecoValue</a>
+      <a class="ft-link ft-en" href="econode.html" style="left:374px;top:121px;">ecoNODE</a>
+      <a class="ft-link ft-en" href="easset.html" style="left:374px;top:156px;">E-ASSET</a>
+      <a class="ft-link ft-en" href="ecoasset.html" style="left:374px;top:191px;">ecoASSET</a>
+      <a class="ft-link ft-en" href="https://www.netzeronews.kr/" target="_blank" rel="noopener noreferrer" style="left:554px;top:86px;">NetZero News
+        <svg width="6" height="6" viewBox="0 0 8 8" fill="none" style="margin-left:2px;vertical-align:middle;"><path d="M1 7L7 1M7 1H3M7 1V5" stroke="#fff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a class="ft-link" href="insight.html?page=eco" style="left:554px;top:121px;">친환경 기업정보</a>
+      <a class="ft-link" href="insight.html?page=green" style="left:554px;top:156px;">그린카 계산기</a>
+      <a class="ft-link ft-en" href="notice.html" style="left:750px;top:87px;">공지사항</a>
+      <a class="ft-link ft-en" href="directions.html" style="left:750px;top:121px;">오시는길</a>
+      <a class="ft-link ft-en" href="contact.html" style="left:750px;top:156px;">문의하기</a>
+      <div class="ft-divider" style="top:305px;"></div>
+      <a class="ft-bottom-link fw-bold" href="privacy.html" style="left:45px;">개인정보처리방침</a>
+      <a class="ft-bottom-link" href="terms.html" style="left:173px;">이용약관</a>
+      <a class="ft-bottom-link" href="email-policy.html" style="left:250px;">이메일무단수집거부</a>
+      <a class="ft-bottom-link" href="faq.html" style="left:383px;">자주 묻는 질문(FAQ)</a>
+      <a class="ft-social" href="https://www.youtube.com/@yt_ecobell" target="_blank" rel="noopener noreferrer" aria-label="YouTube" style="right:135px;">
+        <svg width="22" height="23" viewBox="0 0 22 23" fill="none"><rect x="1.5" y="5" width="19" height="13" rx="3" stroke="#fff" stroke-width="1.3"/><polygon points="8.5,8.5 15.5,11.5 8.5,14.5" fill="#fff"/></svg>
+      </a>
+      <a class="ft-social" href="https://www.instagram.com/ecobell.co.kr/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" style="right:90px;">
+        <svg width="22" height="23" viewBox="0 0 22 23" fill="none"><rect x="2" y="2.5" width="18" height="18" rx="5" stroke="#fff" stroke-width="1.3"/><circle cx="11" cy="11.5" r="4" stroke="#fff" stroke-width="1.3"/><circle cx="16" cy="6.5" r="1.1" fill="#fff"/></svg>
+      </a>
+      <a class="ft-social" href="https://www.facebook.com/ecobell.co.kr" target="_blank" rel="noopener noreferrer" aria-label="Facebook" style="right:46px;">
+        <svg width="22" height="23" viewBox="0 0 22 23" fill="none"><path d="M12.5 11.5H14.8L15.5 8.5H12.5V6.8C12.5 5.9 12.9 5.2 14.2 5.2H15.8V2.6C15.8 2.6 14.3 2.3 12.9 2.3C10.1 2.3 8.5 3.9 8.5 6.5V8.5H5.8V11.5H8.5V20.5H12.5V11.5Z" fill="#fff"/></svg>
+      </a>
+      <p class="ft-copyright">서울시 금천구 시흥대로 193, 701호(08635)
+ⓒ ecobell Co., Ltd. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ─── 플로팅 FAB ─── -->
+  <div class="floating-fab">
+    <div class="floating-fab-menu">
+      <a href="https://ecoasset.co.kr" class="floating-fab-item" target="_blank" rel="noopener noreferrer">ecoASSET</a>
+      <a href="https://e-asset.co.kr" class="floating-fab-item" target="_blank" rel="noopener noreferrer">E-ASSET</a>
+    </div>
+    <a class="floating-fab-icon" href="ecoasset.html" aria-label="eco Asset 바로가기">
+      <img src="ecoasset_badge.png" alt="eco Asset">
+    </a>
+  </div>
+
+  <script>
+  (function(){
+    var fab = document.querySelector('.floating-fab');
+    if (!fab) return;
+    var y = 0, v = 0, lastSY = window.scrollY, lt = 0, raf = null;
+    var K = 100, D = 12;
+    function step(t) {
+      var dt = Math.min((t - lt) / 1000, 0.05);
+      lt = t;
+      v += (-K * y - D * v) * dt;
+      y += v * dt;
+      fab.style.transform = 'translateY(' + y.toFixed(2) + 'px)';
+      if (Math.abs(y) < 0.08 && Math.abs(v) < 0.08) {
+        fab.style.transform = ''; y = 0; v = 0; raf = null;
+      } else {
+        raf = requestAnimationFrame(step);
+      }
+    }
+    window.addEventListener('scroll', function() {
+      var d = window.scrollY - lastSY;
+      lastSY = window.scrollY;
+      v -= d * 1.8;
+      v = Math.max(-250, Math.min(250, v));
+      if (!raf) { lt = performance.now(); raf = requestAnimationFrame(step); }
+    }, { passive: true });
+  })();
+  </script>
+
+  <script>
+    if (history.scrollRestoration) history.scrollRestoration = 'manual';
+    window.scrollTo(0, 0);
+
+    const header = document.getElementById('header');
+
+    const slTabsEl = document.getElementById('sl-tabs');
+    let _lastScrollY = window.scrollY;
+    window.addEventListener('scroll', () => {
+      const cur = window.scrollY;
+      header.classList.toggle('scrolled', cur > 10);
+      if (cur > _lastScrollY && cur > 80) {
+        header.classList.add('gnb-hidden');
+        if (slTabsEl) slTabsEl.style.top = '0px';
+      } else {
+        header.classList.remove('gnb-hidden');
+        if (slTabsEl) slTabsEl.style.top = '69px';
+      }
+      if (cur > _lastScrollY && header.classList.contains('search-open')) closeSearch();
+      _lastScrollY = cur;
+    }, { passive: true });
+
+    // GNB / LNB
+    const nav      = document.getElementById('main-nav');
+    const lnb      = document.getElementById('lnb');
+    const navItems = document.querySelectorAll('.nav-item');
+    const lnbCols  = document.querySelectorAll('.lnb-col');
+    let closeTimer;
+
+    function setupHeaderLayout() {
+      const lnbInnerEl = lnb.querySelector('.lnb-inner');
+      const lnbRect = lnbInnerEl.getBoundingClientRect();
+      const items = Array.from(navItems);
+      const colWidth = lnbCols[0] ? lnbCols[0].offsetWidth : 132;
+      const firstRect = items[0].getBoundingClientRect();
+      const firstCenterX = firstRect.left + firstRect.width / 2 - lnbRect.left;
+      const startLeft = firstCenterX - colWidth / 2;
+      items.forEach(function(item, i) {
+        const menu = item.dataset.menu;
+        const col = lnb.querySelector('.lnb-col[data-col="' + menu + '"]');
+        if (!col) return;
+        const colLeft = startLeft + i * colWidth;
+        col.style.left = colLeft + 'px';
+        if (i === 0) {
+          item.style.setProperty('--lnb-tx', '0px');
+        } else {
+          const colCenterX = colLeft + colWidth / 2;
+          const itemRect = item.getBoundingClientRect();
+          const itemCenterX = itemRect.left + itemRect.width / 2 - lnbRect.left;
+          item.style.setProperty('--lnb-tx', (colCenterX - itemCenterX) + 'px');
+        }
+      });
+    }
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(setupHeaderLayout);
+    } else {
+      setupHeaderLayout();
+    }
+    window.addEventListener('resize', setupHeaderLayout);
+
+    function openLnb(menuKey) {
+      clearTimeout(closeTimer);
+      nav.classList.add('lnb-open');
+      lnb.classList.add('open');
+      navItems.forEach(function(item) { item.classList.toggle('lnb-active', item.dataset.menu === menuKey); });
+      lnbCols.forEach(function(col) { col.classList.toggle('active', col.dataset.col === menuKey); });
+    }
+
+    function scheduleLnbClose() {
+      closeTimer = setTimeout(function() {
+        nav.classList.remove('lnb-open');
+        lnb.classList.remove('open');
+        navItems.forEach(function(item) { item.classList.remove('lnb-active'); });
+        lnbCols.forEach(function(col) { col.classList.remove('active'); });
+      }, 120);
+    }
+
+    navItems.forEach(function(item) {
+      item.addEventListener('mouseenter', function() { openLnb(item.dataset.menu); });
+      item.addEventListener('mouseleave', scheduleLnbClose);
+    });
+    lnb.addEventListener('mouseenter', function() { clearTimeout(closeTimer); });
+    lnb.addEventListener('mouseleave', scheduleLnbClose);
+    lnbCols.forEach(function(col) {
+      col.addEventListener('mouseenter', function() {
+        const menu = col.dataset.col;
+        navItems.forEach(function(item) { item.classList.toggle('lnb-active', item.dataset.menu === menu); });
+        lnbCols.forEach(function(c) { c.classList.toggle('active', c.dataset.col === menu); });
+      });
+    });
+
+    // Search
+    function openSearch() {
+      header.classList.add('search-open');
+      document.getElementById('search-input').focus();
+    }
+    function closeSearch() {
+      header.classList.remove('search-open');
+    }
+    document.getElementById('search-open-btn').addEventListener('click', openSearch);
+    document.getElementById('search-close-btn').addEventListener('click', closeSearch);
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeSearch(); });
+    document.querySelectorAll('.search-tag').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        document.getElementById('search-input').value = btn.dataset.keyword;
+        document.getElementById('search-input').focus();
+      });
+    });
+
+    // 탭 네비게이션 - 스크롤 연동
+    (function() {
+      const slTabs = document.querySelectorAll('.sl-tab');
+      const slSectionIds = ['sl-about', 'sl-services', 'sl-flow', 'sl-notices'];
+      const slSections = slSectionIds.map(function(id) { return document.getElementById(id); });
+
+      function updateSlActiveTab() {
+        const scrollY = window.scrollY + 69 + (slTabsEl ? slTabsEl.offsetHeight : 70) + 10;
+        let activeIdx = 0;
+        slSections.forEach(function(sec, i) {
+          if (sec && sec.offsetTop <= scrollY) activeIdx = i;
+        });
+        slTabs.forEach(function(tab, i) { tab.classList.toggle('active', i === activeIdx); });
+      }
+      window.addEventListener('scroll', updateSlActiveTab, { passive: true });
+
+      slTabs.forEach(function(tab) {
+        tab.addEventListener('click', function(e) {
+          e.preventDefault();
+          const id = tab.dataset.section;
+          const target = document.getElementById(id);
+          if (target) {
+            const offset = target.offsetTop - 69 - (slTabsEl ? slTabsEl.offsetHeight : 70);
+            window.scrollTo({ top: offset, behavior: 'smooth' });
+          }
+        });
+      });
+    })();
+
+    // Reveal on scroll
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(function(el) { observer.observe(el); });
+
+    // ─── 공지사항 (태양광 솔루션) ───
+    (function() {
+      const ITEMS_PER_PAGE = 5;
+      let slNotices = [];
+      let slPage = 1;
+
+      const tbody = document.getElementById('sl-notice-tbody');
+      const empty = document.getElementById('sl-notice-empty');
+      const pagination = document.getElementById('sl-notice-pagination');
+      const pgNums = document.getElementById('sl-pg-nums');
+
+      const _PIN_SVG = `<svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M16.7906 6.72187L11.7 5.93438L9.39371 1.09688C9.22495 0.759375 8.77495 0.759375 8.6062 1.09688L6.29995 5.9625L1.23746 6.72187C0.87183 6.77812 0.731205 7.25625 1.01246 7.50938L4.69683 11.3063L3.82495 16.6219C3.7687 16.9875 4.13433 17.2969 4.47183 17.0719L9.0562 14.5687L13.6125 17.0719C13.9218 17.2406 14.3156 16.9594 14.2312 16.6219L13.3593 11.3063L17.0437 7.50938C17.2687 7.25625 17.1562 6.77812 16.7906 6.72187Z" fill="#1E8DCD"/></svg>`;
+      const _ATTACH_SVG = `<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M12 3L17 8L8 17C6.3 18.7 3.5 18.7 1.8 17C0.1 15.3 0.1 12.5 1.8 10.8L10.5 2.1C11.7 0.9 13.6 0.9 14.8 2.1C16 3.3 16 5.2 14.8 6.4L7.1 14.1C6.4 14.8 5.3 14.8 4.6 14.1C3.9 13.4 3.9 12.3 4.6 11.6L12 4.2" stroke="#000" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+
+      function fmtDate(d) { return d ? d.replace(/-/g, '.') : ''; }
+
+      function renderPage(page) {
+        slPage = page;
+        const start = (page - 1) * ITEMS_PER_PAGE;
+        const slice = slNotices.slice(start, start + ITEMS_PER_PAGE);
+        const normalItems = slNotices.filter(function(i) { return !i.pinned; });
+
+        let html = '';
+        slice.forEach(function(item) {
+          const isPinned = !!item.pinned;
+          const noCell = isPinned
+            ? `<td class="sl-td-no pinned">${_PIN_SVG}</td>`
+            : `<td class="sl-td-no">${normalItems.length - normalItems.indexOf(item)}</td>`;
+          const attachCell = (item.attachments && item.attachments.length)
+            ? `<td class="sl-td-attach">${_ATTACH_SVG}</td>` : `<td class="sl-td-attach"></td>`;
+          html += `<tr>${noCell}<td><a class="sl-td-title" href="notice-article.html?id=${item.id}">${item.title}</a></td><td class="sl-td-author">${item.author || ''}</td><td class="sl-td-date">${fmtDate(item.date)}</td><td class="sl-td-views">0</td>${attachCell}</tr>`;
+        });
+        tbody.innerHTML = html;
+
+        if (slNotices.length === 0) {
+          empty.classList.add('visible');
+          pagination.style.display = 'none';
+        } else {
+          empty.classList.remove('visible');
+          pagination.style.display = slNotices.length > ITEMS_PER_PAGE ? '' : 'none';
+        }
+        renderPagination();
+      }
+
+      function renderPagination() {
+        const totalPages = Math.max(1, Math.ceil(slNotices.length / ITEMS_PER_PAGE));
+        pgNums.innerHTML = '';
+        let start = Math.max(1, slPage - 2);
+        let end = Math.min(totalPages, start + 4);
+        if (end - start < 4) start = Math.max(1, end - 4);
+        for (let i = start; i <= end; i++) {
+          const span = document.createElement('span');
+          span.className = 'sl-page-num' + (i === slPage ? ' active' : '');
+          span.textContent = i;
+          (function(p) { span.addEventListener('click', function() { renderPage(p); }); })(i);
+          pgNums.appendChild(span);
+        }
+        document.getElementById('sl-pg-first').onclick = function() { renderPage(1); };
+        document.getElementById('sl-pg-prev').onclick = function() { if (slPage > 1) renderPage(slPage - 1); };
+        document.getElementById('sl-pg-next').onclick = function() { if (slPage < totalPages) renderPage(slPage + 1); };
+        document.getElementById('sl-pg-last').onclick = function() { renderPage(totalPages); };
+      }
+
+      fetch('https://raw.githubusercontent.com/Elowen-yn/ecobellwebsite/main/data/notices.json?_=' + Date.now())
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          var items = (data.items || []).filter(function(i) {
+            return i.published !== false && i.category === '태양광 솔루션';
+          });
+          var pinned = items.filter(function(i) { return i.pinned; });
+          var normal = items.filter(function(i) { return !i.pinned; }).sort(function(a, b) {
+            return (b.date || '').localeCompare(a.date || '');
+          });
+          slNotices = pinned.concat(normal);
+          renderPage(1);
+        })
+        .catch(function() { renderPage(1); });
+    })();
+  </script>
+  <script src="assets/admin-trigger.js"></script>
+  <script src="assets/header-scroll.js"></script>
+</body>
+</html>

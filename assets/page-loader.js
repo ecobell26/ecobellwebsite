@@ -1,5 +1,5 @@
 (function () {
-  /* ── 첫 페인트 전에 html 전체를 숨김 (head에서 동기 실행 → 반드시 적용) ── */
+  /* ── 첫 페인트 전에 html 전체를 숨김 ── */
   document.documentElement.style.opacity = '0';
 
   /* ── Ecobell 심볼 SVG ── */
@@ -39,48 +39,52 @@
   document.head.appendChild(styleEl);
 
   /* ── 상태 ── */
-  var ANIM_DURATION = 2100;
-  var FADE_DURATION = 600;
-  var loaded    = false;
-  var domReady  = false;
-  var currentEl = null;
-  var animTimer = null;
-  var removeTimer = null;
+  var THRESHOLD     = 1000; /* 로더는 로딩 1초 초과 시에만 표시 */
+  var ANIM_DURATION = 2100; /* 한 사이클 애니메이션 */
+  var FADE_DURATION = 600;  /* 페이드아웃 */
 
-  /* html opacity 복원: loader가 body 안에서 덮고 있는 상태에서 호출 */
+  var loaded      = false;
+  var domReady    = false;
+  var loaderShown = false; /* 로더가 한 번이라도 화면에 올라왔는지 */
+  var stopping    = false; /* 페이드아웃 시작됐는지 (중복 방지) */
+  var waitForCycle= false; /* load 완료됐지만 사이클 끝나길 기다리는 중 */
+  var currentEl   = null;
+  var showTimer   = null;
+  var animTimer   = null;
+
   function revealPage() {
     document.documentElement.style.opacity = '';
   }
 
-  function fadeOut(el, cb) {
-    /* 경로를 먼저 즉시 숨김 → mix-blend-mode 경로가 페이지 위에 떠 보이는 현상 방지 */
+  /* 경로 즉시 숨기고 흰 배경만 페이드아웃 */
+  function doFadeOut(el) {
+    stopping = true;
+    if (animTimer) { clearTimeout(animTimer); animTimer = null; }
     el.classList.remove('ecb-go');
     el.querySelectorAll('svg path').forEach(function (p) {
       p.style.animation = 'none';
       p.style.opacity   = '0';
     });
-    /* 흰 배경만 페이드아웃 */
     el.classList.add('ecb-out');
-    removeTimer = setTimeout(function () {
+    setTimeout(function () {
       if (el.parentNode) el.parentNode.removeChild(el);
-      if (cb) cb();
     }, FADE_DURATION);
+    currentEl = null;
   }
 
+  /* 한 사이클 실행 */
   function runCycle() {
-    if (loaded) {
-      revealPage();
-      return;
-    }
+    stopping      = false;
+    waitForCycle  = false;
+    loaderShown   = true;
+
     var el = document.createElement('div');
     el.id = 'ecb-loader';
     el.innerHTML = SYMBOL_SVG;
     currentEl = el;
     document.body.insertBefore(el, document.body.firstChild);
 
-    /* loader가 body 첫 자식으로 들어간 뒤 html 복원
-       → 브라우저는 이 두 줄을 한 태스크에서 처리, 중간 페인트 없음
-       → 사용자에게는 로더(흰 배경)가 즉시 덮인 상태로 등장 */
+    /* loader가 body 안에 들어간 뒤 html 표시 → 겹침 없음 */
     revealPage();
 
     requestAnimationFrame(function () {
@@ -89,36 +93,57 @@
       });
     });
 
+    /* 한 사이클(2.1s) 후 처리 */
     animTimer = setTimeout(function () {
-      fadeOut(el, function () {
-        currentEl = null;
-        if (!loaded) runCycle();
-      });
+      animTimer = null;
+      if (loaded || waitForCycle) {
+        /* 로드 완료 상태 → 이 사이클이 마지막, 페이드아웃 후 종료 */
+        doFadeOut(el);
+      } else {
+        /* 아직 로딩 중 → 페이드아웃 후 다음 사이클 (이 시간 안에 load 오면 취소) */
+        doFadeOut(el);
+        setTimeout(function () { if (!loaded) runCycle(); }, FADE_DURATION);
+      }
     }, ANIM_DURATION);
   }
 
+  /* 페이지 로드 완료 */
   function onLoaded() {
     loaded = true;
-    if (animTimer)   { clearTimeout(animTimer);   animTimer   = null; }
-    if (removeTimer) { clearTimeout(removeTimer);  removeTimer = null; }
-    if (!domReady) {
-      /* DOMContentLoaded 전에 load (극히 드문 케이스) */
-      revealPage();
+    if (showTimer) { clearTimeout(showTimer); showTimer = null; }
+
+    if (!loaderShown) {
+      /* 1초 안에 로드 완료 → 로더 없이 페이지 바로 표시 */
+      if (domReady) revealPage();
       return;
     }
-    if (currentEl) {
-      fadeOut(currentEl, null);
-      currentEl = null;
+
+    if (stopping) {
+      /* 이미 마지막 페이드아웃 진행 중 → 아무것도 안 해도 됨 */
+      return;
     }
+
+    if (animTimer) {
+      /* 사이클 진행 중 → 완료 신호만 남김 (animTimer 콜백에서 처리) */
+      waitForCycle = true;
+    }
+    /* animTimer가 없으면 사이클 간 fadeOut 중 → fadeOut 후 runCycle이 호출되지 않도록
+       stopping이 true가 되므로 다음 runCycle은 실행 안 됨 */
   }
 
   document.addEventListener('DOMContentLoaded', function () {
     domReady = true;
+
     if (loaded) {
+      /* DOMContentLoaded 전에 load 완료된 경우 */
       revealPage();
-    } else {
-      runCycle();
+      return;
     }
+
+    /* 1초 후에도 미완료 시 로더 시작 */
+    showTimer = setTimeout(function () {
+      if (!loaded) runCycle();
+    }, THRESHOLD);
   });
 
   window.addEventListener('load', onLoaded);
