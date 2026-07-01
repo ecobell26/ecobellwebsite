@@ -266,6 +266,10 @@
     .item-title { font-size: 14px; font-weight: 500; color: #222; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .item-meta { font-size: 12px; color: #aaa; margin-top: 2px; }
     .item-tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; background: #eef6fb; color: #1E8DCD; margin-right: 6px; }
+    .ci-open-link { flex-shrink: 0; font-size: 12px; color: #1E8DCD; text-decoration: none; white-space: nowrap; padding: 3px 8px; border-radius: 5px; border: 1px solid #c8e4f5; transition: background 0.13s; }
+    .ci-open-link:hover { background: #eef6fb; }
+    .dark .ci-open-link { color: #4da8d8; border-color: #1e3050; }
+    .dark .ci-open-link:hover { background: #1e2838; }
     .item-tag.unpub { background: #f5f5f5; color: #bbb; }
     .action-btn.pub-eye.on { color: #1E8DCD; }
     .action-btn.pub-eye.on:hover { background: #eef6fb; }
@@ -500,15 +504,22 @@
     .rte-content.notice-rte p { margin-bottom: 0; }
     .rte-content.notice-rte p:last-child { margin-bottom: 0; }
     /* ── 보도자료 본문 타이포 강제 ── */
-    .rte-content.press-rte { font-family: 'Noto Sans KR', -apple-system, sans-serif; font-weight: 400; font-size: 15px; line-height: 33px; letter-spacing: 0.5px; color: #000; background: none; word-break: keep-all; overflow-wrap: break-word; text-align: justify; }
+    .rte-content.press-rte { font-family: 'Noto Sans KR', -apple-system, sans-serif; font-weight: 400; font-size: 15px; line-height: 32.9px; letter-spacing: 0.5px; color: #000; background: none; word-break: keep-all; overflow-wrap: break-word; text-align: justify; }
     .dark .rte-content.press-rte { color: #fff; }
-    .rte-content.press-rte * { font-family: 'Noto Sans KR', -apple-system, sans-serif !important; font-weight: 400 !important; font-size: 15px !important; line-height: 33px !important; letter-spacing: 0.5px !important; color: inherit !important; background: none !important; background-color: transparent !important; text-decoration: none !important; }
+    .rte-content.press-rte * { font-family: 'Noto Sans KR', -apple-system, sans-serif !important; font-weight: 400 !important; font-size: 15px !important; line-height: 32.9px !important; letter-spacing: 0.5px !important; color: inherit !important; background: none !important; background-color: transparent !important; text-decoration: none !important; }
+    .rte-content.press-rte b, .rte-content.press-rte strong { font-weight: 600 !important; }
+    .rte-content.press-rte .rte-bold { font-weight: 600 !important; }
     .rte-content.press-rte p { margin: 0; text-align: justify; }
     /* ── 보도자료 미리보기 본문 타이포 강제 ── */
-    .press-preview-html { font-family: 'Noto Sans KR', -apple-system, sans-serif; font-weight: 400; font-size: 15px; line-height: 33px; letter-spacing: 0.5px; color: #000; background: none; word-break: keep-all; overflow-wrap: break-word; text-align: justify; }
+    .press-preview-html { font-family: 'Noto Sans KR', -apple-system, sans-serif; font-weight: 400; font-size: 15px; line-height: 32.9px; letter-spacing: 0.5px; color: #000; background: none; word-break: keep-all; overflow-wrap: break-word; text-align: justify; }
     .dark .press-preview-html { color: #fff; }
-    .press-preview-html * { font-family: 'Noto Sans KR', -apple-system, sans-serif !important; font-weight: 400 !important; font-size: 15px !important; line-height: 33px !important; letter-spacing: 0.5px !important; color: inherit !important; background: none !important; background-color: transparent !important; text-decoration: none !important; }
+    .press-preview-html * { font-family: 'Noto Sans KR', -apple-system, sans-serif !important; font-weight: 400 !important; font-size: 15px !important; line-height: 32.9px !important; letter-spacing: 0.5px !important; color: inherit !important; background: none !important; background-color: transparent !important; text-decoration: none !important; }
+    .press-preview-html b, .press-preview-html strong { font-weight: 600 !important; }
+    .press-preview-html .rte-bold { font-weight: 600 !important; }
     .press-preview-html p { margin: 0; text-align: justify; }
+    /* ── 캡션 서식: 기본보다 -5px, 회색, 중앙정렬 (specificity로 !important 우선) ── */
+    .rte-content.press-rte .rte-caption-style,
+    .press-preview-html .rte-caption-style { font-size: 10px !important; color: #999 !important; text-align: center !important; line-height: 1.6 !important; }
     /* 아카이브 폼 그리드 */
     .arch-form-row { display: grid; gap: 16px; }
     .arch-form-row-3 { grid-template-columns: 1fr 1fr 1fr; }
@@ -522,8 +533,7 @@
     .rte-img-block { display: block; margin: 15px 0; text-align: center; }
     .rte-img { cursor: pointer; display: inline-block; max-width: 100%; outline: none; }
     .rte-img.selected { outline: 2px solid #1E8DCD; }
-    .rte-img-caption { font-size: 10px; color: rgba(0,0,0,0.5); line-height: 1.5; margin: 4px 0 0; text-align: center; }
-    .rte-img-caption:empty::before { content: attr(data-placeholder); color: #ccc; pointer-events: none; }
+    .rte-img-caption { display: none; }
     .rte-img-toolbar { display: flex; align-items: center; gap: 4px; padding: 5px 8px; background: #1a1f36; border-radius: 6px; margin-bottom: 6px; flex-wrap: wrap; }
     .rte-img-toolbar button { padding: 2px 8px; border: 1px solid rgba(255,255,255,0.3); border-radius: 3px; background: transparent; color: #fff; cursor: pointer; font-size: 12px; }
     .rte-img-toolbar button:hover { background: rgba(255,255,255,0.15); }
@@ -792,6 +802,18 @@
   const SVG_EYE = `<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>`;
   const SVG_EYE_OFF = `<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>`;
 
+  /* ── 입력 자동완성 전역 비활성화 ── */
+  new MutationObserver(function(mutations) {
+    mutations.forEach(function(m) {
+      m.addedNodes.forEach(function(node) {
+        if (node.nodeType !== 1) return;
+        var sel = 'input:not([type=checkbox]):not([type=file]):not([type=radio]):not([type=hidden]), textarea';
+        node.querySelectorAll(sel).forEach(function(el) { el.setAttribute('autocomplete', 'off'); });
+        if (node.matches && node.matches(sel)) node.setAttribute('autocomplete', 'off');
+      });
+    });
+  }).observe(document.body, { childList: true, subtree: true });
+
   /* ── 초기화 ── */
   window.addEventListener('DOMContentLoaded', () => {
     const saved = sessionStorage.getItem('adminAuth');
@@ -1031,7 +1053,7 @@ function showDashboard() {
           ).join('')}</div>
           ${(() => {
             const ciHasItem = archiveTab === 'ci' && currentItems.some(i => (i.type || 'intro') === 'ci');
-            return ciHasItem ? '' : `<div style="display:flex;justify-content:flex-end;padding:12px 10px 4px;"><button id="archive-tab-add-btn" class="add-btn" onclick="showForm()">+ 새 항목 추가</button></div>`;
+            return ciHasItem ? '' : `<div style="display:flex;justify-content:flex-end;padding:12px 20px 4px;"><button id="archive-tab-add-btn" class="add-btn" onclick="showForm()">+ 새 항목 추가</button></div>`;
           })()}`;
           displayItems = currentItems.filter(i => (i.type || 'intro') === archiveTab);
           if (archiveTab === 'ci' && displayItems.length > 1) displayItems = displayItems.slice(0, 1);
@@ -1090,6 +1112,21 @@ function showDashboard() {
     else meta = (item.author ? `<span class="item-tag">${item.author}</span>` : '') + (item.date || '');
 
     const title = currentSection === 'faq' ? (item.question || '') : (item.title || '');
+
+    /* ── CI 탭 전용 행 ── */
+    if (currentSection === 'archive' && item.type === 'ci') {
+      const ciDate = item.createdAt ? item.createdAt.replace('T', ' ').slice(0, 10) : '';
+      const ciFileName = escHtml(item.fileName || item.title || '파일');
+      const ciFileUrl  = item.file || '';
+      return `<div class="item-row" data-id="${item.id}" data-idx="${idx}">
+        <input type="checkbox" class="item-check" ${selectedIds.has(item.id) ? 'checked' : ''} onclick="event.stopPropagation();toggleSelect('${item.id}')">
+        <span class="item-pin ${isPinned ? 'pinned' : ''}" title="${isPinned ? '고정 해제' : '고정'}" onclick="event.stopPropagation();togglePin('${item.id}')"><svg width="14" height="14" viewBox="0 0 24 24" fill="${isPinned ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"/><path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z"/></svg></span>
+        <div class="item-info"><div class="item-title">${escHtml(title)}</div></div>
+        ${ciFileUrl ? `<a class="ci-open-link" href="${escAttr(ciFileUrl)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">[${ciFileName}] 열기</a>` : ''}
+        <span style="font-size:12px;color:#aaa;white-space:nowrap;flex-shrink:0;">${ciDate}</span>
+        <button class="action-btn pub-eye ${isPublished ? 'on' : 'off'}" onclick="event.stopPropagation();togglePublish('${item.id}')" title="${isPublished ? '게시 중 (클릭하여 숨기기)' : '숨김 (클릭하여 게시)'}">${isPublished ? SVG_EYE : SVG_EYE_OFF}</button>
+      </div>`;
+    }
 
     const canDrag = currentSection !== 'notices' && currentSection !== 'press'
       && !(currentSection === 'faq' && faqFilter !== 'all')
@@ -1524,14 +1561,20 @@ function showDashboard() {
       updatePressSummary();
       if (pinnedChk) pinnedChk.addEventListener('change', updatePressSummary);
       // 보도자료 스타일 강제: 붙여넣기 시 순수 텍스트로 정규화
-      const PRESS_LOCKED = ['font-size','line-height','letter-spacing','font-family','font-weight','color','background','background-color','text-decoration'];
+      const PRESS_LOCKED = ['font-size','line-height','letter-spacing','font-family','color','background','background-color','text-decoration'];
       function stripPressStyles() {
         if (!rteEl) return;
         rteEl.querySelectorAll('*').forEach(el => {
           if (el.classList?.contains('rte-img') || el.classList?.contains('rte-img-block')) return;
+          // B/STRONG: font-weight 유지, 나머지 스타일만 제거
+          if (['B','STRONG'].includes(el.tagName)) {
+            PRESS_LOCKED.forEach(p => el.style.removeProperty(p));
+            return;
+          }
           PRESS_LOCKED.forEach(p => el.style.removeProperty(p));
-          // b/strong/em/i/u → span으로 교체
-          if (['B','STRONG','EM','I','U','MARK'].includes(el.tagName)) {
+          el.style.removeProperty('font-weight');
+          // em/i/u/mark → span으로 교체
+          if (['EM','I','U','MARK'].includes(el.tagName)) {
             const span = document.createElement('span');
             span.innerHTML = el.innerHTML;
             el.replaceWith(span);
@@ -1600,6 +1643,7 @@ function showDashboard() {
       <button type="button" onmousedown="event.preventDefault();rteCmd('bold')"><b>B</b></button>
       <div class="rte-sep"></div>
       <button type="button" onmousedown="event.preventDefault();rteInsertImage()" title="이미지 삽입">🖼 이미지</button>
+      <button type="button" onmousedown="event.preventDefault();rteApplyCaption()" title="캡션 서식 (현재 줄에 적용/해제)" style="font-size:11px;color:#888;">캡션</button>
     </div>`;
 
   const RTE_COLORS = ['#000000','#444444','#888888','#e63946','#f4722b','#f9c74f','#2d6a4f','#1E8DCD','#234B63','#6a0dad'];
@@ -2019,6 +2063,22 @@ function showDashboard() {
     btn.classList.toggle('pinned', chk.checked);
   }
 
+  /* ── 캡션 서식 토글 (현재 커서 위치의 블록 요소에 적용/해제) ── */
+  function rteApplyCaption() {
+    const el = document.getElementById('f-content');
+    if (!el) return;
+    el.focus();
+    const sel = window.getSelection();
+    if (!sel || sel.rangeCount === 0) return;
+    let node = sel.getRangeAt(0).commonAncestorContainer;
+    if (node.nodeType === 3) node = node.parentNode;
+    while (node && node !== el && !['P','DIV','H1','H2','H3','LI','BLOCKQUOTE'].includes(node.nodeName)) {
+      node = node.parentNode;
+    }
+    if (!node || node === el) return;
+    node.classList.toggle('rte-caption-style');
+  }
+
   /* ── 리치 텍스트 에디터 ── */
   function rteCmd(cmd) {
     const el = document.getElementById('f-content');
@@ -2385,11 +2445,16 @@ function showDashboard() {
   function stripPressHtml(html) {
     const div = document.createElement('div');
     div.innerHTML = html;
-    const LOCKED = ['font-size','line-height','letter-spacing','font-family','font-weight','color','background','background-color','text-decoration','font-style'];
+    const LOCKED = ['font-size','line-height','letter-spacing','font-family','color','background','background-color','text-decoration','font-style'];
     div.querySelectorAll('*').forEach(el => {
       if (el.classList?.contains('rte-img') || el.classList?.contains('rte-img-block')) return;
       LOCKED.forEach(p => el.style.removeProperty(p));
-      if (['B','STRONG','EM','I','U','MARK'].includes(el.tagName)) {
+      if (['B','STRONG'].includes(el.tagName)) {
+        const span = document.createElement('span');
+        span.className = 'rte-bold';
+        span.innerHTML = el.innerHTML;
+        el.replaceWith(span);
+      } else if (['EM','I','U','MARK'].includes(el.tagName)) {
         const span = document.createElement('span');
         span.innerHTML = el.innerHTML;
         el.replaceWith(span);
@@ -2465,7 +2530,7 @@ function showDashboard() {
 
   /* ── RTE 이미지 블록 HTML 생성 ── */
   function rteImgHtml(src) {
-    return `<div class="rte-img-block" style="display:block;text-align:center;margin:15px 0;"><img src="${src}" class="rte-img" style="width:60%;max-width:100%;display:inline-block;"><p class="rte-img-caption" data-placeholder="▲ 캡션을 입력하세요 (선택)">▲ </p></div><p><br></p>`;
+    return `<div class="rte-img-block" style="display:block;text-align:center;margin:15px 0;"><img src="${src}" class="rte-img" style="max-width:100%;width:auto;height:auto;display:inline-block;"></div>`;
   }
 
   /* ── GitHub에 이미지 즉시 업로드 → URL 반환 ── */
@@ -2495,23 +2560,25 @@ function showDashboard() {
     const input = document.createElement('input');
     input.type = 'file';
     input.accept = 'image/*';
+    // 파일 다이얼로그 열기 전에 커서 위치를 플레이스홀더로 고정
+    const el = document.getElementById('f-content');
+    if (el) el.focus();
+    const pid = 'rte-loading-' + Date.now();
+    document.execCommand('insertHTML', false,
+      `<span id="${pid}" style="display:inline-block;padding:2px 10px;background:#eef6fb;color:#1E8DCD;border-radius:4px;font-size:12px;">⏳ 업로드 중...</span>`);
     input.onchange = async function() {
       const file = input.files[0];
-      if (!file) return;
-      const el = document.getElementById('f-content');
-      if (!el) return;
-      // 로딩 플레이스홀더 삽입
-      const pid = 'rte-loading-' + Date.now();
-      el.focus();
-      document.execCommand('insertHTML', false,
-        `<span id="${pid}" style="display:inline-block;padding:2px 10px;background:#eef6fb;color:#1E8DCD;border-radius:4px;font-size:12px;">⏳ 업로드 중...</span>`);
+      if (!file) { const ph = document.getElementById(pid); if (ph) ph.remove(); return; }
       try {
         const url = await uploadImageNow(file);
         const placeholder = document.getElementById(pid);
         if (placeholder) {
           const tmp = document.createElement('div');
-          tmp.innerHTML = rteImgHtml(url);
-          placeholder.replaceWith(tmp.firstChild);
+          tmp.innerHTML = rteImgHtml(url) + '<p><br></p>';
+          // 이미지 블록 + 빈 줄을 순서대로 삽입
+          const frag = document.createDocumentFragment();
+          while (tmp.firstChild) frag.appendChild(tmp.firstChild);
+          placeholder.replaceWith(frag);
         }
         // 보도자료: 이미지 목록에도 동기화
         if (currentSection === 'press') {
