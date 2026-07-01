@@ -489,7 +489,6 @@
       background: url('assets/main-hero-photo.jpg') center center / cover no-repeat;
       filter: brightness(1.18);
     }
-    .hero-bg.alt { background-image: url('assets/main-hero-photo-alt.jpg'); }
     .hero-overlay {
       position: absolute;
       inset: 0;
@@ -1707,22 +1706,6 @@
       if (e.key === 'Escape') closeIframeModal();
     });
 
-    // 'E' 키 → 히어로 이미지 전환
-    (function() {
-      const heroBg = document.querySelector('.hero-bg');
-      let isAlt = false;
-      // 이미지 미리 로드
-      new Image().src = 'assets/main-hero-photo-alt.jpg';
-      document.addEventListener('keydown', function(e) {
-        if (e.key !== 'e' && e.key !== 'E') return;
-        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable) return;
-        isAlt = !isAlt;
-        heroBg.classList.toggle('alt', isAlt);
-        document.querySelector('.hero-radial').style.background = isAlt
-          ? 'radial-gradient(ellipse at center, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0) 100%)'
-          : 'radial-gradient(ellipse at center, rgba(0,0,0,0.40) 0%, rgba(0,0,0,0) 100%)';
-      });
-    })();
   </script>
   <script src="assets/admin-trigger.js"></script>
 
