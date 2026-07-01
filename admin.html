@@ -1082,6 +1082,10 @@ function showDashboard() {
     if (currentSection === 'notices' || currentSection === 'press') {
       displayItems.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
     }
+    // 개인정보/이용약관/이메일수집거부: 날짜 내림차순 (최신순)
+    if (['privacy','terms','email-policy'].includes(currentSection)) {
+      displayItems.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+    }
 
     // 검색 필터
     if (searchQuery) {
@@ -1168,7 +1172,7 @@ function showDashboard() {
       </div>` : '';
     return `<div class="item-row ${isFaqExpanded ? 'faq-row-expanded' : ''}" ${canDrag ? 'draggable="true"' : ''} data-id="${item.id}" data-idx="${idx}" onclick="${rowClick}">
       <input type="checkbox" class="item-check" ${selectedIds.has(item.id) ? 'checked' : ''} onclick="event.stopPropagation();toggleSelect('${item.id}')">
-      ${currentSection !== 'faq' ? `<span class="item-pin ${isPinned ? 'pinned' : ''}" title="${isPinned ? '고정 해제' : '고정'}" onclick="event.stopPropagation();togglePin('${item.id}')"><svg width="14" height="14" viewBox="0 0 24 24" fill="${isPinned ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"/><path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z"/></svg></span>` : ''}
+      ${currentSection !== 'faq' && !['privacy','terms','email-policy'].includes(currentSection) ? `<span class="item-pin ${isPinned ? 'pinned' : ''}" title="${isPinned ? '고정 해제' : '고정'}" onclick="event.stopPropagation();togglePin('${item.id}')"><svg width="14" height="14" viewBox="0 0 24 24" fill="${isPinned ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"/><path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z"/></svg></span>` : ''}
       <div class="item-info">
         ${currentSection === 'press' && item.date ? `<div class="item-date-press">${escHtml(item.date)}</div>` : ''}
         <div class="item-title">${escHtml(title)}</div>
@@ -1303,21 +1307,6 @@ function showDashboard() {
       const sameType = (item.type || 'intro');
       for (const other of currentItems) {
         if (other.id !== id && !!other.pinned && (other.type || 'intro') === sameType) {
-          other.pinned = false;
-          try {
-            await fetch('/api/admin-data', {
-              method: 'PUT',
-              headers: { 'Content-Type': 'application/json', Authorization: 'Basic ' + authHeader },
-              body: JSON.stringify({ type: currentSection, item: other })
-            });
-          } catch(e) {}
-        }
-      }
-    }
-    // 개인정보/이용약관/이메일수집거부: 최대 1개만 핀 (= 공개)
-    if (['privacy','terms','email-policy'].includes(currentSection) && item.pinned) {
-      for (const other of currentItems) {
-        if (other.id !== id && !!other.pinned) {
           other.pinned = false;
           try {
             await fetch('/api/admin-data', {
@@ -1917,12 +1906,12 @@ function showDashboard() {
         ${currentSection === 'archive' ? `<button type="button" class="arch-pin-btn ${v('pinned',false)?'pinned':''}" id="f-pinned-btn" onclick="toggleArchiveFormPin()" title="상단 고정">${pinSvg}</button>` : ''}
       </div>
       ${currentSection === 'archive' ? fields : `<div class="form-grid">${fields}</div>`}
-      ${currentSection !== 'faq' && currentSection !== 'archive' ? `
+      ${currentSection !== 'faq' && currentSection !== 'archive' && !IS_POLICY_SECTION ? `
       <div class="form-grid" style="margin-top:14px;">
         <div class="form-group">
           <label class="form-label">옵션</label>
           <div class="form-check-row">
-            <label class="form-check"><input type="checkbox" id="f-pinned" ${v('pinned',false)?'checked':''}> ${IS_POLICY_SECTION ? '공개 (핀됨 = 웹사이트에 표시)' : '상단 고정'}</label>
+            <label class="form-check"><input type="checkbox" id="f-pinned" ${v('pinned',false)?'checked':''}> 상단 고정</label>
           </div>
         </div>
       </div>` : ''}
@@ -2800,7 +2789,7 @@ function showDashboard() {
     const pinBtn = document.getElementById('preview-pin-btn');
     const eyeBtn = document.getElementById('preview-eye-btn');
     if (pinBtn) {
-      if (currentSection === 'faq') {
+      if (currentSection === 'faq' || ['privacy','terms','email-policy'].includes(currentSection)) {
         pinBtn.style.display = 'none';
       } else {
         pinBtn.style.display = '';

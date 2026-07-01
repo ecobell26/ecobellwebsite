@@ -184,11 +184,14 @@
           if (!items.length) return;
           _allItems = items;
 
-          var pinned = items.find(function(i) { return i.pinned; }) || items[0];
-          var others = items.filter(function(i) { return i.id !== pinned.id; });
+          var published = items.filter(function(i) { return i.published !== false; });
+          published.sort(function(a, b) { return (b.date || '').localeCompare(a.date || ''); });
+          if (!published.length) return;
+          var main = published[0];
+          var others = published.slice(1);
 
-          showItem(pinned);
-          document.title = (pinned.title || '개인정보처리방침') + ' - Ecobell';
+          showItem(main);
+          document.title = (main.title || '개인정보처리방침') + ' - Ecobell';
 
           if (others.length) {
             var wrap = document.getElementById('policy-year-wrap');

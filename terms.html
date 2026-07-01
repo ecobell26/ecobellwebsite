@@ -30,6 +30,19 @@
     .article-body a { color: #1e8dcd; text-decoration: underline; }
     .article-divider-bottom { height: 1.5px; background: #1e8ccc; }
 
+    /* ─── 연도 드롭다운 ─── */
+    .policy-year-wrap { margin-top: 16px; position: relative; display: inline-flex; align-items: center; gap: 8px; }
+    .policy-year-label { font-family: 'Noto Sans KR',sans-serif; font-size: 13px; color: rgba(0,0,0,0.45); }
+    .policy-year-btn { display: inline-flex; align-items: center; gap: 6px; height: 30px; padding: 0 12px; border: 0.8px solid rgba(0,0,0,0.2); border-radius: 6px; background: #fff; cursor: pointer; font-family: 'Noto Sans KR',sans-serif; font-size: 13px; color: #000; transition: border-color 0.15s; }
+    .policy-year-btn:hover { border-color: #1e8dcd; color: #1e8dcd; }
+    .policy-year-btn svg { transition: transform 0.2s; }
+    .policy-year-btn.open svg { transform: rotate(180deg); }
+    .policy-year-dropdown { position: absolute; top: calc(100% + 4px); left: 0; min-width: 120px; background: #fff; border: 0.8px solid rgba(0,0,0,0.12); border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); z-index: 100; overflow: hidden; opacity: 0; pointer-events: none; transform: translateY(-6px); transition: opacity 0.18s ease, transform 0.18s ease; }
+    .policy-year-dropdown.open { opacity: 1; pointer-events: auto; transform: translateY(0); }
+    .policy-year-item { display: block; width: 100%; padding: 9px 16px; text-align: left; background: none; border: none; cursor: pointer; font-family: 'Noto Sans KR',sans-serif; font-size: 13px; color: #333; transition: background 0.1s; }
+    .policy-year-item:hover { background: #f5f7fa; }
+    .policy-year-item.active { color: #1e8dcd; font-weight: 600; }
+
     /* ─── FOOTER ─── */
     footer { position: sticky; bottom: 0; z-index: 0; min-width: 1100px; height: 442px; background: #2a2a2a; }
     .footer-inner { position: relative; width: 100%; max-width: 1440px; margin: 0 auto; height: 100%; }
@@ -56,6 +69,15 @@
       <div class="article-header">
         <h1 class="article-title" id="article-title">이용약관</h1>
         <div class="article-meta"><span id="article-date"></span></div>
+        <!-- 이전 약관 드롭다운 -->
+        <div class="policy-year-wrap" id="policy-year-wrap" style="display:none;">
+          <span class="policy-year-label">이전 약관 보기</span>
+          <button class="policy-year-btn" id="policy-year-btn" onclick="toggleYearDropdown()">
+            <span id="policy-year-text">연도 선택</span>
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="policy-year-dropdown" id="policy-year-dropdown"></div>
+        </div>
       </div>
       <div class="article-body" id="article-body">
         <p style="color:rgba(0,0,0,0.35);">준비 중입니다.</p>
@@ -106,19 +128,77 @@
   <script>
     if (history.scrollRestoration) history.scrollRestoration = 'manual';
     window.scrollTo(0, 0);
+
+    var _allItems = [];
+    var _activeId = null;
+
+    function showItem(item) {
+      _activeId = item.id;
+      var titleEl = document.getElementById('article-title');
+      var dateEl  = document.getElementById('article-date');
+      var bodyEl  = document.getElementById('article-body');
+      if (titleEl) titleEl.textContent = item.title || '이용약관';
+      if (dateEl) dateEl.textContent = item.date ? item.date.replace(/-/g, '.') : '';
+      if (bodyEl && item.content) bodyEl.innerHTML = item.content;
+      document.querySelectorAll('.policy-year-item').forEach(function(btn) {
+        btn.classList.toggle('active', btn.dataset.id === item.id);
+      });
+    }
+
+    function toggleYearDropdown() {
+      var btn = document.getElementById('policy-year-btn');
+      var dd  = document.getElementById('policy-year-dropdown');
+      var open = dd.classList.toggle('open');
+      btn.classList.toggle('open', open);
+    }
+
+    document.addEventListener('click', function(e) {
+      var wrap = document.getElementById('policy-year-wrap');
+      if (wrap && !wrap.contains(e.target)) {
+        document.getElementById('policy-year-dropdown').classList.remove('open');
+        document.getElementById('policy-year-btn').classList.remove('open');
+      }
+    });
+
+    function onYearSelect(id) {
+      var item = _allItems.find(function(i) { return i.id === id; });
+      if (!item) return;
+      showItem(item);
+      document.getElementById('policy-year-dropdown').classList.remove('open');
+      document.getElementById('policy-year-btn').classList.remove('open');
+      var label = item.date ? item.date.slice(0, 4) + '년' : (item.title || '이전');
+      var textEl = document.getElementById('policy-year-text');
+      if (textEl) textEl.textContent = label;
+    }
+
     (function() {
       fetch('https://raw.githubusercontent.com/Elowen-yn/ecobellwebsite/main/data/terms.json?_=' + Date.now())
         .then(function(r) { return r.json(); })
         .then(function(data) {
-          var item = (data.items || []).find(function(i) { return i.pinned; });
-          if (!item) return;
-          var titleEl = document.getElementById('article-title');
-          var dateEl  = document.getElementById('article-date');
-          var bodyEl  = document.getElementById('article-body');
-          if (titleEl) titleEl.textContent = item.title || '이용약관';
-          if (dateEl && item.date) dateEl.textContent = item.date.replace(/-/g, '.');
-          if (bodyEl && item.content) bodyEl.innerHTML = item.content;
-          document.title = (item.title || '이용약관') + ' - Ecobell';
+          var items = data.items || [];
+          if (!items.length) return;
+          _allItems = items;
+
+          var published = items.filter(function(i) { return i.published !== false; });
+          published.sort(function(a, b) { return (b.date || '').localeCompare(a.date || ''); });
+          if (!published.length) return;
+          var main = published[0];
+          var others = published.slice(1);
+
+          showItem(main);
+          document.title = (main.title || '이용약관') + ' - Ecobell';
+
+          if (others.length) {
+            var wrap = document.getElementById('policy-year-wrap');
+            var dd   = document.getElementById('policy-year-dropdown');
+            if (wrap) wrap.style.display = '';
+            if (dd) {
+              dd.innerHTML = others.map(function(item) {
+                var label = item.date ? item.date.slice(0, 4) + '년' : (item.title || '이전 약관');
+                return '<button class="policy-year-item" data-id="' + item.id + '" onclick="onYearSelect(\'' + item.id + '\')">' + label + '</button>';
+              }).join('');
+            }
+          }
         })
         .catch(function() {});
     })();
