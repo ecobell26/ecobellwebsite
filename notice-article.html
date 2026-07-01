@@ -1174,7 +1174,7 @@
     (function () {
       const id = new URLSearchParams(window.location.search).get('id');
       if (!id) return;
-      fetch('data/notices.json')
+      fetch('https://raw.githubusercontent.com/Elowen-yn/ecobellwebsite/main/data/notices.json')
         .then(r => r.json())
         .then(function (data) {
           const item = (data.items || []).find(function (i) { return i.id === id; });

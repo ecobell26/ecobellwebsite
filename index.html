@@ -1894,7 +1894,7 @@
       if (nextBtn) nextBtn.addEventListener('click', () => slideTo(currentIndex + 1));
 
       // press.json에서 최신순 최대 12개 표시
-      fetch('data/press.json')
+      fetch('https://raw.githubusercontent.com/Elowen-yn/ecobellwebsite/main/data/press.json')
         .then(r => r.json())
         .then(data => {
           const items = (data.items || [])

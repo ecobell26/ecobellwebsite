@@ -559,8 +559,8 @@
     }
 
     /* 본문 내 이미지 블록 */
-    .article-text .rte-img-block { display: block; margin: 15px 0; text-align: center; }
-    .article-text .rte-img { max-width: 100%; display: inline-block; cursor: default; outline: none; }
+    .article-text .rte-img-block { display: block; margin: 15px 0; text-align: center !important; }
+    .article-text .rte-img { max-width: 100% !important; height: auto !important; display: inline-block; cursor: default; outline: none; }
     .article-text .rte-img-toolbar { display: none; }
     .article-text .rte-img-caption { display: none; }
     .article-text .rte-caption-style { font-size: 10px !important; color: #999 !important; text-align: center !important; line-height: 1.6 !important; }
@@ -1214,7 +1214,7 @@
     (function () {
       const id = new URLSearchParams(window.location.search).get('id');
       if (!id) return;
-      fetch('data/press.json')
+      fetch('https://raw.githubusercontent.com/Elowen-yn/ecobellwebsite/main/data/press.json')
         .then(function(r) { return r.json(); })
         .then(function(data) {
           const item = (data.items || []).find(function(i) { return i.id === id; });
@@ -1238,14 +1238,15 @@
             // 인라인 스타일 정규화: 텍스트 요소의 서식은 CSS로만 제어
             bodyEl.querySelectorAll('*').forEach(el => {
               if (el.classList.contains('rte-img')) {
-                const w = el.style.width, mw = el.style.maxWidth, d = el.style.display;
+                const w = el.style.width;
                 el.removeAttribute('style');
-                if (w)  el.style.width    = w;
-                if (mw) el.style.maxWidth = mw;
-                if (d)  el.style.display  = d;
+                if (w) el.style.width = w;
+                el.style.maxWidth = '100%';
+                el.style.height = 'auto';
+                el.style.display = 'inline-block';
               } else if (el.classList.contains('rte-img-block')) {
                 el.removeAttribute('style');
-                el.style.cssText = 'display:block;text-align:center;margin:15px 0;';
+                el.style.cssText = 'display:block;text-align:center !important;margin:15px 0;';
               } else if (el.tagName !== 'IMG') {
                 const fw = el.style.fontWeight, fs = el.style.fontStyle;
                 el.removeAttribute('style');
