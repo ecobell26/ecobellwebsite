@@ -429,6 +429,26 @@
     /* ── 로딩 ── */
     .loading { text-align: center; padding: 40px; color: #aaa; font-size: 14px; }
 
+    /* ── 액션 로더 오버레이 (저장/업로드 중) ── */
+    #ecb-action-loader {
+      position: fixed; inset: 0; background: rgba(255,255,255,0.88);
+      z-index: 99998; display: none;
+      flex-direction: column; align-items: center; justify-content: center; gap: 16px;
+      backdrop-filter: blur(2px);
+    }
+    #ecb-action-loader.active { display: flex; }
+    #ecb-action-loader .ecb-al-msg { font-size: 13px; color: #666; letter-spacing: 0.3px; }
+    /* 심볼 path 순환 발광 (루프) */
+    #ecb-action-loader svg .ecbs1 { animation: ecbal 1.8s 0s   infinite; }
+    #ecb-action-loader svg .ecbs2 { animation: ecbal 1.8s 0.36s infinite; }
+    #ecb-action-loader svg .ecbs4 { animation: ecbal 1.8s 0.72s infinite; }
+    #ecb-action-loader svg .ecbs3 { animation: ecbal 1.8s 1.08s infinite; }
+    #ecb-action-loader svg .ecbs5 { animation: ecbal 1.8s 1.44s infinite; }
+    @keyframes ecbal {
+      0%, 100% { opacity: 0.25; }
+      50%       { opacity: 1; }
+    }
+
     /* ── 구분선 ── */
     .divider { height: 1px; background: #f0f0f0; margin: 20px 0; }
 
@@ -480,15 +500,15 @@
     .rte-content.notice-rte p { margin-bottom: 0; }
     .rte-content.notice-rte p:last-child { margin-bottom: 0; }
     /* ── 보도자료 본문 타이포 강제 ── */
-    .rte-content.press-rte { font-family: 'Noto Sans KR', -apple-system, sans-serif; font-weight: 400; font-size: 16px; line-height: 33px; letter-spacing: 0.5px; color: #000; background: none; word-break: keep-all; overflow-wrap: break-word; }
+    .rte-content.press-rte { font-family: 'Noto Sans KR', -apple-system, sans-serif; font-weight: 400; font-size: 15px; line-height: 33px; letter-spacing: 0.5px; color: #000; background: none; word-break: keep-all; overflow-wrap: break-word; text-align: justify; }
     .dark .rte-content.press-rte { color: #fff; }
-    .rte-content.press-rte * { font-family: 'Noto Sans KR', -apple-system, sans-serif !important; font-weight: 400 !important; font-size: 16px !important; line-height: 33px !important; letter-spacing: 0.5px !important; color: inherit !important; background: none !important; background-color: transparent !important; text-decoration: none !important; }
-    .rte-content.press-rte p { margin: 0; }
+    .rte-content.press-rte * { font-family: 'Noto Sans KR', -apple-system, sans-serif !important; font-weight: 400 !important; font-size: 15px !important; line-height: 33px !important; letter-spacing: 0.5px !important; color: inherit !important; background: none !important; background-color: transparent !important; text-decoration: none !important; }
+    .rte-content.press-rte p { margin: 0; text-align: justify; }
     /* ── 보도자료 미리보기 본문 타이포 강제 ── */
-    .press-preview-html { font-family: 'Noto Sans KR', -apple-system, sans-serif; font-weight: 400; font-size: 16px; line-height: 33px; letter-spacing: 0.5px; color: #000; background: none; word-break: keep-all; overflow-wrap: break-word; }
+    .press-preview-html { font-family: 'Noto Sans KR', -apple-system, sans-serif; font-weight: 400; font-size: 15px; line-height: 33px; letter-spacing: 0.5px; color: #000; background: none; word-break: keep-all; overflow-wrap: break-word; text-align: justify; }
     .dark .press-preview-html { color: #fff; }
-    .press-preview-html * { font-family: 'Noto Sans KR', -apple-system, sans-serif !important; font-weight: 400 !important; font-size: 16px !important; line-height: 33px !important; letter-spacing: 0.5px !important; color: inherit !important; background: none !important; background-color: transparent !important; text-decoration: none !important; }
-    .press-preview-html p { margin: 0; }
+    .press-preview-html * { font-family: 'Noto Sans KR', -apple-system, sans-serif !important; font-weight: 400 !important; font-size: 15px !important; line-height: 33px !important; letter-spacing: 0.5px !important; color: inherit !important; background: none !important; background-color: transparent !important; text-decoration: none !important; }
+    .press-preview-html p { margin: 0; text-align: justify; }
     /* 아카이브 폼 그리드 */
     .arch-form-row { display: grid; gap: 16px; }
     .arch-form-row-3 { grid-template-columns: 1fr 1fr 1fr; }
@@ -525,15 +545,28 @@
     .preview-article-header { padding: 0 0 28px; border-bottom: 0.3px solid #1e8ccc; }
     .preview-article-title { font-family: 'Noto Sans KR', sans-serif; font-weight: 800; font-size: 23px; color: #000; line-height: 1.45; letter-spacing: 0.28px; margin-bottom: 14px; }
     .preview-article-meta { font-family: 'Noto Sans KR', sans-serif; font-weight: 700; font-size: 14px; color: rgba(0,0,0,0.5); display: flex; align-items: center; gap: 8px; }
-    .preview-article-body { padding: 50px 0; font-family: 'Nanum Square', 'NanumSquare', sans-serif; font-weight: 400; font-size: 16px; color: #000; line-height: 40px; letter-spacing: 0; text-align: left; word-break: keep-all; overflow-wrap: break-word; }
+    .preview-article-body { padding: 50px 0; font-family: 'Nanum Square', 'NanumSquare', sans-serif; font-weight: 400; font-size: 15px; color: #000; line-height: 40px; letter-spacing: 0; text-align: justify; word-break: keep-all; overflow-wrap: break-word; }
     .preview-article-body p { margin-bottom: 0; }
     .preview-article-body p:last-child { margin-bottom: 0; }
 
     /* ── 개요 카운터 ── */
     .summary-counter { text-align: right; font-size: 12px; color: #aaa; margin-top: 3px; }
   </style>
+  <script src="assets/page-loader.js"></script>
 </head>
 <body>
+
+<!-- 액션 로더 오버레이 -->
+<div id="ecb-action-loader">
+  <svg width="72" height="72" viewBox="0 0 258 258" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path class="ecbs1" d="M129.006 0C114.757 0 103.201 11.5467 103.201 25.805C103.201 40.0633 114.747 51.61 129.006 51.61C171.75 51.61 206.411 86.2601 206.411 129.015C206.411 143.263 217.957 154.82 232.216 154.82C246.474 154.82 258.021 143.273 258.021 129.015C258.001 57.7536 200.247 0 129.006 0Z" fill="#57B7E1"/>
+    <path class="ecbs2" d="M129.005 0C143.253 0 154.81 11.5467 154.81 25.805C154.81 40.0533 143.263 51.61 129.005 51.61C86.2603 51.61 51.6002 86.2601 51.6002 129.015C51.6002 143.263 40.0535 154.82 25.7952 154.82C11.5469 154.82 -0.0097713 143.273 -0.0097713 129.015C0.000234511 57.7536 57.7538 0 129.005 0Z" fill="#0968A7"/>
+    <path class="ecbs3" d="M129.005 258C143.253 258 154.81 246.453 154.81 232.195C154.81 217.947 143.263 206.39 129.005 206.39C86.2603 206.39 51.6002 171.74 51.6002 128.985C51.6002 114.737 40.0535 103.18 25.7952 103.18C11.5469 103.18 -0.0097713 114.727 -0.0097713 128.985C-0.0097713 200.226 57.7438 257.99 128.995 257.99L129.005 258Z" fill="#3995CA"/>
+    <path class="ecbs4" d="M232.195 103.2H25.805C11.5533 103.2 0 114.751 0 129C0 143.249 11.5533 154.8 25.805 154.8H232.195C246.447 154.8 258 143.249 258 129C258 114.751 246.447 103.2 232.195 103.2Z" fill="#209896"/>
+    <path class="ecbs5" d="M227.742 202.077C227.742 187.829 216.196 176.272 201.937 176.272C194.843 176.272 188.42 179.134 183.757 183.767L183.717 183.727C169.709 197.735 150.357 206.4 128.985 206.4C114.737 206.4 103.18 217.947 103.18 232.205C103.18 246.463 114.727 258.01 128.985 258.01C163.785 258.01 195.344 244.202 218.547 221.799C224.16 217.066 227.732 209.992 227.732 202.077H227.742Z" fill="#46A538"/>
+  </svg>
+  <span class="ecb-al-msg" id="ecb-action-loader-msg"></span>
+</div>
 
 <!-- 로그인 다크모드 토글 -->
 <div class="login-dark-toggle" id="login-dark-toggle">
@@ -998,7 +1031,7 @@ function showDashboard() {
           ).join('')}</div>
           ${(() => {
             const ciHasItem = archiveTab === 'ci' && currentItems.some(i => (i.type || 'intro') === 'ci');
-            return ciHasItem ? '' : `<div style="display:flex;justify-content:flex-end;padding:12px 0 4px;"><button id="archive-tab-add-btn" class="add-btn" onclick="showForm()">+ 새 항목 추가</button></div>`;
+            return ciHasItem ? '' : `<div style="display:flex;justify-content:flex-end;padding:12px 10px 4px;"><button id="archive-tab-add-btn" class="add-btn" onclick="showForm()">+ 새 항목 추가</button></div>`;
           })()}`;
           displayItems = currentItems.filter(i => (i.type || 'intro') === archiveTab);
           if (archiveTab === 'ci' && displayItems.length > 1) displayItems = displayItems.slice(0, 1);
@@ -1052,8 +1085,7 @@ function showDashboard() {
     if (currentSection === 'faq') meta = '';
     else if (currentSection === 'press') meta = '';
     else if (currentSection === 'archive') {
-      const archParts = [item.year, item.period && item.period !== '구분없음' ? item.period : ''].filter(Boolean);
-      meta = '<span class="item-tag">' + ({intro:'기업소개서',catalog:'카탈로그/지명원',ir:'IR',ci:'CI'}[item.type] || item.type || '') + '</span>' + (archParts.length ? ' ' + archParts.join(' ') : '');
+      meta = item.createdAt ? item.createdAt.replace('T', ' ').slice(0, 16) : '';
     }
     else meta = (item.author ? `<span class="item-tag">${item.author}</span>` : '') + (item.date || '');
 
@@ -1065,7 +1097,8 @@ function showDashboard() {
 
     const isFaqExpanded = currentSection === 'faq' && faqExpandedId === item.id;
     const rowClick = currentSection === 'faq' ? `toggleFaqRow('${item.id}')`
-      : currentSection === 'archive' ? `openArchiveModal('${item.id}')`
+      : currentSection === 'archive' ? (item.type === 'ci' ? '' : `openArchiveModal('${item.id}')`)
+
       : `openPreview('${item.id}')`;
     const faqExpandHtml = currentSection === 'faq' ? `
       <div class="faq-expand" id="faq-exp-${item.id}" style="${isFaqExpanded ? '' : 'display:none'}">
@@ -2229,6 +2262,7 @@ function showDashboard() {
       }
     }
 
+    showActionLoader('저장 중...');
     try {
       // 단일 파일 업로드
       const uploadedUrls = {};
@@ -2341,6 +2375,8 @@ function showDashboard() {
       renderList();
     } catch (err) {
       showToast(err.message || '저장 실패', true);
+    } finally {
+      hideActionLoader();
     }
     btn.disabled = false; btn.textContent = '저장';
   }
@@ -2561,6 +2597,18 @@ function showDashboard() {
     document.body.appendChild(overlay);
   }
 
+  /* ── 액션 로더 ── */
+  function showActionLoader(msg) {
+    const el = document.getElementById('ecb-action-loader');
+    if (!el) return;
+    document.getElementById('ecb-action-loader-msg').textContent = msg || '';
+    el.classList.add('active');
+  }
+  function hideActionLoader() {
+    const el = document.getElementById('ecb-action-loader');
+    if (el) el.classList.remove('active');
+  }
+
   /* ── 미리보기 패널 ── */
   const PIN_SVG = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"/><path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z"/></svg>`;
 
@@ -2581,11 +2629,13 @@ function showDashboard() {
         <div class="preview-answer-label">답변</div>
         <div class="preview-answer-text">${escHtml(item.answer || '')}</div>`;
     } else if (currentSection === 'press') {
-      const imgs = (item.images && item.images.length) ? `<div class="preview-imgs">${item.images.map(u=>`<img src="${escAttr(u)}" alt="">`).join('')}</div>` : '';
-      body = `${item.date ? `<div class="preview-date-above">${escHtml(item.date)}</div>` : ''}
-        <div class="preview-title">${escHtml(item.title || '')}</div>
-        ${imgs}
-        <div class="preview-html press-preview-html">${item.content || ''}</div>`;
+      const attachHtml = (item.images && item.images.length)
+        ? `<div style="border-top:1px solid #f0f2f4;margin:20px 0 16px;"></div><div style="font-size:11px;font-weight:600;color:#aaa;letter-spacing:0.5px;margin-bottom:10px;">첨부파일</div><div class="preview-imgs">${item.images.map(u=>`<img src="${escAttr(u)}" alt="">`).join('')}</div>`
+        : '';
+      body = `<div class="preview-title">${escHtml(item.title || '')}</div>
+        ${item.date ? `<div class="preview-date-above" style="margin-bottom:16px;">${escHtml(item.date)}</div>` : ''}
+        <div class="preview-html press-preview-html" style="margin-top:0;">${item.content || ''}</div>
+        ${attachHtml}`;
     } else if (currentSection === 'archive') {
       const typeLabel = {intro:'기업소개서',catalog:'카탈로그/지명원',ir:'IR',ci:'CI'}[item.type] || item.type || '';
       const archMeta = [item.year, item.period && item.period !== '구분없음' ? item.period : ''].filter(Boolean).join(' ');
@@ -2750,6 +2800,7 @@ function showDashboard() {
 
       const btn = document.getElementById('press-upload-submit-btn');
       btn.disabled = true; btn.textContent = '처리 중...';
+      showActionLoader('업로드 중...');
 
       try {
         // 1. 엑셀 파싱
@@ -2806,6 +2857,8 @@ function showDashboard() {
         showToast('보도자료가 추가됐습니다.');
       } catch (err) {
         showToast('업로드 실패: ' + (err.message || err), true);
+      } finally {
+        hideActionLoader();
       }
       btn.disabled = false; btn.textContent = '업로드';
     }
