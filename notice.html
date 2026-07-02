@@ -1440,9 +1440,9 @@
 
       <div class="ft-divider" style="top:305px;"></div>
 
-      <a class="ft-bottom-link fw-bold" href="privacy.html" style="left:45px;">개인정보처리방침</a>
-      <a class="ft-bottom-link" href="terms.html" style="left:173px;">이용약관</a>
-      <a class="ft-bottom-link" href="email-policy.html" style="left:250px;">이메일무단수집거부</a>
+      <a class="ft-bottom-link fw-bold" href="privacy.html" target="_blank" rel="noopener" style="left:45px;">개인정보처리방침</a>
+      <a class="ft-bottom-link" href="terms.html" target="_blank" rel="noopener" style="left:173px;">이용약관</a>
+      <a class="ft-bottom-link" href="email-policy.html" target="_blank" rel="noopener" style="left:250px;">이메일무단수집거부</a>
       <a class="ft-bottom-link" href="faq.html" style="left:383px;">자주 묻는 질문(FAQ)</a>
 
       <a class="ft-social" href="https://www.youtube.com/@yt_ecobell" target="_blank" rel="noopener noreferrer" aria-label="YouTube" style="right:135px;">
@@ -1845,12 +1845,25 @@
         const catBadge = item => item.category ? `<span class="notice-cat-badge">${item.category}</span>` : '';
         let html = '';
         pinned.forEach(item => {
-          html += `<tr data-category="${item.category||''}"><td class="td-no pinned">${_PIN_SVG}</td><td><a class="td-title" href="notice-article.html?id=${item.id}">${catBadge(item)}${item.title}</a></td><td class="td-author">${item.author || ''}</td><td class="td-date">${fmtDate(item.date)}</td><td class="td-views">0</td><td class="td-attach">${attachCell(item)}</td></tr>`;
+          html += `<tr data-category="${item.category||''}"><td class="td-no pinned">${_PIN_SVG}</td><td><a class="td-title" href="notice-article.html?id=${item.id}">${catBadge(item)}${item.title}</a></td><td class="td-author">${item.author || ''}</td><td class="td-date">${fmtDate(item.date)}</td><td class="td-views" data-id="${item.id}">-</td><td class="td-attach">${attachCell(item)}</td></tr>`;
         });
         normal.forEach((item, idx) => {
-          html += `<tr data-category="${item.category||''}"><td class="td-no">${normal.length - idx}</td><td><a class="td-title" href="notice-article.html?id=${item.id}">${catBadge(item)}${item.title}</a></td><td class="td-author">${item.author || ''}</td><td class="td-date">${fmtDate(item.date)}</td><td class="td-views">0</td><td class="td-attach">${attachCell(item)}</td></tr>`;
+          html += `<tr data-category="${item.category||''}"><td class="td-no">${normal.length - idx}</td><td><a class="td-title" href="notice-article.html?id=${item.id}">${catBadge(item)}${item.title}</a></td><td class="td-author">${item.author || ''}</td><td class="td-date">${fmtDate(item.date)}</td><td class="td-views" data-id="${item.id}">-</td><td class="td-attach">${attachCell(item)}</td></tr>`;
         });
         _noticeTbody.innerHTML = html;
+
+        // 조회수 비동기 로드
+        fetch('https://raw.githubusercontent.com/Elowen-yn/ecobellwebsite/main/data/views.json?_=' + Date.now())
+          .then(r => r.json())
+          .then(views => {
+            document.querySelectorAll('.td-views[data-id]').forEach(td => {
+              const id = td.dataset.id;
+              td.textContent = views[id] != null ? views[id] : 0;
+            });
+          })
+          .catch(() => {
+            document.querySelectorAll('.td-views[data-id]').forEach(td => { td.textContent = 0; });
+          });
       } catch(e) { console.error('notices fetch failed', e); }
       filteredRows = getAllRows();
       renderPage(1);

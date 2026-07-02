@@ -11,12 +11,12 @@
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; overscroll-behavior: none; }
-    body { font-family: 'Noto Sans KR', sans-serif; min-width: 1100px; background: #fff; color: #000; }
+    body { font-family: 'Noto Sans KR', sans-serif; min-width: 900px; background: #fff; color: #000; }
 
     /* ─── HEADER ─── */
     header {
       position: fixed;
-      top: 0; left: 0; right: 0; min-width: 1100px;
+      top: 0; left: 0; right: 0; min-width: 900px;
       height: 69px;
       background: #fff;
       z-index: 999;
@@ -93,7 +93,7 @@
     .lnb {
       position: fixed;
       top: 69px;
-      left: 0; right: 0; min-width: 1100px;
+      left: 0; right: 0; min-width: 900px;
       height: 202px;
       background: #fff;
       border-top: 0.3px solid #d9d9d9; border-bottom: 0.3px solid #d9d9d9;
@@ -148,7 +148,7 @@
     .search-overlay {
       position: fixed;
       top: 69px;
-      left: 0; right: 0; min-width: 1100px;
+      left: 0; right: 0; min-width: 900px;
       height: 202px;
       background: #fafcfd;
       border-bottom: 0.2px solid rgba(0,0,0,0.3);
@@ -330,7 +330,7 @@
     /* ─── 필터 탭 ─── */
     .faq-filter {
       display: flex; align-items: center; justify-content: center;
-      gap: 0; padding: 80px 0 0;
+      flex-wrap: wrap; gap: 0; padding: 80px 20px 0;
     }
     .faq-filter-btn {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
@@ -352,7 +352,7 @@
     .faq-content {
       max-width: 1100px;
       margin: 30px auto 0;
-      padding: 0 0 100px;
+      padding: 0 20px 100px;
     }
     .faq-item {
       border-bottom: 1px solid #e8e8e8;
@@ -389,7 +389,7 @@
     /* ─── 페이지네이션 ─── */
     .faq-pagination {
       display: flex; align-items: center; justify-content: center;
-      gap: 30px; padding-top: 60px; margin-top: 10px; padding-bottom: 80px;
+      gap: 30px; padding-top: 20px; margin-top: 0; padding-bottom: 80px;
     }
     .page-arrow-group { display: flex; align-items: center; gap: 9px; }
     .page-arrow {
@@ -424,8 +424,25 @@
     .cta-contact-btn:hover::before { transform: translate(-50%, -50%) scale(5); }
     .cta-contact-btn span { position: relative; z-index: 1; }
 
+    /* ─── 반응형 (900~1100px) ─── */
+    @media (max-width: 1100px) {
+      .faq-hero { padding: 80px 20px 40px; }
+      .faq-title { font-size: 38px; }
+      .faq-subtitle { font-size: 16px; }
+      .faq-filter-btn { font-size: 15px; padding: 0 16px; }
+      .faq-content { padding: 0 20px 80px; }
+      .faq-pagination { gap: 16px; }
+    }
+    @media (max-width: 950px) {
+      .faq-title { font-size: 32px; }
+      .faq-subtitle { font-size: 14px; }
+      .faq-filter-btn { font-size: 14px; padding: 0 12px; }
+      .faq-question { padding: 0 6px; }
+      .faq-question-text { font-size: 15px; }
+    }
+
     /* ─── FOOTER ─── */
-    footer { position: sticky; bottom: 0; z-index: 0; min-width: 1100px; height: 442px; background: #2a2a2a; }
+    footer { position: sticky; bottom: 0; z-index: 0; min-width: 900px; height: 442px; background: #2a2a2a; }
     .footer-inner { position: relative; width: 100%; max-width: 1440px; margin: 0 auto; height: 100%; }
     .ft-company-info { position: absolute; right: 45px; top: 211px; font-family: 'Noto Sans KR', sans-serif; font-weight: 450; font-size: 13px; color: rgba(255,255,255,0.5); line-height: 23px; letter-spacing: -0.28px; white-space: pre-line; text-align: right; }
     .ft-col-title { position: absolute; font-family: 'Chillax', sans-serif; font-weight: 600; font-size: 16px; color: #fff; white-space: nowrap; margin: 0; top: 41px; letter-spacing: 0.54px; line-height: 28.8px; }
@@ -600,17 +617,19 @@
 
     <!-- 필터 탭 -->
     <div class="faq-filter">
-      <a class="faq-filter-btn" href="#" data-filter="전체">전체</a>
+      <a class="faq-filter-btn" href="#전체" data-filter="전체" onclick="event.preventDefault();setFaqFilterDirect('전체')">전체</a>
       <span class="faq-filter-sep"></span>
-      <a class="faq-filter-btn" href="#ecoASSET" data-filter="ecoASSET">ecoASSET</a>
+      <a class="faq-filter-btn" href="#ecoValue" data-filter="ecoValue" onclick="event.preventDefault();setFaqFilterDirect('ecoValue')">ecoValue</a>
       <span class="faq-filter-sep"></span>
-      <a class="faq-filter-btn" href="#E-ASSET" data-filter="E-ASSET">E-ASSET</a>
+      <a class="faq-filter-btn" href="#ecoASSET" data-filter="ecoASSET" onclick="event.preventDefault();setFaqFilterDirect('ecoASSET')">ecoASSET</a>
       <span class="faq-filter-sep"></span>
-      <a class="faq-filter-btn" href="#ecoNODE" data-filter="ecoNODE">ecoNODE</a>
+      <a class="faq-filter-btn" href="#E-ASSET" data-filter="E-ASSET" onclick="event.preventDefault();setFaqFilterDirect('E-ASSET')">E-ASSET</a>
       <span class="faq-filter-sep"></span>
-      <a class="faq-filter-btn" href="#신재생에너지" data-filter="신재생에너지">신재생에너지</a>
+      <a class="faq-filter-btn" href="#ecoNODE" data-filter="ecoNODE" onclick="event.preventDefault();setFaqFilterDirect('ecoNODE')">ecoNODE</a>
       <span class="faq-filter-sep"></span>
-      <a class="faq-filter-btn" href="#기타" data-filter="기타">기타</a>
+      <a class="faq-filter-btn" href="#태양광 솔루션" data-filter="태양광 솔루션" onclick="event.preventDefault();setFaqFilterDirect('태양광 솔루션')">태양광 솔루션</a>
+      <span class="faq-filter-sep"></span>
+      <a class="faq-filter-btn" href="#기타" data-filter="기타" onclick="event.preventDefault();setFaqFilterDirect('기타')">기타</a>
     </div>
   </div>
 
@@ -637,7 +656,7 @@
         </span>
       </div>
       <div class="faq-answer">
-        에코벨류는 신재생에너지 발전 사업자, RE100 이행이 필요한 제조·유통 기업, 탄소 감축 실적을 자산화하려는 ESG 경영 기업에 최적화되어 있습니다. 특히 온실가스 감축 데이터의 신뢰성 확보와 국내 KOC 및 글로벌 VCM 시장 참여를 목표로 하는 기업에 적합합니다.
+        에코벨류는 태양광 솔루션 발전 사업자, RE100 이행이 필요한 제조·유통 기업, 탄소 감축 실적을 자산화하려는 ESG 경영 기업에 최적화되어 있습니다. 특히 온실가스 감축 데이터의 신뢰성 확보와 국내 KOC 및 글로벌 VCM 시장 참여를 목표로 하는 기업에 적합합니다.
       </div>
     </div>
 
@@ -673,7 +692,7 @@
         </span>
       </div>
       <div class="faq-answer">
-        ecoNODE는 신재생에너지 설비를 원격으로 통합 관리하는 에코벨의 RTU(Remote Terminal Unit) 장비입니다. 태양광, 풍력 등 다양한 신재생에너지 설비의 데이터를 실시간으로 수집·전송하며, 현장 설비 상태를 중앙에서 효율적으로 모니터링할 수 있도록 지원합니다.
+        ecoNODE는 태양광 솔루션 설비를 원격으로 통합 관리하는 에코벨의 RTU(Remote Terminal Unit) 장비입니다. 태양광, 풍력 등 다양한 태양광 솔루션 설비의 데이터를 실시간으로 수집·전송하며, 현장 설비 상태를 중앙에서 효율적으로 모니터링할 수 있도록 지원합니다.
       </div>
     </div>
 
@@ -685,7 +704,7 @@
         </span>
       </div>
       <div class="faq-answer">
-        E-ASSET(에너지에셋)은 신재생에너지 설비의 발전 현황을 실시간으로 모니터링하고 분석하는 통합 플랫폼입니다. 태양광, 풍력 등 다양한 에너지원의 데이터를 한 곳에서 관리하고, 발전량·수익·설비 상태를 직관적인 대시보드로 확인하실 수 있습니다.
+        E-ASSET(에너지에셋)은 태양광 솔루션 설비의 발전 현황을 실시간으로 모니터링하고 분석하는 통합 플랫폼입니다. 태양광, 풍력 등 다양한 에너지원의 데이터를 한 곳에서 관리하고, 발전량·수익·설비 상태를 직관적인 대시보드로 확인하실 수 있습니다.
       </div>
     </div>
 
@@ -701,7 +720,7 @@
       </div>
     </div>
 
-    <div class="faq-item" data-category="신재생에너지">
+    <div class="faq-item" data-category="태양광 솔루션">
       <div class="faq-question">
         <span class="faq-question-text">태양광 솔루션 견적 신청은 어떻게 해야 하나요?</span>
         <span class="faq-chevron">
@@ -808,9 +827,9 @@
       <div class="ft-divider" style="top:305px;"></div>
 
       <!-- 하단 링크 -->
-      <a class="ft-bottom-link fw-bold" href="privacy.html" style="left:45px;">개인정보처리방침</a>
-      <a class="ft-bottom-link" href="terms.html" style="left:173px;">이용약관</a>
-      <a class="ft-bottom-link" href="email-policy.html" style="left:250px;">이메일무단수집거부</a>
+      <a class="ft-bottom-link fw-bold" href="privacy.html" target="_blank" rel="noopener" style="left:45px;">개인정보처리방침</a>
+      <a class="ft-bottom-link" href="terms.html" target="_blank" rel="noopener" style="left:173px;">이용약관</a>
+      <a class="ft-bottom-link" href="email-policy.html" target="_blank" rel="noopener" style="left:250px;">이메일무단수집거부</a>
       <a class="ft-bottom-link" href="faq.html" style="left:383px;">자주 묻는 질문(FAQ)</a>
 
       <!-- 소셜 아이콘 (y=323) -->
@@ -974,7 +993,7 @@
     });
 
     // ─── FAQ 페이지네이션 ───
-    const PAGE_SIZE = 5;
+    const PAGE_SIZE = 10;
     let curFilter = '전체', curPage = 1;
     let allItems = [];
 
@@ -1062,7 +1081,29 @@
       renderPage();
     }
 
+    function setFaqFilterDirect(filter) {
+      curFilter = filter;
+      curPage = 1;
+      document.querySelectorAll('.faq-filter-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.filter === curFilter);
+      });
+      const bcSep   = document.getElementById('bc-cat-sep');
+      const bcLabel = document.getElementById('bc-cat-label');
+      if (curFilter && curFilter !== '전체') {
+        bcSep.style.display = ''; bcLabel.style.display = ''; bcLabel.textContent = curFilter;
+      } else {
+        bcSep.style.display = 'none'; bcLabel.style.display = 'none';
+      }
+      renderPage();
+    }
+
     window.addEventListener('hashchange', applyFilter);
+
+    // URL ?filter= 파라미터로 진입 시 해당 카테고리 자동 선택
+    (function() {
+      const param = new URLSearchParams(location.search).get('filter');
+      if (param) setFaqFilterDirect(param);
+    })();
 
     // 초기 로드 (JSON fetch)
     const _faqList = document.getElementById('faq-list');

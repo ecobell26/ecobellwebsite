@@ -390,6 +390,16 @@
       align-self: center;
     }
 
+    /* ─── CTA ─── */
+    .sl-cta-section { background: #fff; padding: 80px 0 110px; }
+    .sl-cta-inner { width: 100%; max-width: 1440px; margin: 0 auto; padding: 0 155px; display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
+    .sl-cta-col { background: #fff; border: 1.5px solid #e7e7e7; border-radius: 20px; display: flex; align-items: center; justify-content: space-between; padding: 42px 48px 42px 54px; min-height: 235px; }
+    .sl-cta-left { display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; height: 100%; flex: 1; padding-bottom: 10px; }
+    .sl-cta-icon { width: 90px; height: 90px; flex-shrink: 0; margin-left: 24px; align-self: flex-end; margin-bottom: 10px; }
+    .sl-cta-heading { font-family: 'Kakao OTF', 'Noto Sans KR', sans-serif; font-weight: 700; font-size: 22.5px; color: #103e58; letter-spacing: -0.3px; line-height: 1.4; margin-top: 10px; margin-bottom: 32px; }
+    .sl-cta-btn { display: inline-flex; align-items: center; gap: 12px; background: #00314d; color: #fff; font-family: 'Kakao OTF', 'Noto Sans KR', sans-serif; font-weight: 400; font-size: 18px; text-decoration: none; padding: 13px 16px; border-radius: 200px; white-space: nowrap; }
+    .sl-cta-btn svg { flex-shrink: 0; }
+
     /* ─── FOOTER ─── */
     footer { position: sticky; bottom: 0; z-index: 0; min-width: 1100px; height: 442px; background: #2a2a2a; }
     .footer-inner { position: relative; width: 100%; max-width: 1440px; margin: 0 auto; height: 100%; }
@@ -424,17 +434,11 @@
     /* ─── 공지사항 섹션 ─── */
     .sl-notices-section { background: #fff; padding: 80px 0 90px; }
     .sl-notices-inner { width: 100%; max-width: 1440px; margin: 0 auto; padding: 0 155px; }
-    .sl-notices-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 0; }
+    .sl-notices-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0; }
     .sl-notices-label {
       font-family: 'Chillax', sans-serif; font-weight: 700; font-size: 33px;
       color: #000; letter-spacing: 0.3px; padding-bottom: 10px;
     }
-    .sl-notices-more {
-      font-family: 'Nanum Square', 'NanumSquare', sans-serif; font-weight: 700;
-      font-size: 13px; color: rgba(0,0,0,0.45); text-decoration: none;
-      letter-spacing: 0.2px; transition: color 0.15s;
-    }
-    .sl-notices-more:hover { color: #2DB47C; }
 
     /* 테이블 (notice.html 동일 디자인, 그린 컬러) */
     .sl-notice-table { width: 100%; border-collapse: collapse; margin-top: 18px; }
@@ -456,19 +460,33 @@
     .sl-attach-btn { background: none; border: none; cursor: pointer; padding: 2px; display: inline-flex; align-items: center; }
     .sl-attach-btn:hover svg { opacity: 1; }
 
-    /* 페이지네이션 */
-    .sl-notice-pagination { display: flex; align-items: center; justify-content: center; gap: 30px; padding-top: 70px; border-top: 2px solid #2DB47C; }
-    .sl-page-arrow-group { display: flex; align-items: center; gap: 9px; }
-    .sl-page-arrow { width: 23px; height: 22px; display: flex; align-items: center; justify-content: center; cursor: pointer; border: 0.5px solid rgba(0,0,0,0.3); border-radius: 3px; background: #fff; transition: background 0.2s; }
-    .sl-page-arrow:hover { background: #f5f5f5; }
-    .sl-page-num { font-family: 'Chillax', sans-serif; font-size: 17px; color: #000; text-align: center; cursor: pointer; font-weight: 500; letter-spacing: 0.17px; line-height: 22.1px; transition: color 0.15s; }
-    .sl-page-num:hover { color: #2DB47C; }
-    .sl-page-num.active { color: #2DB47C; font-weight: 600; }
 
     /* 빈 상태 */
     .sl-notice-empty { display: none; flex-direction: column; align-items: center; justify-content: center; padding: 80px 0 40px; }
     .sl-notice-empty.visible { display: flex; }
     .sl-notice-empty-text { font-family: 'Nanum Square', 'NanumSquare', sans-serif; font-weight: 700; font-size: 18px; color: rgba(0,0,0,0.4); }
+  /* ── FAQ 섹션 ── */
+  .sl-faq-section { background: #F2F4F5; padding: 100px 0 80px; }
+  .sl-faq-inner { max-width: 1440px; margin: 0 auto; padding: 0 155px; }
+  .sl-faq-title { font-family: 'Noto Sans KR', sans-serif; font-weight: 700; font-size: 30px; color: #000; line-height: 1.3; margin-bottom: 0; }
+  .sl-faq-list { margin-top: 30px; }
+  .sl-faq-item { border-bottom: 1px solid #d0d4d6; }
+  .sl-faq-q { display: flex; align-items: center; justify-content: space-between; padding: 28px 8px; cursor: pointer; font-family: 'Noto Sans KR', sans-serif; font-size: 16px; font-weight: 500; color: #222; transition: color 0.2s; user-select: none; }
+  .sl-faq-q:hover { color: #2DB47C; }
+  .sl-faq-item.open .sl-faq-q { color: #2DB47C; font-weight: 700; }
+  .sl-faq-chevron { flex-shrink: 0; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; transition: transform 0.3s ease; }
+  .sl-faq-item.open .sl-faq-chevron { transform: rotate(180deg); }
+  .sl-faq-a { max-height: 0; overflow: hidden; transition: max-height 0.35s cubic-bezier(0.4,0,0.2,1), padding 0.35s; font-family: 'Noto Sans KR', sans-serif; font-size: 15px; color: #555; line-height: 1.8; padding: 0 8px; word-break: keep-all; }
+  .sl-faq-item.open .sl-faq-a { max-height: 400px; padding: 0 8px 28px; }
+  .sl-faq-header { display: flex; align-items: center; justify-content: space-between; }
+  .faq-more-btn { display: inline-flex; align-items: center; gap: 10px; background: #00314D; color: #fff; font-family: 'Nanum Square','NanumSquare',sans-serif; font-weight: 700; font-size: 14px; text-decoration: none; padding: 10px 20px; border-radius: 200px; white-space: nowrap; height: 40px; box-sizing: border-box; transition: opacity 0.2s; }
+  .faq-more-btn:hover { opacity: 0.8; }
+  .faq-controls { display: flex; align-items: center; gap: 12px; }
+  .faq-nav { display: flex; align-items: center; border: 1.5px solid #e8e8e8; border-radius: 200px; height: 44px; overflow: hidden; }
+  .faq-nav-btn { width: 39px; height: 44px; display: flex; align-items: center; justify-content: center; background: none; border: none; cursor: pointer; transition: background 0.2s; padding: 0; }
+  .faq-nav-btn:hover:not(:disabled) { background: #f5f5f5; }
+  .faq-nav-btn:disabled { opacity: 0.35; cursor: default; }
+  .faq-nav-divider { width: 1px; height: 20px; background: #e8e8e8; flex-shrink: 0; }
   </style>
   <script src="assets/page-loader.js"></script>
 </head>
@@ -803,7 +821,18 @@
       <div class="sl-notices-inner">
         <div class="sl-notices-head">
           <p class="sl-notices-label">공지사항</p>
-          <a class="sl-notices-more" href="notice.html">전체보기 &rsaquo;</a>
+          <div class="faq-controls">
+            <div class="faq-nav">
+              <button class="faq-nav-btn" id="sl-notice-prev" aria-label="이전">
+                <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M7 1L1 7L7 13" stroke="#234B63" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <div class="faq-nav-divider"></div>
+              <button class="faq-nav-btn" id="sl-notice-next" aria-label="다음">
+                <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M1 1L7 7L1 13" stroke="#234B63" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+            <a class="faq-more-btn" href="notice.html">전체보기 <svg width="7" height="12" viewBox="0 0 7 12" fill="none"><path d="M1 1L6 6L1 11" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
         </div>
         <table class="sl-notice-table">
           <colgroup>
@@ -829,21 +858,58 @@
         <div class="sl-notice-empty" id="sl-notice-empty">
           <p class="sl-notice-empty-text">등록된 공지사항이 없습니다.</p>
         </div>
-        <div class="sl-notice-pagination" id="sl-notice-pagination" style="display:none;">
-          <div class="sl-page-arrow-group">
-            <span class="sl-page-arrow" id="sl-pg-first"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6 1L1 6.5L6 12" stroke="#000" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 1L7 6.5L12 12" stroke="#000" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-            <span class="sl-page-arrow" id="sl-pg-prev"><svg width="8" height="13" viewBox="0 0 8 13" fill="none"><path d="M7 1L1 6.5L7 12" stroke="#000" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          </div>
-          <div id="sl-pg-nums" style="display:flex;align-items:center;gap:18px;"></div>
-          <div class="sl-page-arrow-group">
-            <span class="sl-page-arrow" id="sl-pg-next"><svg width="8" height="13" viewBox="0 0 8 13" fill="none"><path d="M1 1L7 6.5L1 12" stroke="#000" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-            <span class="sl-page-arrow" id="sl-pg-last"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M7 1L12 6.5L7 12" stroke="#000" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M1 1L6 6.5L1 12" stroke="#000" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          </div>
-        </div>
       </div>
     </section>
 
   </main>
+
+  <!-- ═══ FAQ ═══ -->
+  <section class="sl-faq-section">
+    <div class="sl-faq-inner">
+      <div class="sl-faq-header reveal">
+        <p class="sl-faq-title">자주 묻는 질문</p>
+        <div class="faq-controls">
+          <div class="faq-nav">
+            <button class="faq-nav-btn" id="sl-faq-prev" aria-label="이전">
+              <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M7 1L1 7L7 13" stroke="#234B63" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="faq-nav-divider"></div>
+            <button class="faq-nav-btn" id="sl-faq-next" aria-label="다음">
+              <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M1 1L7 7L1 13" stroke="#234B63" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+          <a class="faq-more-btn" href="faq.html?filter=태양광 솔루션">전체보기 <svg width="7" height="12" viewBox="0 0 7 12" fill="none"><path d="M1 1L6 6L1 11" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </div>
+      <div class="sl-faq-list reveal" id="sl-faq-container"></div>
+    </div>
+  </section>
+
+  <!-- ═══ CTA ═══ -->
+  <section class="sl-cta-section">
+    <div class="sl-cta-inner">
+      <div class="sl-cta-col reveal">
+        <div class="sl-cta-left">
+          <p class="sl-cta-heading">태양광 솔루션이 더 궁금하신가요?</p>
+          <a class="sl-cta-btn" href="archive.html#/catalog">
+            카탈로그 다운로드
+            <svg width="20" height="14" viewBox="0 0 20 14" fill="none"><path d="M0 7H16" stroke="white" stroke-width="1.5" stroke-linecap="round"/><path d="M10 1L17 7L10 13" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+        <img class="sl-cta-icon" src="assets/company-brochure-icon.png" alt="">
+      </div>
+      <div class="sl-cta-col reveal">
+        <div class="sl-cta-left">
+          <p class="sl-cta-heading">무엇이든 담당자와 이야기 해보세요</p>
+          <a class="sl-cta-btn" href="contact.html">
+            담당자 문의하기
+            <svg width="20" height="14" viewBox="0 0 20 14" fill="none"><path d="M0 7H16" stroke="white" stroke-width="1.5" stroke-linecap="round"/><path d="M10 1L17 7L10 13" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+        <img class="sl-cta-icon" src="assets/company-contact-icon.png" alt="">
+      </div>
+    </div>
+  </section>
 
   <!-- ─── FOOTER ─── -->
   <footer>
@@ -874,9 +940,9 @@
       <a class="ft-link ft-en" href="directions.html" style="left:750px;top:121px;">오시는길</a>
       <a class="ft-link ft-en" href="contact.html" style="left:750px;top:156px;">문의하기</a>
       <div class="ft-divider" style="top:305px;"></div>
-      <a class="ft-bottom-link fw-bold" href="privacy.html" style="left:45px;">개인정보처리방침</a>
-      <a class="ft-bottom-link" href="terms.html" style="left:173px;">이용약관</a>
-      <a class="ft-bottom-link" href="email-policy.html" style="left:250px;">이메일무단수집거부</a>
+      <a class="ft-bottom-link fw-bold" href="privacy.html" target="_blank" rel="noopener" style="left:45px;">개인정보처리방침</a>
+      <a class="ft-bottom-link" href="terms.html" target="_blank" rel="noopener" style="left:173px;">이용약관</a>
+      <a class="ft-bottom-link" href="email-policy.html" target="_blank" rel="noopener" style="left:250px;">이메일무단수집거부</a>
       <a class="ft-bottom-link" href="faq.html" style="left:383px;">자주 묻는 질문(FAQ)</a>
       <a class="ft-social" href="https://www.youtube.com/@yt_ecobell" target="_blank" rel="noopener noreferrer" aria-label="YouTube" style="right:135px;">
         <svg width="22" height="23" viewBox="0 0 22 23" fill="none"><rect x="1.5" y="5" width="19" height="13" rx="3" stroke="#fff" stroke-width="1.3"/><polygon points="8.5,8.5 15.5,11.5 8.5,14.5" fill="#fff"/></svg>
@@ -1086,8 +1152,8 @@
 
       const tbody = document.getElementById('sl-notice-tbody');
       const empty = document.getElementById('sl-notice-empty');
-      const pagination = document.getElementById('sl-notice-pagination');
-      const pgNums = document.getElementById('sl-pg-nums');
+      const btnPrev = document.getElementById('sl-notice-prev');
+      const btnNext = document.getElementById('sl-notice-next');
 
       const _PIN_SVG = `<svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M16.7906 6.72187L11.7 5.93438L9.39371 1.09688C9.22495 0.759375 8.77495 0.759375 8.6062 1.09688L6.29995 5.9625L1.23746 6.72187C0.87183 6.77812 0.731205 7.25625 1.01246 7.50938L4.69683 11.3063L3.82495 16.6219C3.7687 16.9875 4.13433 17.2969 4.47183 17.0719L9.0562 14.5687L13.6125 17.0719C13.9218 17.2406 14.3156 16.9594 14.2312 16.6219L13.3593 11.3063L17.0437 7.50938C17.2687 7.25625 17.1562 6.77812 16.7906 6.72187Z" fill="#1E8DCD"/></svg>`;
       const _ATTACH_SVG = `<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M12 3L17 8L8 17C6.3 18.7 3.5 18.7 1.8 17C0.1 15.3 0.1 12.5 1.8 10.8L10.5 2.1C11.7 0.9 13.6 0.9 14.8 2.1C16 3.3 16 5.2 14.8 6.4L7.1 14.1C6.4 14.8 5.3 14.8 4.6 14.1C3.9 13.4 3.9 12.3 4.6 11.6L12 4.2" stroke="#000" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
@@ -1096,6 +1162,7 @@
 
       function renderPage(page) {
         slPage = page;
+        const totalPages = Math.max(1, Math.ceil(slNotices.length / ITEMS_PER_PAGE));
         const start = (page - 1) * ITEMS_PER_PAGE;
         const slice = slNotices.slice(start, start + ITEMS_PER_PAGE);
         const normalItems = slNotices.filter(function(i) { return !i.pinned; });
@@ -1108,38 +1175,30 @@
             : `<td class="sl-td-no">${normalItems.length - normalItems.indexOf(item)}</td>`;
           const attachCell = (item.attachments && item.attachments.length)
             ? `<td class="sl-td-attach">${_ATTACH_SVG}</td>` : `<td class="sl-td-attach"></td>`;
-          html += `<tr>${noCell}<td><a class="sl-td-title" href="notice-article.html?id=${item.id}">${item.title}</a></td><td class="sl-td-author">${item.author || ''}</td><td class="sl-td-date">${fmtDate(item.date)}</td><td class="sl-td-views">0</td>${attachCell}</tr>`;
+          html += `<tr>${noCell}<td><a class="sl-td-title" href="notice-article.html?id=${item.id}">${item.title}</a></td><td class="sl-td-author">${item.author || ''}</td><td class="sl-td-date">${fmtDate(item.date)}</td><td class="sl-td-views" data-id="${item.id}">-</td>${attachCell}</tr>`;
         });
         tbody.innerHTML = html;
+        fetch('https://raw.githubusercontent.com/Elowen-yn/ecobellwebsite/main/data/views.json?_=' + Date.now())
+          .then(function(r) { return r.json(); })
+          .then(function(views) {
+            tbody.querySelectorAll('.sl-td-views[data-id]').forEach(function(td) {
+              td.textContent = views[td.dataset.id] != null ? views[td.dataset.id] : 0;
+            });
+          }).catch(function() {
+            tbody.querySelectorAll('.sl-td-views[data-id]').forEach(function(td) { td.textContent = 0; });
+          });
 
         if (slNotices.length === 0) {
           empty.classList.add('visible');
-          pagination.style.display = 'none';
         } else {
           empty.classList.remove('visible');
-          pagination.style.display = slNotices.length > ITEMS_PER_PAGE ? '' : 'none';
         }
-        renderPagination();
+        if (btnPrev) btnPrev.disabled = slPage <= 1;
+        if (btnNext) btnNext.disabled = slPage >= totalPages;
       }
 
-      function renderPagination() {
-        const totalPages = Math.max(1, Math.ceil(slNotices.length / ITEMS_PER_PAGE));
-        pgNums.innerHTML = '';
-        let start = Math.max(1, slPage - 2);
-        let end = Math.min(totalPages, start + 4);
-        if (end - start < 4) start = Math.max(1, end - 4);
-        for (let i = start; i <= end; i++) {
-          const span = document.createElement('span');
-          span.className = 'sl-page-num' + (i === slPage ? ' active' : '');
-          span.textContent = i;
-          (function(p) { span.addEventListener('click', function() { renderPage(p); }); })(i);
-          pgNums.appendChild(span);
-        }
-        document.getElementById('sl-pg-first').onclick = function() { renderPage(1); };
-        document.getElementById('sl-pg-prev').onclick = function() { if (slPage > 1) renderPage(slPage - 1); };
-        document.getElementById('sl-pg-next').onclick = function() { if (slPage < totalPages) renderPage(slPage + 1); };
-        document.getElementById('sl-pg-last').onclick = function() { renderPage(totalPages); };
-      }
+      if (btnPrev) btnPrev.addEventListener('click', function() { if (slPage > 1) renderPage(slPage - 1); });
+      if (btnNext) btnNext.addEventListener('click', function() { if (slPage < Math.ceil(slNotices.length / ITEMS_PER_PAGE)) renderPage(slPage + 1); });
 
       fetch('https://raw.githubusercontent.com/Elowen-yn/ecobellwebsite/main/data/notices.json?_=' + Date.now())
         .then(function(r) { return r.json(); })
@@ -1155,6 +1214,53 @@
           renderPage(1);
         })
         .catch(function() { renderPage(1); });
+    })();
+  </script>
+  <script>
+    // FAQ: faq.json에서 태양광 솔루션 카테고리 항목 동적 로드 (5개씩, 이전/다음 버튼)
+    (function() {
+      const container = document.getElementById('sl-faq-container');
+      const btnPrev   = document.getElementById('sl-faq-prev');
+      const btnNext   = document.getElementById('sl-faq-next');
+      if (!container) return;
+      const PAGE_SIZE = 5;
+      const CATEGORY  = '태양광 솔루션';
+      const chevronSVG = `<svg width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M1 1L8 8L15 1" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+      let allItems = [], curPage = 1;
+
+      function renderPage(page) {
+        curPage = page;
+        container.innerHTML = '';
+        const totalPages = Math.ceil(allItems.length / PAGE_SIZE);
+        allItems.slice((page-1)*PAGE_SIZE, page*PAGE_SIZE).forEach(item => {
+          const el = document.createElement('div');
+          el.className = 'sl-faq-item';
+          el.innerHTML = `<div class="sl-faq-q"><span>${item.question||''}</span><span class="sl-faq-chevron">${chevronSVG}</span></div><div class="sl-faq-a">${item.answer||''}</div>`;
+          container.appendChild(el);
+        });
+        container.querySelectorAll('.sl-faq-q').forEach(q => {
+          q.addEventListener('click', () => {
+            const it = q.closest('.sl-faq-item');
+            const isOpen = it.classList.contains('open');
+            container.querySelectorAll('.sl-faq-item.open').forEach(i => i.classList.remove('open'));
+            if (!isOpen) it.classList.add('open');
+          });
+        });
+        if (btnPrev) btnPrev.disabled = curPage <= 1;
+        if (btnNext) btnNext.disabled = curPage >= totalPages;
+      }
+
+      if (btnPrev) btnPrev.addEventListener('click', () => { if (curPage > 1) renderPage(curPage - 1); });
+      if (btnNext) btnNext.addEventListener('click', () => { if (curPage < Math.ceil(allItems.length / PAGE_SIZE)) renderPage(curPage + 1); });
+
+      fetch('https://raw.githubusercontent.com/Elowen-yn/ecobellwebsite/main/data/faq.json')
+        .then(r => r.json())
+        .then(data => {
+          allItems = (data.items||[]).filter(i => i.published!==false && String(i.category||'').split(',').map(s=>s.trim()).includes(CATEGORY));
+          if (!allItems.length) { container.innerHTML = '<p style="color:#aaa;text-align:center;padding:40px 0;">등록된 FAQ가 없습니다.</p>'; return; }
+          renderPage(1);
+        })
+        .catch(() => { container.innerHTML = '<p style="color:#aaa;text-align:center;padding:40px 0;">FAQ를 불러오지 못했습니다.</p>'; });
     })();
   </script>
   <script src="assets/admin-trigger.js"></script>

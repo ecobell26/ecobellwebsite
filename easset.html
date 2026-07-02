@@ -102,6 +102,16 @@
       .lnb-inner    { max-width: none; }
     }
 
+    /* ─── CTA ─── */
+    .sl-cta-section { background: #fff; padding: 80px 0 110px; }
+    .sl-cta-inner { width: 100%; max-width: 1440px; margin: 0 auto; padding: 0 155px; display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
+    .sl-cta-col { background: #fff; border: 1.5px solid #e7e7e7; border-radius: 20px; display: flex; align-items: center; justify-content: space-between; padding: 42px 48px 42px 54px; min-height: 235px; }
+    .sl-cta-left { display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; height: 100%; flex: 1; padding-bottom: 10px; }
+    .sl-cta-icon { width: 90px; height: 90px; flex-shrink: 0; margin-left: 24px; align-self: flex-end; margin-bottom: 10px; }
+    .sl-cta-heading { font-family: 'Kakao OTF', 'Noto Sans KR', sans-serif; font-weight: 700; font-size: 22.5px; color: #103e58; letter-spacing: -0.3px; line-height: 1.4; margin-top: 10px; margin-bottom: 32px; }
+    .sl-cta-btn { display: inline-flex; align-items: center; gap: 12px; background: #00314d; color: #fff; font-family: 'Kakao OTF', 'Noto Sans KR', sans-serif; font-weight: 400; font-size: 18px; text-decoration: none; padding: 13px 16px; border-radius: 200px; white-space: nowrap; }
+    .sl-cta-btn svg { flex-shrink: 0; }
+
     /* ─── FOOTER ─── */
     footer { position: sticky; bottom: 0; z-index: 0; min-width: 1100px; height: 442px; background: #2a2a2a; }
     .footer-inner { position: relative; width: 100%; max-width: 1440px; margin: 0 auto; height: 100%; }
@@ -419,7 +429,7 @@
     .pf-faq-section { background: #fff; padding: 100px 0 80px; }
     .pf-faq-inner { max-width: 1440px; margin: 0 auto; padding: 0 155px; }
     .pf-faq-title { font-family: 'Noto Sans KR', sans-serif; font-weight: 700; font-size: 33px; color: #3694AA; line-height: 1.3; margin-bottom: 0; }
-    .pf-faq-list { margin-top: 60px; border-top: 1.5px solid #e0e0e0; }
+    .pf-faq-list { margin-top: 30px; }
     .pf-faq-item { border-bottom: 1px solid #e0e0e0; }
     .pf-faq-q { display: flex; align-items: center; justify-content: space-between; padding: 28px 8px; cursor: pointer; font-family: 'Noto Sans KR', sans-serif; font-size: 16px; font-weight: 500; color: #222; transition: color 0.2s; user-select: none; }
     .pf-faq-q:hover { color: #3694AA; }
@@ -428,6 +438,15 @@
     .pf-faq-item.open .pf-faq-chevron { transform: rotate(180deg); }
     .pf-faq-a { max-height: 0; overflow: hidden; transition: max-height 0.35s cubic-bezier(0.4,0,0.2,1), padding 0.35s; font-family: 'Noto Sans KR', sans-serif; font-size: 15px; color: #555; line-height: 1.8; padding: 0 8px; word-break: keep-all; }
     .pf-faq-item.open .pf-faq-a { max-height: 400px; padding: 0 8px 28px; }
+    .pf-faq-header { display: flex; align-items: center; justify-content: space-between; }
+    .faq-more-btn { display: inline-flex; align-items: center; gap: 10px; background: #00314D; color: #fff; font-family: 'Nanum Square','NanumSquare',sans-serif; font-weight: 700; font-size: 14px; text-decoration: none; padding: 10px 20px; border-radius: 200px; white-space: nowrap; height: 40px; box-sizing: border-box; transition: opacity 0.2s; }
+    .faq-more-btn:hover { opacity: 0.8; }
+    .faq-controls { display: flex; align-items: center; gap: 12px; }
+    .faq-nav { display: flex; align-items: center; border: 1.5px solid #e8e8e8; border-radius: 200px; height: 44px; overflow: hidden; }
+    .faq-nav-btn { width: 39px; height: 44px; display: flex; align-items: center; justify-content: center; background: none; border: none; cursor: pointer; transition: background 0.2s; padding: 0; }
+    .faq-nav-btn:hover:not(:disabled) { background: #f5f5f5; }
+    .faq-nav-btn:disabled { opacity: 0.35; cursor: default; }
+    .faq-nav-divider { width: 1px; height: 20px; background: #e8e8e8; flex-shrink: 0; }
 
   </style>
   <script src="assets/page-loader.js"></script>
@@ -642,8 +661,48 @@
   <!-- ═══ FAQ ═══ -->
   <section class="pf-faq-section">
     <div class="pf-faq-inner">
-      <p class="pf-faq-title reveal">자주 묻는 질문</p>
+      <div class="pf-faq-header reveal">
+        <p class="pf-faq-title">자주 묻는 질문</p>
+        <div class="faq-controls">
+          <div class="faq-nav">
+            <button class="faq-nav-btn" id="pf-faq-prev" aria-label="이전">
+              <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M7 1L1 7L7 13" stroke="#234B63" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="faq-nav-divider"></div>
+            <button class="faq-nav-btn" id="pf-faq-next" aria-label="다음">
+              <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M1 1L7 7L1 13" stroke="#234B63" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+          <a class="faq-more-btn" href="faq.html?filter=E-ASSET">전체보기 <svg width="7" height="12" viewBox="0 0 7 12" fill="none"><path d="M1 1L6 6L1 11" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </div>
       <div class="pf-faq-list reveal" id="pf-faq-container"></div>
+    </div>
+  </section>
+
+  <!-- ═══ CTA ═══ -->
+  <section class="sl-cta-section">
+    <div class="sl-cta-inner">
+      <div class="sl-cta-col reveal">
+        <div class="sl-cta-left">
+          <p class="sl-cta-heading">E-ASSET이 더 궁금하신가요?</p>
+          <a class="sl-cta-btn" href="archive.html#/catalog">
+            카탈로그 다운로드
+            <svg width="20" height="14" viewBox="0 0 20 14" fill="none"><path d="M0 7H16" stroke="white" stroke-width="1.5" stroke-linecap="round"/><path d="M10 1L17 7L10 13" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+        <img class="sl-cta-icon" src="assets/company-brochure-icon.png" alt="">
+      </div>
+      <div class="sl-cta-col reveal">
+        <div class="sl-cta-left">
+          <p class="sl-cta-heading">무엇이든 담당자와 이야기 해보세요</p>
+          <a class="sl-cta-btn" href="contact.html">
+            담당자 문의하기
+            <svg width="20" height="14" viewBox="0 0 20 14" fill="none"><path d="M0 7H16" stroke="white" stroke-width="1.5" stroke-linecap="round"/><path d="M10 1L17 7L10 13" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+        <img class="sl-cta-icon" src="assets/company-contact-icon.png" alt="">
+      </div>
     </div>
   </section>
 
@@ -684,9 +743,9 @@
 
       <div class="ft-divider" style="top:305px;"></div>
 
-      <a class="ft-bottom-link fw-bold" href="privacy.html" style="left:45px;">개인정보처리방침</a>
-      <a class="ft-bottom-link" href="terms.html" style="left:173px;">이용약관</a>
-      <a class="ft-bottom-link" href="email-policy.html" style="left:250px;">이메일무단수집거부</a>
+      <a class="ft-bottom-link fw-bold" href="privacy.html" target="_blank" rel="noopener" style="left:45px;">개인정보처리방침</a>
+      <a class="ft-bottom-link" href="terms.html" target="_blank" rel="noopener" style="left:173px;">이용약관</a>
+      <a class="ft-bottom-link" href="email-policy.html" target="_blank" rel="noopener" style="left:250px;">이메일무단수집거부</a>
       <a class="ft-bottom-link" href="faq.html" style="left:383px;">자주 묻는 질문(FAQ)</a>
 
       <a class="ft-social" href="https://www.youtube.com/@yt_ecobell" target="_blank" rel="noopener noreferrer" aria-label="YouTube" style="right:135px;">
@@ -898,33 +957,48 @@
   <script src="assets/header-scroll.js"></script>
 
   <script>
-    // FAQ: faq.json에서 E-ASSET 카테고리 항목 동적 로드
+    // FAQ: faq.json에서 E-ASSET 카테고리 항목 동적 로드 (5개씩, 이전/다음 버튼)
     (function() {
       const container = document.getElementById('pf-faq-container');
+      const btnPrev   = document.getElementById('pf-faq-prev');
+      const btnNext   = document.getElementById('pf-faq-next');
       if (!container) return;
+      const PAGE_SIZE = 5;
+      const CATEGORY  = 'E-ASSET';
       const chevronSVG = `<svg width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M1 1L8 8L15 1" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+      let allItems = [], curPage = 1;
+
+      function renderPage(page) {
+        curPage = page;
+        container.innerHTML = '';
+        const totalPages = Math.ceil(allItems.length / PAGE_SIZE);
+        allItems.slice((page-1)*PAGE_SIZE, page*PAGE_SIZE).forEach(item => {
+          const el = document.createElement('div');
+          el.className = 'pf-faq-item';
+          el.innerHTML = `<div class="pf-faq-q"><span>${item.question||''}</span><span class="pf-faq-chevron">${chevronSVG}</span></div><div class="pf-faq-a">${item.answer||''}</div>`;
+          container.appendChild(el);
+        });
+        container.querySelectorAll('.pf-faq-q').forEach(q => {
+          q.addEventListener('click', () => {
+            const it = q.closest('.pf-faq-item');
+            const isOpen = it.classList.contains('open');
+            container.querySelectorAll('.pf-faq-item.open').forEach(i => i.classList.remove('open'));
+            if (!isOpen) it.classList.add('open');
+          });
+        });
+        if (btnPrev) btnPrev.disabled = curPage <= 1;
+        if (btnNext) btnNext.disabled = curPage >= totalPages;
+      }
+
+      if (btnPrev) btnPrev.addEventListener('click', () => { if (curPage > 1) renderPage(curPage - 1); });
+      if (btnNext) btnNext.addEventListener('click', () => { if (curPage < Math.ceil(allItems.length / PAGE_SIZE)) renderPage(curPage + 1); });
+
       fetch('https://raw.githubusercontent.com/Elowen-yn/ecobellwebsite/main/data/faq.json')
         .then(r => r.json())
         .then(data => {
-          const items = (data.items || []).filter(i =>
-            i.published !== false &&
-            String(i.category || '').split(',').map(s => s.trim()).includes('E-ASSET')
-          );
-          if (!items.length) { container.innerHTML = '<p style="color:#aaa;text-align:center;padding:40px 0;">등록된 FAQ가 없습니다.</p>'; return; }
-          items.forEach(item => {
-            const el = document.createElement('div');
-            el.className = 'pf-faq-item';
-            el.innerHTML = `<div class="pf-faq-q"><span>${item.question || ''}</span><span class="pf-faq-chevron">${chevronSVG}</span></div><div class="pf-faq-a">${item.answer || ''}</div>`;
-            container.appendChild(el);
-          });
-          container.querySelectorAll('.pf-faq-q').forEach(q => {
-            q.addEventListener('click', () => {
-              const item = q.closest('.pf-faq-item');
-              const isOpen = item.classList.contains('open');
-              container.querySelectorAll('.pf-faq-item.open').forEach(i => i.classList.remove('open'));
-              if (!isOpen) item.classList.add('open');
-            });
-          });
+          allItems = (data.items||[]).filter(i => i.published!==false && String(i.category||'').split(',').map(s=>s.trim()).includes(CATEGORY));
+          if (!allItems.length) { container.innerHTML = '<p style="color:#aaa;text-align:center;padding:40px 0;">등록된 FAQ가 없습니다.</p>'; return; }
+          renderPage(1);
         })
         .catch(() => { container.innerHTML = '<p style="color:#aaa;text-align:center;padding:40px 0;">FAQ를 불러오지 못했습니다.</p>'; });
     })();

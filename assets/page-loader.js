@@ -47,7 +47,6 @@
   var domReady    = false;
   var loaderShown = false; /* 로더가 한 번이라도 화면에 올라왔는지 */
   var stopping    = false; /* 페이드아웃 시작됐는지 (중복 방지) */
-  var waitForCycle= false; /* load 완료됐지만 사이클 끝나길 기다리는 중 */
   var currentEl   = null;
   var showTimer   = null;
   var animTimer   = null;
@@ -75,7 +74,6 @@
   /* 한 사이클 실행 */
   function runCycle() {
     stopping      = false;
-    waitForCycle  = false;
     loaderShown   = true;
 
     var el = document.createElement('div');
@@ -93,17 +91,10 @@
       });
     });
 
-    /* 한 사이클(2.1s) 후 처리 */
+    /* 한 사이클(2.1s) 후 처리 — 항상 1회만 실행 (재등장 방지) */
     animTimer = setTimeout(function () {
       animTimer = null;
-      if (loaded || waitForCycle) {
-        /* 로드 완료 상태 → 이 사이클이 마지막, 페이드아웃 후 종료 */
-        doFadeOut(el);
-      } else {
-        /* 아직 로딩 중 → 페이드아웃 후 다음 사이클 (이 시간 안에 load 오면 취소) */
-        doFadeOut(el);
-        setTimeout(function () { if (!loaded) runCycle(); }, FADE_DURATION);
-      }
+      doFadeOut(el);
     }, ANIM_DURATION);
   }
 
@@ -124,11 +115,11 @@
     }
 
     if (animTimer) {
-      /* 사이클 진행 중 → 완료 신호만 남김 (animTimer 콜백에서 처리) */
-      waitForCycle = true;
+      /* 사이클 진행 중 → animTimer 취소하고 즉시 페이드아웃 */
+      clearTimeout(animTimer);
+      animTimer = null;
+      if (currentEl) doFadeOut(currentEl);
     }
-    /* animTimer가 없으면 사이클 간 fadeOut 중 → fadeOut 후 runCycle이 호출되지 않도록
-       stopping이 true가 되므로 다음 runCycle은 실행 안 됨 */
   }
 
   document.addEventListener('DOMContentLoaded', function () {
