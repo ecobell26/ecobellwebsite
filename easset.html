@@ -102,6 +102,20 @@
       .lnb-inner    { max-width: none; }
     }
 
+    /* ─── CASES SECTION ─── */
+    .en-cases-section { background: linear-gradient(to bottom, #fff 0%, #E9F4FA 100%); padding: 100px 0 120px; }
+    .en-cases-inner { max-width: 1440px; margin: 0 auto; padding: 0 131px; }
+    .en-cases-label { font-family: 'Noto Sans KR', sans-serif; font-weight: 700; font-size: 19px; color: #000; margin-bottom: 14px; letter-spacing: -0.3px; }
+    .en-cases-title { font-family: 'Noto Sans KR', sans-serif; font-weight: 700; font-size: 37px; color: #000; line-height: 1.4; margin-bottom: 60px; word-break: keep-all; }
+    .en-case-row { display: flex; gap: 52px; align-items: flex-start; padding: 50px 0; }
+    .en-case-thumb { flex: 0 0 352px; height: 209px; background: #D9D9D9; border-radius: 12px; overflow: hidden; }
+    .en-case-thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .en-case-info { flex: 1; padding-top: 8px; }
+    .en-case-heading { font-family: 'Kakao OTF', 'Noto Sans KR', sans-serif; font-weight: 700; font-size: 27px; color: #1E8CCC; line-height: 1.4; margin-bottom: 22px; word-break: keep-all; }
+    .en-case-bullets { display: flex; flex-direction: column; gap: 16px; }
+    .en-case-bullet-item { font-family: 'Noto Sans KR', sans-serif; font-weight: 700; font-size: 17px; color: #000; line-height: 1.7; word-break: keep-all; }
+    .en-case-bullet-item strong { font-weight: 700; display: block; margin-bottom: 2px; }
+
     /* ─── CTA ─── */
     .sl-cta-section { background: #fff; padding: 80px 0 110px; }
     .sl-cta-inner { width: 100%; max-width: 1440px; margin: 0 auto; padding: 0 155px; display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
@@ -637,54 +651,49 @@
       </div>
     </section>
 
-    <!-- ═══ FEATURES ═══ -->
-    <section class="en-features">
-      <div class="en-features-inner">
-        <div class="en-features-head reveal">
-          <div>
-            <p class="en-features-label">에너지에셋만의 특장점</p>
-            <p class="en-features-title">발전 효율을 극대화하는 스마트 관제 플랫폼</p>
+    <!-- ═══ CASES SECTION ═══ -->
+    <section class="en-cases-section">
+      <div class="en-cases-inner">
+        <p class="en-cases-label reveal">에너지에셋만의 특장점</p>
+        <p class="en-cases-title reveal">발전 효율을 극대화하는<br>스마트 관제 플랫폼</p>
+        <div class="reveal">
+          <div class="en-case-row">
+            <div class="en-case-thumb"></div>
+            <div class="en-case-info">
+              <p class="en-case-heading">발전 효율을 극대화하는 스마트 관제 플랫폼</p>
+              <div class="en-case-bullets">
+                <div class="en-case-bullet-item"><span style="font-weight:400;">전국에 분산된 태양광·풍력 등 신재생에너지 발전소를 단일 플랫폼에서 통합 모니터링합니다. 실시간 발전량, 성능지수(PR), 설비 상태를 한 화면에서 파악하여 운영 효율을 즉각 최적화합니다.</span></div>
+              </div>
+            </div>
           </div>
-          <div class="en-features-nav">
-            <div class="en-slide-counter">
-              <span class="en-counter-cur" id="en-current">01</span>
-              <span class="en-counter-line"><span class="en-counter-fill" id="en-fill"></span></span>
-              <span class="en-counter-total" id="en-total">01</span>
+          <div class="en-case-row">
+            <div class="en-case-thumb"></div>
+            <div class="en-case-info">
+              <p class="en-case-heading">이상 감지 즉시 알림, 선제적 O&amp;M 대응</p>
+              <div class="en-case-bullets">
+                <div class="en-case-bullet-item"><span style="font-weight:400;">인버터, 접속함, 계측기 등 현장 설비의 이상 신호를 엣지 단에서 실시간 감지하고 즉각 알림을 발송합니다. 문제 발생 시점과 원인을 정확히 파악하여 불필요한 현장 출동을 최소화합니다.</span></div>
+              </div>
             </div>
-            <button class="en-nav-btn" id="en-prev" aria-label="이전">
-              <svg width="7" height="11" viewBox="0 0 10 16" fill="none">
-                <path d="M9 1L2 8L9 15" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </button>
-            <button class="en-nav-btn" id="en-next" aria-label="다음">
-              <svg width="7" height="11" viewBox="0 0 10 16" fill="none">
-                <path d="M1 1L8 8L1 15" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </button>
           </div>
-        </div>
-
-        <div class="en-features-track-wrap reveal">
-          <div class="en-features-track" id="en-track">
-            <div class="en-feature-card" data-title="발전 효율을 극대화하는 스마트 관제 플랫폼">
-              <div class="en-feature-card-img"></div>
-              <div class="en-feature-card-content">전국에 분산된 태양광·풍력 등 신재생에너지 발전소를 단일 플랫폼에서 통합 모니터링합니다. 실시간 발전량, 성능지수(PR), 설비 상태를 한 화면에서 파악하여 운영 효율을 즉각 최적화합니다.</div>
+          <div class="en-case-row">
+            <div class="en-case-thumb"></div>
+            <div class="en-case-info">
+              <p class="en-case-heading">지역별 발전량 비교 및 성능 분석(PR) 엔진</p>
+              <div class="en-case-bullets">
+                <div class="en-case-bullet-item"><span style="font-weight:400;">기상 데이터와 실측 발전량을 결합한 PR(Performance Ratio) 분석으로 발전소별 실질 성능을 정밀 평가합니다. 지역별·기간별 비교 분석을 통해 저성능 발전소를 조기 발견하고 수익성을 극대화합니다.</span></div>
+              </div>
             </div>
-            <div class="en-feature-card" data-title="이상 감지 즉시 알림, 선제적 O&amp;M 대응">
-              <div class="en-feature-card-img"></div>
-              <div class="en-feature-card-content">인버터, 접속함, 계측기 등 현장 설비의 이상 신호를 엣지 단에서 실시간 감지하고 즉각 알림을 발송합니다. 문제 발생 시점과 원인을 정확히 파악하여 불필요한 현장 출동을 최소화합니다.</div>
-            </div>
-            <div class="en-feature-card" data-title="지역별 발전량 비교 및 성능 분석(PR) 엔진">
-              <div class="en-feature-card-img"></div>
-              <div class="en-feature-card-content">기상 데이터와 실측 발전량을 결합한 PR(Performance Ratio) 분석으로 발전소별 실질 성능을 정밀 평가합니다. 지역별·기간별 비교 분석을 통해 저성능 발전소를 조기 발견하고 수익성을 극대화합니다.</div>
-            </div>
-            <div class="en-feature-card" data-title="자동 보고서 생성으로 운영 효율 최적화">
-              <div class="en-feature-card-img"></div>
-              <div class="en-feature-card-content">일간·월간·연간 발전 실적 보고서를 자동으로 생성합니다. 투자자, 감독 기관, 유지보수 팀에 필요한 맞춤형 보고서를 버튼 하나로 산출하여 운영 업무 부담을 획기적으로 줄입니다.</div>
+          </div>
+          <div class="en-case-row">
+            <div class="en-case-thumb"></div>
+            <div class="en-case-info">
+              <p class="en-case-heading">자동 보고서 생성으로 운영 효율 최적화</p>
+              <div class="en-case-bullets">
+                <div class="en-case-bullet-item"><span style="font-weight:400;">일간·월간·연간 발전 실적 보고서를 자동으로 생성합니다. 투자자, 감독 기관, 유지보수 팀에 필요한 맞춤형 보고서를 버튼 하나로 산출하여 운영 업무 부담을 획기적으로 줄입니다.</span></div>
+              </div>
             </div>
           </div>
         </div>
-
       </div>
     </section>
 

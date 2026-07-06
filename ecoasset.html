@@ -102,6 +102,20 @@
       .lnb-inner    { max-width: none; }
     }
 
+    /* ─── CASES SECTION ─── */
+    .en-cases-section { background: linear-gradient(to bottom, #fff 0%, #E9F4FA 100%); padding: 100px 0 120px; }
+    .en-cases-inner { max-width: 1440px; margin: 0 auto; padding: 0 131px; }
+    .en-cases-label { font-family: 'Noto Sans KR', sans-serif; font-weight: 700; font-size: 19px; color: #000; margin-bottom: 14px; letter-spacing: -0.3px; }
+    .en-cases-title { font-family: 'Noto Sans KR', sans-serif; font-weight: 700; font-size: 37px; color: #000; line-height: 1.4; margin-bottom: 60px; word-break: keep-all; }
+    .en-case-row { display: flex; gap: 52px; align-items: flex-start; padding: 50px 0; }
+    .en-case-thumb { flex: 0 0 352px; height: 209px; background: #D9D9D9; border-radius: 12px; overflow: hidden; }
+    .en-case-thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .en-case-info { flex: 1; padding-top: 8px; }
+    .en-case-heading { font-family: 'Kakao OTF', 'Noto Sans KR', sans-serif; font-weight: 700; font-size: 27px; color: #1E8CCC; line-height: 1.4; margin-bottom: 22px; word-break: keep-all; }
+    .en-case-bullets { display: flex; flex-direction: column; gap: 16px; }
+    .en-case-bullet-item { font-family: 'Noto Sans KR', sans-serif; font-weight: 700; font-size: 17px; color: #000; line-height: 1.7; word-break: keep-all; }
+    .en-case-bullet-item strong { font-weight: 700; display: block; margin-bottom: 2px; }
+
     /* ─── CTA ─── */
     .sl-cta-section { background: #fff; padding: 80px 0 110px; }
     .sl-cta-inner { width: 100%; max-width: 1440px; margin: 0 auto; padding: 0 155px; display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
@@ -637,50 +651,40 @@
       </div>
     </section>
 
-    <!-- ═══ FEATURES ═══ -->
-    <section class="en-features">
-      <div class="en-features-inner">
-        <div class="en-features-head reveal">
-          <div>
-            <p class="en-features-label">에코에셋만의 특장점</p>
-            <p class="en-features-title">탄소 자산화를 위한 완전한 회계 솔루션</p>
+    <!-- ═══ CASES SECTION ═══ -->
+    <section class="en-cases-section">
+      <div class="en-cases-inner">
+        <p class="en-cases-label reveal">에코에셋만의 특장점</p>
+        <p class="en-cases-title reveal">탄소 자산화를 위한<br>완전한 회계 솔루션</p>
+        <div class="reveal">
+          <div class="en-case-row">
+            <div class="en-case-thumb"></div>
+            <div class="en-case-info">
+              <p class="en-case-heading">탄소 자산화를 위한 완전한 회계 솔루션</p>
+              <div class="en-case-bullets">
+                <div class="en-case-bullet-item"><span style="font-weight:400;">온실가스 감축 성과를 탄소 크레딧으로 전환하는 전 과정을 단일 플랫폼에서 관리합니다. 감축 실적 입력부터 크레딧 발행, 거래 이력 관리까지 탄소 자산의 전 생애주기를 추적합니다.</span></div>
+              </div>
+            </div>
           </div>
-          <div class="en-features-nav">
-            <div class="en-slide-counter">
-              <span class="en-counter-cur" id="en-current">01</span>
-              <span class="en-counter-line"><span class="en-counter-fill" id="en-fill"></span></span>
-              <span class="en-counter-total" id="en-total">01</span>
+          <div class="en-case-row">
+            <div class="en-case-thumb"></div>
+            <div class="en-case-info">
+              <p class="en-case-heading">규제 대응 자동화, 보고서 원클릭 생성</p>
+              <div class="en-case-bullets">
+                <div class="en-case-bullet-item"><span style="font-weight:400;">국내외 탄소 규제 기준에 맞는 온실가스 보고서를 자동으로 생성합니다. GHG Protocol, ISO 14064 등 국제 기준에 부합하는 형식으로 즉각 산출하여 검증 비용과 시간을 절감합니다.</span></div>
+              </div>
             </div>
-            <button class="en-nav-btn" id="en-prev" aria-label="이전">
-              <svg width="7" height="11" viewBox="0 0 10 16" fill="none">
-                <path d="M9 1L2 8L9 15" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </button>
-            <button class="en-nav-btn" id="en-next" aria-label="다음">
-              <svg width="7" height="11" viewBox="0 0 10 16" fill="none">
-                <path d="M1 1L8 8L1 15" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </button>
           </div>
-        </div>
-
-        <div class="en-features-track-wrap reveal">
-          <div class="en-features-track" id="en-track">
-            <div class="en-feature-card" data-title="탄소 자산화를 위한 완전한 회계 솔루션">
-              <div class="en-feature-card-img"></div>
-              <div class="en-feature-card-content">온실가스 감축 성과를 탄소 크레딧으로 전환하는 전 과정을 단일 플랫폼에서 관리합니다. 감축 실적 입력부터 크레딧 발행, 거래 이력 관리까지 탄소 자산의 전 생애주기를 추적합니다.</div>
-            </div>
-            <div class="en-feature-card" data-title="규제 대응 자동화, 보고서 원클릭 생성">
-              <div class="en-feature-card-img"></div>
-              <div class="en-feature-card-content">국내외 탄소 규제 기준에 맞는 온실가스 보고서를 자동으로 생성합니다. GHG Protocol, ISO 14064 등 국제 기준에 부합하는 형식으로 즉각 산출하여 검증 비용과 시간을 절감합니다.</div>
-            </div>
-            <div class="en-feature-card" data-title="데이터 무결성 보장, 감사 추적 가능">
-              <div class="en-feature-card-img"></div>
-              <div class="en-feature-card-content">모든 감축 실적 데이터는 변조 불가능한 방식으로 기록되며, 원본 데이터부터 최종 크레딧 발행까지 완전한 감사 추적(Audit Trail)을 제공합니다. 제3자 검증에도 즉각 대응 가능한 투명한 데이터 환경을 구축합니다.</div>
+          <div class="en-case-row">
+            <div class="en-case-thumb"></div>
+            <div class="en-case-info">
+              <p class="en-case-heading">데이터 무결성 보장, 감사 추적 가능</p>
+              <div class="en-case-bullets">
+                <div class="en-case-bullet-item"><span style="font-weight:400;">모든 감축 실적 데이터는 변조 불가능한 방식으로 기록되며, 원본 데이터부터 최종 크레딧 발행까지 완전한 감사 추적(Audit Trail)을 제공합니다. 제3자 검증에도 즉각 대응 가능한 투명한 데이터 환경을 구축합니다.</span></div>
+              </div>
             </div>
           </div>
         </div>
-
       </div>
     </section>
 
