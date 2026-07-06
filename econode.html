@@ -196,7 +196,7 @@
       line-height: 1.4; margin-bottom: 60px; word-break: keep-all;
     }
     .en-case-row {
-      display: flex; gap: 52px; align-items: flex-start;
+      display: flex; gap: 65px; align-items: flex-start;
       padding: 50px 0;
     }
     .en-case-thumb {
@@ -226,39 +226,66 @@
     }
 
     /* ─── FEATURE SOLO SECTION ─── */
-    .en-feature-solo {
-      background: #fff;
-      padding: 100px 0 120px;
-    }
-    .en-feature-solo-inner {
-      max-width: 1440px; margin: 0 auto;
-      padding: 0 155px;
-      display: flex; gap: 54px; align-items: flex-start;
-    }
-    .en-feature-solo-left {
-      flex: 0 0 345px;
-    }
+    .en-feature-solo { background: #fff; padding: 100px 0 120px; }
+    .en-feature-solo-inner { max-width: 1440px; margin: 0 auto; padding: 0 155px; }
     .en-feature-solo-label {
       font-family: 'Noto Sans KR', sans-serif;
       font-weight: 600; font-size: 17px; color: #000;
       margin-bottom: 14px; letter-spacing: -0.3px;
     }
+    .en-fs-header {
+      display: flex; align-items: flex-end;
+      justify-content: space-between; margin-bottom: 48px; gap: 40px;
+    }
     .en-feature-solo-title {
       font-family: 'Noto Sans KR', sans-serif;
-      font-weight: 700; font-size: 27px; color: #000;
-      line-height: 1.4; margin-bottom: 28px;
-      word-break: keep-all;
+      font-weight: 700; font-size: 34px; color: #000;
+      line-height: 1.4; word-break: keep-all; flex: 1;
     }
-    .en-feature-solo-body {
-      font-family: 'Noto Sans KR', sans-serif;
-      font-size: 15px; color: rgba(0,0,0,0.7);
-      line-height: 1.85; word-break: keep-all;
+    .en-fs-controls { display: flex; align-items: center; gap: 16px; flex-shrink: 0; padding-bottom: 6px; }
+    .en-fs-progress-wrap { display: flex; align-items: center; gap: 12px; }
+    .en-fs-num { font-family: 'Chillax', sans-serif; font-size: 18px; font-weight: 600; color: #234B63; min-width: 14px; text-align: center; }
+    .en-fs-bar-track { display: flex; gap: 5px; align-items: center; }
+    .en-fs-seg { width: 28px; height: 3px; border-radius: 2px; background: #e0e0e0; transition: background 0.4s ease; }
+    .en-fs-seg.active { background: #1E8DCD; }
+    .en-fs-track-wrap { overflow: hidden; }
+    .en-fs-track { display: flex; transition: transform 0.6s cubic-bezier(0.4,0,0.2,1); }
+    .en-feature-solo-row {
+      flex: 0 0 100%; display: flex; gap: 65px; align-items: flex-start;
     }
     .en-feature-solo-img {
-      flex: 1; height: 460px;
-      background: #D9D9D9; border-radius: 16px;
-      overflow: hidden;
+      flex: 0 0 654px; height: 414px;
+      background: #D9D9D9; border-radius: 16px; overflow: hidden;
     }
+    .en-feature-solo-body {
+      flex: 0 0 338px; padding-top: 8px;
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 17px; color: #000;
+      line-height: 1.85; word-break: keep-all;
+    }
+
+    /* ─── FAQ ─── */
+    .sl-faq-section { background: #F2F4F5; padding: 100px 0 80px; }
+    .sl-faq-inner { max-width: 1440px; margin: 0 auto; padding: 0 155px; }
+    .sl-faq-title { font-family: 'Noto Sans KR', sans-serif; font-weight: 700; font-size: 30px; color: #000; line-height: 1.3; margin-bottom: 0; }
+    .sl-faq-list { margin-top: 30px; }
+    .sl-faq-item { border-bottom: 1px solid #d0d4d6; }
+    .sl-faq-q { display: flex; align-items: center; justify-content: space-between; padding: 28px 8px; cursor: pointer; font-family: 'Noto Sans KR', sans-serif; font-size: 16px; font-weight: 500; color: #222; transition: color 0.2s; user-select: none; }
+    .sl-faq-q:hover { color: #2DB47C; }
+    .sl-faq-item.open .sl-faq-q { color: #2DB47C; font-weight: 700; }
+    .sl-faq-chevron { flex-shrink: 0; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; transition: transform 0.3s ease; }
+    .sl-faq-item.open .sl-faq-chevron { transform: rotate(180deg); }
+    .sl-faq-a { max-height: 0; overflow: hidden; transition: max-height 0.35s cubic-bezier(0.4,0,0.2,1), padding 0.35s; font-family: 'Noto Sans KR', sans-serif; font-size: 15px; color: #555; line-height: 1.8; padding: 0 8px; word-break: keep-all; }
+    .sl-faq-item.open .sl-faq-a { max-height: 400px; padding: 0 8px 28px; }
+    .sl-faq-header { display: flex; align-items: center; justify-content: space-between; }
+    .faq-more-btn { display: inline-flex; align-items: center; gap: 10px; background: #00314D; color: #fff; font-family: 'Nanum Square','NanumSquare',sans-serif; font-weight: 700; font-size: 14px; text-decoration: none; padding: 10px 20px; border-radius: 200px; white-space: nowrap; height: 40px; box-sizing: border-box; transition: opacity 0.2s; }
+    .faq-more-btn:hover { opacity: 0.8; }
+    .faq-controls { display: flex; align-items: center; gap: 12px; }
+    .faq-nav { display: flex; align-items: center; border: 1.5px solid #e8e8e8; border-radius: 200px; height: 44px; overflow: hidden; }
+    .faq-nav-btn { width: 39px; height: 44px; display: flex; align-items: center; justify-content: center; background: none; border: none; cursor: pointer; transition: background 0.2s; padding: 0; }
+    .faq-nav-btn:hover:not(:disabled) { background: #f5f5f5; }
+    .faq-nav-btn:disabled { opacity: 0.35; cursor: default; }
+    .faq-nav-divider { width: 1px; height: 20px; background: #e8e8e8; flex-shrink: 0; }
 
         /* ─── CTA ─── */
     .sl-cta-section { background: #fff; padding: 80px 0 110px; }
@@ -346,6 +373,8 @@
     body > *:not(header):not(footer):not(.floating-fab) { position: relative; z-index: 1; background: inherit; }
     .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s cubic-bezier(0.4,0,0.2,1), transform 0.65s cubic-bezier(0.4,0,0.2,1); }
     .reveal.visible { opacity: 1; transform: translateY(0); }
+    .en-case-row.reveal { opacity: 0; transform: translateY(30px); transition: opacity 1.1s ease, transform 1.1s cubic-bezier(0.22,1,0.36,1); }
+    .en-case-row.reveal.visible { opacity: 1; transform: translateY(0); }
 
     /* ═══ ECONODE PAGE ═══ */
 
@@ -774,9 +803,8 @@
       <div class="en-cases-inner">
         <p class="en-cases-label reveal">에코노드만의 특장점</p>
         <p class="en-cases-title reveal">발전부터 배출까지<br>온실가스 인벤토리의 모든 것을 한곳에</p>
-        <div class="reveal">
-          <div class="en-case-row">
-            <div class="en-case-thumb"></div>
+          <div class="en-case-row reveal">
+            <div class="en-case-thumb"><img src="assets/en-case-thumb-1.png" alt="탄소 배출권 및 ESG 성과 증빙"></div>
             <div class="en-case-info">
               <p class="en-case-heading">탄소 배출권 및 ESG 성과 증빙</p>
               <div class="en-case-bullets">
@@ -785,8 +813,8 @@
               </div>
             </div>
           </div>
-          <div class="en-case-row">
-            <div class="en-case-thumb"></div>
+          <div class="en-case-row reveal">
+            <div class="en-case-thumb"><img src="assets/en-case-thumb-2.png" alt="글로벌 스탠다드 기반의 디지털 MRV 구현"></div>
             <div class="en-case-info">
               <p class="en-case-heading">글로벌 스탠다드 기반의 디지털 MRV 구현</p>
               <div class="en-case-bullets">
@@ -795,8 +823,8 @@
               </div>
             </div>
           </div>
-          <div class="en-case-row">
-            <div class="en-case-thumb"></div>
+          <div class="en-case-row reveal">
+            <div class="en-case-thumb"><img src="assets/en-case-thumb-3.png" alt="상업용 및 대규모 발전 단지 운영"></div>
             <div class="en-case-info">
               <p class="en-case-heading">상업용 및 대규모 발전 단지 운영</p>
               <div class="en-case-bullets">
@@ -805,8 +833,8 @@
               </div>
             </div>
           </div>
-          <div class="en-case-row">
-            <div class="en-case-thumb"></div>
+          <div class="en-case-row reveal">
+            <div class="en-case-thumb"><img src="assets/en-case-thumb-4.png" alt="전국 단위 분산형 에너지 관리"></div>
             <div class="en-case-info">
               <p class="en-case-heading">전국 단위 분산형 에너지 관리</p>
               <div class="en-case-bullets">
@@ -815,8 +843,8 @@
               </div>
             </div>
           </div>
-          <div class="en-case-row">
-            <div class="en-case-thumb"></div>
+          <div class="en-case-row reveal">
+            <div class="en-case-thumb"><img src="assets/en-case-thumb-5.png" alt="실시간 이상 진단 및 데이터 기반 O&M"></div>
             <div class="en-case-info">
               <p class="en-case-heading">실시간 이상 진단 및 데이터 기반 O&amp;M</p>
               <div class="en-case-bullets">
@@ -825,42 +853,84 @@
               </div>
             </div>
           </div>
-        </div>
       </div>
     </section>
 
     <!-- ═══ FEATURE SOLO SECTION ═══ -->
     <section class="en-feature-solo">
-      <div class="en-feature-solo-inner reveal">
-        <div class="en-feature-solo-left">
-          <p class="en-feature-solo-label">에코노드만의 특장점</p>
-          <p class="en-feature-solo-title">수기 입력 ZERO,<br>실시간 채록으로<br>무결성 선점</p>
-          <p class="en-feature-solo-body">태양광 인버터, 일사량계, 온도 센서 등 현장 설비의 물리적 원천 신호를 가공 없이 실시간 직접 채록합니다. 인적 개입이 없는 직독(Direct Read) 방식을 통해 데이터의 왜곡 및 위·변조 가능성을 물리적으로 차단합니다.</p>
+      <div class="en-feature-solo-inner">
+        <p class="en-feature-solo-label reveal">에코노드만의 특장점</p>
+        <div class="en-fs-header reveal">
+          <p class="en-feature-solo-title" id="fs-title">수기 입력 ZERO, 실시간 채록으로 무결성 선점</p>
+          <div class="en-fs-controls">
+            <div class="en-fs-progress-wrap">
+              <span class="en-fs-num" id="fs-cur">1</span>
+              <div class="en-fs-bar-track" id="fs-segs">
+                <div class="en-fs-seg active"></div>
+                <div class="en-fs-seg"></div>
+                <div class="en-fs-seg"></div>
+                <div class="en-fs-seg"></div>
+                <div class="en-fs-seg"></div>
+              </div>
+            </div>
+            <div class="faq-nav">
+              <button class="faq-nav-btn" id="fs-prev" aria-label="이전">
+                <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M7 1L1 7L7 13" stroke="#234B63" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <div class="faq-nav-divider"></div>
+              <button class="faq-nav-btn" id="fs-next" aria-label="다음">
+                <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M1 1L7 7L1 13" stroke="#234B63" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+          </div>
         </div>
-        <div class="en-feature-solo-img"></div>
+        <div class="en-fs-track-wrap reveal">
+          <div class="en-fs-track" id="fs-track">
+            <div class="en-feature-solo-row">
+              <div class="en-feature-solo-img"></div>
+              <p class="en-feature-solo-body">태양광 인버터, 일사량계, 온도 센서 등 현장 설비의 물리적 원천 신호를 가공 없이 실시간 직접 채록합니다. 인적 개입이 없는 직독(Direct Read) 방식을 통해 데이터의 왜곡 및 위·변조 가능성을 물리적으로 차단합니다.</p>
+            </div>
+            <div class="en-feature-solo-row">
+              <div class="en-feature-solo-img"></div>
+              <p class="en-feature-solo-body">현장 설비별로 상이한 이기종 원시 전력 신호들을 자산화에 최적화된 표준 통신 규격으로 단일화합니다. 포맷이 표준화된 데이터는 추가 가공 없이 외부 관제 시스템 및 플랫폼에 즉각 통합 연동됩니다.</p>
+            </div>
+            <div class="en-feature-solo-row">
+              <div class="en-feature-solo-img"></div>
+              <p class="en-feature-solo-body">인버터와 원격 서버를 연결하는 별도의 장거리 통신선 매설 공사 없이, 장치 자체에 탑재된 전용 무선 LTE망 모듈을 통해 데이터를 전송합니다. 외곽 지역의 분산형 발전 설비에서도 기기에 장착된 안테나를 활용하여 현장 데이터를 유실 없이 실시간으로 무선 송신합니다.</p>
+            </div>
+            <div class="en-feature-solo-row">
+              <div class="en-feature-solo-img"></div>
+              <p class="en-feature-solo-body">현장에서 직접 채록한 무결성 발전 데이터에 외부에서 유입되는 기상 데이터를 매칭하고 보안 봉인(씰링) 기능을 수행합니다. 기기 내부에 계수측정 수식을 내장하여 직접 수집한 에너지 데이터와 외부 환경 데이터를 결합한 실질적인 탄소 배출 측정을 지원합니다.</p>
+            </div>
+            <div class="en-feature-solo-row">
+              <div class="en-feature-solo-img"></div>
+              <p class="en-feature-solo-body">계통 정전, 과전류, 설비 효율 저하 등 주변 전력 계통의 이상 신호를 실시간 엣지 단에서 포착하여 장치 내부에 로그 데이터를 저장합니다. 저장된 데이터를 통해 정보의 연속성을 유지하며, 장치 전면의 LCD 창을 통해 주요 발전 지표를 현장에서 즉각 시각화합니다.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
 
   <!-- ═══ FAQ ═══ -->
-  <section class="pf-faq-section">
-    <div class="pf-faq-inner">
-      <div class="pf-faq-header reveal">
-        <p class="pf-faq-title">자주 묻는 질문</p>
+  <section class="sl-faq-section">
+    <div class="sl-faq-inner">
+      <div class="sl-faq-header reveal">
+        <p class="sl-faq-title">자주 묻는 질문</p>
         <div class="faq-controls">
           <div class="faq-nav">
-            <button class="faq-nav-btn" id="pf-faq-prev" aria-label="이전">
+            <button class="faq-nav-btn" id="en-faq-prev" aria-label="이전">
               <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M7 1L1 7L7 13" stroke="#234B63" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
             <div class="faq-nav-divider"></div>
-            <button class="faq-nav-btn" id="pf-faq-next" aria-label="다음">
+            <button class="faq-nav-btn" id="en-faq-next" aria-label="다음">
               <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M1 1L7 7L1 13" stroke="#234B63" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
           </div>
           <a class="faq-more-btn" href="faq.html?filter=ecoNODE">전체보기 <svg width="7" height="12" viewBox="0 0 7 12" fill="none"><path d="M1 1L6 6L1 11" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         </div>
       </div>
-      <div class="pf-faq-list reveal" id="pf-faq-container"></div>
+      <div class="sl-faq-list reveal" id="en-faq-container"></div>
     </div>
   </section>
 
@@ -1109,47 +1179,56 @@
     // Reveal 애니메이션
     const revealEls = document.querySelectorAll('.reveal');
     const revealObserver = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); } });
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+        } else {
+          e.target.classList.remove('visible');
+        }
+      });
     }, { threshold: 0.12 });
     revealEls.forEach(el => revealObserver.observe(el));
 
-    // 특장점 슬라이더
-    const track   = document.getElementById('en-track');
-    const prevBtn = document.getElementById('en-prev');
-    const nextBtn = document.getElementById('en-next');
-    const curEl   = document.getElementById('en-current');
-    const totEl   = document.getElementById('en-total');
-    const fillEl  = document.getElementById('en-fill');
-    const titleEl = document.querySelector('.en-features-title');
-    const cards   = track ? track.querySelectorAll('.en-feature-card') : [];
-    let current = 0;
+    // ─── Feature Solo 슬라이더 ───
+    const fsTitles = [
+      '수기 입력 ZERO, 실시간 채록으로 무결성 선점',
+      '어떤 설비든 표준 프로토콜',
+      'LTE 안테나로 전국 실시간 무선 연결',
+      '실측에 기상을 더해, 엣지 단에서 끝내는 계산',
+      '계통 이상 즉시 포착, 엣지 단의 자체 데이터 보존'
+    ];
+    const fsTrack   = document.getElementById('fs-track');
+    const fsPrev    = document.getElementById('fs-prev');
+    const fsNext    = document.getElementById('fs-next');
+    const fsCur     = document.getElementById('fs-cur');
+    const fsSegs    = document.getElementById('fs-segs');
+    const fsTitleEl = document.getElementById('fs-title');
+    const TOTAL = 5;
+    let fsIdx = 0;
 
-    function pad(n) { return String(n).padStart(2, '0'); }
-
-    function slideTo(idx) {
-      if (idx >= cards.length) idx = 0;
-      current = Math.max(0, idx);
-      track.style.transform = `translateX(-${current * 100}%)`;
-      prevBtn.classList.toggle('is-end', current === 0);
-      nextBtn.classList.toggle('is-end', current === cards.length - 1);
-      if (curEl) curEl.textContent = pad(current + 1);
-      if (fillEl && cards.length > 1) fillEl.style.width = (current / (cards.length - 1) * 100) + '%';
-      if (titleEl && cards[current]) titleEl.textContent = cards[current].dataset.title || '';
+    function fsSlideTo(idx) {
+      fsIdx = Math.max(0, Math.min(idx, TOTAL - 1));
+      fsTrack.style.transform = 'translateX(-' + (fsIdx * 100) + '%)';
+      if (fsCur) fsCur.textContent = fsIdx + 1;
+      if (fsSegs) fsSegs.querySelectorAll('.en-fs-seg').forEach((s, i) => s.classList.toggle('active', i <= fsIdx));
+      if (fsTitleEl) fsTitleEl.textContent = fsTitles[fsIdx];
+      if (fsPrev) fsPrev.disabled = fsIdx === 0;
+      if (fsNext) fsNext.disabled = fsIdx === TOTAL - 1;
     }
-    if (track && cards.length > 0) {
-      if (totEl) totEl.textContent = pad(cards.length);
-      slideTo(0);
-      prevBtn.addEventListener('click', () => slideTo(current - 1));
-      nextBtn.addEventListener('click', () => slideTo(current + 1));
+
+    if (fsTrack) {
+      fsSlideTo(0);
+      fsPrev.addEventListener('click', () => fsSlideTo(fsIdx - 1));
+      fsNext.addEventListener('click', () => fsSlideTo(fsIdx + 1));
     }
   </script>
 
   <script>
     // FAQ: faq.json에서 ecoNODE 카테고리 항목 동적 로드 (5개씩, 이전/다음 버튼)
     (function() {
-      const container = document.getElementById('pf-faq-container');
-      const btnPrev   = document.getElementById('pf-faq-prev');
-      const btnNext   = document.getElementById('pf-faq-next');
+      const container = document.getElementById('en-faq-container');
+      const btnPrev   = document.getElementById('en-faq-prev');
+      const btnNext   = document.getElementById('en-faq-next');
       if (!container) return;
       const PAGE_SIZE = 5;
       const CATEGORY  = 'ecoNODE';
@@ -1162,15 +1241,15 @@
         const totalPages = Math.ceil(allItems.length / PAGE_SIZE);
         allItems.slice((page-1)*PAGE_SIZE, page*PAGE_SIZE).forEach(item => {
           const el = document.createElement('div');
-          el.className = 'pf-faq-item';
-          el.innerHTML = `<div class="pf-faq-q"><span>${item.question||''}</span><span class="pf-faq-chevron">${chevronSVG}</span></div><div class="pf-faq-a">${item.answer||''}</div>`;
+          el.className = 'sl-faq-item';
+          el.innerHTML = `<div class="sl-faq-q"><span>${item.question||''}</span><span class="sl-faq-chevron">${chevronSVG}</span></div><div class="sl-faq-a">${item.answer||''}</div>`;
           container.appendChild(el);
         });
-        container.querySelectorAll('.pf-faq-q').forEach(q => {
+        container.querySelectorAll('.sl-faq-q').forEach(q => {
           q.addEventListener('click', () => {
-            const it = q.closest('.pf-faq-item');
+            const it = q.closest('.sl-faq-item');
             const isOpen = it.classList.contains('open');
-            container.querySelectorAll('.pf-faq-item.open').forEach(i => i.classList.remove('open'));
+            container.querySelectorAll('.sl-faq-item.open').forEach(i => i.classList.remove('open'));
             if (!isOpen) it.classList.add('open');
           });
         });
