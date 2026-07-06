@@ -116,6 +116,46 @@
     .en-case-bullet-item { font-family: 'Noto Sans KR', sans-serif; font-weight: 700; font-size: 17px; color: #000; line-height: 1.7; word-break: keep-all; }
     .en-case-bullet-item strong { font-weight: 700; display: block; margin-bottom: 2px; }
 
+        /* ─── FEATURE SOLO ─── */
+    .en-feature-solo { background: #fff; padding: 100px 0 120px; }
+    .en-feature-solo-inner { max-width: 1440px; margin: 0 auto; padding: 0 155px; }
+    .en-feature-solo-label { font-family: 'Noto Sans KR', sans-serif; font-weight: 600; font-size: 17px; color: #000; margin-bottom: 14px; letter-spacing: -0.3px; }
+    .en-fs-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 48px; gap: 40px; }
+    .en-feature-solo-title { font-family: 'Noto Sans KR', sans-serif; font-weight: 700; font-size: 34px; color: #000; line-height: 1.4; word-break: keep-all; flex: 1; }
+    .en-fs-controls { display: flex; align-items: center; gap: 16px; flex-shrink: 0; padding-bottom: 6px; }
+    .en-fs-progress-wrap { display: flex; align-items: center; gap: 12px; }
+    .en-fs-num { font-family: 'Chillax', sans-serif; font-size: 18px; font-weight: 600; color: #234B63; min-width: 14px; text-align: center; }
+    .en-fs-bar-track { display: flex; gap: 5px; align-items: center; }
+    .en-fs-seg { width: 28px; height: 3px; border-radius: 2px; background: #e0e0e0; transition: background 0.4s ease; }
+    .en-fs-seg.active { background: #1E8DCD; }
+    .en-fs-track-wrap { overflow: hidden; }
+    .en-fs-track { display: flex; transition: transform 0.6s cubic-bezier(0.4,0,0.2,1); }
+    .en-feature-solo-row { flex: 0 0 100%; display: flex; gap: 65px; align-items: flex-start; }
+    .en-feature-solo-img { flex: 0 0 654px; height: 414px; background: #D9D9D9; border-radius: 16px; overflow: hidden; }
+    .en-feature-solo-body { flex: 0 0 338px; padding-top: 8px; font-family: 'Noto Sans KR', sans-serif; font-size: 17px; color: #000; line-height: 1.85; word-break: keep-all; }
+
+    /* ─── CAPABILITIES ─── */
+    .ea-cap-section { background: linear-gradient(to bottom right, #E9F4FA 0%, #fff 100%); padding: 90px 0 110px; }
+    .ea-cap-inner { max-width: 1440px; margin: 0 auto; padding: 0 131px; }
+    .ea-cap-title { font-family: 'Noto Sans KR', sans-serif; font-weight: 700; font-size: 35px; color: #000; line-height: 1.35; margin-bottom: 52px; word-break: keep-all; }
+    .ea-cap-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; overflow: visible; margin: 0 117px; }
+    .ea-cap-card { position: relative; background: #fff; border-radius: 30px; padding: 38px 44px; border: 0.5px solid rgba(182,182,182,0.5); box-shadow: 0 0 10px rgba(30, 141, 205, 0.3); overflow: visible; display: flex; flex-direction: column; justify-content: center; }
+    .ea-cap-card-illust { position: absolute; width: 120px; object-fit: contain; pointer-events: none; }
+    .ea-cap-card--r-img .ea-cap-card-illust { right: -100px; top: 8px; }
+    .ea-cap-card--l-img .ea-cap-card-illust { left: -100px; top: 18px; }
+    .ea-cap-grid > .ea-cap-card:nth-child(1) .ea-cap-card-illust { top: 28px; }
+    .ea-cap-grid > .ea-cap-card:nth-child(2) .ea-cap-card-illust { top: 18px; }
+    .ea-cap-grid > .ea-cap-card:nth-child(3) .ea-cap-card-illust { top: 28px; width: 114px; }
+    .ea-cap-card-heading { font-family: 'Kakao OTF', 'Noto Sans KR', sans-serif; font-weight: 700; font-size: 22px; color: #1D7BB2; margin-bottom: 12px; word-break: keep-all; text-align: center; }
+    .ea-cap-card-body { font-family: 'Kakao OTF', 'Noto Sans KR', sans-serif; font-weight: 400; font-size: 16px; color: #000; line-height: 1.75; word-break: keep-all; text-align: center; }
+
+    /* ─── FEATURE SOLO (EA) ─── */
+    .ea-fs-subtitle { font-family: 'Noto Sans KR', sans-serif; font-size: 18px; color: #555; line-height: 1.65; margin-top: -14px; margin-bottom: 31px; word-break: keep-all; }
+    .en-feature-solo-body.ea-fs-body { flex: 0 0 401px; padding-top: 0; padding-right: 10px; }
+    .ea-fs-bullet + .ea-fs-bullet { margin-top: 28px; }
+    .ea-fs-bullet-title { font-family: 'Noto Sans KR', sans-serif; font-weight: 700; font-size: 16px; color: #234B63; margin-bottom: 8px; }
+    .ea-fs-bullet-desc { font-family: 'Noto Sans KR', sans-serif; font-size: 15px; color: #000; line-height: 1.78; word-break: keep-all; }
+
     /* ─── CTA ─── */
     .sl-cta-section { background: #fff; padding: 80px 0 110px; }
     .sl-cta-inner { width: 100%; max-width: 1440px; margin: 0 auto; padding: 0 155px; display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
@@ -651,45 +691,134 @@
       </div>
     </section>
 
-    <!-- ═══ CASES SECTION ═══ -->
-    <section class="en-cases-section">
-      <div class="en-cases-inner">
-        <p class="en-cases-label reveal">에너지에셋만의 특장점</p>
-        <p class="en-cases-title reveal">발전 효율을 극대화하는<br>스마트 관제 플랫폼</p>
-        <div class="reveal">
-          <div class="en-case-row">
-            <div class="en-case-thumb"></div>
-            <div class="en-case-info">
-              <p class="en-case-heading">발전 효율을 극대화하는 스마트 관제 플랫폼</p>
-              <div class="en-case-bullets">
-                <div class="en-case-bullet-item"><span style="font-weight:400;">전국에 분산된 태양광·풍력 등 신재생에너지 발전소를 단일 플랫폼에서 통합 모니터링합니다. 실시간 발전량, 성능지수(PR), 설비 상태를 한 화면에서 파악하여 운영 효율을 즉각 최적화합니다.</span></div>
+    <!-- ═══ CAPABILITIES ═══ -->
+    <section class="ea-cap-section">
+      <div class="ea-cap-inner">
+        <h2 class="ea-cap-title reveal">흘러가는 신재생에너지 전력<br>에너지에셋으로 붙잡다</h2>
+        <div class="ea-cap-grid reveal">
+          <div class="ea-cap-card ea-cap-card--l-img">
+            <img class="ea-cap-card-illust" src="assets/ea-card-img4.png" alt="">
+            <p class="ea-cap-card-heading">규제 대응형 자동 인증 엔진</p>
+            <p class="ea-cap-card-body">탄소 시장 표준 규격 선제 반영을 통한 외부 제출용 증명서를 즉시 자동 발급합니다.</p>
+          </div>
+          <div class="ea-cap-card ea-cap-card--r-img">
+            <img class="ea-cap-card-illust" src="assets/ea-card-img3.png" alt="">
+            <p class="ea-cap-card-heading">현장 연계형 무결성 모니터링</p>
+            <p class="ea-cap-card-body">현장 점검 이력과 원격 수집 체계를 결합하여 에코에셋으로 송신될 데이터의 법적 준수성 및 무결성을 사전에 확보합니다.</p>
+          </div>
+          <div class="ea-cap-card ea-cap-card--l-img">
+            <img class="ea-cap-card-illust" src="assets/ea-card-img2.png" alt="">
+            <p class="ea-cap-card-heading">Scope 1·2 실측 데이터 거버넌스</p>
+            <p class="ea-cap-card-body">자체 개발 ecoNODE를 통해 기업 내부의 직접 배출 및 사용 전력 데이터를 가공 없이 실시간으로 정밀 측정합니다.</p>
+          </div>
+          <div class="ea-cap-card ea-cap-card--r-img">
+            <img class="ea-cap-card-illust" src="assets/ea-card-img1.png" alt="">
+            <p class="ea-cap-card-heading">플러그앤플레이 실시간 시각화</p>
+            <p class="ea-cap-card-body">기존 인프라 간섭 없는 경량화 연동을 통해 공급망 탄소 관리에 필요한 재생에너지 발전 현황을 단일 화면에 일원화합니다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ FEATURE SOLO SECTION ═══ -->
+    <section class="en-feature-solo">
+      <div class="en-feature-solo-inner">
+        <p class="en-feature-solo-label reveal">에너지에셋만의 특장점</p>
+        <div class="en-fs-header reveal">
+          <p class="en-feature-solo-title" id="ea-fs-title">눈으로 확인하는 격차 실시간 입체 모니터링</p>
+          <div class="en-fs-controls">
+            <div class="en-fs-progress-wrap">
+              <span class="en-fs-num" id="ea-fs-cur">1</span>
+              <div class="en-fs-bar-track" id="ea-fs-segs">
+                <div class="en-fs-seg active"></div>
+                <div class="en-fs-seg"></div>
+                <div class="en-fs-seg"></div>
+                <div class="en-fs-seg"></div>
+                <div class="en-fs-seg"></div>
               </div>
             </div>
-          </div>
-          <div class="en-case-row">
-            <div class="en-case-thumb"></div>
-            <div class="en-case-info">
-              <p class="en-case-heading">이상 감지 즉시 알림, 선제적 O&amp;M 대응</p>
-              <div class="en-case-bullets">
-                <div class="en-case-bullet-item"><span style="font-weight:400;">인버터, 접속함, 계측기 등 현장 설비의 이상 신호를 엣지 단에서 실시간 감지하고 즉각 알림을 발송합니다. 문제 발생 시점과 원인을 정확히 파악하여 불필요한 현장 출동을 최소화합니다.</span></div>
-              </div>
+            <div class="faq-nav">
+              <button class="faq-nav-btn" id="ea-fs-prev" aria-label="이전">
+                <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M7 1L1 7L7 13" stroke="#234B63" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <div class="faq-nav-divider"></div>
+              <button class="faq-nav-btn" id="ea-fs-next" aria-label="다음">
+                <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M1 1L7 7L1 13" stroke="#234B63" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
             </div>
           </div>
-          <div class="en-case-row">
-            <div class="en-case-thumb"></div>
-            <div class="en-case-info">
-              <p class="en-case-heading">지역별 발전량 비교 및 성능 분석(PR) 엔진</p>
-              <div class="en-case-bullets">
-                <div class="en-case-bullet-item"><span style="font-weight:400;">기상 데이터와 실측 발전량을 결합한 PR(Performance Ratio) 분석으로 발전소별 실질 성능을 정밀 평가합니다. 지역별·기간별 비교 분석을 통해 저성능 발전소를 조기 발견하고 수익성을 극대화합니다.</span></div>
+        </div>
+        <p class="ea-fs-subtitle reveal" id="ea-fs-subtitle">전국 발전소 데이터 비교를 통해 내 발전소의 현재 위치를 정확히 진단합니다.</p>
+        <div class="en-fs-track-wrap reveal">
+          <div class="en-fs-track" id="ea-fs-track">
+            <!-- Slide 1 -->
+            <div class="en-feature-solo-row">
+              <div class="en-feature-solo-img"></div>
+              <div class="en-feature-solo-body ea-fs-body">
+                <div class="ea-fs-bullet">
+                  <p class="ea-fs-bullet-title">지역별 벤치마킹</p>
+                  <p class="ea-fs-bullet-desc">동종 지역의 평균 발전시간 데이터를 기반으로 현재 발전량을 유추하고 고객님 발전소의 실제 발전량과 실시간으로 비교 분석합니다. 이를 통해 이웃 발전소 대비 우리 발전소의 운영 효율을 한눈에 파악하실 수 있습니다.</p>
+                </div>
+                <div class="ea-fs-bullet">
+                  <p class="ea-fs-bullet-title">종합 인프라 관제</p>
+                  <p class="ea-fs-bullet-desc">인버터의 가동 상태 및 국지적 기상 정보를 실시간으로 연동하여 발전 환경의 변화를 원격으로 상시 모니터링합니다.</p>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="en-case-row">
-            <div class="en-case-thumb"></div>
-            <div class="en-case-info">
-              <p class="en-case-heading">자동 보고서 생성으로 운영 효율 최적화</p>
-              <div class="en-case-bullets">
-                <div class="en-case-bullet-item"><span style="font-weight:400;">일간·월간·연간 발전 실적 보고서를 자동으로 생성합니다. 투자자, 감독 기관, 유지보수 팀에 필요한 맞춤형 보고서를 버튼 하나로 산출하여 운영 업무 부담을 획기적으로 줄입니다.</span></div>
+            <!-- Slide 2 -->
+            <div class="en-feature-solo-row">
+              <div class="en-feature-solo-img"></div>
+              <div class="en-feature-solo-body ea-fs-body">
+                <div class="ea-fs-bullet">
+                  <p class="ea-fs-bullet-title">발전효율지수 계산</p>
+                  <p class="ea-fs-bullet-desc">일사량과 온도 등 외부 환경 변수를 반영하여 발전소가 가진 이론적 최대 성능 대비 실제 효율을 정밀 분석합니다.</p>
+                </div>
+                <div class="ea-fs-bullet">
+                  <p class="ea-fs-bullet-title">손실 추적</p>
+                  <p class="ea-fs-bullet-desc">설비 노후화나 음영 간섭 등으로 인한 미세한 효율 저하를 유추하여 선제적인 유지보수 타이밍을 확보하실 수 있도록 지원합니다.</p>
+                </div>
+              </div>
+            </div>
+            <!-- Slide 3 -->
+            <div class="en-feature-solo-row">
+              <div class="en-feature-solo-img"></div>
+              <div class="en-feature-solo-body ea-fs-body">
+                <div class="ea-fs-bullet">
+                  <p class="ea-fs-bullet-title">실시간 장애 감지</p>
+                  <p class="ea-fs-bullet-desc">인버터 내부 장애나 통신 단절 등 발전 수익에 타격을 줄 수 있는 이상 징후를 감지하는 즉시 관리자에게 스마트 알림을 발송합니다.</p>
+                </div>
+                <div class="ea-fs-bullet">
+                  <p class="ea-fs-bullet-title">공백 없는 관리</p>
+                  <p class="ea-fs-bullet-desc">가동 중단 시간을 최소화하여 발전소 가동률을 최상으로 유지해 드립니다.</p>
+                </div>
+              </div>
+            </div>
+            <!-- Slide 4 -->
+            <div class="en-feature-solo-row">
+              <div class="en-feature-solo-img"></div>
+              <div class="en-feature-solo-body ea-fs-body">
+                <div class="ea-fs-bullet">
+                  <p class="ea-fs-bullet-title">디지털MRV</p>
+                  <p class="ea-fs-bullet-desc">현장에 설치된 IoT 디바이스 ecoNODE로부터 고정밀 실측 데이터를 실시간 수집하여 탄소 감축량을 자동 산정합니다.</p>
+                </div>
+                <div class="ea-fs-bullet">
+                  <p class="ea-fs-bullet-title">데이터 무결성 보장</p>
+                  <p class="ea-fs-bullet-desc">수집 단계부터 위변조가 불가능한 프로세스를 거쳐, 외부 제3자 검증 기관이 즉시 신뢰할 수 있는 공신력 있는 데이터를 제공합니다. 고객님의 발전소가 탄소배출권 거래 시장에서 최고의 자산 가치를 인정받도록 지원합니다.</p>
+                </div>
+              </div>
+            </div>
+            <!-- Slide 5 -->
+            <div class="en-feature-solo-row">
+              <div class="en-feature-solo-img"></div>
+              <div class="en-feature-solo-body ea-fs-body">
+                <div class="ea-fs-bullet">
+                  <p class="ea-fs-bullet-title">정기 리포트 발행</p>
+                  <p class="ea-fs-bullet-desc">일간 및 월간 발전 현황 분석 리포트를 자동으로 생성하여 제공합니다.</p>
+                </div>
+                <div class="ea-fs-bullet">
+                  <p class="ea-fs-bullet-title">자산 가치 평가</p>
+                  <p class="ea-fs-bullet-desc">누적 데이터 분석을 통해 발전소의 현재 자산 가치를 계량화된 수치로 산출해 드리므로, 향후 매각이나 금융 재조달 시 강력한 증빙 자료로 활용하실 수 있습니다.</p>
+                </div>
               </div>
             </div>
           </div>
@@ -999,6 +1128,39 @@
       slideTo(0);
       prevBtn.addEventListener('click', () => slideTo(current - 1));
       nextBtn.addEventListener('click', () => slideTo(current + 1));
+    }
+
+    // 에너지에셋 특장점 슬라이더
+    const eaFsData = [
+      { title: '눈으로 확인하는 격차 실시간 입체 모니터링', subtitle: '전국 발전소 데이터 비교를 통해 내 발전소의 현재 위치를 정확히 진단합니다.' },
+      { title: '발전소 건강검진의 핵심 정밀 성능 분석',     subtitle: '단순 발전량 수치를 넘어 발전소 고유의 펀더멘탈을 측정합니다.' },
+      { title: '리스크 제로를 위한 즉각적 이상 징후 알림', subtitle: '발전 손실을 최소화하는 가장 빠른 방법은 신속한 인지입니다.' },
+      { title: '탄소 금융의 시작 디지털MRV 자산화 체계',   subtitle: '탄소 감축 실적을 이제는 수작업 없이 자동으로 검증받으세요.' },
+      { title: '경영진을 위한 원클릭 지능형 보고서 자동 생성', subtitle: '복잡한 데이터 분석은 맡기시고 완성된 인사이트만 받아보세요.' }
+    ];
+    const eaFsTrack    = document.getElementById('ea-fs-track');
+    const eaFsCur      = document.getElementById('ea-fs-cur');
+    const eaFsSegs     = document.getElementById('ea-fs-segs');
+    const eaFsTitleEl  = document.getElementById('ea-fs-title');
+    const eaFsSubEl    = document.getElementById('ea-fs-subtitle');
+    const eaFsPrev     = document.getElementById('ea-fs-prev');
+    const eaFsNext     = document.getElementById('ea-fs-next');
+    const EA_TOTAL = 5;
+    let eaFsIdx = 0;
+    function eaFsSlideTo(idx) {
+      eaFsIdx = Math.max(0, Math.min(idx, EA_TOTAL - 1));
+      eaFsTrack.style.transform = 'translateX(-' + (eaFsIdx * 100) + '%)';
+      if (eaFsCur)     eaFsCur.textContent     = eaFsIdx + 1;
+      if (eaFsSegs)    eaFsSegs.querySelectorAll('.en-fs-seg').forEach((s, i) => s.classList.toggle('active', i <= eaFsIdx));
+      if (eaFsTitleEl) eaFsTitleEl.textContent  = eaFsData[eaFsIdx].title;
+      if (eaFsSubEl)   eaFsSubEl.textContent    = eaFsData[eaFsIdx].subtitle;
+      if (eaFsPrev)    eaFsPrev.disabled        = eaFsIdx === 0;
+      if (eaFsNext)    eaFsNext.disabled        = eaFsIdx === EA_TOTAL - 1;
+    }
+    if (eaFsTrack) {
+      eaFsSlideTo(0);
+      if (eaFsPrev) eaFsPrev.addEventListener('click', () => eaFsSlideTo(eaFsIdx - 1));
+      if (eaFsNext) eaFsNext.addEventListener('click', () => eaFsSlideTo(eaFsIdx + 1));
     }
   </script>
 

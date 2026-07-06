@@ -418,6 +418,24 @@
       align-self: center;
     }
 
+        /* ─── FEATURE SOLO ─── */
+    .en-feature-solo { background: #fff; padding: 100px 0 120px; }
+    .en-feature-solo-inner { max-width: 1440px; margin: 0 auto; padding: 0 155px; }
+    .en-feature-solo-label { font-family: 'Noto Sans KR', sans-serif; font-weight: 600; font-size: 17px; color: #000; margin-bottom: 14px; letter-spacing: -0.3px; }
+    .en-fs-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 48px; gap: 40px; }
+    .en-feature-solo-title { font-family: 'Noto Sans KR', sans-serif; font-weight: 700; font-size: 34px; color: #000; line-height: 1.4; word-break: keep-all; flex: 1; }
+    .en-fs-controls { display: flex; align-items: center; gap: 16px; flex-shrink: 0; padding-bottom: 6px; }
+    .en-fs-progress-wrap { display: flex; align-items: center; gap: 12px; }
+    .en-fs-num { font-family: 'Chillax', sans-serif; font-size: 18px; font-weight: 600; color: #234B63; min-width: 14px; text-align: center; }
+    .en-fs-bar-track { display: flex; gap: 5px; align-items: center; }
+    .en-fs-seg { width: 28px; height: 3px; border-radius: 2px; background: #e0e0e0; transition: background 0.4s ease; }
+    .en-fs-seg.active { background: #1E8DCD; }
+    .en-fs-track-wrap { overflow: hidden; }
+    .en-fs-track { display: flex; transition: transform 0.6s cubic-bezier(0.4,0,0.2,1); }
+    .en-feature-solo-row { flex: 0 0 100%; display: flex; gap: 65px; align-items: flex-start; }
+    .en-feature-solo-img { flex: 0 0 654px; height: 414px; background: #D9D9D9; border-radius: 16px; overflow: hidden; }
+    .en-feature-solo-body { flex: 0 0 338px; padding-top: 8px; font-family: 'Noto Sans KR', sans-serif; font-size: 17px; color: #000; line-height: 1.85; word-break: keep-all; }
+
     /* ─── CTA ─── */
     .sl-cta-section { background: #fff; padding: 80px 0 110px; }
     .sl-cta-inner { width: 100%; max-width: 1440px; margin: 0 auto; padding: 0 155px; display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
@@ -694,63 +712,60 @@
     </section>
 
     <!-- ═══ SERVICES ═══ -->
-    <section class="en-cases-section" id="sl-services">
-      <div class="en-cases-inner">
-        <p class="en-cases-label reveal">에코벨 태양광 솔루션의 핵심 서비스</p>
-        <p class="en-cases-title reveal">태양광 발전의 모든 단계를 하나로</p>
-        <div class="reveal">
-          <div class="en-case-row">
-            <div class="en-case-thumb"></div>
-            <div class="en-case-info">
-              <p class="en-case-heading">발전소 개발 &amp; 설계</p>
-              <div class="en-case-bullets">
-                <div class="en-case-bullet-item"><span style="font-weight:400;">부지 발굴·타당성 분석, 인허가 대행, 계통 연계 검토, 최적 설계까지 발전소 구축 전 과정을 지원합니다.</span></div>
+    <!-- ═══ FEATURE SOLO SECTION ═══ -->
+    <section class="en-feature-solo" id="sl-services">
+      <div class="en-feature-solo-inner">
+        <p class="en-feature-solo-label reveal">에코벨 태양광 솔루션의 핵심 서비스</p>
+        <div class="en-fs-header reveal">
+          <p class="en-feature-solo-title" id="sl-fs-title">발전소 개발 &amp; 설계</p>
+          <div class="en-fs-controls">
+            <div class="en-fs-progress-wrap">
+              <span class="en-fs-num" id="sl-fs-cur">1</span>
+              <div class="en-fs-bar-track" id="sl-fs-segs">
+                <div class="en-fs-seg active"></div>
+                <div class="en-fs-seg"></div>
+                <div class="en-fs-seg"></div>
+                <div class="en-fs-seg"></div>
+                <div class="en-fs-seg"></div>
+                <div class="en-fs-seg"></div>
               </div>
             </div>
-          </div>
-          <div class="en-case-row">
-            <div class="en-case-thumb"></div>
-            <div class="en-case-info">
-              <p class="en-case-heading">EPC 시공 관리</p>
-              <div class="en-case-bullets">
-                <div class="en-case-bullet-item"><span style="font-weight:400;">검증된 시공 파트너 네트워크를 통한 품질·일정·비용 최적화 EPC 관리로 안정적인 준공을 보장합니다.</span></div>
-              </div>
+            <div class="faq-nav">
+              <button class="faq-nav-btn" id="sl-fs-prev" aria-label="이전">
+                <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M7 1L1 7L7 13" stroke="#234B63" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <div class="faq-nav-divider"></div>
+              <button class="faq-nav-btn" id="sl-fs-next" aria-label="다음">
+                <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M1 1L7 7L1 13" stroke="#234B63" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
             </div>
           </div>
-          <div class="en-case-row">
-            <div class="en-case-thumb"></div>
-            <div class="en-case-info">
-              <p class="en-case-heading">실시간 모니터링</p>
-              <div class="en-case-bullets">
-                <div class="en-case-bullet-item"><span style="font-weight:400;">ecoNODE RTU 기반 실시간 발전량 수집과 E-ASSET 플랫폼 연동으로 데이터 유실 없는 정밀 모니터링을 제공합니다.</span></div>
-              </div>
+        </div>
+        <div class="en-fs-track-wrap reveal">
+          <div class="en-fs-track" id="sl-fs-track">
+            <div class="en-feature-solo-row">
+              <div class="en-feature-solo-img"></div>
+              <p class="en-feature-solo-body">부지 발굴·타당성 분석, 인허가 대행, 계통 연계 검토, 최적 설계까지 발전소 구축 전 과정을 지원합니다.</p>
             </div>
-          </div>
-          <div class="en-case-row">
-            <div class="en-case-thumb"></div>
-            <div class="en-case-info">
-              <p class="en-case-heading">O&amp;M 유지보수</p>
-              <div class="en-case-bullets">
-                <div class="en-case-bullet-item"><span style="font-weight:400;">이상 신호 즉각 감지, 예방 정비 스케줄 관리, 원격 진단으로 발전 손실을 최소화하고 수익성을 극대화합니다.</span></div>
-              </div>
+            <div class="en-feature-solo-row">
+              <div class="en-feature-solo-img"></div>
+              <p class="en-feature-solo-body">검증된 시공 파트너 네트워크를 통한 품질·일정·비용 최적화 EPC 관리로 안정적인 준공을 보장합니다.</p>
             </div>
-          </div>
-          <div class="en-case-row">
-            <div class="en-case-thumb"></div>
-            <div class="en-case-info">
-              <p class="en-case-heading">탄소 자산화 지원</p>
-              <div class="en-case-bullets">
-                <div class="en-case-bullet-item"><span style="font-weight:400;">REC 발급·거래, 탄소배출권(K-ETS) 연동, dMRV 기반 검증 데이터 제공으로 신재생에너지의 자산 가치를 높입니다.</span></div>
-              </div>
+            <div class="en-feature-solo-row">
+              <div class="en-feature-solo-img"></div>
+              <p class="en-feature-solo-body">ecoNODE RTU 기반 실시간 발전량 수집과 E-ASSET 플랫폼 연동으로 데이터 유실 없는 정밀 모니터링을 제공합니다.</p>
             </div>
-          </div>
-          <div class="en-case-row">
-            <div class="en-case-thumb"></div>
-            <div class="en-case-info">
-              <p class="en-case-heading">RE100 컨설팅</p>
-              <div class="en-case-bullets">
-                <div class="en-case-bullet-item"><span style="font-weight:400;">기업 RE100·ESG 목표에 맞춘 전력 조달 전략 수립부터 이행 보고서 작성까지 맞춤형 컨설팅을 지원합니다.</span></div>
-              </div>
+            <div class="en-feature-solo-row">
+              <div class="en-feature-solo-img"></div>
+              <p class="en-feature-solo-body">이상 신호 즉각 감지, 예방 정비 스케줄 관리, 원격 진단으로 발전 손실을 최소화하고 수익성을 극대화합니다.</p>
+            </div>
+            <div class="en-feature-solo-row">
+              <div class="en-feature-solo-img"></div>
+              <p class="en-feature-solo-body">REC 발급·거래, 탄소배출권(K-ETS) 연동, dMRV 기반 검증 데이터 제공으로 신재생에너지의 자산 가치를 높입니다.</p>
+            </div>
+            <div class="en-feature-solo-row">
+              <div class="en-feature-solo-img"></div>
+              <p class="en-feature-solo-body">기업 RE100·ESG 목표에 맞춘 전력 조달 전략 수립부터 이행 보고서 작성까지 맞춤형 컨설팅을 지원합니다.</p>
             </div>
           </div>
         </div>
