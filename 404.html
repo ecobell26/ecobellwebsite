@@ -106,7 +106,7 @@
     }
 
     /* ─── FOOTER ─── */
-    footer { position: sticky; bottom: 0; z-index: 0; min-width: 1100px; height: 442px; background: #2a2a2a; }
+    footer { position: relative; min-width: 1100px; height: 442px; background: #2a2a2a; }
     .footer-inner { position: relative; width: 100%; max-width: 1440px; margin: 0 auto; height: 100%; }
     .ft-company-info { position: absolute; right: 45px; top: 211px; font-family: 'Noto Sans KR', sans-serif; font-weight: 450; font-size: 13px; color: rgba(255,255,255,0.5); line-height: 23px; letter-spacing: -0.28px; white-space: pre-line; text-align: right; }
     .ft-col-title { position: absolute; font-family: 'Chillax', sans-serif; font-weight: 600; font-size: 16px; color: #fff; white-space: nowrap; margin: 0; top: 41px; letter-spacing: 0.54px; line-height: 28.8px; }
@@ -159,8 +159,8 @@
       color: #234B63;
       text-decoration: none;
       white-space: nowrap;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.15);
-      transition: background 0.15s, color 0.15s;
+      border: 1px solid rgba(0,0,0,0.3);
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
       flex-shrink: 0;
     }
     .floating-fab-item:hover { background: #1E8DCD; color: #fff; }
@@ -313,9 +313,9 @@
       <a href="https://ecoasset.co.kr" class="floating-fab-item" target="_blank" rel="noopener noreferrer">ecoASSET</a>
       <a href="https://e-asset.co.kr" class="floating-fab-item" target="_blank" rel="noopener noreferrer">E-ASSET</a>
     </div>
-    <a class="floating-fab-icon" href="ecoasset.html" aria-label="eco Asset 바로가기">
+    <div class="floating-fab-icon">
       <img src="ecoasset_badge.png" alt="eco Asset">
-    </a>
+    </div>
   </div>
   <script>
   (function(){

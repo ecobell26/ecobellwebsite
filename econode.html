@@ -102,178 +102,155 @@
       .lnb-inner    { max-width: none; }
     }
 
-    /* ─── DATA SECTION ─── */
-    .en-data-section {
+    /* ─── PROBLEM SECTION ─── */
+    .en-problem-section {
+      background: #F0F7FA;
+      padding: 100px 0 120px;
+    }
+    .en-problem-inner {
+      max-width: 1440px; margin: 0 auto;
+      padding: 0 131px;
+    }
+    .en-problem-title {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 700; font-size: 33px;
+      color: #000; line-height: 1.4;
+      margin-bottom: 60px; word-break: keep-all;
+    }
+    .en-problem-grid {
+      display: flex; gap: 26px;
+    }
+    .en-problem-col {
+      flex: 1; display: flex; flex-direction: column;
+    }
+    .en-problem-img {
+      width: 100%; height: 144px;
+      background: #D5D5D5; border-radius: 10px;
+      margin-bottom: 20px; overflow: hidden;
+    }
+    .en-problem-text {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 14px; color: #505050;
+      line-height: 1.6; margin-bottom: 18px;
+      word-break: keep-all;
+    }
+    .en-problem-arrow {
+      width: 42px; height: 42px;
+      background: #E9F4FA; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 18px; flex-shrink: 0;
+    }
+    .en-solution-card {
+      background: #fff; border-radius: 14px;
+      padding: 24px 24px 28px; flex: 1;
+      position: relative; overflow: hidden;
+      min-height: 180px;
+    }
+    .en-solution-title {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 700; font-size: 15px;
+      color: #1C7BB2; margin-bottom: 12px;
+      letter-spacing: -0.2px;
+    }
+    .en-solution-body {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 13.5px; color: rgba(0,0,0,0.75);
+      line-height: 1.75; word-break: keep-all;
+    }
+    .en-solution-device {
+      position: absolute; bottom: -8px; right: -8px;
+      width: 130px; height: 150px;
+      background: #D9D9D9; border-radius: 8px;
+      opacity: 0.45;
+    }
+
+    /* ─── CASES SECTION ─── */
+    .en-cases-section {
+      background: #F5F5F5;
+      padding: 100px 0 120px;
+    }
+    .en-cases-inner {
+      max-width: 1440px; margin: 0 auto;
+      padding: 0 131px;
+    }
+    .en-cases-label {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 600; font-size: 17px; color: #000;
+      margin-bottom: 14px; letter-spacing: -0.3px;
+    }
+    .en-cases-title {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 700; font-size: 33px; color: #000;
+      line-height: 1.4; margin-bottom: 60px; word-break: keep-all;
+    }
+    .en-case-row {
+      display: flex; gap: 52px; align-items: flex-start;
+      padding: 50px 0;
+      border-top: 0.5px solid rgba(0,0,0,0.1);
+    }
+    .en-case-row:last-child { border-bottom: 0.5px solid rgba(0,0,0,0.1); }
+    .en-case-thumb {
+      flex: 0 0 352px; height: 209px;
+      background: #D9D9D9; border-radius: 12px;
+      overflow: hidden;
+    }
+    .en-case-thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .en-case-info { flex: 1; padding-top: 8px; }
+    .en-case-heading {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 700; font-size: 20px;
+      color: #1C7BB2; line-height: 1.4;
+      margin-bottom: 22px; word-break: keep-all;
+    }
+    .en-case-bullets {
+      display: flex; flex-direction: column; gap: 16px;
+    }
+    .en-case-bullet-item {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 15px; color: #000;
+      line-height: 1.7; word-break: keep-all;
+    }
+    .en-case-bullet-item strong {
+      font-weight: 700; display: block;
+      margin-bottom: 2px;
+    }
+
+    /* ─── FEATURE SOLO SECTION ─── */
+    .en-feature-solo {
       background: #fff;
       padding: 100px 0 120px;
     }
-    .en-data-inner {
+    .en-feature-solo-inner {
       max-width: 1440px; margin: 0 auto;
       padding: 0 155px;
+      display: flex; gap: 54px; align-items: flex-start;
     }
-    .en-data-title {
+    .en-feature-solo-left {
+      flex: 0 0 345px;
+    }
+    .en-feature-solo-label {
       font-family: 'Noto Sans KR', sans-serif;
-      font-weight: 700; font-size: 33px;
-      color: #000; line-height: 1.3;
+      font-weight: 600; font-size: 17px; color: #000;
+      margin-bottom: 14px; letter-spacing: -0.3px;
+    }
+    .en-feature-solo-title {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 700; font-size: 27px; color: #000;
+      line-height: 1.4; margin-bottom: 28px;
       word-break: keep-all;
-      margin-bottom: 10px;
     }
-    .en-data-subtitle {
+    .en-feature-solo-body {
       font-family: 'Noto Sans KR', sans-serif;
-      font-weight: 400; font-size: 15px;
-      color: rgba(0,0,0,0.45);
-      margin-bottom: 70px;
+      font-size: 15px; color: rgba(0,0,0,0.7);
+      line-height: 1.85; word-break: keep-all;
     }
-    /* Infographic flow */
-    .en-infographic {
-      display: flex; align-items: flex-start; gap: 0;
-    }
-    .en-info-step {
-      flex: 1; display: flex; flex-direction: column;
-    }
-    .en-info-visual {
-      width: 100%; aspect-ratio: 4/3;
-      border-radius: 10px;
-      margin-bottom: 28px;
+    .en-feature-solo-img {
+      flex: 1; height: 460px;
+      background: #D9D9D9; border-radius: 16px;
       overflow: hidden;
     }
-    .en-info-visual svg { display: block; width: 100%; height: 100%; }
-    .en-info-step-num {
-      font-family: 'Chillax', sans-serif;
-      font-weight: 600; font-size: 12px;
-      color: #3694AA; letter-spacing: 1.5px;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-    .en-info-step-title {
-      font-family: 'Noto Sans KR', sans-serif;
-      font-weight: 700; font-size: 18px;
-      color: #000; margin-bottom: 16px;
-      line-height: 1.4;
-    }
-    .en-info-bullets {
-      list-style: none; display: flex; flex-direction: column; gap: 10px;
-    }
-    .en-info-bullets li {
-      font-family: 'Noto Sans KR', sans-serif;
-      font-size: 14px; color: rgba(0,0,0,0.65);
-      line-height: 1.6; word-break: keep-all;
-      padding-left: 14px; position: relative;
-    }
-    .en-info-bullets li::before {
-      content: '';
-      position: absolute; left: 0; top: 9px;
-      width: 5px; height: 5px;
-      border-radius: 50%; background: #3694AA;
-    }
-    .en-info-bullets li strong {
-      font-weight: 700; color: #000;
-      display: block;
-    }
-    /* Separator between steps */
-    .en-info-sep {
-      flex: 0 0 40px;
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Chillax', sans-serif;
-      font-weight: 300; font-size: 22px;
-      color: rgba(0,0,0,0.25);
-      padding-bottom: 28px; /* align with center of visual */
-      align-self: center;
-    }
 
-    /* ─── CUSTOMERS SECTION ─── */
-    .en-customers-section {
-      background: #F4F4F4;
-      padding: 100px 0 120px;
-    }
-    .en-customers-inner {
-      max-width: 1440px; margin: 0 auto;
-      padding: 0 155px;
-    }
-    .en-customers-sub {
-      font-family: 'Noto Sans KR', sans-serif;
-      font-weight: 400; font-size: 17px;
-      color: #000;
-      margin-top: 30px;
-    }
-    .en-case-grid {
-      display: flex; flex-direction: column;
-      gap: 14px; margin-top: 48px;
-    }
-    .en-case-card {
-      background: #fff; border-radius: 14px;
-      padding: 32px 40px;
-      display: grid;
-      grid-template-columns: 160px 1fr 40px 1fr;
-      gap: 32px; align-items: center;
-    }
-    .en-case-label-col {
-      display: flex; flex-direction: column; gap: 6px;
-    }
-    .en-case-num {
-      font-family: 'Chillax', sans-serif;
-      font-weight: 600; font-size: 11px;
-      color: #3694AA; letter-spacing: 1.5px;
-      text-transform: uppercase;
-    }
-    .en-case-title {
-      font-family: 'Noto Sans KR', sans-serif;
-      font-weight: 700; font-size: 14px;
-      color: #000; line-height: 1.45; word-break: keep-all;
-    }
-    /* Before: speech bubble */
-    .en-case-before {
-      background: #F7F7F7; border-radius: 12px;
-      padding: 22px 24px; position: relative;
-    }
-    .en-case-before-tag {
-      font-family: 'Noto Sans KR', sans-serif;
-      font-size: 10px; font-weight: 700;
-      color: rgba(0,0,0,0.35); letter-spacing: 0.5px;
-      text-transform: uppercase; margin-bottom: 10px;
-    }
-    .en-case-quote {
-      font-family: 'Noto Sans KR', sans-serif;
-      font-size: 14px; color: rgba(0,0,0,0.75);
-      line-height: 1.8; word-break: keep-all;
-      font-style: italic;
-    }
-    .en-case-quote::before {
-      content: '"'; font-size: 28px; color: rgba(0,0,0,0.1);
-      font-style: normal; line-height: 0;
-      vertical-align: -10px; margin-right: 4px;
-    }
-    .en-case-quote::after {
-      content: '"'; font-size: 28px; color: rgba(0,0,0,0.1);
-      font-style: normal; line-height: 0;
-      vertical-align: -10px; margin-left: 4px;
-    }
-    /* Arrow */
-    .en-case-arrow {
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Chillax', sans-serif;
-      font-size: 20px; font-weight: 300;
-      color: #3694AA; opacity: 0.5;
-    }
-    /* After */
-    .en-case-after {
-      background: #EDF7FB; border-radius: 12px;
-      padding: 22px 24px;
-    }
-    .en-case-after-tag {
-      font-family: 'Noto Sans KR', sans-serif;
-      font-size: 10px; font-weight: 700;
-      color: #3694AA; letter-spacing: 0.5px;
-      text-transform: uppercase; margin-bottom: 10px;
-    }
-    .en-case-result {
-      font-family: 'Noto Sans KR', sans-serif;
-      font-size: 14px; color: rgba(0,0,0,0.75);
-      line-height: 1.8; word-break: keep-all;
-    }
-    .en-case-result strong { color: #3694AA; font-weight: 700; }
-
-    /* ─── CTA ─── */
+        /* ─── CTA ─── */
     .sl-cta-section { background: #fff; padding: 80px 0 110px; }
     .sl-cta-inner { width: 100%; max-width: 1440px; margin: 0 auto; padding: 0 155px; display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
     .sl-cta-col { background: #fff; border: 1.5px solid #e7e7e7; border-radius: 20px; display: flex; align-items: center; justify-content: space-between; padding: 42px 48px 42px 54px; min-height: 235px; }
@@ -284,7 +261,7 @@
     .sl-cta-btn svg { flex-shrink: 0; }
 
     /* ─── FOOTER ─── */
-    footer { position: sticky; bottom: 0; z-index: 0; min-width: 1100px; height: 442px; background: #2a2a2a; }
+    footer { position: relative; min-width: 1100px; height: 442px; background: #2a2a2a; }
     .footer-inner { position: relative; width: 100%; max-width: 1440px; margin: 0 auto; height: 100%; }
     .ft-company-info { position: absolute; right: 45px; top: 211px; font-family: 'Noto Sans KR', sans-serif; font-weight: 450; font-size: 13px; color: rgba(255,255,255,0.5); line-height: 23px; letter-spacing: -0.28px; white-space: pre-line; text-align: right; }
     .ft-col-title { position: absolute; font-family: 'Chillax', sans-serif; font-weight: 600; font-size: 16px; color: #fff; white-space: nowrap; margin: 0; top: 41px; letter-spacing: 0.54px; line-height: 28.8px; }
@@ -338,8 +315,8 @@
       color: #234B63;
       text-decoration: none;
       white-space: nowrap;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.15);
-      transition: background 0.15s, color 0.15s;
+      border: 1px solid rgba(0,0,0,0.3);
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
       flex-shrink: 0;
     }
     .floating-fab-item:hover { background: #1E8DCD; color: #fff; }
@@ -663,7 +640,158 @@
   .faq-nav-btn:hover:not(:disabled) { background: #f5f5f5; }
   .faq-nav-btn:disabled { opacity: 0.35; cursor: default; }
   .faq-nav-divider { width: 1px; height: 20px; background: #e8e8e8; flex-shrink: 0; }
-  </style>
+  
+    /* ─── BACK TO TOP ─── */
+    .back-to-top {
+      position: absolute; right: 45px; top: 32px;
+      width: 56px; height: 56px; border-radius: 50%;
+      border: 1.5px solid rgba(255,255,255,0.35);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 3px;
+      cursor: pointer; background: transparent;
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .back-to-top:hover { border-color: rgba(255,255,255,0.8); background: rgba(255,255,255,0.08); }
+    .back-to-top-text { font-family: 'Chillax', sans-serif; font-weight: 500; font-size: 11px; color: #fff; letter-spacing: 0.8px; line-height: 1; }
+
+
+    /* ─── FEATURES ─── */
+    .en-features {
+      background: #f5f5f5;
+      padding: 87px 0 100px;
+    }
+    .en-features-inner {
+      width: 100%; max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 131px;
+    }
+    .en-features-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 40px;
+    }
+    .en-features-label {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 600; font-size: 17px; color: #000;
+      margin-bottom: 14px; letter-spacing: -0.3px;
+    }
+    .en-features-title {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 700; font-size: 24px; color: #000;
+      letter-spacing: -0.4px; line-height: 1.3;
+      word-break: keep-all;
+    }
+    .en-features-nav {
+      display: flex; align-items: center; gap: 21px; flex-shrink: 0;
+      padding-bottom: 4px;
+    }
+    .en-slide-counter {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .en-counter-cur {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 700; font-size: 14px; color: #000;
+    }
+    .en-counter-line {
+      display: block; width: 44px; height: 1.5px;
+      background: rgba(0,0,0,0.15);
+      position: relative; flex-shrink: 0;
+    }
+    .en-counter-fill {
+      position: absolute; left: 0; top: 0; bottom: 0;
+      background: #000;
+      width: 0%;
+      transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .en-counter-total {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 400; font-size: 14px; color: rgba(0,0,0,0.35);
+    }
+    .en-nav-btn {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .en-nav-btn {
+      border: 1.5px solid #000;
+    }
+    .en-nav-btn:hover { background: rgba(0,0,0,0.06); }
+    .en-nav-btn.is-end {
+      border: 1px solid rgba(0,0,0,0.2);
+      cursor: default;
+      background: none;
+    }
+
+    .en-features-sep {
+      height: 0.5px; background: rgba(0,0,0,0.15);
+      margin-bottom: 36px;
+    }
+
+    /* Card slider */
+    .en-features-track-wrap {
+      overflow: hidden;
+      border-radius: 12px;
+    }
+    .en-features-track {
+      display: flex;
+      gap: 0;
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .en-feature-card {
+      min-width: 100%;
+      display: flex; align-items: flex-start; gap: 48px;
+      padding: 40px 0 0;
+    }
+    .en-feature-card-img {
+      flex: 0 0 55%;
+      background: #e8e8e8;
+      border-radius: 10px;
+      min-height: 320px;
+    }
+    .en-feature-card-content {
+      flex: 1;
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 400; font-size: 15px;
+      color: #000;
+      line-height: 1.8; letter-spacing: -0.2px;
+      word-break: keep-all;
+      padding-top: 8px;
+    }
+    .en-feature-card-placeholder {
+      text-align: center;
+      color: rgba(0,0,0,0.2);
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 14px;
+    }
+
+  /* ── FAQ 섹션 ── */
+  .pf-faq-section { background: #fff; padding: 100px 0 80px; }
+  .pf-faq-inner { max-width: 1440px; margin: 0 auto; padding: 0 155px; }
+  .pf-faq-header { display: flex; align-items: center; justify-content: space-between; }
+  .pf-faq-title { font-family: 'Noto Sans KR', sans-serif; font-weight: 700; font-size: 33px; color: #1E8DCD; line-height: 1.3; margin-bottom: 0; }
+  .pf-faq-list { margin-top: 30px; }
+  .pf-faq-item { border-bottom: 1px solid #e0e0e0; }
+  .pf-faq-q { display: flex; align-items: center; justify-content: space-between; padding: 28px 8px; cursor: pointer; font-family: 'Noto Sans KR', sans-serif; font-size: 16px; font-weight: 500; color: #222; transition: color 0.2s; user-select: none; }
+  .pf-faq-q:hover { color: #1E8DCD; }
+  .pf-faq-item.open .pf-faq-q { color: #1E8DCD; font-weight: 700; }
+  .pf-faq-chevron { flex-shrink: 0; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; transition: transform 0.3s ease; }
+  .pf-faq-item.open .pf-faq-chevron { transform: rotate(180deg); }
+  .pf-faq-a { max-height: 0; overflow: hidden; transition: max-height 0.35s cubic-bezier(0.4,0,0.2,1), padding 0.35s; font-family: 'Noto Sans KR', sans-serif; font-size: 15px; color: #555; line-height: 1.8; padding: 0 8px; word-break: keep-all; }
+  .pf-faq-item.open .pf-faq-a { max-height: 400px; padding: 0 8px 28px; }
+  .faq-more-btn { display: inline-flex; align-items: center; gap: 10px; background: #00314D; color: #fff; font-family: 'Nanum Square','NanumSquare',sans-serif; font-weight: 700; font-size: 14px; text-decoration: none; padding: 10px 20px; border-radius: 200px; white-space: nowrap; height: 40px; box-sizing: border-box; transition: opacity 0.2s; }
+  .faq-more-btn:hover { opacity: 0.8; }
+  .faq-controls { display: flex; align-items: center; gap: 12px; }
+  .faq-nav { display: flex; align-items: center; border: 1.5px solid #e8e8e8; border-radius: 200px; height: 44px; overflow: hidden; }
+  .faq-nav-btn { width: 39px; height: 44px; display: flex; align-items: center; justify-content: center; background: none; border: none; cursor: pointer; transition: background 0.2s; padding: 0; }
+  .faq-nav-btn:hover:not(:disabled) { background: #f5f5f5; }
+  .faq-nav-btn:disabled { opacity: 0.35; cursor: default; }
+  .faq-nav-divider { width: 1px; height: 20px; background: #e8e8e8; flex-shrink: 0; }
+  
+</style>
   <script src="assets/page-loader.js"></script>
 </head>
 <body>
@@ -852,6 +980,7 @@
       </div>
     </section>
 
+
     <!-- ═══ FEATURES ═══ -->
     <section class="en-features">
       <div class="en-features-inner">
@@ -911,273 +1040,133 @@
       </div>
     </section>
 
-    <!-- ═══ DATA / INFOGRAPHIC SECTION ═══ -->
-    <section class="en-data-section">
-      <div class="en-data-inner">
-        <p class="en-data-title reveal">현장에서 겪던 데이터 누락,<br>에코노드가 바로잡다</p>
+    <!-- ═══ PROBLEM / SOLUTION SECTION ═══ -->
+    <section class="en-problem-section">
+      <div class="en-problem-inner">
+        <p class="en-problem-title reveal">현장에서 겪던 데이터 누락,<br>에코노드가 바로잡다</p>
+        <div class="en-problem-grid reveal">
 
-        <div class="en-infographic reveal">
-
-          <!-- Step 1: 현장 -->
-          <div class="en-info-step">
-            <div class="en-info-visual">
-              <svg viewBox="0 0 320 240" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="320" height="240" fill="#F4F9FC"/>
-                <!-- Sun -->
-                <circle cx="72" cy="38" r="12" fill="#FBBF24" opacity="0.85"/>
-                <line x1="72" y1="20" x2="72" y2="14" stroke="#FBBF24" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
-                <line x1="86" y1="24" x2="90" y2="19" stroke="#FBBF24" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
-                <line x1="92" y1="38" x2="98" y2="38" stroke="#FBBF24" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
-                <line x1="58" y1="24" x2="54" y2="19" stroke="#FBBF24" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
-                <line x1="52" y1="38" x2="46" y2="38" stroke="#FBBF24" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
-                <!-- Solar panel 1 -->
-                <rect x="22" y="66" width="50" height="34" rx="2" fill="#1E5A7A" stroke="#3694AA" stroke-width="1"/>
-                <line x1="39" y1="66" x2="39" y2="100" stroke="#3694AA" stroke-width="0.5" opacity="0.6"/>
-                <line x1="55" y1="66" x2="55" y2="100" stroke="#3694AA" stroke-width="0.5" opacity="0.6"/>
-                <line x1="22" y1="83" x2="72" y2="83" stroke="#3694AA" stroke-width="0.5" opacity="0.6"/>
-                <!-- Solar panel 2 -->
-                <rect x="78" y="66" width="50" height="34" rx="2" fill="#1E5A7A" stroke="#3694AA" stroke-width="1"/>
-                <line x1="95" y1="66" x2="95" y2="100" stroke="#3694AA" stroke-width="0.5" opacity="0.6"/>
-                <line x1="111" y1="66" x2="111" y2="100" stroke="#3694AA" stroke-width="0.5" opacity="0.6"/>
-                <line x1="78" y1="83" x2="128" y2="83" stroke="#3694AA" stroke-width="0.5" opacity="0.6"/>
-                <!-- Solar panel 3 -->
-                <rect x="22" y="106" width="50" height="34" rx="2" fill="#1E5A7A" stroke="#3694AA" stroke-width="1"/>
-                <line x1="39" y1="106" x2="39" y2="140" stroke="#3694AA" stroke-width="0.5" opacity="0.6"/>
-                <line x1="55" y1="106" x2="55" y2="140" stroke="#3694AA" stroke-width="0.5" opacity="0.6"/>
-                <line x1="22" y1="123" x2="72" y2="123" stroke="#3694AA" stroke-width="0.5" opacity="0.6"/>
-                <!-- Solar panel 4 -->
-                <rect x="78" y="106" width="50" height="34" rx="2" fill="#1E5A7A" stroke="#3694AA" stroke-width="1"/>
-                <line x1="95" y1="106" x2="95" y2="140" stroke="#3694AA" stroke-width="0.5" opacity="0.6"/>
-                <line x1="111" y1="106" x2="111" y2="140" stroke="#3694AA" stroke-width="0.5" opacity="0.6"/>
-                <line x1="78" y1="123" x2="128" y2="123" stroke="#3694AA" stroke-width="0.5" opacity="0.6"/>
-                <!-- Wire panel → device -->
-                <line x1="128" y1="103" x2="155" y2="103" stroke="#888" stroke-width="1.2" stroke-dasharray="3,2"/>
-                <polygon points="152,100 158,103 152,106" fill="#888"/>
-                <!-- ecoNODE device -->
-                <rect x="160" y="58" width="86" height="126" rx="7" fill="#fff" stroke="#3694AA" stroke-width="1.5"/>
-                <!-- LCD screen -->
-                <rect x="170" y="68" width="66" height="58" rx="3" fill="#0d1f2f"/>
-                <text x="203" y="89" text-anchor="middle" font-family="monospace" font-size="11" fill="#3CD4D3" font-weight="bold">380V</text>
-                <text x="203" y="107" text-anchor="middle" font-family="monospace" font-size="11" fill="#5CD4D3">45kW</text>
-                <text x="203" y="121" text-anchor="middle" font-family="monospace" font-size="8" fill="#1E8DCD" opacity="0.7">12.3kWh</text>
-                <!-- Status LEDs -->
-                <circle cx="178" cy="142" r="3.5" fill="#3BBD6A"/>
-                <circle cx="190" cy="142" r="3.5" fill="#5CD4D3"/>
-                <circle cx="202" cy="142" r="3.5" fill="#E0E0E0"/>
-                <!-- Label -->
-                <text x="203" y="170" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#3694AA" font-weight="700" letter-spacing="0.5">ecoNODE</text>
+          <div class="en-problem-col">
+            <div class="en-problem-img"></div>
+            <p class="en-problem-text">발전량 저하 원인을 파악하기 어려워 신속한 대응이 불가능해요</p>
+            <div class="en-problem-arrow">
+              <svg width="14" height="18" viewBox="0 0 14 18" fill="none">
+                <path d="M7 1V15M7 15L1 9M7 15L13 9" stroke="#1C7BB2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </div>
-            <p class="en-info-step-num">01 &nbsp;/&nbsp; Field</p>
-            <p class="en-info-step-title">정밀 데이터 채록</p>
-            <ul class="en-info-bullets">
-              <li><strong>원천 신호 직접 추출</strong>인버터 및 센서의 물리적 신호 실시간 감지</li>
-              <li><strong>인적 오류 제로</strong>가공 없는 직독(Direct Read) 방식으로 데이터 무결성 확보</li>
-            </ul>
+            <div class="en-solution-card">
+              <p class="en-solution-title">정밀 계측</p>
+              <p class="en-solution-body">실시간 모니터링으로 인버터 효율 저하와 패널 이상을 즉각 감지하여 발전 손실을 최소화합니다.</p>
+              <div class="en-solution-device"></div>
+            </div>
           </div>
 
-          <span class="en-info-sep">&gt;</span>
-
-          <!-- Step 2: 전송 -->
-          <div class="en-info-step">
-            <div class="en-info-visual">
-              <svg viewBox="0 0 320 240" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="320" height="240" fill="#F4F9FC"/>
-                <!-- ecoNODE device (left) -->
-                <rect x="28" y="72" width="74" height="116" rx="7" fill="#fff" stroke="#3694AA" stroke-width="1.5"/>
-                <!-- LCD -->
-                <rect x="38" y="82" width="54" height="44" rx="3" fill="#0d1f2f"/>
-                <text x="65" y="100" text-anchor="middle" font-family="monospace" font-size="10" fill="#3CD4D3" font-weight="bold">380V</text>
-                <text x="65" y="117" text-anchor="middle" font-family="monospace" font-size="10" fill="#5CD4D3">45kW</text>
-                <!-- LEDs -->
-                <circle cx="44" cy="140" r="3" fill="#3BBD6A"/>
-                <circle cx="55" cy="140" r="3" fill="#5CD4D3"/>
-                <!-- Label -->
-                <text x="65" y="176" text-anchor="middle" font-family="sans-serif" font-size="7.5" fill="#3694AA" font-weight="700" letter-spacing="0.5">ecoNODE</text>
-                <!-- Antenna pole -->
-                <line x1="65" y1="72" x2="65" y2="46" stroke="#555" stroke-width="1.8" stroke-linecap="round"/>
-                <line x1="65" y1="46" x2="55" y2="60" stroke="#555" stroke-width="1.5" stroke-linecap="round"/>
-                <line x1="65" y1="46" x2="75" y2="60" stroke="#555" stroke-width="1.5" stroke-linecap="round"/>
-                <!-- LTE signal arcs -->
-                <path d="M88 48 Q108 32 88 16" stroke="#3694AA" stroke-width="1.8" stroke-linecap="round" opacity="0.8"/>
-                <path d="M98 52 Q126 30 98 8" stroke="#3694AA" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
-                <path d="M108 56 Q148 26 108 -2" stroke="#3694AA" stroke-width="1.2" stroke-linecap="round" opacity="0.3"/>
-                <!-- LTE badge -->
-                <rect x="138" y="108" width="36" height="20" rx="10" fill="#3694AA"/>
-                <text x="156" y="122" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#fff" font-weight="800">LTE</text>
-                <!-- Dashed transmit line -->
-                <line x1="105" y1="128" x2="212" y2="128" stroke="#3694AA" stroke-width="1.2" stroke-dasharray="5,3" opacity="0.45"/>
-                <polygon points="209,124 217,128 209,132" fill="#3694AA" opacity="0.45"/>
-                <!-- Cloud -->
-                <path d="M234 158 Q228 142 244 139 Q247 125 264 128 Q279 127 277 140 Q290 140 288 153 Q286 166 271 165 L241 165 Q228 166 234 158 Z" fill="#fff" stroke="#3694AA" stroke-width="1.5"/>
-                <!-- Server rack below cloud -->
-                <rect x="244" y="170" width="32" height="24" rx="3" fill="#3694AA" opacity="0.12"/>
-                <rect x="247" y="173" width="26" height="5" rx="1.5" fill="#3694AA" opacity="0.3"/>
-                <rect x="247" y="181" width="26" height="5" rx="1.5" fill="#3694AA" opacity="0.3"/>
-                <circle cx="270" cy="175.5" r="1.5" fill="#3BBD6A"/>
-                <circle cx="270" cy="183.5" r="1.5" fill="#3BBD6A"/>
-                <text x="260" y="205" text-anchor="middle" font-family="sans-serif" font-size="7.5" fill="#3694AA" opacity="0.8" font-weight="600">클라우드 서버</text>
+          <div class="en-problem-col">
+            <div class="en-problem-img"></div>
+            <p class="en-problem-text">단순 확인 때문에 현장에 자주 가야 하고 그만큼 관리비도 계속 나가요</p>
+            <div class="en-problem-arrow">
+              <svg width="14" height="18" viewBox="0 0 14 18" fill="none">
+                <path d="M7 1V15M7 15L1 9M7 15L13 9" stroke="#1C7BB2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </div>
-            <p class="en-info-step-num">02 &nbsp;/&nbsp; Transfer</p>
-            <p class="en-info-step-title">통합 데이터 무선 전송</p>
-            <ul class="en-info-bullets">
-              <li><strong>통신 매설 공사 제로</strong>장치 자체 탑재된 전용 무선 LTE망 모듈 활용</li>
-              <li><strong>전국 분산 발전소 연결</strong>외곽 지역에서도 데이터 유실 없는 실시간 송신</li>
-            </ul>
+            <div class="en-solution-card">
+              <p class="en-solution-title">원격 진단</p>
+              <p class="en-solution-body">현장 방문 없이 상태를 진단하여 불필요한 관리 비용을 줄이고 운영 효율을 극대화합니다.</p>
+              <div class="en-solution-device"></div>
+            </div>
           </div>
 
-          <span class="en-info-sep">&gt;</span>
-
-          <!-- Step 3: 연동 & 알림 -->
-          <div class="en-info-step">
-            <div class="en-info-visual">
-              <svg viewBox="0 0 320 240" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="320" height="240" fill="#F4F9FC"/>
-                <!-- Monitor (left) -->
-                <rect x="16" y="44" width="152" height="102" rx="6" fill="#2a2a2a"/>
-                <rect x="22" y="50" width="140" height="82" rx="3" fill="#0d1f2f"/>
-                <!-- Graph area fill -->
-                <polygon points="32,124 32,114 52,94 74,106 98,76 120,88 144,58 154,68 162,124" fill="#3CD4D3" opacity="0.1"/>
-                <!-- Graph line -->
-                <polyline points="32,114 52,94 74,106 98,76 120,88 144,58 154,68" stroke="#3CD4D3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <!-- Graph dots -->
-                <circle cx="32" cy="114" r="2.5" fill="#3CD4D3"/>
-                <circle cx="74" cy="106" r="2.5" fill="#3CD4D3"/>
-                <circle cx="98" cy="76" r="2.5" fill="#3CD4D3"/>
-                <circle cx="144" cy="58" r="2.5" fill="#3CD4D3"/>
-                <!-- Y-axis lines -->
-                <line x1="30" y1="60" x2="162" y2="60" stroke="#fff" stroke-width="0.3" opacity="0.1"/>
-                <line x1="30" y1="80" x2="162" y2="80" stroke="#fff" stroke-width="0.3" opacity="0.1"/>
-                <line x1="30" y1="100" x2="162" y2="100" stroke="#fff" stroke-width="0.3" opacity="0.1"/>
-                <line x1="30" y1="120" x2="162" y2="120" stroke="#fff" stroke-width="0.3" opacity="0.1"/>
-                <!-- Monitor stand -->
-                <rect x="88" y="146" width="8" height="18" rx="2" fill="#555"/>
-                <rect x="70" y="162" width="44" height="6" rx="3" fill="#555"/>
-                <!-- E-ASSET label -->
-                <text x="92" y="200" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#3694AA" font-weight="700" letter-spacing="0.5">E-ASSET</text>
-
-                <!-- Smartphone (right) -->
-                <rect x="202" y="34" width="86" height="158" rx="12" fill="#fff" stroke="#3694AA" stroke-width="1.5"/>
-                <!-- Home indicator -->
-                <rect x="232" y="178" width="26" height="4" rx="2" fill="#ddd"/>
-                <!-- Screen area -->
-                <rect x="208" y="48" width="74" height="122" rx="4" fill="#f7f7f7"/>
-                <!-- Status bar -->
-                <rect x="208" y="48" width="74" height="14" fill="#3694AA" opacity="0.9"/>
-                <text x="245" y="58" text-anchor="middle" font-family="sans-serif" font-size="6.5" fill="#fff" font-weight="600">E-ASSET</text>
-                <!-- KakaoTalk notification popup -->
-                <rect x="212" y="72" width="66" height="70" rx="8" fill="#FAE300"/>
-                <!-- Kakao icon circle -->
-                <circle cx="226" cy="87" r="9" fill="#3C1E1E"/>
-                <ellipse cx="226" cy="87" rx="6" ry="5" fill="#FAE300"/>
-                <circle cx="223" cy="86" r="1.2" fill="#3C1E1E"/>
-                <circle cx="229" cy="86" r="1.2" fill="#3C1E1E"/>
-                <path d="M223 89.5 Q226 91.5 229 89.5" stroke="#3C1E1E" stroke-width="1" stroke-linecap="round"/>
-                <!-- Notification text -->
-                <text x="240" y="84" font-family="sans-serif" font-size="6.5" fill="#3C1E1E" font-weight="800">[E-ASSET]</text>
-                <text x="240" y="94" font-family="sans-serif" font-size="6" fill="#3C1E1E">OO발전소 인버터</text>
-                <text x="240" y="103" font-family="sans-serif" font-size="6" fill="#3C1E1E">정상 가동 중</text>
-                <line x1="216" y1="110" x2="274" y2="110" stroke="#3C1E1E" stroke-width="0.5" opacity="0.2"/>
-                <text x="216" y="120" font-family="sans-serif" font-size="5.5" fill="#3C1E1E" opacity="0.7">누적 발전량 가시성 확보</text>
-                <text x="216" y="130" font-family="sans-serif" font-size="5.5" fill="#3C1E1E" opacity="0.7">방금 전</text>
-                <!-- Screen content below popup -->
-                <rect x="212" y="148" width="66" height="16" rx="3" fill="#eee"/>
-                <rect x="212" y="168" width="44" height="6" rx="3" fill="#ddd"/>
+          <div class="en-problem-col">
+            <div class="en-problem-img"></div>
+            <p class="en-problem-text">정산이나 증빙이 급할 때, 바로 데이터를 확보하기가 어려워요</p>
+            <div class="en-problem-arrow">
+              <svg width="14" height="18" viewBox="0 0 14 18" fill="none">
+                <path d="M7 1V15M7 15L1 9M7 15L13 9" stroke="#1C7BB2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </div>
-            <p class="en-info-step-num">03 &nbsp;/&nbsp; Platform &amp; Alert</p>
-            <p class="en-info-step-title">스마트 모니터링</p>
-            <ul class="en-info-bullets">
-              <li><strong>표준 프로토콜 변환</strong>이종 데이터 단일화로 플랫폼 즉각 통합 연동</li>
-              <li><strong>실시간 모니터링</strong>국내외 어디서나 주요 발전 지표 및 알림 확인</li>
-            </ul>
+            <div class="en-solution-card">
+              <p class="en-solution-title">원천 데이터</p>
+              <p class="en-solution-body">전력 계통 사양을 충족하는 원천 데이터를 확보하여, 탄소시장에서의 고신뢰 자산을 만듭니다.</p>
+              <div class="en-solution-device"></div>
+            </div>
           </div>
 
         </div>
       </div>
     </section>
 
-    <!-- ═══ CUSTOMERS SECTION ═══ -->
-    <section class="en-customers-section">
-      <div class="en-customers-inner">
-        <p class="en-data-title reveal">에너지 자산화를 선도하는<br>기업들의 필수 선택</p>
-        <p class="en-customers-sub reveal">고객 사례</p>
-
-        <div class="en-case-grid reveal">
-
-          <!-- Case 1 -->
-          <div class="en-case-card">
-            <div class="en-case-label-col">
-              <p class="en-case-num">Case 01 &nbsp;/&nbsp; ESG</p>
-              <p class="en-case-title">글로벌 ESG &amp;<br>탄소 배출권 자산화</p>
-            </div>
-            <div class="en-case-before">
-              <p class="en-case-before-tag">Before</p>
-              <p class="en-case-quote">수기 입력하다 보면 담당자마다 숫자가 달라요. 외부 기관에 제출하려니 어떤 데이터를 믿어야 할지 모르겠더라고요.</p>
-            </div>
-            <div class="en-case-arrow">→</div>
-            <div class="en-case-after">
-              <p class="en-case-after-tag">After</p>
-              <p class="en-case-result">가공 없는 자동 수집으로 <strong>디지털 MRV(dMRV)를 구현</strong>했습니다. 인적 개입 없는 데이터 뱅크로 탄소 배출권 자산의 공신력을 확보했습니다.</p>
+    <!-- ═══ CASES SECTION ═══ -->
+    <section class="en-cases-section">
+      <div class="en-cases-inner">
+        <p class="en-cases-label reveal">에코노드만의 특장점</p>
+        <p class="en-cases-title reveal">발전부터 배출까지<br>온실가스 인벤토리의 모든 것을 한곳에</p>
+        <div class="reveal">
+          <div class="en-case-row">
+            <div class="en-case-thumb"></div>
+            <div class="en-case-info">
+              <p class="en-case-heading">탄소 배출권 및 ESG 성과 증빙</p>
+              <div class="en-case-bullets">
+                <div class="en-case-bullet-item"><strong>실측 데이터의 증빙 자료화</strong>외부 기관 제출용 실시간 에너지 실측 데이터의 리포트화</div>
+                <div class="en-case-bullet-item"><strong>ESG 경영 근거 확보</strong>탄소 배출권 확보 및 기업별 ESG 성과 입증을 위한 객관적 데이터 뱅크 구축</div>
+              </div>
             </div>
           </div>
-
-          <!-- Case 2 -->
-          <div class="en-case-card">
-            <div class="en-case-label-col">
-              <p class="en-case-num">Case 02 &nbsp;/&nbsp; 대규모 발전</p>
-              <p class="en-case-title">상업용 대규모<br>발전 단지</p>
-            </div>
-            <div class="en-case-before">
-              <p class="en-case-before-tag">Before</p>
-              <p class="en-case-quote">발전소 100곳 데이터를 엑셀로 취합하는 데 하루가 걸렸어요. 그때쯤이면 이미 '실시간'이 아닌 거잖아요.</p>
-            </div>
-            <div class="en-case-arrow">→</div>
-            <div class="en-case-after">
-              <p class="en-case-after-tag">After</p>
-              <p class="en-case-result">이종 설비 신호를 단일 표준으로 묶어 <strong>누적 발전량을 실시간 통합 집계</strong>합니다. 오차 없는 정밀 로그로 수익성 분석이 즉시 가능해졌습니다.</p>
+          <div class="en-case-row">
+            <div class="en-case-thumb"></div>
+            <div class="en-case-info">
+              <p class="en-case-heading">글로벌 스탠다드 기반의 디지털 MRV 구현</p>
+              <div class="en-case-bullets">
+                <div class="en-case-bullet-item"><strong>데이터 왜곡 가능성 차단</strong>자동 수집 체계를 통한 인적 개입 및 데이터 위·변조 가능성의 원천 봉쇄</div>
+                <div class="en-case-bullet-item"><strong>탄소 자산 공신력 극대화</strong>실측 기반의 dMRV를 통해 탄소 배출권 발행 및 공시를 위한 핵심 근거 제공</div>
+              </div>
             </div>
           </div>
-
-          <!-- Case 3 -->
-          <div class="en-case-card">
-            <div class="en-case-label-col">
-              <p class="en-case-num">Case 03 &nbsp;/&nbsp; 분산 관리</p>
-              <p class="en-case-title">전국 단위<br>분산형 에너지 관리</p>
-            </div>
-            <div class="en-case-before">
-              <p class="en-case-before-tag">Before</p>
-              <p class="en-case-quote">외곽 발전소 장애 하나 확인하러 왕복 4시간이요. 통신선 공사비만 몇 천이고요. 사실상 관리가 안 됐어요.</p>
-            </div>
-            <div class="en-case-arrow">→</div>
-            <div class="en-case-after">
-              <p class="en-case-after-tag">After</p>
-              <p class="en-case-result">LTE 무선망으로 <strong>현장 방문 횟수를 최소화</strong>했습니다. 통신선 공사비 없이 전국 분산 발전소를 원격으로 통합 관리합니다.</p>
+          <div class="en-case-row">
+            <div class="en-case-thumb"></div>
+            <div class="en-case-info">
+              <p class="en-case-heading">상업용 및 대규모 발전 단지 운영</p>
+              <div class="en-case-bullets">
+                <div class="en-case-bullet-item"><strong>누적 발전량의 실시간 집계</strong>대규모 발전 설비의 발전 지표를 실시간 통합 모니터링</div>
+                <div class="en-case-bullet-item"><strong>수익성 분석 기초 자료 활용</strong>정밀 데이터를 기반으로 한 발전 수익 분석 및 재무적 의사결정 지원</div>
+              </div>
             </div>
           </div>
-
-          <!-- Case 4 -->
-          <div class="en-case-card">
-            <div class="en-case-label-col">
-              <p class="en-case-num">Case 04 &nbsp;/&nbsp; O&amp;M</p>
-              <p class="en-case-title">실시간 이상 진단 및<br>O&amp;M 자동화</p>
+          <div class="en-case-row">
+            <div class="en-case-thumb"></div>
+            <div class="en-case-info">
+              <p class="en-case-heading">전국 단위 분산형 에너지 관리</p>
+              <div class="en-case-bullets">
+                <div class="en-case-bullet-item"><strong>통합 관리 네트워크 연결</strong>전국에 산재된 소규모 발전소의 유기적 연동 및 통합 관제</div>
+                <div class="en-case-bullet-item"><strong>자산 관리 효율 제고</strong>원격 관리 체계 구축을 통한 현장 방문 최소화 및 운영 효율성 극대화</div>
+              </div>
             </div>
-            <div class="en-case-before">
-              <p class="en-case-before-tag">Before</p>
-              <p class="en-case-quote">정전이 언제 났는지, 얼마나 됐는지 알 수가 없어요. 결국 현장에 가봐야 아니까요.</p>
-            </div>
-            <div class="en-case-arrow">→</div>
-            <div class="en-case-after">
-              <p class="en-case-after-tag">After</p>
-              <p class="en-case-result">이상 신호를 엣지 단에서 즉각 포착하고 <strong>카카오톡 알림으로 동기화</strong>합니다. 꼭 필요한 시점에만 출동하는 데이터 기반 O&amp;M 환경을 완성했습니다.</p>
+          </div>
+          <div class="en-case-row">
+            <div class="en-case-thumb"></div>
+            <div class="en-case-info">
+              <p class="en-case-heading">실시간 이상 진단 및 데이터 기반 O&amp;M</p>
+              <div class="en-case-bullets">
+                <div class="en-case-bullet-item"><strong>설비 이벤트 및 원인 분석</strong>설비 이상 신호의 즉각 포착 및 원인·조치 방법 데이터 생성</div>
+                <div class="en-case-bullet-item"><strong>실시간 연동을 통한 관리 공백 최소화</strong>E-ASSET 동기화 및 카카오톡 사고 알림 서비스를 통한 가동 중단 시간 단축</div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-  </main>
+    <!-- ═══ FEATURE SOLO SECTION ═══ -->
+    <section class="en-feature-solo">
+      <div class="en-feature-solo-inner reveal">
+        <div class="en-feature-solo-left">
+          <p class="en-feature-solo-label">에코노드만의 특장점</p>
+          <p class="en-feature-solo-title">수기 입력 ZERO,<br>실시간 채록으로<br>무결성 선점</p>
+          <p class="en-feature-solo-body">태양광 인버터, 일사량계, 온도 센서 등 현장 설비의 물리적 원천 신호를 가공 없이 실시간 직접 채록합니다. 인적 개입이 없는 직독(Direct Read) 방식을 통해 데이터의 왜곡 및 위·변조 가능성을 물리적으로 차단합니다.</p>
+        </div>
+        <div class="en-feature-solo-img"></div>
+      </div>
+    </section>
+
 
   <!-- ═══ FAQ ═══ -->
   <section class="pf-faq-section">
@@ -1281,6 +1270,12 @@
 
       <p class="ft-copyright">서울시 금천구 시흥대로 193, 701호(08635)
 ⓒ ecobell Co., Ltd. All rights reserved.</p>
+      <!-- Back to Top -->
+      <a class="back-to-top" href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;" aria-label="맨 위로">
+        <svg width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M1 9L8 1L15 9" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="back-to-top-text">TOP</span>
+      </a>
+
     </div>
   </footer>
 
@@ -1290,9 +1285,9 @@
       <a href="https://ecoasset.co.kr" class="floating-fab-item" target="_blank" rel="noopener noreferrer">ecoASSET</a>
       <a href="https://e-asset.co.kr" class="floating-fab-item" target="_blank" rel="noopener noreferrer">E-ASSET</a>
     </div>
-    <a class="floating-fab-icon" href="ecoasset.html" aria-label="eco Asset 바로가기">
+    <div class="floating-fab-icon">
       <img src="ecoasset_badge.png" alt="eco Asset">
-    </a>
+    </div>
   </div>
   <script>
   (function(){

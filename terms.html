@@ -47,7 +47,7 @@
     .policy-year-item.active { color: #1e8dcd; font-weight: 600; }
 
     /* ─── FOOTER ─── */
-    footer { position: sticky; bottom: 0; z-index: 0; min-width: 1100px; height: 442px; background: #2a2a2a; }
+    footer { position: relative; min-width: 1100px; height: 442px; background: #2a2a2a; }
     .footer-inner { position: relative; width: 100%; max-width: 1440px; margin: 0 auto; height: 100%; }
     .ft-company-info { position: absolute; right: 45px; top: 211px; font-family: 'Noto Sans KR',sans-serif; font-weight: 450; font-size: 13px; color: rgba(255,255,255,0.5); line-height: 23px; letter-spacing: -0.28px; white-space: pre-line; text-align: right; }
     .ft-col-title { position: absolute; font-family: 'Chillax',sans-serif; font-weight: 600; font-size: 16px; color: #fff; white-space: nowrap; margin: 0; top: 41px; letter-spacing: 0.5px; line-height: 28.8px; }
@@ -63,7 +63,39 @@
     .ft-copyright { position: absolute; left: 45px; top: 357px; font-family: 'Noto Sans KR',sans-serif; font-weight: 300; font-size: 12px; color: rgba(255,255,255,0.8); white-space: pre-line; margin: 0; }
 
     main { position: relative; z-index: 1; background: #fff; }
-  </style>
+  
+    /* ─── BACK TO TOP ─── */
+    .back-to-top {
+      position: absolute;
+      right: 45px;
+      top: 32px;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255,255,255,0.35);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      cursor: pointer;
+      background: transparent;
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .back-to-top:hover {
+      border-color: rgba(255,255,255,0.8);
+      background: rgba(255,255,255,0.08);
+    }
+    .back-to-top-text {
+      font-family: 'Chillax', sans-serif;
+      font-weight: 500;
+      font-size: 11px;
+      color: #fff;
+      letter-spacing: 0.8px;
+      line-height: 1;
+    }
+</style>
 </head>
 <body>
 
@@ -125,6 +157,13 @@
       <a class="ft-social" href="https://www.facebook.com/ecobell.co.kr" target="_blank" rel="noopener noreferrer" aria-label="Facebook" style="right:46px;"><svg width="22" height="23" viewBox="0 0 22 23" fill="none"><path d="M12.5 11.5H14.8L15.5 8.5H12.5V6.8C12.5 5.9 12.9 5.2 14.2 5.2H15.8V2.6C15.8 2.6 14.3 2.3 12.9 2.3C10.1 2.3 8.5 3.9 8.5 6.5V8.5H5.8V11.5H8.5V20.5H12.5V11.5Z" fill="#fff"/></svg></a>
       <p class="ft-copyright">서울시 금천구 시흥대로 193, 701호(08635)
 ⓒ ecobell Co., Ltd. All rights reserved.</p>
+
+      <!-- Back to Top -->
+      <a class="back-to-top" href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;" aria-label="맨 위로">
+        <svg width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M1 9L8 1L15 9" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="back-to-top-text">TOP</span>
+      </a>
+
     </div>
   </footer>
 

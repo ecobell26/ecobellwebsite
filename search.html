@@ -785,8 +785,8 @@
       color: #234B63;
       text-decoration: none;
       white-space: nowrap;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.15);
-      transition: background 0.15s, color 0.15s;
+      border: 1px solid rgba(0,0,0,0.3);
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
       flex-shrink: 0;
     }
     .floating-fab-item:hover { background: #1E8DCD; color: #fff; }
@@ -807,7 +807,39 @@
       z-index: 1;
       background: #fff;
     }
-  </style>
+  
+    /* ─── BACK TO TOP ─── */
+    .back-to-top {
+      position: absolute;
+      right: 45px;
+      top: 32px;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255,255,255,0.35);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      cursor: pointer;
+      background: transparent;
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .back-to-top:hover {
+      border-color: rgba(255,255,255,0.8);
+      background: rgba(255,255,255,0.08);
+    }
+    .back-to-top-text {
+      font-family: 'Chillax', sans-serif;
+      font-weight: 500;
+      font-size: 11px;
+      color: #fff;
+      letter-spacing: 0.8px;
+      line-height: 1;
+    }
+</style>
   <script src="assets/page-loader.js"></script>
 </head>
 <body>
@@ -1118,6 +1150,13 @@
       <p class="ft-copyright">서울시 금천구 시흥대로 193, 701호(08635)
 ⓒ ecobell Co., Ltd. All rights reserved.</p>
 
+      <!-- Back to Top -->
+      <a class="back-to-top" href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;" aria-label="맨 위로">
+        <svg width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M1 9L8 1L15 9" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="back-to-top-text">TOP</span>
+      </a>
+
+
     </div>
   </footer>
   <!-- ─── 플로팅 FAB ─── -->
@@ -1126,9 +1165,9 @@
       <a href="https://ecoasset.co.kr" class="floating-fab-item" target="_blank" rel="noopener noreferrer">ecoASSET</a>
       <a href="https://e-asset.co.kr" class="floating-fab-item" target="_blank" rel="noopener noreferrer">E-ASSET</a>
     </div>
-    <a class="floating-fab-icon" href="ecoasset.html" aria-label="eco Asset 바로가기">
+    <div class="floating-fab-icon">
       <img src="ecoasset_badge.png" alt="eco Asset">
-    </a>
+    </div>
   </div>
   <script>
   (function(){
