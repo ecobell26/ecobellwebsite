@@ -29,74 +29,277 @@
 
     /* ─── HEADER ─── */
     header {
-      position: fixed; top: 0; left: 0; right: 0; min-width: 1100px;
-      height: 69px; background: #fff; z-index: 999;
+      position: fixed;
+      top: 0; left: 0; right: 0; min-width: 1100px;
+      height: 69px;
+      background: #fff;
+      z-index: 999;
       transition: box-shadow 0.3s ease, transform 0.35s cubic-bezier(0.4,0,0.2,1);
     }
     header.scrolled { box-shadow: 0 2px 16px rgba(0,0,0,0.07); }
     header.gnb-hidden { transform: translateY(-100%); }
+
     .header-inner {
-      position: relative; width: 100%; max-width: 1440px;
-      height: 100%; margin: 0 auto; display: flex; align-items: center;
+      position: relative;
+      width: 100%;
+      max-width: 1440px;
+      height: 100%;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
     }
-    .logo { position: absolute; left: 44px; top: 50%; transform: translateY(-50%); width: 110px; height: 26px; transition: opacity 0.2s; }
+
+    .logo {
+      position: absolute;
+      left: 44px;
+      top: 50%; transform: translateY(-50%);
+      width: 110px; height: 26px;
+      transition: opacity 0.2s;
+    }
     .logo img { width: 100%; height: 100%; object-fit: contain; }
     .logo:hover { opacity: 0.75; }
 
     /* ─── GNB ─── */
-    nav { position: absolute; left: 198px; right: 324px; top: 0; display: flex; align-items: stretch; height: 69px; }
-    .nav-item { position: relative; display: flex; align-items: center; transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1); }
+    nav {
+      position: absolute;
+      left: 198px;
+      right: 324px;
+      top: 0;
+      display: flex;
+      align-items: stretch;
+      height: 69px;
+    }
+    .nav-item {
+      position: relative;
+      display: flex;
+      align-items: center;
+      transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+    }
     nav.lnb-open .nav-item { transform: translateX(var(--lnb-tx, 0px)); }
-    .nav-link { font-family: 'Chillax', sans-serif; font-weight: 500; font-size: 15.5px; color: #000; text-decoration: none; letter-spacing: 0.46px; line-height: 1.6; padding: 0 17px; white-space: nowrap; position: relative; display: flex; align-items: center; height: 100%; transition: color 0.2s; }
-    .nav-link::after { content: ''; position: absolute; left: 17px; right: 17px; bottom: 0; height: 2px; background: #000; transform: scaleX(0); transform-origin: left; transition: transform 0.25s ease; }
+    .nav-link {
+      font-family: 'Chillax', sans-serif;
+      font-weight: 500;
+      font-size: 15.5px;
+      color: #000;
+      text-decoration: none;
+      letter-spacing: 0.46px;
+      line-height: 1.6;
+      padding: 0 17px;
+      white-space: nowrap;
+      position: relative;
+      display: flex;
+      align-items: center;
+      height: 100%;
+      transition: color 0.2s;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      left: 17px; right: 17px;
+      bottom: 0;
+      height: 2px;
+      background: #000;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.25s ease;
+    }
     .nav-item:not(.lnb-active) .nav-link:hover::after { transform: scaleX(1); }
     .nav-item.lnb-active .nav-link { color: #1e8dcd; }
 
     /* ─── LNB ─── */
-    .lnb { position: fixed; top: 69px; left: 0; right: 0; min-width: 1100px; height: 202px; background: #fff; border-top: 0.3px solid #d9d9d9; border-bottom: 0.3px solid #d9d9d9; opacity: 0; transform: translateY(-6px); pointer-events: none; transition: opacity 0.25s ease, transform 0.28s cubic-bezier(0.4,0,0.2,1); z-index: 102; }
+    .lnb {
+      position: fixed;
+      top: 69px;
+      left: 0; right: 0; min-width: 1100px;
+      height: 202px;
+      background: #fff;
+      border-top: 0.3px solid #d9d9d9; border-bottom: 0.3px solid #d9d9d9;
+      opacity: 0;
+      transform: translateY(-6px);
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 102;
+    }
     .lnb-inner { position: relative; width: 100%; max-width: 1440px; margin: 0 auto; height: 100%; }
     .lnb.open { opacity: 1; transform: translateY(0); pointer-events: auto; }
-    .lnb-col { position: absolute; top: 0; width: 132px; height: 100%; display: flex; flex-direction: column; align-items: center; padding-top: 29px; gap: 0; transition: background 0.2s ease; }
+    .lnb-col {
+      position: absolute;
+      top: 0;
+      width: 132px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 29px;
+      gap: 0;
+      transition: background 0.2s ease;
+    }
     .lnb-col.active { background: #fafcfd; border-top: 2px solid #1e8dcd; padding-top: 27px; }
-    .lnb-col a { font-family: 'Nanum Square', 'NanumSquare', sans-serif; font-weight: 600; font-size: 14px; color: #000; text-decoration: none; letter-spacing: 0.14px; line-height: 21px; text-align: center; display: block; width: 100%; padding: 7px 0; transition: color 0.15s; }
+    .lnb-col a {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      color: #000;
+      text-decoration: none;
+      letter-spacing: 0.14px;
+      line-height: 21px;
+      text-align: center;
+      display: block;
+      width: 100%;
+      padding: 7px 0;
+      transition: color 0.15s;
+    }
     .lnb-col a.en { font-family: 'Chillax', sans-serif; font-weight: 450; }
     .lnb-col a:hover { color: #1e8dcd; }
     .lnb-col a.ext::after { content: ' ↗'; font-size: 11px; }
     .lnb-col a.active-page { color: #1e8dcd; }
 
     /* ─── SEARCH ─── */
-    .search-overlay { position: absolute; top: 0; left: 0; right: 0; height: 69px; background: #fff; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.2s; z-index: 10; }
-    header.search-open .search-overlay { opacity: 1; pointer-events: auto; }
-    .search-content { width: 100%; max-width: 700px; padding: 0 20px; }
-    .search-input-row { display: flex; align-items: center; gap: 12px; }
-    .search-input { flex: 1; border: none; border-bottom: 1.5px solid rgba(0,0,0,0.25); outline: none; font-family: 'Noto Sans KR', sans-serif; font-size: 15px; font-weight: 400; color: #000; padding: 4px 0; background: transparent; }
-    .search-input::placeholder { color: rgba(0,0,0,0.35); }
-    .search-input:focus { border-bottom-color: rgba(0,0,0,0.78); }
-    .search-submit { background: none; border: none; cursor: pointer; padding: 0; display: flex; align-items: center; flex-shrink: 0; opacity: 0.6; transition: opacity 0.2s; }
+    header.search-open { background: #fafcfd; box-shadow: none; }
+    .search-overlay {
+      position: fixed;
+      top: 69px;
+      left: 0; right: 0; min-width: 1100px;
+      height: 202px;
+      background: #fafcfd;
+      border-bottom: 0.2px solid rgba(0,0,0,0.3);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-8px);
+      transition: opacity 0.25s ease, transform 0.28s cubic-bezier(0.4,0,0.2,1);
+      z-index: 100;
+    }
+    .search-overlay.open { opacity: 1; pointer-events: auto; transform: translateY(0); }
+    .search-content {
+      position: relative;
+      width: 100%;
+      max-width: 1440px;
+      margin: 0 auto;
+      height: 100%;
+    }
+    .search-input-row {
+      position: absolute;
+      top: 57px;
+      left: 23.9583%;
+      right: 24.0278%;
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+    .search-input {
+      flex: 1;
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 400;
+      font-size: 20px;
+      color: #000;
+      letter-spacing: 0.2px;
+      line-height: 1.5;
+      background: transparent;
+      border: none;
+      outline: none;
+      height: 36px;
+      padding: 0;
+    }
+    .search-input::placeholder { color: rgba(0,0,0,0.3); }
+    .search-submit {
+      background: none; border: none; cursor: pointer;
+      width: 17px; height: 17px; padding: 0;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; opacity: 0.6; transition: opacity 0.2s;
+    }
     .search-submit:hover { opacity: 1; }
-    .search-tags { display: flex; gap: 8px; margin-top: 12px; }
-    .search-tag { background: none; border: 1px solid rgba(0,0,0,0.2); border-radius: 999px; padding: 4px 12px; font-family: 'Noto Sans KR', sans-serif; font-size: 13px; color: rgba(0,0,0,0.55); cursor: pointer; transition: border-color 0.2s, color 0.2s; }
+    .search-divider {
+      position: absolute;
+      top: 102px;
+      left: 23.9583%; right: 24.0278%;
+      width: auto; height: 0.3px;
+      background: rgba(0,0,0,0.2);
+    }
+    .search-tags {
+      position: absolute;
+      top: 117px;
+      left: 23.9583%;
+      display: flex;
+      gap: 9px;
+    }
+    .search-tag {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 700; font-size: 11.6px;
+      color: rgba(0,0,0,0.55); letter-spacing: 0.11px;
+      border: 0.3px solid rgba(0,0,0,0.15);
+      border-radius: 100px; padding: 0 10px; height: 22px;
+      background: transparent; cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
     .search-tag:hover { border-color: rgba(0,0,0,0.4); color: rgba(0,0,0,0.85); }
-    .search-icon-wrap { position: relative; width: 22px; height: 22px; }
-    .search-tooltip { position: absolute; top: calc(100% + 10px); left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.78); color: #fff; font-family: 'Noto Sans KR', sans-serif; font-size: 11px; font-weight: 400; letter-spacing: 0.4px; padding: 4px 8px; border-radius: 4px; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity 0.15s; }
-    .search-tooltip::before { content: ''; position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); border: 5px solid transparent; border-bottom-color: rgba(0,0,0,0.78); }
+    .search-icon-wrap {
+      position: relative; width: 22px; height: 22px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .search-tooltip {
+      position: absolute; top: calc(100% + 10px); left: 50%; transform: translateX(-50%);
+      background: rgba(0,0,0,0.78); color: #fff;
+      font-family: 'Noto Sans KR', sans-serif; font-size: 11px; font-weight: 400;
+      letter-spacing: 0.4px; padding: 5px 10px; border-radius: 4px;
+      white-space: nowrap; pointer-events: none; opacity: 0;
+      transition: opacity 0.18s ease; z-index: 1001;
+    }
+    .search-tooltip::before {
+      content: ''; position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%);
+      border: 5px solid transparent; border-bottom-color: rgba(0,0,0,0.78);
+    }
     .search-icon-wrap:hover .search-tooltip { opacity: 1; }
     header.search-open .search-tooltip { opacity: 0 !important; pointer-events: none; }
-    .close-btn { background: none; border: none; cursor: pointer; padding: 0; display: flex; align-items: center; opacity: 0; pointer-events: none; position: absolute; right: 0; transition: opacity 0.25s ease, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1); }
+    .close-btn {
+      display: flex; background: none; border: none; cursor: pointer;
+      width: 20px; height: 20px; padding: 0;
+      align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none; position: absolute;
+      transform: rotate(-180deg) scale(0.5);
+      transition: opacity 0.25s ease, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
     .close-btn:hover { opacity: 1; }
     header.search-open .search-btn { opacity: 0; pointer-events: none; transform: rotate(90deg) scale(0.7); }
     header.search-open .close-btn { opacity: 0.6; pointer-events: auto; transform: rotate(0deg) scale(1); }
 
     /* ─── HEADER RIGHT ─── */
-    .header-right { position: absolute; right: 44px; display: flex; align-items: center; gap: 25px; }
+    .header-right {
+      position: absolute; right: 45px;
+      top: 50%; transform: translateY(-50%);
+      display: flex; align-items: center; gap: 25px;
+    }
     .gnb-sep { color: rgba(0,0,0,0.2); font-size: 16px; line-height: 1; user-select: none; }
-    .search-btn { background: none; border: none; cursor: pointer; padding: 0; display: flex; align-items: center; opacity: 0.7; transition: transform 0.2s ease, opacity 0.2s; }
+    .search-btn {
+      background: none; border: none; cursor: pointer;
+      width: 20px; height: 21px; padding: 0;
+      display: flex; align-items: center; justify-content: center;
+      position: absolute;
+      transition: transform 0.2s ease, opacity 0.2s;
+    }
     .search-btn:hover { transform: scale(1.15); opacity: 0.7; }
-    .demo-btn { display: inline-flex; align-items: center; justify-content: center; width: 114px; height: 38px; border: 1.5px solid #000; border-radius: 999px; font-family: 'Chillax', sans-serif; font-weight: 500; font-size: 14px; color: #000; text-decoration: none; letter-spacing: 0.32px; position: relative; overflow: hidden; }
-    .demo-btn::before { content: ''; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%) scale(0); width: 80px; height: 80px; background: #000; border-radius: 50%; transition: transform 0.45s ease; }
+    .search-btn svg { display: block; }
+    .demo-btn {
+      display: flex; align-items: center; gap: 5px;
+      border: 0.3px solid rgba(0,0,0,0.5);
+      border-radius: 100px; padding: 0 18px; height: 34px;
+      cursor: pointer; text-decoration: none;
+      background: transparent; overflow: hidden; position: relative;
+      transition: border-color 0.25s ease;
+    }
+    .demo-btn::before {
+      content: ''; position: absolute; left: 0; top: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      width: 34px; height: 34px; background: #000; border-radius: 50%;
+      transition: transform 0.45s ease;
+    }
     .demo-btn:hover::before { transform: translate(-50%, -50%) scale(10); }
+    .demo-btn:hover { border-color: #000; }
     .demo-btn:hover .demo-text { color: #fff; }
-    .demo-text { font-family: 'Chillax', sans-serif; font-weight: 500; font-size: 14px; letter-spacing: 0.32px; line-height: 0.8; white-space: nowrap; transition: color 0.25s ease; position: relative; top: 1.5px; }
+    .demo-text {
+      font-family: 'Chillax', sans-serif; font-weight: 500; font-size: 13px;
+      color: #000; letter-spacing: 0.16px; line-height: 0.8;
+      white-space: nowrap; transition: color 0.25s ease; position: relative; top: 1.5px;
+    }
 
     @media (min-width: 1441px) {
       .header-inner { max-width: none; }
@@ -269,15 +472,15 @@
     }
 
     /* ─── CASES SECTION ─── */
-    .en-cases-section { background: linear-gradient(to bottom, #fff 0%, #E9F4FA 100%); padding: 100px 0 120px; }
+    .en-cases-section { background: linear-gradient(to bottom right, #fff 0%, #E8F8F1 100%); padding: 100px 0 120px; }
     .en-cases-inner { max-width: 1440px; margin: 0 auto; padding: 0 131px; }
-    .en-cases-label { font-family: 'Noto Sans KR', sans-serif; font-weight: 700; font-size: 19px; color: #000; margin-bottom: 14px; letter-spacing: -0.3px; }
+    .en-cases-label { font-family: 'Noto Sans KR', sans-serif; font-weight: 700; font-size: 30px; color: #000; margin-bottom: 14px; letter-spacing: -0.3px; }
     .en-cases-title { font-family: 'Noto Sans KR', sans-serif; font-weight: 700; font-size: 37px; color: #000; line-height: 1.4; margin-bottom: 60px; word-break: keep-all; }
     .en-case-row { display: flex; gap: 52px; align-items: flex-start; padding: 50px 0; }
     .en-case-thumb { flex: 0 0 352px; height: 209px; background: #D9D9D9; border-radius: 12px; overflow: hidden; }
     .en-case-thumb img { width: 100%; height: 100%; object-fit: cover; }
     .en-case-info { flex: 1; padding-top: 8px; }
-    .en-case-heading { font-family: 'Kakao OTF', 'Noto Sans KR', sans-serif; font-weight: 700; font-size: 27px; color: #1E8CCC; line-height: 1.4; margin-bottom: 22px; word-break: keep-all; }
+    .en-case-heading { font-family: 'Kakao OTF', 'Noto Sans KR', sans-serif; font-weight: 700; font-size: 27px; color: #2DB47C; line-height: 1.4; margin-bottom: 22px; word-break: keep-all; }
     .en-case-bullets { display: flex; flex-direction: column; gap: 16px; }
     .en-case-bullet-item { font-family: 'Noto Sans KR', sans-serif; font-weight: 700; font-size: 17px; color: #000; line-height: 1.7; word-break: keep-all; }
     .en-case-bullet-item strong { font-weight: 700; display: block; margin-bottom: 2px; }
@@ -573,18 +776,32 @@
   <!-- ─── HEADER ─── -->
   <header id="header">
     <div class="header-inner">
+
+      <!-- Logo -->
       <a class="logo" href="index.html">
         <img src="assets/logo.png" alt="ecobell">
       </a>
 
+      <!-- GNB -->
       <nav id="main-nav">
-        <div class="nav-item" data-menu="company"><a class="nav-link" href="#">Company</a></div>
-        <div class="nav-item" data-menu="platform"><a class="nav-link" href="#">Project</a></div>
-        <div class="nav-item" data-menu="solution"><a class="nav-link" href="#">Solution</a></div>
-        <div class="nav-item" data-menu="insight"><a class="nav-link" href="insight.html">Insight</a></div>
-        <div class="nav-item" data-menu="contact"><a class="nav-link" href="notice.html">Contact Us</a></div>
+        <div class="nav-item" data-menu="company">
+          <a class="nav-link" href="#">Company</a>
+        </div>
+        <div class="nav-item" data-menu="platform">
+          <a class="nav-link" href="#">Project</a>
+        </div>
+        <div class="nav-item" data-menu="solution">
+          <a class="nav-link" href="#">Solution</a>
+        </div>
+        <div class="nav-item" data-menu="insight">
+          <a class="nav-link" href="insight.html">Insight</a>
+        </div>
+        <div class="nav-item" data-menu="contact">
+          <a class="nav-link" href="notice.html">Contact Us</a>
+        </div>
       </nav>
 
+      <!-- LNB Dropdown -->
       <div class="lnb" id="lnb">
         <div class="lnb-inner">
           <div class="lnb-col" data-col="company">
@@ -615,6 +832,7 @@
         </div>
       </div>
 
+      <!-- Search Overlay -->
       <div class="search-overlay" id="search-overlay">
         <div class="search-content">
           <div class="search-input-row">
@@ -626,6 +844,7 @@
               </svg>
             </button>
           </div>
+          <div class="search-divider"></div>
           <div class="search-tags">
             <button class="search-tag" data-keyword="태양광">#태양광</button>
             <button class="search-tag" data-keyword="태양광 솔루션">#태양광 솔루션</button>
@@ -634,8 +853,9 @@
         </div>
       </div>
 
+      <!-- Header Right -->
       <div class="header-right">
-        <span class="gnb-sep">|</span>
+        <span class="gnb-sep" style="color:rgba(0,0,0,0.2);font-size:16px;line-height:1;user-select:none;">|</span>
         <div class="search-icon-wrap">
           <button class="search-btn" aria-label="검색" id="search-open-btn">
             <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
@@ -654,6 +874,7 @@
           <span class="demo-text">문의하기</span>
         </a>
       </div>
+
     </div>
   </header>
 
@@ -692,14 +913,6 @@
       </div>
     </div>
 
-    <!-- ═══ TAB NAV ═══ -->
-    <div class="sl-tabs" id="sl-tabs">
-      <a class="sl-tab active" href="#sl-about" data-section="sl-about">태양광 솔루션이란?</a>
-      <a class="sl-tab" href="#sl-services" data-section="sl-services">특장점</a>
-      <a class="sl-tab" href="#sl-flow" data-section="sl-flow">솔루션 맵</a>
-      <a class="sl-tab" href="#sl-notices" data-section="sl-notices">공지사항</a>
-    </div>
-
     <!-- ═══ ABOUT ═══ -->
     <section class="sl-about" id="sl-about">
       <div class="sl-about-inner">
@@ -712,152 +925,63 @@
     </section>
 
     <!-- ═══ SERVICES ═══ -->
-    <!-- ═══ FEATURE SOLO SECTION ═══ -->
-    <section class="en-feature-solo" id="sl-services">
-      <div class="en-feature-solo-inner">
-        <p class="en-feature-solo-label reveal">에코벨 태양광 솔루션의 핵심 서비스</p>
-        <div class="en-fs-header reveal">
-          <p class="en-feature-solo-title" id="sl-fs-title">발전소 개발 &amp; 설계</p>
-          <div class="en-fs-controls">
-            <div class="en-fs-progress-wrap">
-              <span class="en-fs-num" id="sl-fs-cur">1</span>
-              <div class="en-fs-bar-track" id="sl-fs-segs">
-                <div class="en-fs-seg active"></div>
-                <div class="en-fs-seg"></div>
-                <div class="en-fs-seg"></div>
-                <div class="en-fs-seg"></div>
-                <div class="en-fs-seg"></div>
-                <div class="en-fs-seg"></div>
-              </div>
-            </div>
-            <div class="faq-nav">
-              <button class="faq-nav-btn" id="sl-fs-prev" aria-label="이전">
-                <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M7 1L1 7L7 13" stroke="#234B63" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </button>
-              <div class="faq-nav-divider"></div>
-              <button class="faq-nav-btn" id="sl-fs-next" aria-label="다음">
-                <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M1 1L7 7L1 13" stroke="#234B63" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </button>
+    <section class="en-cases-section" id="sl-services">
+      <div class="en-cases-inner">
+        <p class="en-cases-label reveal">에코벨 태양광 솔루션의 핵심 서비스</p>
+        <div class="en-case-row reveal">
+          <div class="en-case-thumb"></div>
+          <div class="en-case-info">
+            <p class="en-case-heading">발전소 개발 &amp; 설계</p>
+            <div class="en-case-bullets">
+              <div class="en-case-bullet-item">부지 발굴·타당성 분석, 인허가 대행, 계통 연계 검토, 최적 설계까지 발전소 구축 전 과정을 지원합니다.</div>
             </div>
           </div>
         </div>
-        <div class="en-fs-track-wrap reveal">
-          <div class="en-fs-track" id="sl-fs-track">
-            <div class="en-feature-solo-row">
-              <div class="en-feature-solo-img"></div>
-              <p class="en-feature-solo-body">부지 발굴·타당성 분석, 인허가 대행, 계통 연계 검토, 최적 설계까지 발전소 구축 전 과정을 지원합니다.</p>
-            </div>
-            <div class="en-feature-solo-row">
-              <div class="en-feature-solo-img"></div>
-              <p class="en-feature-solo-body">검증된 시공 파트너 네트워크를 통한 품질·일정·비용 최적화 EPC 관리로 안정적인 준공을 보장합니다.</p>
-            </div>
-            <div class="en-feature-solo-row">
-              <div class="en-feature-solo-img"></div>
-              <p class="en-feature-solo-body">ecoNODE RTU 기반 실시간 발전량 수집과 E-ASSET 플랫폼 연동으로 데이터 유실 없는 정밀 모니터링을 제공합니다.</p>
-            </div>
-            <div class="en-feature-solo-row">
-              <div class="en-feature-solo-img"></div>
-              <p class="en-feature-solo-body">이상 신호 즉각 감지, 예방 정비 스케줄 관리, 원격 진단으로 발전 손실을 최소화하고 수익성을 극대화합니다.</p>
-            </div>
-            <div class="en-feature-solo-row">
-              <div class="en-feature-solo-img"></div>
-              <p class="en-feature-solo-body">REC 발급·거래, 탄소배출권(K-ETS) 연동, dMRV 기반 검증 데이터 제공으로 신재생에너지의 자산 가치를 높입니다.</p>
-            </div>
-            <div class="en-feature-solo-row">
-              <div class="en-feature-solo-img"></div>
-              <p class="en-feature-solo-body">기업 RE100·ESG 목표에 맞춘 전력 조달 전략 수립부터 이행 보고서 작성까지 맞춤형 컨설팅을 지원합니다.</p>
+        <div class="en-case-row reveal">
+          <div class="en-case-thumb"></div>
+          <div class="en-case-info">
+            <p class="en-case-heading">EPC 시공 관리</p>
+            <div class="en-case-bullets">
+              <div class="en-case-bullet-item">검증된 시공 파트너 네트워크를 통한 품질·일정·비용 최적화 EPC 관리로 안정적인 준공을 보장합니다.</div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- ═══ FLOW ═══ -->
-    <section class="sl-flow" id="sl-flow">
-      <div class="sl-flow-inner">
-        <p class="sl-flow-title reveal">태양광 발전의 흐름,<br>에코벨이 처음부터 끝까지</p>
-        <p class="sl-flow-sub reveal">개발 → 시공 → 운영 → 자산화의 전 단계를 에코벨 하나로</p>
-
-        <div class="sl-flow-steps reveal">
-          <div class="sl-flow-step">
-            <div class="sl-flow-visual">
-              <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
-                <circle cx="40" cy="40" r="20" fill="#E8F8F1" stroke="#2DB47C" stroke-width="2"/>
-                <circle cx="40" cy="40" r="8" fill="#2DB47C"/>
-                <line x1="40" y1="10" x2="40" y2="18" stroke="#2DB47C" stroke-width="2.5" stroke-linecap="round"/>
-                <line x1="40" y1="62" x2="40" y2="70" stroke="#2DB47C" stroke-width="2.5" stroke-linecap="round"/>
-                <line x1="10" y1="40" x2="18" y2="40" stroke="#2DB47C" stroke-width="2.5" stroke-linecap="round"/>
-                <line x1="62" y1="40" x2="70" y2="40" stroke="#2DB47C" stroke-width="2.5" stroke-linecap="round"/>
-              </svg>
+        <div class="en-case-row reveal">
+          <div class="en-case-thumb"></div>
+          <div class="en-case-info">
+            <p class="en-case-heading">정밀 발전량 모니터링</p>
+            <div class="en-case-bullets">
+              <div class="en-case-bullet-item">ecoNODE RTU 기반 실시간 발전량 수집과 E-ASSET 플랫폼 연동으로 데이터 유실 없는 정밀 모니터링을 제공합니다.</div>
             </div>
-            <p class="sl-flow-step-num">01 &nbsp;/&nbsp; Development</p>
-            <p class="sl-flow-step-title">부지 발굴 &amp; 개발</p>
-            <ul class="sl-flow-bullets">
-              <li>최적 입지 분석 및 타당성 검토</li>
-              <li>인허가 대행 및 계통 연계 신청</li>
-            </ul>
-          </div>
-
-          <div class="sl-flow-sep">→</div>
-
-          <div class="sl-flow-step">
-            <div class="sl-flow-visual">
-              <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
-                <rect x="20" y="45" width="40" height="15" rx="3" fill="#E8F8F1" stroke="#2DB47C" stroke-width="2"/>
-                <rect x="28" y="30" width="24" height="16" rx="2" fill="#E8F8F1" stroke="#2DB47C" stroke-width="1.5"/>
-                <line x1="30" y1="34" x2="50" y2="34" stroke="#2DB47C" stroke-width="1" stroke-dasharray="3 2"/>
-                <line x1="30" y1="38" x2="50" y2="38" stroke="#2DB47C" stroke-width="1" stroke-dasharray="3 2"/>
-                <line x1="30" y1="42" x2="44" y2="42" stroke="#2DB47C" stroke-width="1" stroke-dasharray="3 2"/>
-                <line x1="40" y1="20" x2="40" y2="30" stroke="#2DB47C" stroke-width="2" stroke-linecap="round"/>
-                <circle cx="40" cy="18" r="4" fill="#2DB47C"/>
-              </svg>
-            </div>
-            <p class="sl-flow-step-num">02 &nbsp;/&nbsp; EPC</p>
-            <p class="sl-flow-step-title">설계 &amp; 시공</p>
-            <ul class="sl-flow-bullets">
-              <li>최적 설계 및 BOM 최소화</li>
-              <li>검증된 시공사 연계 품질 관리</li>
-            </ul>
-          </div>
-
-          <div class="sl-flow-sep">→</div>
-
-          <div class="sl-flow-step">
-            <div class="sl-flow-visual">
-              <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
-                <rect x="15" y="28" width="50" height="30" rx="4" fill="#E8F8F1" stroke="#2DB47C" stroke-width="2"/>
-                <polyline points="22,48 30,36 38,44 46,32 58,40" stroke="#2DB47C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <circle cx="46" cy="32" r="3" fill="#2DB47C"/>
-              </svg>
-            </div>
-            <p class="sl-flow-step-num">03 &nbsp;/&nbsp; O&amp;M</p>
-            <p class="sl-flow-step-title">운영 &amp; 유지보수</p>
-            <ul class="sl-flow-bullets">
-              <li>ecoNODE 기반 실시간 발전량 수집</li>
-              <li>이상 감지 및 예방 정비 자동화</li>
-            </ul>
-          </div>
-
-          <div class="sl-flow-sep">→</div>
-
-          <div class="sl-flow-step">
-            <div class="sl-flow-visual">
-              <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
-                <circle cx="40" cy="40" r="22" fill="#E8F8F1" stroke="#2DB47C" stroke-width="2"/>
-                <path d="M40 28v6l4 4" stroke="#2DB47C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M28 52l4-6h16l4 6" stroke="#2DB47C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M32 46h16" stroke="#2DB47C" stroke-width="1.5" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <p class="sl-flow-step-num">04 &nbsp;/&nbsp; Asset</p>
-            <p class="sl-flow-step-title">탄소 자산화</p>
-            <ul class="sl-flow-bullets">
-              <li>REC 발급·거래 및 K-ETS 연동</li>
-              <li>dMRV 검증 데이터로 공신력 확보</li>
-            </ul>
           </div>
         </div>
-
+        <div class="en-case-row reveal">
+          <div class="en-case-thumb"></div>
+          <div class="en-case-info">
+            <p class="en-case-heading">O&amp;M 운영·유지보수</p>
+            <div class="en-case-bullets">
+              <div class="en-case-bullet-item">이상 신호 즉각 감지, 예방 정비 스케줄 관리, 원격 진단으로 발전 손실을 최소화하고 수익성을 극대화합니다.</div>
+            </div>
+          </div>
+        </div>
+        <div class="en-case-row reveal">
+          <div class="en-case-thumb"></div>
+          <div class="en-case-info">
+            <p class="en-case-heading">탄소 자산화</p>
+            <div class="en-case-bullets">
+              <div class="en-case-bullet-item">REC 발급·거래, 탄소배출권(K-ETS) 연동, dMRV 기반 검증 데이터 제공으로 신재생에너지의 자산 가치를 높입니다.</div>
+            </div>
+          </div>
+        </div>
+        <div class="en-case-row reveal">
+          <div class="en-case-thumb"></div>
+          <div class="en-case-info">
+            <p class="en-case-heading">RE100 &amp; ESG 컨설팅</p>
+            <div class="en-case-bullets">
+              <div class="en-case-bullet-item">기업 RE100·ESG 목표에 맞춘 전력 조달 전략 수립부터 이행 보고서 작성까지 맞춤형 컨설팅을 지원합니다.</div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -1141,12 +1265,15 @@
     });
 
     // Search
+    const searchOverlay = document.getElementById('search-overlay');
     function openSearch() {
       header.classList.add('search-open');
-      document.getElementById('search-input').focus();
+      searchOverlay.classList.add('open');
+      setTimeout(function() { document.getElementById('search-input').focus(); }, 50);
     }
     function closeSearch() {
       header.classList.remove('search-open');
+      searchOverlay.classList.remove('open');
     }
     document.getElementById('search-open-btn').addEventListener('click', openSearch);
     document.getElementById('search-close-btn').addEventListener('click', closeSearch);
